@@ -1,0 +1,44 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Character: MonoBehaviour
+{
+    [SerializeField] private CharacterInfo characterInfo;
+    public event System.Action<int> OnHpChanged;
+    private int hp;
+    public int Hp
+    {
+        get => hp;
+        private set
+        {
+            hp = value;
+            // TODO: UI Health Bar Logic
+            OnHpChanged?.Invoke(hp);
+            if (hp <= 0)
+            {
+                Die();
+            }
+        }
+    }
+    private Animator anim;
+    public virtual void Die()
+    {
+        anim.SetTrigger("Death");
+    }
+
+    public virtual void Start()
+    {
+        Hp = characterInfo.Hp;
+        anim = GetComponent<Animator>();
+    }
+    public void Hit(Character target, int damage)
+    {
+        target.Hurt(damage) ;
+    }
+    public void Hurt(int damage)
+    {
+        Hp -= damage;
+        anim.SetTrigger("Hurt");
+    }
+}
