@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
@@ -26,11 +27,15 @@ public class Character: MonoBehaviour
     {
         anim.SetTrigger("Death");
     }
-
-    public virtual void Start()
+    public virtual void Awake()
     {
         Hp = characterInfo.Hp;
         anim = GetComponent<Animator>();
+    }
+
+    public virtual void Start()
+    {
+        
     }
     public void Hit(Character target, int damage)
     {
