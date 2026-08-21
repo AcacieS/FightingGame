@@ -9,17 +9,6 @@ public class Match
     public Match(GameObject player, GameObject enemy)
     {
         battleParticipants = new BattleParticipants(player, enemy);
-    }
-    public void AssignCharactersUI(TextMeshProUGUI playerUI, TextMeshProUGUI enemyUI)
-    {
-        battleParticipants.AssignCharactersUI(playerUI, enemyUI);
-    }
-    public void StartMatch()
-    {
-        battleParticipants.AssignHp();
-    }
-    public void FinishMatch()
-    {
-        
+        UIManager.Instance.UpdateUI(player.GetComponent<Character>(), enemy.GetComponent<Character>());
     }
 }

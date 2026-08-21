@@ -4,5 +4,7 @@ using UnityEngine;
 public class CharacterInfo : ScriptableObject
 {
     [SerializeField] private int hp;
+    [SerializeField] private Sprite profileImg;
     public int Hp => hp;
+    public Sprite ProfileImg => profileImg;
 }

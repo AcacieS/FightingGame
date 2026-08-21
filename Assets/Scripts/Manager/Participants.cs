@@ -9,4 +9,6 @@ public class Participants
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     public GameObject Player => player;
     public List<GameObject> Enemies => new List<GameObject>(enemies);
+    public int EnemiesCount => enemies.Count;
+    public GameObject Enemy(int index) => enemies[index];
 }

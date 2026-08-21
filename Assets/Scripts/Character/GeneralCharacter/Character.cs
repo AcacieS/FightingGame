@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
+    public CharacterInfo Info => characterInfo;
     public event System.Action<int> OnHpChanged;
     private int hp;
     public int Hp
