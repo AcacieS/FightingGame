@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [SerializeField] private Participants participants;
     [ReadOnly, SerializeField] private Match currentMatch;
+    [SerializeField] private Transform playerSpawn;
+    [SerializeField] private Transform enemySpawn;
     [ReadOnly] private int indexMatch = -1;
     
     private void Awake()
@@ -41,9 +43,11 @@ public class GameManager : MonoBehaviour
         if (currentMatch != null && indexMatch!=-1)
         {
             Debug.Log("end match: "+currentMatch);
-            //currentMatch.EndMatch();
+            currentMatch.EndMatch();
         }
         indexMatch++;
-        currentMatch = new Match(participants.Player, participants.Enemy(indexMatch));
+        GameObject player = participants.Player;
+        GameObject enemy = participants.Enemy(indexMatch);
+        currentMatch = new Match(player, playerSpawn, enemy, enemySpawn);
     }
 }

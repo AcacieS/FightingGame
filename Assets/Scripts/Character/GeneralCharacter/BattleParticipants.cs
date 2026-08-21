@@ -6,10 +6,15 @@ public class BattleParticipants
 {
     [ReadOnly, SerializeField] private GameObject player;
     [ReadOnly, SerializeField] private GameObject enemy;
-    public BattleParticipants(GameObject playerPrefab, GameObject enemyPrefab)
+    public BattleParticipants(GameObject player, GameObject enemy)
     {
-        player = playerPrefab;
-        enemy = enemyPrefab;
+        this.player = player;
+        this.enemy = enemy;
+    }
+    public void DestroyParticipants()
+    {
+        UnityEngine.Object.Destroy(player);
+        UnityEngine.Object.Destroy(enemy);
     }
     
 }
