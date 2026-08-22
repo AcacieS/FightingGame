@@ -1,23 +1,23 @@
 using UnityEngine;
 
-public class IdleState : State
+public class BlockState : State
 {
-    private float timer;
-    private float duration;
 
+    private float timer;
     public override void Enter()
     {
-        timer = 0f;
-        duration = Random.Range(1f, 3f);
+        Debug.Log("AI → Block");
 
-        Debug.Log("AI → Idle");
+        timer = 0f;
+
+        // AI.Character.Block();
     }
 
     public override void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= duration)
+        if (timer >= 0.75f)
         {
             RequestDecision();
         }

@@ -8,6 +8,7 @@ public class Character: MonoBehaviour
     [SerializeField] private CharacterInfo characterInfo;
     public CharacterInfo Info => characterInfo;
     public event System.Action<int> OnHpChanged;
+    public event System.Action<int> OnHurt;
     private int hp;
     public int Hp
     {
@@ -45,6 +46,7 @@ public class Character: MonoBehaviour
     public void Hurt(int damage)
     {
         Hp -= damage;
+        OnHurt?.Invoke(Hp);
         anim.SetTrigger("Hurt");
     }
 }

@@ -1,23 +1,24 @@
 using UnityEngine;
 
-public class IdleState : State
+public class DodgeState : State
 {
+
     private float timer;
-    private float duration;
 
     public override void Enter()
     {
-        timer = 0f;
-        duration = Random.Range(1f, 3f);
+        Debug.Log("AI → Dodge");
 
-        Debug.Log("AI → Idle");
+        timer = 0f;
+
+        // AI.Character.Dodge();
     }
 
     public override void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= duration)
+        if (timer >= 0.5f)
         {
             RequestDecision();
         }

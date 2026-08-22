@@ -1,25 +1,31 @@
 using UnityEngine;
 
-public class IdleState : State
+public class AttackState : State
 {
+
     private float timer;
-    private float duration;
 
     public override void Enter()
     {
-        timer = 0f;
-        duration = Random.Range(1f, 3f);
+        Debug.Log("AI → Attack");
 
-        Debug.Log("AI → Idle");
+        timer = 0f;
+
+        // AI.Character.Attack();
     }
 
     public override void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= duration)
+        if (timer >= 1f)
         {
             RequestDecision();
         }
+    }
+    
+    public override void Exit()
+    {
+        Debug.Log("AI → Exit Attack");
     }
 }

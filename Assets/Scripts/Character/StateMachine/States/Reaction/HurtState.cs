@@ -1,25 +1,26 @@
 using UnityEngine;
 
-public class IdleState : State
+public class HurtState : State
 {
+    private readonly ReactionState reaction;
+
     private float timer;
-    private float duration;
 
     public override void Enter()
     {
-        timer = 0f;
-        duration = Random.Range(1f, 3f);
+        Debug.Log("AI → Hit");
 
-        Debug.Log("AI → Idle");
+        timer = 0f;
     }
 
     public override void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= duration)
+        if (timer >= 0.5f)
         {
             RequestDecision();
+            //AI.EnterCombat();
         }
     }
 }
