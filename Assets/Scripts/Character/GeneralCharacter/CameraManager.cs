@@ -22,65 +22,30 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        // If this script is on the Cinemachine Camera,
-        // this will automatically find it.
-        if (CinemachineCamera == null)
-            CinemachineCamera = GetComponent<CinemachineCamera>();
+        if (CinemachineCamera == null) CinemachineCamera = GetComponent<CinemachineCamera>();
     }
 
     private void LateUpdate()
     {
-        if (player == null || enemy == null || CinemachineCamera == null)
-            return;
-
-        // =====================================
-        // FIND MIDDLE BETWEEN PLAYER AND ENEMY
-        // =====================================
+        if (player == null || enemy == null || CinemachineCamera == null) return;
 
         Vector3 middlePoint = (player.position + enemy.position) / 2f;
 
-        // Move the CAMERA TARGET, not the Cinemachine Camera
-        Vector3 targetPosition = new Vector3(
-            middlePoint.x,
-            middlePoint.y,
-            transform.position.z
-        );
+        Vector3 targetPosition = new Vector3(middlePoint.x, middlePoint.y, transform.position.z);
 
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetPosition,
-            moveSmoothness * Time.deltaTime
-        );
+        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmoothness * Time.deltaTime);
 
-        // =====================================
-        // ZOOM
-        // =====================================
+        float distance = Mathf.Abs(player.position.x - enemy.position.x);
 
-        float distance = Mathf.Abs(
-            player.position.x - enemy.position.x
-        );
-
-        // Further apart = zoom out
         float targetZoom = minZoom + distance * 0.5f;
 
         targetZoom += zoomPadding;
 
-        targetZoom = Mathf.Clamp(
-            targetZoom,
-            minZoom,
-            maxZoom
-        );
+        targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
 
-        // Smooth zoom
-        CinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(
-            CinemachineCamera.Lens.OrthographicSize,
-            targetZoom,
-            zoomSmoothness * Time.deltaTime
-        );
+        CinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(CinemachineCamera.Lens.OrthographicSize, targetZoom, zoomSmoothness * Time.deltaTime);
 
         if (confiner != null)
-        {
             confiner.InvalidateLensCache();
-        }
     }
 }
