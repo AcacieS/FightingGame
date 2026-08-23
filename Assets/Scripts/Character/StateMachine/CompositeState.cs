@@ -19,6 +19,9 @@ public class CompositeState : State
         actions = new List<UtilityAction>();
         foreach (Transform childTransform in transform)
         {
+            if (!childTransform.gameObject.activeSelf)
+            continue;
+
             State state = childTransform.GetComponent<State>();
             
             if (state != null)
@@ -52,14 +55,27 @@ public class CompositeState : State
 
     public void MakeDecision()
     {
-        UtilityAction action = utility.ChooseAction(
-            AI.Context
-        );
+        UtilityAction action = utility.ChooseAction(AI.Context);
 
         if (action == null)
+        {
+            Debug.LogError($"{name}: No UtilityAction was chosen!");
             return;
+        }
+
+        Debug.Log($"{name}: Chosen action = {action.name}");
 
         State nextState = action.GetState();
+
+        if (nextState == null)
+        {
+            Debug.LogError(
+                $"{name}: {action.name} returned NULL state!"
+            );
+            return;
+        }
+
+        Debug.Log($"{name}: Next state = {nextState.name}");
 
         ChangeChild(nextState);
     }
@@ -69,6 +85,10 @@ public class CompositeState : State
         currentChild?.Exit();
 
         currentChild = state;
+
+        Debug.Log(
+            $"{name}: Entering child {currentChild.name}"
+        );
 
         currentChild.Enter();
     }

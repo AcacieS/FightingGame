@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    [Header("Characters")]
-    [SerializeField] private Character character;
-    [SerializeField] private Character target;
+    // [Header("Characters")]
+    private Character character;
+    private Character target;
 
     [Header("AI")]
     [SerializeField] private State startingState;
@@ -18,7 +18,10 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
-        context = new Context(character, target);
+        context = Context.Instance;
+        character = context.Self;
+        target = context.Target;
+        //context = new Context(character, target);
         character.OnHurt += HandleHurt;
         if (startingState == null)
         {
@@ -27,7 +30,7 @@ public class CharacterController : MonoBehaviour
         }
 
         startingState.Initialize(this);
-        reactionState.Initialize(this);
+        //reactionState.Initialize(this);
     }
 
     private void Start()
@@ -37,21 +40,21 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        context.Update();
+        //context.Update();
         currentState?.Update();
     }
     private void HandleHurt(int Hp)
     {
-        if (Hp <= 0)
-        {
-            //TODO: DEATH
-            ChangeState(reactionState);
-        }
-        else
-        {
-            //TODO: HURT
-            ChangeState(reactionState);
-        }
+        // if (Hp <= 0)
+        // {
+        //     //TODO: DEATH
+        //     ChangeState(reactionState);
+        // }
+        // else
+        // {
+        //     //TODO: HURT
+        //     ChangeState(reactionState);
+        // }
         
     }
 
