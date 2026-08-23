@@ -12,6 +12,7 @@ public class Context : MonoBehaviour
 
     // Runtime data
     public float Distance { get; private set; }
+    public float Direction { get; private set; }
 
     public float SelfHp => Self != null ? Self.Hp : 0;
     public float SelfMaxHp => Self != null ? Self.Info.Hp : 0;
@@ -35,6 +36,7 @@ public class Context : MonoBehaviour
             Self.transform.position,
             Target.transform.position
         );
+        Direction = Target.transform.position.x - Self.transform.position.x;
     }
     private void Awake()
     {
