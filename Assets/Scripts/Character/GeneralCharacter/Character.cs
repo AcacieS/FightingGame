@@ -82,7 +82,8 @@ public class Character: MonoBehaviour
 
         float newSpeed = Mathf.MoveTowards(
             rb.linearVelocity.x,
-            targetSpeed, Time.fixedDeltaTime
+            targetSpeed,
+            Info.Acceleration * Time.fixedDeltaTime
         );
 
         rb.linearVelocity = new Vector2(
