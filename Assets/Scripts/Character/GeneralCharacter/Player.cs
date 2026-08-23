@@ -12,7 +12,7 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-        
+        Movement();
     }
     //TODO: Do the input that it should be for Movement
     private void Movement()
