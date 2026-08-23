@@ -13,9 +13,9 @@ public class Player : Character
     [SerializeField] private LayerMask groundLayer;
     private Vector2 moveInput;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         rb = GetComponent<Rigidbody2D>();
     }
