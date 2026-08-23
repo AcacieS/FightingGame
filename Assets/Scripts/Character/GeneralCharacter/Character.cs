@@ -32,12 +32,28 @@ public class Character: MonoBehaviour
     }
     public virtual void Awake()
     {
-        Hp = characterInfo.Hp;
+        // Cached before Hp is set: the Hp setter can call Die(), which needs anim.
         anim = GetComponent<Animator>();
+
+        if (characterInfo == null)
+        {
+            Debug.LogError($"{name}: CharacterInfo is not assigned.", this);
+            return;
+        }
+
+        Hp = characterInfo.Hp;
     }
 
     public virtual void Start()
     {
+        // Without this guard the NullReferenceException propagates into subclass Start
+        // overrides and silently kills whatever they set up afterwards.
+        if (Context.Instance == null)
+        {
+            Debug.LogWarning($"{name}: no Context in the scene, so LookAt is disabled.", this);
+            return;
+        }
+
         StartCoroutine(LookAt(Context.Instance.Target));
     }
     public void Hit(Character target, int damage)

@@ -187,6 +187,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4889810009924403310, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1359260421}
+    - targetCorrespondingSourceObject: {fileID: 4889810009924403310, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1359260424}
   m_SourcePrefab: {fileID: 100100000, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
 --- !u!1 &1108944025
 GameObject:
@@ -352,6 +355,14 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  targetTag: Player
+  targetSearchInterval: 0.5
+  controlFacing: 1
+  wanderingMoveScale: 0.5
+  wanderingMinWalkTime: 0.4
+  wanderingMaxWalkTime: 1.2
+  wanderingMinPauseTime: 0.3
+  wanderingMaxPauseTime: 1
   biteDamage: 8
   biteRange: 1.8
   biteWindup: 0.15
@@ -370,15 +381,26 @@ MonoBehaviour:
   pounceMaxAirTime: 2.5
   pounceHitboxOffset: {x: 0.7, y: -0.2}
   pounceHitboxSize: {x: 1.6, y: 1.6}
-  dashBackSpeed: 10
-  dashBackDuration: 0.2
-  dashBackRecovery: 0.15
-  dashBackCooldown: 1.5
+  dashSpeed: 10
+  dashDuration: 0.2
+  dashRecovery: 0.15
+  dashCooldown: 1.5
+  accumulateHealthThreshold: 0.3
+  accumulateChargeTime: 3
+  accumulateReleaseWindup: 0.2
+  accumulateRecovery: 0.8
+  accumulateCooldown: 8
+  accumulateDamage: 30
+  accumulateHitboxOffset: {x: 1.2, y: 0}
+  accumulateHitboxSize: {x: 3.5, y: 2.5}
+  wanderingTrigger: Wandering
   biteTrigger: Bite
   pounceWindupTrigger: PounceWindup
   pounceLaunchTrigger: Pounce
   pounceLandTrigger: PounceLand
-  dashBackTrigger: DashBack
+  dashTrigger: Dash
+  accumulateChargeTrigger: Accumulate
+  accumulateReleaseTrigger: AccumulateRelease
   drawGizmos: 1
   currentMove: 0
   grounded: 0
@@ -469,6 +491,28 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0077855587, y: -0.0038928986}
   m_Size: {x: 1.231852, y: 2.409206}
   m_Direction: 0
+--- !u!114 &1359260424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359260415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627931f6df602274980de00e28160b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GirlWolfDebugView
+  spriteRenderer: {fileID: 0}
+  wandering: {r: 0.2, g: 0.4, b: 1, a: 1}
+  bite: {r: 0.45, g: 0.05, b: 0.05, a: 1}
+  dash: {r: 0.1, g: 0.9, b: 0.9, a: 1}
+  pounce: {r: 1, g: 0.55, b: 0.1, a: 1}
+  accumulate: {r: 0.7, g: 0.2, b: 0.9, a: 1}
+  dead: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+  logMoves: 1
+  logTarget: 1
+  logHealth: 1
 --- !u!1001 &1553191678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -519,6 +563,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
