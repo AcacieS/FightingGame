@@ -1,8 +1,18 @@
 using UnityEngine;
 
-public class JumpHunterState : State
+public class JumpHunterState : HunterState
 {
-    public override void Enter() { }
-    public override void Update() { }
-    public override void Exit() { }
+    [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float jumpForce = 7f;
+    public override void Enter()
+    {
+        base.Enter();
+        HunterWolf.ChangeSpeed(moveSpeed);
+        HunterWolf.Jump(jumpForce);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        HunterWolf.ChangeSpeed(0);
+    }
 }

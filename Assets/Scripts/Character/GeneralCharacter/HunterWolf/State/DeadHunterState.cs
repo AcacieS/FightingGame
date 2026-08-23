@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class DeadHunterState : MonoBehaviour
+public class DeadHunterState : HunterState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Enter()
     {
-        
+        base.Enter();
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void Update() { }
+    public override void Exit()
     {
-        
+        base.Exit();
     }
 }

@@ -2,15 +2,66 @@ using UnityEngine;
 
 public class BulletHunterWolf : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float speed = 15f;
+    [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private LayerMask collisionLayer;
+
+    private Rigidbody2D rb;
+    private BulletHunterPool pool;
+
+    private Timer timer;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        timer = new Timer(lifeTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(BulletHunterPool pool)
     {
-        
+        this.pool = pool;
+    }
+
+    public void Launch(Vector2 direction)
+    {
+        timer = new Timer(lifeTime);
+
+        rb.linearVelocity = direction.normalized * speed;
+    }
+
+    private void FixedUpdate()
+    {
+        if (timer.IsOver())
+        {
+            ReturnToPool();
+            return;
+        }
+
+        Vector2 velocity = rb.linearVelocity;
+        float distance = velocity.magnitude * Time.fixedDeltaTime;
+
+        if (distance <= 0f)
+            return;
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            rb.position,
+            velocity.normalized,
+            distance,
+            collisionLayer
+        );
+
+        if (hit.collider != null)
+        {
+            rb.position = hit.point;
+
+            ReturnToPool();
+        }
+    }
+
+    private void ReturnToPool()
+    {
+        rb.linearVelocity = Vector2.zero;
+
+        pool.ReturnBullet(this);
     }
 }

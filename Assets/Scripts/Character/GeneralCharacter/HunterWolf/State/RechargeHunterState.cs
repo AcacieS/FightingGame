@@ -1,8 +1,16 @@
 using UnityEngine;
 
-public class RechargeHunterState : State
+public class RechargeHunterState : HunterState
 {
-    public override void Enter() { }
-    public override void Update() { }
-    public override void Exit() { }
+    [SerializeField] private float moveSpeed = 2f;
+    public override void Enter()
+    {
+        base.Enter();
+        HunterWolf.ChangeSpeed(moveSpeed);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        HunterWolf.ChangeSpeed(0);
+    }
 }

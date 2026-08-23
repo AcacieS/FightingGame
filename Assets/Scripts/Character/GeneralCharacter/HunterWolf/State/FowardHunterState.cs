@@ -1,8 +1,16 @@
 using UnityEngine;
 
-public class FowardHunterState : State
+public class FowardHunterState : HunterState
 {
-    public override void Enter() { }
-    public override void Update() { }
-    public override void Exit() { }
+    [SerializeField] private float moveSpeed = 4f;
+    public override void Enter()
+    {
+        base.Enter();
+        HunterWolf.ChangeSpeed(moveSpeed, 1);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        HunterWolf.ChangeSpeed(0);
+    }
 }

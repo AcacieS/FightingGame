@@ -1,8 +1,14 @@
 using UnityEngine;
 
-public class StunHunterState : State
+public class StunHunterState : HunterState
 {
-    public override void Enter() { }
+    public override void Enter()
+    {
+        base.Enter();
+    }
     public override void Update() { }
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }
