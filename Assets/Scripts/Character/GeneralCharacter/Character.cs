@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
+    [SerializeField] protected Rigidbody2D rb;
     public CharacterInfo Info => characterInfo;
     public event System.Action<int> OnHpChanged;
     public event System.Action<int> OnHurt;
@@ -34,6 +35,10 @@ public class Character: MonoBehaviour
     {
         Hp = characterInfo.Hp;
         anim = GetComponent<Animator>();
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
     }
 
     public virtual void Start()
@@ -70,5 +75,19 @@ public class Character: MonoBehaviour
 
             yield return null;
         }
+    }
+    public void Move(float direction)
+    {
+        float targetSpeed = direction * Info.MoveSpeed;
+
+        float newSpeed = Mathf.MoveTowards(
+            rb.linearVelocity.x,
+            targetSpeed, Time.fixedDeltaTime
+        );
+
+        rb.linearVelocity = new Vector2(
+            newSpeed,
+            rb.linearVelocity.y
+        );
     }
 }

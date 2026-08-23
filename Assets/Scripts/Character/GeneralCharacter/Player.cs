@@ -11,8 +11,6 @@ public class Player : Character
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer;
-
-    private Rigidbody2D rb;
     private Vector2 moveInput;
 
     public override void Start()

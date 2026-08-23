@@ -11,7 +11,7 @@ public class CompositeState : State
 
     private Utility utility;
 
-    protected State currentChild;
+    [ReadOnly, SerializeField] protected State currentChild;
     [ContextMenu("SetStates")]
     private void SetStates()
     {

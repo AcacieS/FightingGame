@@ -9,7 +9,7 @@ public class CharacterController : MonoBehaviour
     [Header("AI")]
     [SerializeField] private State startingState;
     [SerializeField] private State reactionState;
-    private State currentState;
+    [ReadOnly, SerializeField] private State currentState;
     private Context context;
 
     public Character Character => character;
