@@ -15,9 +15,9 @@ public class Player : Character
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         rb = GetComponent<Rigidbody2D>();
     }
