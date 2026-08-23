@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class UtilityAction : MonoBehaviour
@@ -14,11 +15,13 @@ public class UtilityAction : MonoBehaviour
     private State state;
 
     protected CharacterController AI;
+    [ReadOnly, SerializeField] private float _finalScore; 
     public void Start()
     {
         //TODO: Might not need anymore state
-        if (state != null)
+        if (state == null)
         {
+            Debug.Log("gets state");
             state = GetComponent<State>();
         }
         
@@ -72,7 +75,7 @@ public class UtilityAction : MonoBehaviour
 
         if (totalWeight <= 0f)
             return 0f;
-
-        return totalScore / totalWeight;
+        _finalScore = totalScore / totalWeight;
+        return _finalScore;
     }
 }

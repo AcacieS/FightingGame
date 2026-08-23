@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,7 +38,7 @@ public class Character: MonoBehaviour
 
     public virtual void Start()
     {
-        
+        StartCoroutine(LookAt(Context.Instance.Target));
     }
     public void Hit(Character target, int damage)
     {
@@ -48,5 +49,26 @@ public class Character: MonoBehaviour
         Hp -= damage;
         OnHurt?.Invoke(Hp);
         anim.SetTrigger("Hurt");
+    }
+    public IEnumerator LookAt(Character target)
+    {
+        if (target == null)
+            yield break;
+
+        while (true)
+        {
+            float direction = Context.Instance.Direction;
+
+            if (!Mathf.Approximately(direction, 0f))
+            {
+                Vector3 scale = transform.localScale;
+
+                scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
+
+                transform.localScale = scale;
+            }
+
+            yield return null;
+        }
     }
 }
