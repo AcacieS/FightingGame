@@ -382,6 +382,30 @@ MonoBehaviour:
   mode: 1
   minDistance: 4
   maxDistance: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &265010206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +422,30 @@ MonoBehaviour:
   mode: 0
   minDistance: 4
   maxDistance: 4
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &393208617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1532,7 @@ MonoBehaviour:
   - {fileID: 849568142}
   considerations:
   - {fileID: 849568137}
-  - {fileID: 849568139}
+  - {fileID: 0}
   - {fileID: 849568140}
   - {fileID: 849568141}
   state: {fileID: 0}
@@ -1982,6 +2030,30 @@ MonoBehaviour:
   mode: 1
   minDistance: 4
   maxDistance: 5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1486953465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2223,6 +2295,30 @@ MonoBehaviour:
   mode: 0
   minDistance: 2
   maxDistance: 2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1617578948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2643,7 @@ GameObject:
   - component: {fileID: 1766193935}
   - component: {fileID: 1766193934}
   - component: {fileID: 1766193936}
+  - component: {fileID: 1766193937}
   m_Layer: 0
   m_Name: NearAttackState
   m_TagString: Untagged
@@ -2616,6 +2713,70 @@ MonoBehaviour:
   mode: 0
   minDistance: 0
   maxDistance: 2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1766193937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766193931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.8
+  mode: 2
+  minDistance: 0
+  maxDistance: 2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0020828247
+      value: 1.0044594
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1786520204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2842,30 @@ MonoBehaviour:
   mode: 0
   minDistance: 0
   maxDistance: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1962447644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,7 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   character: {fileID: 1223976622314749214}
-  target: {fileID: 6400992531653223089}
+  target: {fileID: 0}
   startingState: {fileID: 0}
   reactionState: {fileID: 0}
 --- !u!114 &1223976622314749214 stripped
@@ -3143,17 +3328,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
---- !u!114 &6400992531653223089 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8043827459676367380, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-  m_PrefabInstance: {fileID: 6400992531653223088}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81ae3d8f6dc73544cbe0e5881c3b52e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Character
 --- !u!1 &6969460405105216262
 GameObject:
   m_ObjectHideFlags: 0

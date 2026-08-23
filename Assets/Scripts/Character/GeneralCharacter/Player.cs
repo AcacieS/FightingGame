@@ -14,4 +14,13 @@ public class Player : Character
     {
         
     }
+    //TODO: Do the input that it should be for Movement
+    private void Movement()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        Vector3 movement = Vector3.right * horizontal;
+
+        transform.position += movement * Info.MoveSpeed * Time.deltaTime;
+    }
 }
