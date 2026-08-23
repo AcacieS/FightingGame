@@ -1,26 +1,76 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float acceleration = 20f;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+
+    private Rigidbody2D rb;
+    private Vector2 moveInput;
+
     public override void Start()
     {
         base.Start();
-        
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        CheckGround();
+    }
+
+    private void FixedUpdate()
     {
         Movement();
     }
-    //TODO: Do the input that it should be for Movement
+
+    public void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
+    }
+
+    public void OnJump(InputValue value)
+    {
+        if (value.isPressed && IsGrounded())
+        {
+            Jump();
+        }
+    }
+
     private void Movement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
+        float targetSpeed = moveInput.x * moveSpeed;
 
-        Vector3 movement = Vector3.right * horizontal;
+        float newSpeed = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
 
-        transform.position += movement * Info.MoveSpeed * Time.deltaTime;
+        rb.linearVelocity = new Vector2(newSpeed, rb.linearVelocity.y);
+    }
+
+    private void Jump()
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+    }
+
+    private bool IsGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+        return hit.collider != null;
+    }
+
+    private void CheckGround()
+    {
+        Debug.DrawRay(
+            transform.position,
+            Vector3.down * groundCheckDistance,
+            IsGrounded() ? Color.green : Color.red
+        );
     }
 }
