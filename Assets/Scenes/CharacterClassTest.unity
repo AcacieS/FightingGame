@@ -175,54 +175,6 @@ MonoBehaviour:
       enemy: {fileID: 0}
   playerSpawn: {fileID: 2035981147}
   enemySpawn: {fileID: 406596385}
---- !u!1 &147711464
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 147711465}
-  - component: {fileID: 147711467}
-  m_Layer: 0
-  m_Name: Attack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &147711465
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147711464}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1766193932}
-  - {fileID: 1786520205}
-  m_Father: {fileID: 1607450065}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &147711467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147711464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b86cd6f7b839041bd9bbd7ecd085a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompositeState
-  states: []
-  actions: []
 --- !u!1 &162010570
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +313,9 @@ GameObject:
   m_Component:
   - component: {fileID: 265010201}
   - component: {fileID: 265010202}
+  - component: {fileID: 265010204}
+  - component: {fileID: 265010205}
+  - component: {fileID: 265010206}
   m_Layer: 0
   m_Name: ApproachState
   m_TagString: Untagged
@@ -395,6 +350,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23ba418b1f444b42bf705351e5a086e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ApproachState
+--- !u!114 &265010204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265010200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
+  requirements: []
+  considerations:
+  - {fileID: 265010205}
+  state: {fileID: 0}
+--- !u!114 &265010205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265010200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.5
+  mode: 1
+  minDistance: 4
+  maxDistance: 0
+--- !u!114 &265010206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265010200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.2
+  mode: 0
+  minDistance: 4
+  maxDistance: 4
 --- !u!1 &393208617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetAttackingConsideration
   weight: 0.5
+  TargetIsAttackingCondition: 1
 --- !u!114 &849568139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,6 +1556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaxDistanceRequirement
+  mode: 0
+  minDistance: 0
   maxDistance: 10
 --- !u!1 &907661666
 GameObject:
@@ -1926,6 +1932,87 @@ MonoBehaviour:
   requirements: []
   considerations: []
   state: {fileID: 0}
+--- !u!1 &1486953462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1486953463}
+  - component: {fileID: 1486953466}
+  - component: {fileID: 1486953465}
+  - component: {fileID: 1486953464}
+  m_Layer: 0
+  m_Name: ApproachAttackState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1486953463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486953462}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1607450065}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1486953464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486953462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.5
+  mode: 1
+  minDistance: 4
+  maxDistance: 5
+--- !u!114 &1486953465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486953462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaxDistanceRequirement
+  mode: 1
+  minDistance: 1
+  maxDistance: 5
+--- !u!114 &1486953466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486953462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
+  requirements:
+  - {fileID: 1486953465}
+  considerations: []
+  state: {fileID: 0}
 --- !u!1 &1563998718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,6 +2115,9 @@ GameObject:
   - component: {fileID: 1607450065}
   - component: {fileID: 1607450066}
   - component: {fileID: 1607450067}
+  - component: {fileID: 1607450071}
+  - component: {fileID: 1607450069}
+  - component: {fileID: 1607450070}
   m_Layer: 0
   m_Name: Offensive
   m_TagString: Untagged
@@ -2048,8 +2138,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1486953463}
   - {fileID: 265010201}
-  - {fileID: 147711465}
+  - {fileID: 1766193932}
+  - {fileID: 1786520205}
   m_Father: {fileID: 1962447645}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1607450066
@@ -2064,8 +2156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b86cd6f7b839041bd9bbd7ecd085a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompositeState
-  states: []
-  actions: []
+  states:
+  - {fileID: 265010202}
+  - {fileID: 0}
+  actions:
+  - {fileID: 265010204}
 --- !u!114 &1607450067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2079,8 +2174,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
   requirements: []
-  considerations: []
+  considerations:
+  - {fileID: 1607450071}
+  - {fileID: 1607450069}
+  - {fileID: 1607450070}
   state: {fileID: 0}
+--- !u!114 &1607450069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607450064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a72d5bd132ccc45b894499b89906ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetAttackingConsideration
+  weight: 0.2
+  TargetIsAttackingCondition: 0
+--- !u!114 &1607450070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607450064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d8d34d3fa67d84dbf9da0b4cb445a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetLowHealthConsideration
+  weight: 0.3
+  lowHealthThreshold: 0.1
+--- !u!114 &1607450071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607450064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.3
+  mode: 0
+  minDistance: 2
+  maxDistance: 2
 --- !u!1 &1617578948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,6 +2544,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766193932}
+  - component: {fileID: 1766193935}
+  - component: {fileID: 1766193934}
+  - component: {fileID: 1766193936}
   m_Layer: 0
   m_Name: NearAttackState
   m_TagString: Untagged
@@ -2422,8 +2567,55 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 147711465}
+  m_Father: {fileID: 1607450065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766193934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766193931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaxDistanceRequirement
+  mode: 0
+  minDistance: 0
+  maxDistance: 5
+--- !u!114 &1766193935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766193931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
+  requirements:
+  - {fileID: 1766193934}
+  considerations: []
+  state: {fileID: 0}
+--- !u!114 &1766193936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766193931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.8
+  mode: 0
+  minDistance: 0
+  maxDistance: 2
 --- !u!1 &1786520204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2625,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786520205}
+  - component: {fileID: 1786520206}
+  - component: {fileID: 1786520207}
   m_Layer: 0
   m_Name: SpecialAttackState
   m_TagString: Untagged
@@ -2453,8 +2647,40 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 147711465}
+  m_Father: {fileID: 1607450065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1786520206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786520204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
+  requirements:
+  - {fileID: 1766193934}
+  considerations: []
+  state: {fileID: 0}
+--- !u!114 &1786520207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786520204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 1
+  mode: 0
+  minDistance: 0
+  maxDistance: 0
 --- !u!1 &1962447644
 GameObject:
   m_ObjectHideFlags: 0
