@@ -39,6 +39,7 @@ public class CompositeState : State
     public override void Initialize(AIController ai)
     {
         base.Initialize(ai);
+        SetStates();
         utility = new Utility(actions);
 
         foreach (State state in states)
@@ -59,10 +60,11 @@ public class CompositeState : State
         if (action == null)
         {
             Debug.LogError($"{name}: No UtilityAction was chosen!");
+            RequestRootDecision();
             return;
         }
 
-        //Debug.Log($"{name}: Chosen action = {action.name}");
+        Debug.Log($"{name}: Chosen action = {action.name}");
 
         State nextState = action.GetState();
 

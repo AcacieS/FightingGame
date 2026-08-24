@@ -10,8 +10,6 @@ public class AttackState : State
         Debug.Log("AI → Attack");
 
         timer = 0f;
-
-        // AI.Character.Attack();
     }
 
     public override void Play()

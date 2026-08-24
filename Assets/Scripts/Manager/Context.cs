@@ -15,6 +15,7 @@ public class Context : MonoBehaviour
     // Runtime data
     public float Distance { get; private set; }
     public float Direction { get; private set; }
+    public float DirectionSign => Mathf.Sign(Direction);
 
     public float SelfHp => Self != null ? Self.Hp : 0;
     public float SelfMaxHp => Self != null ? Self.Info.Hp : 0;

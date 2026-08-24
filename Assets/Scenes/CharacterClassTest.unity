@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 265010201}
-  - component: {fileID: 265010202}
+  - component: {fileID: 265010208}
   - component: {fileID: 265010204}
   - component: {fileID: 265010205}
   - component: {fileID: 265010206}
@@ -339,19 +339,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1607450065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &265010202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265010200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23ba418b1f444b42bf705351e5a086e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ApproachState
-  approachDistance: 4
 --- !u!114 &265010204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +459,24 @@ MonoBehaviour:
   mode: 1
   minDistance: 2
   maxDistance: 0
+--- !u!114 &265010208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265010200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1917418959951b3408e15f0194b0fc7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementState
+  _movementDistance: 3
+  moveAwayFromTarget: 0
+  _overrideMovementSettings: 0
+  _movementSpeed: 3
+  _movementAcceleration: 3
+  _movementDirection: 0
 --- !u!1 &393208617
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &414576823
 Transform:
   m_ObjectHideFlags: 0
@@ -1583,9 +1588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompositeState
   states:
-  - {fileID: 414576824}
+  - {fileID: 1617578951}
   actions:
-  - {fileID: 414576825}
+  - {fileID: 1617578952}
   currentChild: {fileID: 0}
 --- !u!114 &849568136
 MonoBehaviour:
@@ -1700,7 +1705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &907661667
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,116 +1980,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231805664}
   m_CullTransparentMesh: 1
---- !u!1 &1324678308
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1324678309}
-  - component: {fileID: 1324678312}
-  - component: {fileID: 1324678311}
-  - component: {fileID: 1324678310}
-  m_Layer: 0
-  m_Name: ApproachAttackState (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1324678309
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324678308}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1607450065}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1324678310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324678308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
-  weight: 0.5
-  score: 0
-  score_weight: 0
-  mode: 1
-  minDistance: 4
-  maxDistance: 5
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1324678311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324678308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MaxDistanceRequirement
-  mode: 1
-  minDistance: 1
-  maxDistance: 5
---- !u!114 &1324678312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324678308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements:
-  - {fileID: 1324678311}
-  considerations: []
-  state: {fileID: 0}
-  _finalScore: 0
-  _activateTestScore: 0
-  _testScore: 0
 --- !u!1 &1338609256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,7 +2206,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1486953463}
-  - {fileID: 1324678309}
   - {fileID: 265010201}
   - {fileID: 1766193932}
   - {fileID: 1786520205}
@@ -2330,7 +2224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompositeState
   states:
-  - {fileID: 265010202}
+  - {fileID: 0}
   actions:
   - {fileID: 265010204}
   currentChild: {fileID: 0}
@@ -2447,7 +2341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1617578949
 Transform:
   m_ObjectHideFlags: 0
@@ -2475,8 +2369,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1917418959951b3408e15f0194b0fc7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetreatState
-  retreatDistance: 4
-  retreatDirection: 0
+  _movementDistance: 3
+  moveAwayFromTarget: 1
+  _overrideMovementSettings: 0
+  _movementSpeed: 3
+  _movementAcceleration: 3
+  _movementDirection: 0
 --- !u!114 &1617578952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2723,7 +2621,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   startingState: {fileID: 1962447646}
-  reactionState: {fileID: 907661668}
+  hurtState: {fileID: 1563998720}
+  deadState: {fileID: 707763656}
   currentState: {fileID: 0}
 --- !u!1 &1741339264
 GameObject:
@@ -3229,7 +3128,7 @@ GameObject:
   - component: {fileID: 6400992531653223090}
   - component: {fileID: 6400992531653223091}
   - component: {fileID: 6400992531653223092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3368,6 +3267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   characterInfo: {fileID: 11400000, guid: 376aba6f11071744cb033b9eb662a2bd, type: 2}
   rb: {fileID: 0}
+  damageTest: 0
   jumpForce: 7
   groundCheckDistance: 0.2
   groundLayer:
@@ -3483,7 +3383,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.042844772, y: 0.51608396}
+  m_Offset: {x: 0.008552721, y: 0.51608396}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.30434778, y: -2.222222}
@@ -3493,7 +3393,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.25214407, y: 0.22067803}
+  m_Size: {x: 0.13935392, y: 0.22067809}
   m_EdgeRadius: 0
 --- !u!50 &6400992531653223091
 Rigidbody2D:
@@ -3566,7 +3466,7 @@ GameObject:
   - component: {fileID: 7878350318599529316}
   - component: {fileID: 7878350318599529317}
   - component: {fileID: 7878350318599529318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3603,6 +3503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Character
   characterInfo: {fileID: 11400000, guid: bc2534ee9b186ed4eae0531b534ae4e0, type: 2}
   rb: {fileID: 0}
+  damageTest: 0
 --- !u!50 &7878350318599529317
 Rigidbody2D:
   serializedVersion: 5
@@ -3664,7 +3565,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.044999998, y: 0.49}
+  m_Offset: {x: 0.005379997, y: 0.49}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.30434778, y: -2.222222}
@@ -3674,7 +3575,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.22999999, y: 0.18000004}
+  m_Size: {x: 0.15075998, y: 0.18000007}
   m_EdgeRadius: 0
 --- !u!1001 &8803172234933449740
 PrefabInstance:

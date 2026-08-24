@@ -8,7 +8,11 @@ public class AIController : MonoBehaviour
 
     [Header("AI")]
     [SerializeField] private State startingState;
-    [SerializeField] private State reactionState;
+    [Header("Reaction State")]
+    
+    [SerializeField] private State hurtState;
+    [SerializeField] private State deadState;
+    [Header("Debug Values")]
     [ReadOnly, SerializeField] private State currentState;
     private Context context;
 
@@ -45,16 +49,16 @@ public class AIController : MonoBehaviour
     }
     private void HandleHurt(int Hp)
     {
-        // if (Hp <= 0)
-        // {
-        //     //TODO: DEATH
-        //     ChangeState(reactionState);
-        // }
-        // else
-        // {
-        //     //TODO: HURT
-        //     ChangeState(reactionState);
-        // }
+        if (Hp <= 0)
+        {
+            //TODO: DEATH
+            ChangeState(hurtState);
+        }
+        else
+        {
+            //TODO: HURT
+            ChangeState(deadState);
+        }
         
     }
     public void RequestDecision()

@@ -8,6 +8,8 @@ public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
     [SerializeField] protected Rigidbody2D rb;
+    [Header("Debug")]
+    [SerializeField] private int damageTest;
     public CharacterInfo Info => characterInfo;
     public event System.Action<int> OnHpChanged;
     public event System.Action<int> OnHurt;
@@ -49,6 +51,12 @@ public class Character: MonoBehaviour
     {
         target.Hurt(damage) ;
     }
+
+    [ContextMenu("Hurt Test")]
+    public void HurtTest()
+    {
+        Hurt(damageTest);
+    }
     public void Hurt(int damage)
     {
         Hp -= damage;
@@ -78,6 +86,10 @@ public class Character: MonoBehaviour
     }
     public void Move(float direction)
     {
+        Move(direction, Info.MoveSpeed, Info.Acceleration);
+    }
+    public void Move(float direction, float speed, float acceleration)
+    {
         if (rb == null)
         {
             Debug.LogError($"{name}: Rigidbody2D is NULL!");
@@ -98,12 +110,12 @@ public class Character: MonoBehaviour
         //     $"before={rb.linearVelocity}"
         // );
 
-        float targetSpeed = direction * Info.MoveSpeed;
+        float targetSpeed = direction * speed;
 
         float newSpeed = Mathf.MoveTowards(
             rb.linearVelocity.x,
             targetSpeed,
-            Info.Acceleration * Time.fixedDeltaTime
+            acceleration * Time.fixedDeltaTime
         );
 
         rb.linearVelocity = new Vector2(

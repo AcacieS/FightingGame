@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class HurtState : State
 {
-    private readonly ReactionState reaction;
-
     private float timer;
 
     public override void Enter()
     {
         Debug.Log("AI → Hit");
-
+        AI.Character.Move(0);
         timer = 0f;
     }
 
