@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class HunterWolf : Enemy
 {
-    private CharacterControllerA ai;
+    private AIController ai;
 
-    public CharacterControllerA AI => ai;
+    public AIController AI => ai;
 
     [Header("State")]
     [SerializeField] private State AimState;
@@ -44,7 +44,7 @@ public class HunterWolf : Enemy
 
     private void Awake()
     {
-        ai = GetComponent<CharacterControllerA>();
+        ai = GetComponent<AIController>();
 
         AimState.Initialize(ai);
         FowardState.Initialize(ai);

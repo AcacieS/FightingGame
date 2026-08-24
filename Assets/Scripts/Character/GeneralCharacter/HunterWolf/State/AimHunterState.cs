@@ -9,7 +9,7 @@ public class AimHunterState : HunterState
         base.Enter();
         HunterWolf.ChangeSpeed(moveSpeed);
     }
-    public override void Tick()
+    public override void Play()
     {
         if (timerState.IsOver())
         {

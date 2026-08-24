@@ -6,7 +6,7 @@ public class IdleHunterWolf : HunterState
     {
         base.Enter();
     }
-    public override void Tick()
+    public override void Play()
     {
         
     }

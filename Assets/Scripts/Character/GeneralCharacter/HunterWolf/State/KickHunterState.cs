@@ -7,7 +7,7 @@ public class KickHunterState : HunterState
     {
         base.Enter();
     }
-    public override void Tick()
+    public override void Play()
     {
         if (timerState.IsOver())
         {

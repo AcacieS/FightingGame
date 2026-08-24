@@ -6,7 +6,7 @@ public class HitHunterState : HunterState
     {
         base.Enter();
     }
-    public override void Tick() { }
+    public override void Play() { }
     public override void Exit()
     {
         base.Exit();
