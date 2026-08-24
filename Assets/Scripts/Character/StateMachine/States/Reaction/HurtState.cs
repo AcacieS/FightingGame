@@ -2,23 +2,28 @@ using UnityEngine;
 
 public class HurtState : State
 {
-    private float timer;
 
     public override void Enter()
     {
-        Debug.Log("AI → Hit");
-        AI.Character.Move(0);
-        timer = 0f;
+        base.Enter();
+        Debug.Log("AI → Hurt");
+        if (Context == null)
+        {
+            Debug.Log("Context null");
+        }
+        if (Context.Self == null)
+        {
+            Debug.Log("Context Self null");
+        }
+        Context.Self.Move(0);
     }
 
     public override void Play()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= 0.5f)
+        if (Context.Self.IsAnimFinished(animName))
         {
             RequestRootDecision();
-            //AI.EnterCombat();
         }
     }
+    
 }

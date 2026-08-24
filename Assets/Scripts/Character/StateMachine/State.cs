@@ -5,7 +5,7 @@ public abstract class State : MonoBehaviour
     protected AIController AI { get; private set; }
     protected CompositeState Parent { get; private set; }
     protected Context Context => AI.Context;
-    [SerializeField] private string animName;
+    [SerializeField] protected string animName;
 
     public virtual void Initialize(AIController ai)
     {

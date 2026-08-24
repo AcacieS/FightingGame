@@ -7,6 +7,7 @@ public class IdleState : State
 
     public override void Enter()
     {
+        base.Enter();
         timer = 0f;
         //duration = Random.Range(1f, 3f);
 

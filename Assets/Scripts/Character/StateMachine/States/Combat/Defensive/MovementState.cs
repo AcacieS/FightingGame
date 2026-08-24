@@ -19,7 +19,15 @@ public class MovementState : State
 
     public override void Enter()
     {
-        Debug.Log("AI → Retreat");
+        if (moveAwayFromTarget)
+        {
+            Debug.Log("AI → Retreat Movement State");
+        }
+        else
+        {
+            Debug.Log("AI → Approach Movement State");
+        }
+        
         base.Enter();
         AI.Character.Move(0);
 

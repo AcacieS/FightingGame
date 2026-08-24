@@ -231,8 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements:
-  - {fileID: 4465026372095164908}
+  requirements: []
   considerations:
   - {fileID: 1523348257234003488}
   - {fileID: 1580034662788412587}
@@ -759,6 +758,7 @@ GameObject:
   - component: {fileID: 8190542592296833967}
   - component: {fileID: 272352771870777805}
   - component: {fileID: 596139106263552471}
+  - component: {fileID: 7590624118289061115}
   m_Layer: 0
   m_Name: Defensive
   m_TagString: Untagged
@@ -819,7 +819,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
   requirements: []
   considerations:
-  - {fileID: 8190542592296833967}
   - {fileID: 272352771870777805}
   - {fileID: 596139106263552471}
   state: {fileID: 0}
@@ -874,6 +873,21 @@ MonoBehaviour:
   score: 0
   score_weight: 0
   lowHealthThreshold: 0.3
+--- !u!114 &7590624118289061115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551577291058336668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d079c2f50143b4f9d94d630ad30788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateConsideration
+  weight: 0.2
+  score: 0
+  score_weight: 0
 --- !u!1 &4136053261862046619
 GameObject:
   m_ObjectHideFlags: 0
