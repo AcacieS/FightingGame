@@ -78,6 +78,26 @@ public class Character: MonoBehaviour
     }
     public void Move(float direction)
     {
+        if (rb == null)
+        {
+            Debug.LogError($"{name}: Rigidbody2D is NULL!");
+            return;
+        }
+
+        if (Info == null)
+        {
+            Debug.LogError($"{name}: CharacterInfo is NULL!");
+            return;
+        }
+
+        // Debug.Log(
+        //     $"{name} Move | " +
+        //     $"direction={direction} | " +
+        //     $"speed={Info.MoveSpeed} | " +
+        //     $"acceleration={Info.Acceleration} | " +
+        //     $"before={rb.linearVelocity}"
+        // );
+
         float targetSpeed = direction * Info.MoveSpeed;
 
         float newSpeed = Mathf.MoveTowards(
@@ -88,6 +108,15 @@ public class Character: MonoBehaviour
 
         rb.linearVelocity = new Vector2(
             newSpeed,
+            rb.linearVelocity.y
+        );
+
+        //Debug.Log($"AFTER velocity = {rb.linearVelocity}");
+    }
+    public void StopMoving()
+    {
+        rb.linearVelocity = new Vector2(
+            0f,
             rb.linearVelocity.y
         );
     }

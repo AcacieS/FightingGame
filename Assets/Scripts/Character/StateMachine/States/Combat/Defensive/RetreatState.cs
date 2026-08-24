@@ -2,42 +2,49 @@ using UnityEngine;
 
 public class RetreatState : State
 {
+    [SerializeField] private float retreatDistance = 3f;
+    [ReadOnly, SerializeField] private float retreatDirection;
+
+    private Vector3 startPosition;
+
     public override void Enter()
     {
         Debug.Log("AI → Retreat");
+        AI.Character.Move(0);
+        startPosition = AI.Character.transform.position;
     }
 
-    public override void Update()
+    public override void Play()
     {
         Character target = AI.Context.Target;
 
         if (target == null)
             return;
 
-        // Direction from AI to target
-        float directionToTarget =
-            Mathf.Sign(
-                target.transform.position.x -
-                AI.Character.transform.position.x
-            );
+        float directionToTarget = Mathf.Sign(
+            AI.Context.Direction
+        );
 
-        // Move in the opposite direction
-        float retreatDirection = -directionToTarget;
+        retreatDirection = -directionToTarget;
 
         AI.Character.Move(retreatDirection);
 
-        // Face the opponent while retreating
         AI.Character.LookAt(target);
 
-        // Stop retreating when healthy enough
-        if (AI.Context.SelfHp > 30f)
+        float distanceMoved = Mathf.Abs(
+            AI.Character.transform.position.x -
+            startPosition.x
+        );
+
+        if (distanceMoved >= retreatDistance)
         {
-            RequestDecision();
+            RequestRootDecision();
         }
     }
 
     public override void Exit()
     {
         Debug.Log("AI → Exit Retreat");
+        AI.Character.StopMoving();
     }
 }

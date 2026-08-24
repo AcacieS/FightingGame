@@ -13,13 +13,13 @@ public class HurtState : State
         timer = 0f;
     }
 
-    public override void Update()
+    public override void Play()
     {
         timer += Time.deltaTime;
 
         if (timer >= 0.5f)
         {
-            RequestDecision();
+            RequestRootDecision();
             //AI.EnterCombat();
         }
     }

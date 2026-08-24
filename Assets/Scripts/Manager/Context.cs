@@ -5,10 +5,12 @@ public class Context : MonoBehaviour
     [Header("Characters")]
     [SerializeField] private Character self;
     [SerializeField] private Character target;
+    [SerializeField] private AIController selfController;
     public static Context Instance { get; private set; }
 
     public Character Self => self;
     public Character Target => target;
+    public AIController AIController => AIController;
 
     // Runtime data
     public float Distance { get; private set; }

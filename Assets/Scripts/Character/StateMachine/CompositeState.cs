@@ -36,7 +36,7 @@ public class CompositeState : State
             }
         }
     }
-    public override void Initialize(CharacterController ai)
+    public override void Initialize(AIController ai)
     {
         base.Initialize(ai);
         utility = new Utility(actions);
@@ -52,7 +52,6 @@ public class CompositeState : State
         }
     }
     
-
     public void MakeDecision()
     {
         UtilityAction action = utility.ChooseAction(AI.Context);
@@ -63,7 +62,7 @@ public class CompositeState : State
             return;
         }
 
-        Debug.Log($"{name}: Chosen action = {action.name}");
+        //Debug.Log($"{name}: Chosen action = {action.name}");
 
         State nextState = action.GetState();
 
@@ -97,9 +96,10 @@ public class CompositeState : State
         MakeDecision();
     }
 
-    public override void Update()
+    public override void Play()
     {
-        currentChild?.Update();
+        // Debug.LogWarning("is doing update"+gameObject.name);
+        currentChild?.Play();
     }
 
     public override void Exit()

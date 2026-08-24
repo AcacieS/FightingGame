@@ -1,6 +1,6 @@
 public class ReactionState : CompositeState
 {
-    // public ReactionState(CharacterController ai)
+    // public ReactionState(AIController ai)
     //     : base(ai)
     // {
     // }

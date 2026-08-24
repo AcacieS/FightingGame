@@ -9,7 +9,7 @@ public class DeadState : State
         // AI.Character.Die();
     }
 
-    public override void Update()
+    public override void Play()
     {
         // Do nothing.
     }

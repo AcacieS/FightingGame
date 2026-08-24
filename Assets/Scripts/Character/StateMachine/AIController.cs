@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class AIController : MonoBehaviour
 {
     // [Header("Characters")]
     private Character character;
@@ -41,7 +41,7 @@ public class CharacterController : MonoBehaviour
     private void Update()
     {
         //context.Update();
-        currentState?.Update();
+        currentState?.Play();
     }
     private void HandleHurt(int Hp)
     {
@@ -56,6 +56,10 @@ public class CharacterController : MonoBehaviour
         //     ChangeState(reactionState);
         // }
         
+    }
+    public void RequestDecision()
+    {
+        ChangeState(startingState);
     }
 
     public void ChangeState(State newState)

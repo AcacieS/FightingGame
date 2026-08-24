@@ -13,13 +13,13 @@ public class BlockState : State
         // AI.Character.Block();
     }
 
-    public override void Update()
+    public override void Play()
     {
         timer += Time.deltaTime;
 
         if (timer >= 0.75f)
         {
-            RequestDecision();
+            RequestRootDecision();
         }
     }
 }

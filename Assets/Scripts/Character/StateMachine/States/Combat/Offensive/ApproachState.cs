@@ -2,46 +2,46 @@ using UnityEngine;
 
 public class ApproachState : State
 {
+    [SerializeField] private float approachDistance = 3f;
+
+    private Vector3 startPosition;
+
     public override void Enter()
     {
         Debug.Log("AI → Approach");
+
+        startPosition = AI.Character.transform.position;
+        AI.Character.Move(0);
     }
 
-    public override void Update()
+    public override void Play()
     {
         Character target = AI.Context.Target;
 
         if (target == null)
-        {
-            Debug.LogError("target is null");
             return;
-        }
-            
 
-        Transform targetTransform = target.transform;
-
-        // Direction toward the opponent
         float direction = Mathf.Sign(
-            targetTransform.position.x - AI.Character.transform.position.x
+            target.transform.position.x -
+            AI.Character.transform.position.x
         );
 
-        // Move toward opponent
-        Vector3 movement = Vector3.right *
-                           direction *
-                           AI.Character.Info.MoveSpeed *
-                           Time.deltaTime;
+        AI.Character.Move(direction);
 
-        AI.Character.transform.position += movement;
+        float distanceMoved = Mathf.Abs(
+            AI.Character.transform.position.x -
+            startPosition.x
+        );
 
-        // Stop approaching when close enough
-        if (AI.Context.Distance <= 2f)
+        if (distanceMoved >= approachDistance)
         {
-            RequestDecision();
+            RequestRootDecision();
         }
     }
 
     public override void Exit()
     {
         Debug.Log("AI → Exit Approach");
+        AI.Character.StopMoving();
     }
 }
