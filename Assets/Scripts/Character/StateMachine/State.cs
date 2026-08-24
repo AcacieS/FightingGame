@@ -14,6 +14,7 @@ public abstract class State : MonoBehaviour
     public virtual void Enter()
     {
         Context.Self.LookAt(Context.Target);
+        Context.SetCurrentState(this);
     }
     public virtual void Play() { }
     public virtual void Exit() { }
