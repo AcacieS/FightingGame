@@ -4,11 +4,22 @@ using UnityEngine;
 [CustomEditor(typeof(Context))]
 public class ContextEditor : Editor
 {
+    private SerializedProperty overrideCharactersSettings;
+    private SerializedProperty player;
+    private SerializedProperty enemy;
     private double nextRepaint;
 
     private void OnEnable()
     {
         EditorApplication.update += EditorUpdate;
+        overrideCharactersSettings =
+            serializedObject.FindProperty("_overrideCharactersSettings");
+
+        player =
+            serializedObject.FindProperty("_target");
+
+        enemy =
+            serializedObject.FindProperty("_self");
     }
 
     private void OnDisable()
@@ -38,8 +49,33 @@ public class ContextEditor : Editor
 
         DrawPropertiesExcluding(
             serializedObject,
-            "m_Script"
+            "_overrideCharactersSettings",
+            "_self",
+            "_target"
         );
+        EditorGUILayout.PropertyField(
+            overrideCharactersSettings,
+            new GUIContent("Override Characters Settings")
+        );
+
+        if (overrideCharactersSettings.boolValue)
+        {
+            EditorGUI.indentLevel++;
+
+            EditorGUILayout.PropertyField(
+                enemy,
+                new GUIContent("Self: Enemy")
+            );
+
+            EditorGUILayout.PropertyField(
+                player,
+                new GUIContent("Target: Player")
+            );
+
+            EditorGUI.indentLevel--;
+        }
+
+        serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.Space(10);
 

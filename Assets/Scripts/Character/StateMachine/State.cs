@@ -5,6 +5,8 @@ public abstract class State : MonoBehaviour
     protected AIController AI { get; private set; }
     protected CompositeState Parent { get; private set; }
     protected Context Context => AI.Context;
+    [SerializeField] private string animName;
+
     public virtual void Initialize(AIController ai)
     {
         AI = ai;
@@ -15,6 +17,7 @@ public abstract class State : MonoBehaviour
     {
         Context.Self.LookAt(Context.Target);
         Context.SetCurrentState(this);
+        Context.Self.PlayAnim(animName);
     }
     public virtual void Play() { }
     public virtual void Exit() { }

@@ -8,9 +8,11 @@ public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
     [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] private Animator anim;
     [Header("Debug")]
     [SerializeField] private int damageTest;
     public CharacterInfo Info => characterInfo;
+    
     public event System.Action<int> OnHpChanged;
     public event System.Action<int> OnHurt;
     private int hp;
@@ -28,7 +30,10 @@ public class Character: MonoBehaviour
             }
         }
     }
-    private Animator anim;
+    public void PlayAnim(string animName)
+    {
+        anim.Play(animName);
+    }
     public virtual void Die()
     {
         anim.SetTrigger("Death");
