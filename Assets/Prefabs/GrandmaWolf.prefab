@@ -9,16 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3358603931235081608}
+  - component: {fileID: 2016332566978425217}
   - component: {fileID: 8254826053932824534}
   - component: {fileID: 3197015000126426922}
   - component: {fileID: 5395379223412228828}
   m_Layer: 0
-  m_Name: ApproachAttackState
+  m_Name: RollAttackState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3358603931235081608
 Transform:
   m_ObjectHideFlags: 0
@@ -31,9 +32,30 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4787532557060414024}
   m_Father: {fileID: 6212307711274433067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016332566978425217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21562573746842089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48c31e97e407cb45bc2ae79d3a79e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  animName: Attack01
+  _movementDistance: 7
+  moveAwayFromTarget: 0
+  _overrideMovementSettings: 1
+  _movementSpeed: 15
+  _movementAcceleration: 15
+  _movementDirection: 0
+  attackHitBox: {fileID: 735235653789676998}
 --- !u!114 &8254826053932824534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,9 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements:
-  - {fileID: 3197015000126426922}
-  considerations: []
+  requirements: []
+  considerations:
+  - {fileID: 5395379223412228828}
   state: {fileID: 0}
   _finalScore: 0
   _activateTestScore: 0
@@ -60,7 +82,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21562573746842089}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
   m_Name: 
@@ -80,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
-  weight: 0.5
+  weight: 1
   score: 0
   score_weight: 0
   mode: 1
@@ -184,7 +206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &286047082302048335
 Transform:
   m_ObjectHideFlags: 0
@@ -338,6 +360,89 @@ MonoBehaviour:
   mode: 1
   minDistance: 2
   maxDistance: 0
+--- !u!1 &735235653789676998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4787532557060414024}
+  - component: {fileID: 7786148729427052166}
+  - component: {fileID: 447877851219726940}
+  m_Layer: 0
+  m_Name: RollHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4787532557060414024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735235653789676998}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.482, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3358603931235081608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7786148729427052166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735235653789676998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0cb754bd2ea9240af89ac3916e6c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
+  owner: {fileID: 3923229689760700375}
+  damage: 10
+--- !u!58 &447877851219726940
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735235653789676998}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.023050457, y: 0.02060203}
+  m_Radius: 0.13350175
 --- !u!1 &1819406442052011895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   animName: Idle
-  duration: 5
+  minDuration: 5
+  maxDuration: 5
 --- !u!114 &3510955230961189949
 MonoBehaviour:
   m_ObjectHideFlags: 0

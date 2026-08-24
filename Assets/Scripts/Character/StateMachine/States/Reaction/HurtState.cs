@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HurtState : State
 {
-
+    //TODO: This will interrupt currentState
     public override void Enter()
     {
         base.Enter();

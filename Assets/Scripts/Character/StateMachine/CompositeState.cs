@@ -59,7 +59,7 @@ public class CompositeState : State
 
         if (action == null)
         {
-            Debug.LogError($"{name}: No UtilityAction was chosen!");
+            Debug.LogWarning($"{name}: No UtilityAction was chosen! This Composite State didn't find any possibility. Redo choice again");
             RequestRootDecision();
             return;
         }
