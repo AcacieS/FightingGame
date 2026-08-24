@@ -36,7 +36,7 @@ public class CompositeState : State
             }
         }
     }
-    public override void Initialize(CharacterController ai)
+    public override void Initialize(CharacterControllerA ai)
     {
         base.Initialize(ai);
         utility = new Utility(actions);
@@ -97,9 +97,9 @@ public class CompositeState : State
         MakeDecision();
     }
 
-    public override void Update()
+    public override void Tick()
     {
-        currentChild?.Update();
+        currentChild?.Tick();
     }
 
     public override void Exit()

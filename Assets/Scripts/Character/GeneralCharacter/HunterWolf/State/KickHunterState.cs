@@ -7,9 +7,9 @@ public class KickHunterState : HunterState
     {
         base.Enter();
     }
-    public override void Update()
+    public override void Tick()
     {
-        if (TimerState.IsOver())
+        if (timerState.IsOver())
         {
             JumpState.Initialize(AI);
             AI.ChangeState(JumpState);

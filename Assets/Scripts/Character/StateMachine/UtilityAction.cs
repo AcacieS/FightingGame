@@ -14,7 +14,7 @@ public class UtilityAction : MonoBehaviour
     [Tooltip("The State that this Action is for, auto-assign State on same GameObject if null")]
     private State state;
 
-    protected CharacterController AI;
+    protected CharacterControllerA AI;
     [ReadOnly, SerializeField] private float _finalScore; 
     public void Start()
     {
@@ -35,7 +35,7 @@ public class UtilityAction : MonoBehaviour
         requirements = GetComponents<Requirement>();
     }
     
-    public virtual void Initialize(CharacterController ai)
+    public virtual void Initialize(CharacterControllerA ai)
     {
         AI = ai;
     }

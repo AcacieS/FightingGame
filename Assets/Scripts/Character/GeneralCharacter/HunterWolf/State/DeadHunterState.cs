@@ -6,7 +6,7 @@ public class DeadHunterState : HunterState
     {
         base.Enter();
     }
-    public override void Update() { }
+    public override void Tick() { }
     public override void Exit()
     {
         base.Exit();

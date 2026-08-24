@@ -9,9 +9,9 @@ public class AimHunterState : HunterState
         base.Enter();
         HunterWolf.ChangeSpeed(moveSpeed);
     }
-    public override void Update()
+    public override void Tick()
     {
-        if (TimerState.IsOver())
+        if (timerState.IsOver())
         {
             ShootState.Initialize(AI);
             AI.ChangeState(ShootState);
