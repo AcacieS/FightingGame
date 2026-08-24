@@ -54,7 +54,6 @@ The system consists of the following important classes:
 
 ---
 # General Implementation
-## Implementation
 
 ### 1. Set up the `Context`
 
