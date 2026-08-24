@@ -10,17 +10,15 @@ public class AttackState : State
         Debug.Log("AI → Attack");
 
         timer = 0f;
-
-        // AI.Character.Attack();
     }
 
-    public override void Update()
+    public override void Play()
     {
         timer += Time.deltaTime;
 
         if (timer >= 1f)
         {
-            RequestDecision();
+            RequestRootDecision();
         }
     }
     

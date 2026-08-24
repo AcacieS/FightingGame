@@ -16,6 +16,6 @@ public class StateMachine
 
     public void Update()
     {
-        CurrentState?.Tick();
+        CurrentState?.Play();
     }
 }

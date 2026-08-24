@@ -3,23 +3,16 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float acceleration = 20f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer;
-
-    private Rigidbody2D rb;
     private Vector2 moveInput;
 
     public override void Awake()
     {
         base.Awake();
-
-        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -35,6 +28,7 @@ public class Player : Character
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        // Debug.Log($"OnMove: {moveInput}");
     }
 
     public void OnJump(InputValue value)
@@ -47,9 +41,9 @@ public class Player : Character
 
     private void Movement()
     {
-        float targetSpeed = moveInput.x * moveSpeed;
+        float targetSpeed = moveInput.x * Info.MoveSpeed;
 
-        float newSpeed = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
+        float newSpeed = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, Info.Acceleration * Time.fixedDeltaTime);
 
         rb.linearVelocity = new Vector2(newSpeed, rb.linearVelocity.y);
     }

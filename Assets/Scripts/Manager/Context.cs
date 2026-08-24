@@ -5,14 +5,21 @@ public class Context : MonoBehaviour
     [Header("Characters")]
     [SerializeField] private Character self;
     [SerializeField] private Character target;
+    [SerializeField] private AIController selfController;
+    [ReadOnly, SerializeField] private State selfState;
     public static Context Instance { get; private set; }
 
     public Character Self => self;
     public Character Target => target;
+    public AIController AIController => AIController;
+
+    public State SelfState => selfState;
+    public void SetCurrentState(State newSelfState) => selfState = newSelfState;
 
     // Runtime data
     public float Distance { get; private set; }
     public float Direction { get; private set; }
+    public float DirectionSign => Mathf.Sign(Direction);
 
     public float SelfHp => Self != null ? Self.Hp : 0;
     public float SelfMaxHp => Self != null ? Self.Info.Hp : 0;

@@ -2,21 +2,29 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
-    protected CharacterControllerA AI { get; private set; }
-
+    protected AIController AI { get; private set; }
     protected CompositeState Parent { get; private set; }
-
-    public virtual void Initialize(CharacterControllerA ai)
+    protected Context Context => AI.Context;
+    public virtual void Initialize(AIController ai)
     {
         AI = ai;
         Parent = GetComponentInParent<CompositeState>();
     }
 
-    public virtual void Enter() { }
-    public virtual void Tick() { }
+    public virtual void Enter()
+    {
+        Context.Self.LookAt(Context.Target);
+        Context.SetCurrentState(this);
+    }
+    public virtual void Play() { }
     public virtual void Exit() { }
     protected void RequestDecision()
     {
-        Parent.MakeDecision();
+        Parent?.MakeDecision();
+    }
+
+    protected void RequestRootDecision()
+    {
+        AI.RequestDecision();
     }
 }

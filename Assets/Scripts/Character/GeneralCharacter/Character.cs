@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
+    [SerializeField] protected Rigidbody2D rb;
+    [Header("Debug")]
+    [SerializeField] private int damageTest;
     public CharacterInfo Info => characterInfo;
     public event System.Action<int> OnHpChanged;
     public event System.Action<int> OnHurt;
@@ -34,15 +37,25 @@ public class Character: MonoBehaviour
     {
         Hp = characterInfo.Hp;
         anim = GetComponent<Animator>();
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
     }
 
     public virtual void Start()
     {
-        StartCoroutine(LookAt(Context.Instance.Target));
+        
     }
     public void Hit(Character target, int damage)
     {
         target.Hurt(damage) ;
+    }
+
+    [ContextMenu("Hurt Test")]
+    public void HurtTest()
+    {
+        Hurt(damageTest);
     }
     public void Hurt(int damage)
     {
@@ -50,25 +63,78 @@ public class Character: MonoBehaviour
         OnHurt?.Invoke(Hp);
         anim.SetTrigger("Hurt");
     }
-    public IEnumerator LookAt(Character target)
+    public void LookAt(Character target)
+    {
+        if (target == null)
+            return;
+
+        float direction = target.transform.position.x - transform.position.x;
+
+        if (Mathf.Approximately(direction, 0f))
+            return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
+        transform.localScale = scale;
+    }
+
+    public IEnumerator LookAtContinuously(Character target)
     {
         if (target == null)
             yield break;
 
         while (true)
         {
-            float direction = Context.Instance.Direction;
-
-            if (!Mathf.Approximately(direction, 0f))
-            {
-                Vector3 scale = transform.localScale;
-
-                scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
-
-                transform.localScale = scale;
-            }
-
+            LookAt(target);
             yield return null;
         }
+    }
+    public void Move(float direction)
+    {
+        Move(direction, Info.MoveSpeed, Info.Acceleration);
+    }
+    public void Move(float direction, float speed, float acceleration)
+    {
+        if (rb == null)
+        {
+            Debug.LogError($"{name}: Rigidbody2D is NULL!");
+            return;
+        }
+
+        if (Info == null)
+        {
+            Debug.LogError($"{name}: CharacterInfo is NULL!");
+            return;
+        }
+
+        // Debug.Log(
+        //     $"{name} Move | " +
+        //     $"direction={direction} | " +
+        //     $"speed={Info.MoveSpeed} | " +
+        //     $"acceleration={Info.Acceleration} | " +
+        //     $"before={rb.linearVelocity}"
+        // );
+
+        float targetSpeed = direction * speed;
+
+        float newSpeed = Mathf.MoveTowards(
+            rb.linearVelocity.x,
+            targetSpeed,
+            acceleration * Time.fixedDeltaTime
+        );
+
+        rb.linearVelocity = new Vector2(
+            newSpeed,
+            rb.linearVelocity.y
+        );
+
+        //Debug.Log($"AFTER velocity = {rb.linearVelocity}");
+    }
+    public void StopMoving()
+    {
+        rb.linearVelocity = new Vector2(
+            0f,
+            rb.linearVelocity.y
+        );
     }
 }

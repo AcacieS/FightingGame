@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class AIController : MonoBehaviour
 {
     // [Header("Characters")]
     private Character character;
@@ -8,8 +8,12 @@ public class CharacterController : MonoBehaviour
 
     [Header("AI")]
     [SerializeField] private State startingState;
-    [SerializeField] private State reactionState;
-    private State currentState;
+    [Header("Reaction State")]
+    
+    [SerializeField] private State hurtState;
+    [SerializeField] private State deadState;
+    [Header("Debug Values")]
+    [ReadOnly, SerializeField] private State currentState;
     private Context context;
 
     public Character Character => character;
@@ -41,21 +45,25 @@ public class CharacterController : MonoBehaviour
     private void Update()
     {
         //context.Update();
-        currentState?.Update();
+        currentState?.Play();
     }
     private void HandleHurt(int Hp)
     {
-        // if (Hp <= 0)
-        // {
-        //     //TODO: DEATH
-        //     ChangeState(reactionState);
-        // }
-        // else
-        // {
-        //     //TODO: HURT
-        //     ChangeState(reactionState);
-        // }
+        if (Hp <= 0)
+        {
+            //TODO: DEATH
+            ChangeState(hurtState);
+        }
+        else
+        {
+            //TODO: HURT
+            ChangeState(deadState);
+        }
         
+    }
+    public void RequestDecision()
+    {
+        ChangeState(startingState);
     }
 
     public void ChangeState(State newState)

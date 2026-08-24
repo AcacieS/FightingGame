@@ -21,23 +21,10 @@ public class DistanceConsiderationEditor : Editor
     {
         serializedObject.Update();
 
-        // Script
-        EditorGUI.BeginDisabledGroup(true);
-
-        EditorGUILayout.ObjectField(
-            "Script",
-            MonoScript.FromMonoBehaviour((DistanceConsideration)target),
-            typeof(MonoScript),
-            false
-        );
-
-        EditorGUI.EndDisabledGroup();
-
         // Draw everything else automatically,
         // except the fields we control manually.
         DrawPropertiesExcluding(
             serializedObject,
-            "m_Script",
             "mode",
             "minDistance",
             "maxDistance",

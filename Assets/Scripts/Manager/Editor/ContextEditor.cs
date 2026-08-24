@@ -49,7 +49,7 @@ public class ContextEditor : Editor
         );
 
         EditorGUI.BeginDisabledGroup(true);
-
+        
         EditorGUILayout.FloatField(
             "Distance",
             context.Distance
@@ -57,6 +57,10 @@ public class ContextEditor : Editor
         EditorGUILayout.FloatField(
             "Direction",
             context.Direction
+        );
+        EditorGUILayout.FloatField(
+            "DirectionSign",
+            context.DirectionSign
         );
 
         EditorGUILayout.Space(5);
