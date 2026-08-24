@@ -20,7 +20,7 @@ public class MovementState : State
     public override void Enter()
     {
         Debug.Log("AI → Retreat");
-
+        base.Enter();
         AI.Character.Move(0);
 
         _startPosition = AI.Character.transform.position;
@@ -29,10 +29,6 @@ public class MovementState : State
 
     public override void Play()
     {
-        Character target = AI.Context.Target;
-
-        if (target == null)
-            return;
 
         _movementDirection = moveAwayFromTarget ? -_direction: _direction;
         if (_overrideMovementSettings)
@@ -43,8 +39,6 @@ public class MovementState : State
         {
             AI.Character.Move(_movementDirection);
         }
-
-        AI.Character.LookAt(target);
 
         float distanceMoved = Mathf.Abs(
             AI.Character.transform.position.x -

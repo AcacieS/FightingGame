@@ -11,7 +11,10 @@ public abstract class State : MonoBehaviour
         Parent = GetComponentInParent<CompositeState>();
     }
 
-    public virtual void Enter() { }
+    public virtual void Enter()
+    {
+        Context.Self.LookAt(Context.Target);
+    }
     public virtual void Play() { }
     public virtual void Exit() { }
     protected void RequestDecision()

@@ -45,7 +45,7 @@ public class Character: MonoBehaviour
 
     public virtual void Start()
     {
-        StartCoroutine(LookAt(Context.Instance.Target));
+        
     }
     public void Hit(Character target, int damage)
     {
@@ -63,24 +63,29 @@ public class Character: MonoBehaviour
         OnHurt?.Invoke(Hp);
         anim.SetTrigger("Hurt");
     }
-    public IEnumerator LookAt(Character target)
+    public void LookAt(Character target)
+    {
+        if (target == null)
+            return;
+
+        float direction = target.transform.position.x - transform.position.x;
+
+        if (Mathf.Approximately(direction, 0f))
+            return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
+        transform.localScale = scale;
+    }
+
+    public IEnumerator LookAtContinuously(Character target)
     {
         if (target == null)
             yield break;
 
         while (true)
         {
-            float direction = Context.Instance.Direction;
-
-            if (!Mathf.Approximately(direction, 0f))
-            {
-                Vector3 scale = transform.localScale;
-
-                scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
-
-                transform.localScale = scale;
-            }
-
+            LookAt(target);
             yield return null;
         }
     }
