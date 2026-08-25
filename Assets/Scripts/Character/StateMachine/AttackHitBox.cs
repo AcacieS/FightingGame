@@ -3,15 +3,22 @@ using UnityEngine;
 public class AttackHitbox : MonoBehaviour
 {
     [SerializeField] private Character owner;
+    [SerializeField] private Transform attackPoint;
     [SerializeField] private int damage = 10;
+    [SerializeField] private float attackRange;
+    [SerializeField] LayerMask charactersLayer;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void Attack()
     {
-        Character target = other.GetComponent<Character>();
-
-        if (target == null || target == owner)
-            return;
-
-        target.Hurt(damage);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, charactersLayer);
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("We hit" + enemy.name);
+        }
+    }
+    void OnDrawGizmosSelected()
+    {
+        if(attackPoint==null) return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

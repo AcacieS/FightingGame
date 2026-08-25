@@ -41,7 +41,7 @@ public class MovementState : State
         _movementDirection = moveAwayFromTarget ? -_direction: _direction;
         if (_overrideMovementSettings)
         {
-            AI.Character.Move(_direction, _movementSpeed, _movementAcceleration);
+            AI.Character.Move(_movementDirection, _movementSpeed, _movementAcceleration);
         }
         else
         {
