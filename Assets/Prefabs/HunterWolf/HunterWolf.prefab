@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HunterBoss
   characterInfo: {fileID: 11400000, guid: a49e5244746743743acda694d991c230, type: 2}
+  rb: {fileID: 0}
+  damageTest: 0
   AimState: {fileID: 5086813171361175945}
   FowardState: {fileID: 821572652400314354}
   IdleState: {fileID: 6154156285600442179}
@@ -124,11 +126,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 652484936673921993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27de8157ac4066043b5af788bf618e87, type: 3}
+  m_Script: {fileID: 11500000, guid: fc6a4b1a4fba29b4c878d14537875170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   startingState: {fileID: 6154156285600442179}
-  reactionState: {fileID: 0}
+  hurtState: {fileID: 5135094510921727173}
+  deadState: {fileID: 6492237317649841670}
+  currentState: {fileID: 0}
 --- !u!50 &3415264450789661364
 Rigidbody2D:
   serializedVersion: 5
