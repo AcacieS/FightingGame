@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HurtState : State
+public class HurtState : ActionState
 {
     //TODO: This will interrupt currentState
     public override void Enter()

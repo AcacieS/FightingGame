@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NearAttackState : State
+public class NearAttackState : ActionState
 {
     [Header("Attack State")]
     [SerializeField] private Transform attackPoint;
@@ -38,6 +38,7 @@ public class NearAttackState : State
         foreach(Collider2D enemy in hitEnemies)
         {
             Debug.Log("We hit" + enemy.name);
+            //TODO: It just search for the same gameObject Character.
             if(enemy.GetComponent<Character>() == Context.Self) continue;
             Context.Target.Hurt(damage);
             return;

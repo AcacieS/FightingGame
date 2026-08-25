@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DodgeState : State
+public class DodgeState : ActionState
 {
 
     private float timer;

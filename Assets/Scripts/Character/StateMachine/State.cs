@@ -5,7 +5,9 @@ public abstract class State : MonoBehaviour
     protected AIController AI { get; private set; }
     protected State Parent { get; private set; }
     protected Context Context => AI.Context;
-    [SerializeField] protected string animName;
+    [SerializeField, Range(0f, 1f)]
+    private float stateWeight = 0f;
+    public float Weight => stateWeight;
 
     public virtual void Initialize(AIController ai)
     {
@@ -19,10 +21,7 @@ public abstract class State : MonoBehaviour
 
     public virtual void Enter()
     {
-        //TODO: LOOK AT NOT ALWAYS WANTED
-        Context.Self.LookAt(Context.Target);
         Context.SetCurrentState(this);
-        Context.Self.PlayAnim(animName);
     }
     public virtual void Play() { }
     public virtual void Exit() { }

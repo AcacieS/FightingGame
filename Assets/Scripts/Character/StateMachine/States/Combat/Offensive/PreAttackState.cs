@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PreAttackState : State
+public class PreAttackState : ActionState
 {
     public override void Enter()
     {

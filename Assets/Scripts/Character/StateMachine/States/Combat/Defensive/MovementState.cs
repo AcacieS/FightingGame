@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementState : State
+public class MovementState : ActionState
 {
     [SerializeField] private float _movementDistance = 3f;
     [Tooltip("If enabled, the character moves away from the target. If disabled, the character moves toward the target.")]

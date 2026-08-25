@@ -45,13 +45,13 @@ public class Character: MonoBehaviour
             return false;
 
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        Debug.Log(
-            $"{name} | " +
-            $"Current State: {stateInfo.fullPathHash} | " +
-            $"animName: {animName} | " +
-            $"normalizedTime: {stateInfo.normalizedTime} | " +
-            $"inTransition: {anim.IsInTransition(0)}"
-        );
+        // Debug.Log(
+        //     $"{name} | " +
+        //     $"Current State: {stateInfo.fullPathHash} | " +
+        //     $"animName: {animName} | " +
+        //     $"normalizedTime: {stateInfo.normalizedTime} | " +
+        //     $"inTransition: {anim.IsInTransition(0)}"
+        // );
 
         return stateInfo.IsName(animName) &&
             stateInfo.normalizedTime >= 1f &&

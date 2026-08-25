@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DeadState : State
+public class DeadState : ActionState
 {
     public override void Enter()
     {

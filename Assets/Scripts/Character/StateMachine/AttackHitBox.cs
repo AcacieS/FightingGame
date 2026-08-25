@@ -8,7 +8,7 @@ public class AttackHitbox : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] LayerMask charactersLayer;
 
-    void Attack()
+    public void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, charactersLayer);
         foreach(Collider2D enemy in hitEnemies)

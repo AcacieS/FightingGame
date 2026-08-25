@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BlockState : State
+public class BlockState : ActionState
 {
 
     private float timer;

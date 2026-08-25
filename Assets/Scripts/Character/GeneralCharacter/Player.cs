@@ -67,4 +67,9 @@ public class Player : Character
             IsGrounded() ? Color.green : Color.red
         );
     }
+    public void Stun()
+    {
+        //TODO: Should interrupt Player
+        Move(0);
+    }
 }

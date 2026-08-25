@@ -40,7 +40,6 @@ public class UtilityAction : MonoBehaviour
         considerations = GetComponents<Consideration>()
             .Where(c => c.enabled)
             .ToArray();
-
         requirements = GetComponents<Requirement>()
             .Where(r => r.enabled)
             .ToArray();
@@ -83,6 +82,10 @@ public class UtilityAction : MonoBehaviour
             totalScore += consideration.Evaluate(context);
             totalWeight += consideration.Weight;
         }
+
+        float stateWeight = GetComponent<State>().Weight;
+        totalScore += stateWeight;
+        totalWeight += stateWeight;
 
         if (totalWeight <= 0f)
             return 0f;
