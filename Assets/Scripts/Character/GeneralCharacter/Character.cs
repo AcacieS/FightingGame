@@ -8,9 +8,11 @@ public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
     [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] private Animator anim;
     [Header("Debug")]
     [SerializeField] private int damageTest;
     public CharacterInfo Info => characterInfo;
+    
     public event System.Action<int> OnHpChanged;
     public event System.Action<int> OnHurt;
     private int hp;
@@ -28,7 +30,21 @@ public class Character: MonoBehaviour
             }
         }
     }
-    private Animator anim;
+    public void PlayAnim(string animName)
+    {
+        anim.Play(animName);
+    }
+    public bool IsAnimFinished(string animName)
+    {
+        if (anim == null)
+            return false;
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        return stateInfo.IsName(animName) &&
+            stateInfo.normalizedTime >= 1f &&
+            !anim.IsInTransition(0);
+    }
     public virtual void Die()
     {
         anim.SetTrigger("Death");

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
-    // [Header("Characters")]
     private Character character;
     private Character target;
 
@@ -22,10 +21,18 @@ public class AIController : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         context = Context.Instance;
         character = context.Self;
         target = context.Target;
-        //context = new Context(character, target);
+        if (character == null)
+        {
+            Debug.LogError("Character null");
+        }
         character.OnHurt += HandleHurt;
         if (startingState == null)
         {
@@ -34,12 +41,20 @@ public class AIController : MonoBehaviour
         }
 
         startingState.Initialize(this);
-        //reactionState.Initialize(this);
-    }
+        if (hurtState != null)
+            hurtState.Initialize(this);
 
-    private void Start()
-    {
+        if (deadState != null)
+            deadState.Initialize(this);
         ChangeState(startingState);
+    }
+    private void OnDisable()
+    {
+        if (character != null)
+        {
+            character.OnHurt-=HandleHurt;
+        }
+        
     }
 
     private void Update()
@@ -49,15 +64,16 @@ public class AIController : MonoBehaviour
     }
     private void HandleHurt(int Hp)
     {
+        Debug.Log("Hey Handle Hurt");
         if (Hp <= 0)
         {
             //TODO: DEATH
-            ChangeState(hurtState);
+            ChangeState(deadState);
         }
         else
         {
+            ChangeState(hurtState);
             //TODO: HURT
-            ChangeState(deadState);
         }
         
     }

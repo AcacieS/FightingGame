@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+using System.Linq;
 using UnityEngine;
 
 public class UtilityAction : MonoBehaviour
@@ -37,8 +37,13 @@ public class UtilityAction : MonoBehaviour
     [ContextMenu("SetActions")]
     private void SetActions()
     {
-        considerations = GetComponents<Consideration>();
-        requirements = GetComponents<Requirement>();
+        considerations = GetComponents<Consideration>()
+            .Where(c => c.enabled)
+            .ToArray();
+
+        requirements = GetComponents<Requirement>()
+            .Where(r => r.enabled)
+            .ToArray();
     }
     
     public virtual void Initialize(AIController ai)

@@ -3,14 +3,14 @@ using UnityEngine;
 public class Context : MonoBehaviour
 {
     [Header("Characters")]
-    [SerializeField] private Character self;
-    [SerializeField] private Character target;
-    [SerializeField] private AIController selfController;
+    [SerializeField] private bool _overrideCharactersSettings = false;
+    [SerializeField] private Character _self;
+    [SerializeField] private Character _target;
+    [SerializeField] private AIController _selfController;
     [ReadOnly, SerializeField] private State selfState;
     public static Context Instance { get; private set; }
-
-    public Character Self => self;
-    public Character Target => target;
+    public Character Self => _self;
+    public Character Target => _target;
     public AIController AIController => AIController;
 
     public State SelfState => selfState;
@@ -33,6 +33,29 @@ public class Context : MonoBehaviour
 
     public bool TargetIsAttacking { get; set; }
     public bool TargetIsBlocking { get; set; }
+    private void OnEnable()
+    {
+        GameManager.Instance.OnMatchChanged += HandleMatchChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnMatchChanged -= HandleMatchChanged;
+    }
+    void HandleMatchChanged(Match currentMatch)
+    {
+        if (!_overrideCharactersSettings)
+        {
+            _self = currentMatch.Enemy;
+            _target = currentMatch.Player;
+            _selfController = currentMatch.Enemy.AIController;
+            if (_self == null||_target==null||_selfController==null)
+            {
+                Debug.LogError("Self or Target or SelfController: null");
+            }
+        }
+    }
 
     public void Update()
     {

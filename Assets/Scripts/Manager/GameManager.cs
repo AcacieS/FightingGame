@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [ReadOnly, SerializeField] private Match currentMatch;
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private Transform enemySpawn;
+    public event System.Action<Match> OnMatchChanged;
     [ReadOnly] private int indexMatch = -1;
     
     private void Awake()
@@ -49,5 +50,6 @@ public class GameManager : MonoBehaviour
         GameObject player = participants.Player;
         GameObject enemy = participants.Enemy(indexMatch);
         currentMatch = new Match(player, playerSpawn, enemy, enemySpawn);
+        OnMatchChanged?.Invoke(currentMatch);  
     }
 }
