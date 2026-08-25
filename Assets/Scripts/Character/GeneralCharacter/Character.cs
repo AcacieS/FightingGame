@@ -32,6 +32,8 @@ public class Character: MonoBehaviour
     }
     public void PlayAnim(string animName)
     {
+        if(anim == null)
+            return;
         anim.Play(animName);
     }
     public bool IsAnimPlaying(string animName)
@@ -64,7 +66,9 @@ public class Character: MonoBehaviour
     public virtual void Awake()
     {
         Hp = characterInfo.Hp;
-        anim = GetComponent<Animator>();
+        if (anim == null){
+            anim = GetComponent<Animator>();
+        }
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
@@ -89,7 +93,10 @@ public class Character: MonoBehaviour
     {
         Hp -= damage;
         OnHurt?.Invoke(Hp);
-        anim.SetTrigger("Hurt");
+        if(anim != null)
+        {
+            anim.SetTrigger("Hurt");         
+        }
     }
     public void LookAt(Character target)
     {
