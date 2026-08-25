@@ -253,7 +253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &286047082302048335
 Transform:
   m_ObjectHideFlags: 0
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 6756577892693293877}
   - component: {fileID: 4630193694779743522}
   m_Layer: 0
-  m_Name: HurtState
+  m_Name: HurtInterruptState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8704601459526052219, guid: 756929d8e03edfb4490e90be41e774cb, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -804,6 +804,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   anim: {fileID: 0}
   damageTest: 5
+  isInterruptibleTest: 0
   _aiController: {fileID: 5032976480902668414}
 --- !u!1 &2412229824454304830
 GameObject:
@@ -844,7 +845,6 @@ Transform:
   - {fileID: 3199004143761683856}
   - {fileID: 7586736248671561399}
   - {fileID: 3728003081294997890}
-  - {fileID: 1997133018529073244}
   m_Father: {fileID: 1918465196380212777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1389478882887614381
@@ -960,7 +960,7 @@ MonoBehaviour:
   score: 0
   score_weight: 0
   lowHealthThreshold: 0.1
---- !u!1 &3293339858882245379
+--- !u!1 &2504347712252818390
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -968,29 +968,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1997133018529073244}
+  - component: {fileID: 3954787837390963876}
+  - component: {fileID: 1874824113098935437}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HurtState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1997133018529073244
+--- !u!4 &3954787837390963876
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293339858882245379}
+  m_GameObject: {fileID: 2504347712252818390}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6212307711274433067}
+  m_Father: {fileID: 1601426502482911426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1874824113098935437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2504347712252818390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ea9a8f0dece3e408e9eb4f66a7fbb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtState
+  stateWeight: 0
+  animName: 
+  characterHurt: {fileID: 2106342742317194220}
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.4
 --- !u!1 &3551577291058336668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1044,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9092702129437061650}
   - {fileID: 7549883623274063673}
   - {fileID: 4286328108245169207}
   - {fileID: 9161993601889144538}
@@ -1453,7 +1470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9161993601889144538
 Transform:
   m_ObjectHideFlags: 0
@@ -1597,6 +1614,8 @@ Transform:
   m_Children:
   - {fileID: 611409224881637131}
   - {fileID: 6756577892693293877}
+  - {fileID: 3954787837390963876}
+  - {fileID: 9092702129437061650}
   m_Father: {fileID: 6291960767165015311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6602611535690284038
@@ -1779,8 +1798,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   startingState: {fileID: 4942487213927423936}
-  hurtState: {fileID: 4630193694779743522}
+  hurtState: {fileID: 1874824113098935437}
+  hurtInterruptState: {fileID: 4630193694779743522}
   deadState: {fileID: 5696296692847041610}
+  percentageBlockState: 0.2
+  blockState: {fileID: 6846137075048816991}
   currentState: {fileID: 0}
 --- !u!1 &7284841005335901241
 GameObject:
@@ -1959,7 +1981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9092702129437061650
 Transform:
   m_ObjectHideFlags: 0
@@ -1973,7 +1995,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7613737245225254397}
+  m_Father: {fileID: 1601426502482911426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6846137075048816991
 MonoBehaviour:
@@ -1987,8 +2009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0baaa2256acfe147ac4ac73033885ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockState
-  stateWeight: 0
-  animName: 
+  stateWeight: 0.2
+  animName: Block
 --- !u!1 &8151938368951143590
 GameObject:
   m_ObjectHideFlags: 0

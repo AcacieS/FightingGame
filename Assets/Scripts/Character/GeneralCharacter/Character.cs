@@ -11,10 +11,11 @@ public class Character: MonoBehaviour
     [SerializeField] private Animator anim;
     [Header("Debug")]
     [SerializeField] private int damageTest;
+    [SerializeField] private bool isInterruptibleTest;
     public CharacterInfo Info => characterInfo;
     
     public event System.Action<int> OnHpChanged;
-    public event System.Action<int> OnHurt;
+    public event System.Action<int, bool> OnHurt;
     private int hp;
     public int Hp
     {
@@ -83,13 +84,12 @@ public class Character: MonoBehaviour
     [ContextMenu("Hurt Test")]
     public void HurtTest()
     {
-        Hurt(damageTest);
+        Hurt(damageTest, isInterruptibleTest);
     }
-    public void Hurt(int damage)
+    public virtual void Hurt(int damage, bool isInterruptible = false)
     {
         Hp -= damage;
-        OnHurt?.Invoke(Hp);
-        anim.SetTrigger("Hurt");
+        OnHurt?.Invoke(Hp, isInterruptible);
     }
     public void LookAt(Character target)
     {

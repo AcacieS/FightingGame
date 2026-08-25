@@ -2,24 +2,22 @@ using UnityEngine;
 
 public class BlockState : ActionState
 {
-
-    private float timer;
     public override void Enter()
     {
+        base.Enter();
+        Context.Self.Move(0);
         Debug.Log("AI → Block");
-
-        timer = 0f;
-
-        // AI.Character.Block();
     }
 
     public override void Play()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= 0.75f)
+        if (Context.Self.IsAnimFinished(animName))
         {
             RequestRootDecision();
         }
+    }
+    public override void Exit()
+    {
+        Debug.Log("AI → Exit Block");
     }
 }
