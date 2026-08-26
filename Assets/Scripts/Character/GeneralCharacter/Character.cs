@@ -8,10 +8,35 @@ public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
     [SerializeField] protected Rigidbody2D rb;
-    [SerializeField] private Animator anim;
+    [SerializeField] protected Animator anim;
     [Header("Debug")]
     [SerializeField] private int damageTest;
     [SerializeField] private bool isInterruptibleTest;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance = 0.05f;
+    [SerializeField] protected Collider2D characterCollider;
+
+    public bool IsOnGround
+    {
+        get
+        {
+            if (characterCollider == null)
+                return false;
+
+            Bounds bounds = characterCollider.bounds;
+
+            RaycastHit2D hit = Physics2D.BoxCast(
+                bounds.center,
+                bounds.size,
+                0f,
+                Vector2.down,
+                groundCheckDistance,
+                groundLayer
+            );
+
+            return hit.collider != null;
+        }
+    }
     public CharacterInfo Info => characterInfo;
     
     public event System.Action<int> OnHpChanged;
@@ -70,6 +95,10 @@ public class Character: MonoBehaviour
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
+        }
+        if(characterCollider == null)
+        {
+            characterCollider = GetComponent<Collider2D>();
         }
     }
 
