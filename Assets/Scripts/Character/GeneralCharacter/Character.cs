@@ -16,6 +16,7 @@ public class Character: MonoBehaviour
     
     public event System.Action<int> OnHpChanged;
     public event System.Action<int, bool> OnHurt;
+    //public bool OnGround=>
     private int hp;
     public int Hp
     {

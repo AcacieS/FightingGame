@@ -253,7 +253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &286047082302048335
 Transform:
   m_ObjectHideFlags: 0
@@ -1152,6 +1152,52 @@ MonoBehaviour:
   weight: 0.2
   score: 0
   score_weight: 0
+--- !u!1 &3973462988292646085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1179182660230040177}
+  - component: {fileID: 6297353525051558351}
+  m_Layer: 0
+  m_Name: PreBallAttack State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1179182660230040177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3973462988292646085}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7586736248671561399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6297353525051558351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3973462988292646085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17480b8616d42ff41abcd693bfa3140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
+  stateWeight: 0
+  animName: PreNearAttack
 --- !u!1 &4122533716166435316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1275,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DodgeState
   stateWeight: 0
   animName: 
+--- !u!1 &4370146903850504059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109258688094565772}
+  - component: {fileID: 4592984601272527922}
+  m_Layer: 0
+  m_Name: StartBallAttack State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109258688094565772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370146903850504059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7586736248671561399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4592984601272527922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370146903850504059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945ddae114596004f9f7f1178df20a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BounceAttackState
+  stateWeight: 0
+  animName: 
+  bounceSpeed: 8
+  bounceAcceleration: 20
+  nbBounce: 4
+  characterCollider: {fileID: 2057084606582264556}
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  detectionDistance: 1.24
+  direction: {x: 0, y: 0}
 --- !u!1 &4536694549272662347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,15 +1469,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7586736248671561399}
+  - component: {fileID: 5362853599425007241}
   - component: {fileID: 8244155118026715207}
   - component: {fileID: 2800335912886665375}
   m_Layer: 0
-  m_Name: SpecialAttackState
+  m_Name: BallAttack Sequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7586736248671561399
 Transform:
   m_ObjectHideFlags: 0
@@ -1389,9 +1491,28 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1179182660230040177}
+  - {fileID: 8594811100808997903}
+  - {fileID: 109258688094565772}
   m_Father: {fileID: 6212307711274433067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5362853599425007241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050440913604241974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb366a7bac44224e8a33613a190b881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SequenceState
+  stateWeight: 1
+  states: []
+  currentChild: {fileID: 0}
+  currentIndex: -1
 --- !u!114 &8244155118026715207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,7 +1758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3199004143761683856
 Transform:
   m_ObjectHideFlags: 0
@@ -2011,6 +2132,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockState
   stateWeight: 0.2
   animName: Block
+--- !u!1 &8078697392778653983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8594811100808997903}
+  - component: {fileID: 3866625171655374456}
+  m_Layer: 0
+  m_Name: LaunchBallAttack State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8594811100808997903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078697392778653983}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7586736248671561399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3866625171655374456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078697392778653983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb15289482b6c24984d90630a7653e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaunchBallAttackState
+  stateWeight: 0
+  animName: 
+  targetHeight: 5
+  launchSpeed: 8
+  launchAcceleration: 20
 --- !u!1 &8151938368951143590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,14 +2246,13 @@ GameObject:
   - component: {fileID: 7298924156174316136}
   - component: {fileID: 1484738629727537282}
   - component: {fileID: 7145886912991948470}
-  - component: {fileID: 3416190782844306397}
   m_Layer: 0
   m_Name: GrabAttackSequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3728003081294997890
 Transform:
   m_ObjectHideFlags: 0
@@ -2180,18 +2349,3 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3416190782844306397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510866973311799279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d079c2f50143b4f9d94d630ad30788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StateConsideration
-  weight: 1
-  score: 0
-  score_weight: 0
