@@ -71,25 +71,28 @@ public class UtilityAction : MonoBehaviour
         if (!CanExecute(context))
             return 0f;
 
-        if (considerations.Length == 0)
-            return 0f;
+        float score = 0f;
 
-        float totalScore = 0f;
-        float totalWeight = 0f;
-
-        foreach (Consideration consideration in considerations)
+        if (considerations.Length > 0)
         {
-            totalScore += consideration.Evaluate(context);
-            totalWeight += consideration.Weight;
+            float totalScore = 0f;
+            float totalWeight = 0f;
+
+            foreach (Consideration consideration in considerations)
+            {
+                totalScore += consideration.Evaluate(context) * consideration.Weight;
+                totalWeight += consideration.Weight;
+            }
+
+            if (totalWeight > 0f)
+            {
+                score = totalScore / totalWeight;
+            }
         }
 
-        float stateWeight = GetComponent<State>().Weight;
-        totalScore += stateWeight;
-        totalWeight += stateWeight;
+        score += state.Weight;
 
-        if (totalWeight <= 0f)
-            return 0f;
-        _finalScore = totalScore / totalWeight;
+        _finalScore = score;
         if (_activateTestScore)
         {
             return _testScore;

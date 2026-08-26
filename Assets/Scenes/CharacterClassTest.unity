@@ -2402,22 +2402,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2276924957141737316, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244155118026715207, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
-      propertyPath: requirements.Array.size
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8244155118026715207, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
-      propertyPath: considerations.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244155118026715207, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
-      propertyPath: 'considerations.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2800335912886665375, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
