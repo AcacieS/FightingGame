@@ -11,7 +11,7 @@ public class CompositeState : State
 
     private Utility utility;
 
-    protected State currentChild;
+    [ReadOnly, SerializeField] protected State currentChild;
     [ContextMenu("SetStates")]
     private void SetStates()
     {
@@ -36,9 +36,10 @@ public class CompositeState : State
             }
         }
     }
-    public override void Initialize(CharacterController ai)
+    public override void Initialize(AIController ai)
     {
         base.Initialize(ai);
+        SetStates();
         utility = new Utility(actions);
 
         foreach (State state in states)
@@ -52,14 +53,14 @@ public class CompositeState : State
         }
     }
     
-
     public void MakeDecision()
     {
         UtilityAction action = utility.ChooseAction(AI.Context);
 
         if (action == null)
         {
-            Debug.LogError($"{name}: No UtilityAction was chosen!");
+            Debug.LogWarning($"{name}: No UtilityAction was chosen! This Composite State didn't find any possibility. Redo choice again");
+            RequestRootDecision();
             return;
         }
 
@@ -97,9 +98,10 @@ public class CompositeState : State
         MakeDecision();
     }
 
-    public override void Update()
+    public override void Play()
     {
-        currentChild?.Update();
+        // Debug.LogWarning("is doing update"+gameObject.name);
+        currentChild?.Play();
     }
 
     public override void Exit()

@@ -7,7 +7,12 @@ using UnityEngine.UI;
 public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
+    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] private Animator anim;
+    [Header("Debug")]
+    [SerializeField] private int damageTest;
     public CharacterInfo Info => characterInfo;
+    
     public event System.Action<int> OnHpChanged;
     public event System.Action<int> OnHurt;
     private int hp;
@@ -25,40 +30,60 @@ public class Character: MonoBehaviour
             }
         }
     }
-    private Animator anim;
+    public void PlayAnim(string animName)
+    {
+        anim.Play(animName);
+    }
+    public bool IsAnimPlaying(string animName)
+    {
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsName(animName);
+    }
+    public bool IsAnimFinished(string animName)
+    {
+        if (anim == null)
+            return false;
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        Debug.Log(
+            $"{name} | " +
+            $"Current State: {stateInfo.fullPathHash} | " +
+            $"animName: {animName} | " +
+            $"normalizedTime: {stateInfo.normalizedTime} | " +
+            $"inTransition: {anim.IsInTransition(0)}"
+        );
+
+        return stateInfo.IsName(animName) &&
+            stateInfo.normalizedTime >= 1f &&
+            !anim.IsInTransition(0);
+    }
     public virtual void Die()
     {
-        anim.SetTrigger("Death");
+        //anim.SetTrigger("Death");
     }
     public virtual void Awake()
     {
-        // Cached before Hp is set: the Hp setter can call Die(), which needs anim.
-        anim = GetComponent<Animator>();
-
-        if (characterInfo == null)
-        {
-            Debug.LogError($"{name}: CharacterInfo is not assigned.", this);
-            return;
-        }
-
         Hp = characterInfo.Hp;
+        anim = GetComponent<Animator>();
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
     }
 
     public virtual void Start()
     {
-        // Without this guard the NullReferenceException propagates into subclass Start
-        // overrides and silently kills whatever they set up afterwards.
-        if (Context.Instance == null)
-        {
-            Debug.LogWarning($"{name}: no Context in the scene, so LookAt is disabled.", this);
-            return;
-        }
-
-        StartCoroutine(LookAt(Context.Instance.Target));
+        
     }
     public void Hit(Character target, int damage)
     {
         target.Hurt(damage) ;
+    }
+
+    [ContextMenu("Hurt Test")]
+    public void HurtTest()
+    {
+        Hurt(damageTest);
     }
     public void Hurt(int damage)
     {
@@ -66,25 +91,78 @@ public class Character: MonoBehaviour
         OnHurt?.Invoke(Hp);
         anim.SetTrigger("Hurt");
     }
-    public IEnumerator LookAt(Character target)
+    public void LookAt(Character target)
+    {
+        if (target == null)
+            return;
+
+        float direction = target.transform.position.x - transform.position.x;
+
+        if (Mathf.Approximately(direction, 0f))
+            return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
+        transform.localScale = scale;
+    }
+
+    public IEnumerator LookAtContinuously(Character target)
     {
         if (target == null)
             yield break;
 
         while (true)
         {
-            float direction = Context.Instance.Direction;
-
-            if (!Mathf.Approximately(direction, 0f))
-            {
-                Vector3 scale = transform.localScale;
-
-                scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
-
-                transform.localScale = scale;
-            }
-
+            LookAt(target);
             yield return null;
         }
+    }
+    public void Move(float direction)
+    {
+        Move(direction, Info.MoveSpeed, Info.Acceleration);
+    }
+    public void Move(float direction, float speed, float acceleration)
+    {
+        if (rb == null)
+        {
+            Debug.LogError($"{name}: Rigidbody2D is NULL!");
+            return;
+        }
+
+        if (Info == null)
+        {
+            Debug.LogError($"{name}: CharacterInfo is NULL!");
+            return;
+        }
+
+        // Debug.Log(
+        //     $"{name} Move | " +
+        //     $"direction={direction} | " +
+        //     $"speed={Info.MoveSpeed} | " +
+        //     $"acceleration={Info.Acceleration} | " +
+        //     $"before={rb.linearVelocity}"
+        // );
+
+        float targetSpeed = direction * speed;
+
+        float newSpeed = Mathf.MoveTowards(
+            rb.linearVelocity.x,
+            targetSpeed,
+            acceleration * Time.fixedDeltaTime
+        );
+
+        rb.linearVelocity = new Vector2(
+            newSpeed,
+            rb.linearVelocity.y
+        );
+
+        //Debug.Log($"AFTER velocity = {rb.linearVelocity}");
+    }
+    public void StopMoving()
+    {
+        rb.linearVelocity = new Vector2(
+            0f,
+            rb.linearVelocity.y
+        );
     }
 }

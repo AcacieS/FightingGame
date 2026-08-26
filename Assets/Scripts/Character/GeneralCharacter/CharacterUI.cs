@@ -16,6 +16,10 @@ public class CharacterUI
         currentCharacter.OnHpChanged += UpdateHealthBar;
         UpdateHealthBar(currentCharacter.Hp);
     }
+    public void OnDisable()
+    {
+        
+    }
     public void Deregister()
     {
         if (currentCharacter != null)

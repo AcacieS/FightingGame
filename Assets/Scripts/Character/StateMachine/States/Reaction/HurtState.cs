@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class HurtState : State
 {
-    private readonly ReactionState reaction;
-
-    private float timer;
-
+    //TODO: This will interrupt currentState
     public override void Enter()
     {
-        Debug.Log("AI → Hit");
-
-        timer = 0f;
+        base.Enter();
+        Debug.Log("AI → Hurt");
+        if (Context == null)
+        {
+            Debug.Log("Context null");
+        }
+        if (Context.Self == null)
+        {
+            Debug.Log("Context Self null");
+        }
+        Context.Self.Move(0);
     }
 
-    public override void Update()
+    public override void Play()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= 0.5f)
+        if (Context.Self.IsAnimFinished(animName))
         {
-            RequestDecision();
-            //AI.EnterCombat();
+            RequestRootDecision();
         }
     }
+    
 }

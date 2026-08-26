@@ -18,14 +18,12 @@ public class DistanceRequirementEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        EditorGUI.BeginDisabledGroup(true);
-        EditorGUILayout.ObjectField(
-            "Script",
-            MonoScript.FromMonoBehaviour((DistanceRequirement)target),
-            typeof(MonoScript),
-            false
+        DrawPropertiesExcluding(
+            serializedObject,
+            "mode",
+            "minDistance",
+            "maxDistance"
         );
-        EditorGUI.EndDisabledGroup();
 
         EditorGUILayout.PropertyField(mode);
 

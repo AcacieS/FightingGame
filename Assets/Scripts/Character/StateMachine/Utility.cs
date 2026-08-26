@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Utility
 {
@@ -11,20 +12,44 @@ public class Utility
 
     public UtilityAction ChooseAction(Context context)
     {
-        UtilityAction bestAction = null;
-        float bestScore = float.MinValue;
+        float totalWeight = 0f;
 
         foreach (UtilityAction action in actions)
         {
-            float score = action.CalculateScore(context);
+            if (action == null)
+                continue;
 
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestAction = action;
-            }
+            float weight = Mathf.Max(
+                0f,
+                action.CalculateScore(context)
+            );
+
+            totalWeight += weight;
         }
 
-        return bestAction;
+        // No valid actions
+        if (totalWeight <= 0f)
+            return null;
+
+        // Pick a random point in the total weight
+        float randomValue = Random.Range(0f, totalWeight);
+
+        foreach (UtilityAction action in actions)
+        {
+            if (action == null)
+                continue;
+
+            float weight = Mathf.Max(
+                0f,
+                action.CalculateScore(context)
+            );
+
+            randomValue -= weight;
+
+            if (randomValue <= 0f)
+                return action;
+        }
+
+        return null;
     }
 }

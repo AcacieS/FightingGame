@@ -4,12 +4,19 @@ public class DeadState : State
 {
     public override void Enter()
     {
-        Debug.Log("AI → Dead");
+        if (Context == null)
+        {
+            Debug.Log("Context null");
+        }
+        Debug.Log($"Context: {Context}");
+        Debug.Log($"Context.Self: {Context?.Self}");
 
+        Debug.Log("AI → Dead");
+        Context.Self.Move(0);
         // AI.Character.Die();
     }
 
-    public override void Update()
+    public override void Play()
     {
         // Do nothing.
     }

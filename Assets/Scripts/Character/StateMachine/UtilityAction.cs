@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+using System.Linq;
 using UnityEngine;
 
 public class UtilityAction : MonoBehaviour
@@ -14,9 +14,11 @@ public class UtilityAction : MonoBehaviour
     [Tooltip("The State that this Action is for, auto-assign State on same GameObject if null")]
     private State state;
 
-    protected CharacterController AI;
+    protected AIController AI;
     [ReadOnly, SerializeField] private float _finalScore; 
-    public void Start()
+    [SerializeField] private bool _activateTestScore;
+    [SerializeField] private float _testScore;
+    public void Awake()
     {
         //TODO: Might not need anymore state
         if (state == null)
@@ -27,15 +29,24 @@ public class UtilityAction : MonoBehaviour
         
         SetActions();
     }
+    public void Start()
+    {
+        
+    }
 
     [ContextMenu("SetActions")]
     private void SetActions()
     {
-        considerations = GetComponents<Consideration>();
-        requirements = GetComponents<Requirement>();
+        considerations = GetComponents<Consideration>()
+            .Where(c => c.enabled)
+            .ToArray();
+
+        requirements = GetComponents<Requirement>()
+            .Where(r => r.enabled)
+            .ToArray();
     }
     
-    public virtual void Initialize(CharacterController ai)
+    public virtual void Initialize(AIController ai)
     {
         AI = ai;
     }
@@ -76,6 +87,10 @@ public class UtilityAction : MonoBehaviour
         if (totalWeight <= 0f)
             return 0f;
         _finalScore = totalScore / totalWeight;
+        if (_activateTestScore)
+        {
+            return _testScore;
+        }
         return _finalScore;
     }
 }
