@@ -16,6 +16,9 @@ public class HunterWolf : Enemy
     [SerializeField] private State ShootState;
     [SerializeField] private State StunState;
 
+    [SerializeField] private Animator animator;
+    public Animator Animator => animator;
+
     [Header("Movement")]
     [SerializeField] private float acceleration = 20f;
     float moveSpeed = 0;
@@ -31,15 +34,14 @@ public class HunterWolf : Enemy
     [SerializeField] Transform gunEndPoint;
     public Transform GunEndPoint => gunEndPoint;
 
-    Timer WalkAway;
-    Timer Timer;
     int directionFoward = 1;
     bool canInitiateOtherState = true;
     public bool CanInitiateOtherState { get => canInitiateOtherState; set => canInitiateOtherState = value; }
     float distance;
     public float Distance => distance;
+    bool hasABullet = true;
+    public bool HasABullet { get => hasABullet; set => hasABullet = value; }
 
-    private Rigidbody2D rb;
     private Vector2 moveInput;
 
     private void Awake()
@@ -61,28 +63,28 @@ public class HunterWolf : Enemy
         if (ai == null || ai.Target == null)
             return;
 
-        Movement();
+        // Movement();
 
-        distance = Vector2.Distance(transform.position, ai.Target.transform.position);
+        // distance = Vector2.Distance(transform.position, ai.Target.transform.position);
 
-        if (!canInitiateOtherState)
-            return;
+        // if (!canInitiateOtherState)
+        //     return;
 
-        if (distance >= tooFarDistance)
-        {
-            ai.ChangeState(FowardState);
-            return;
-        }
-        else if (distance <= tooCloseDistance)
-        {
-            ai.ChangeState(KickState);
-            return;
-        }
-        else
-        {
-            ai.ChangeState(AimState);
-            return;
-        }
+        // if (distance >= tooFarDistance)
+        // {
+        //     ai.ChangeState(FowardState);
+        //     return;
+        // }
+        // else if (distance <= tooCloseDistance)
+        // {
+        //     ai.ChangeState(KickState);
+        //     return;
+        // }
+        // else
+        // {
+        //     ai.ChangeState(AimState);
+        //     return;
+        // }
     }
 
 

@@ -6,6 +6,8 @@ public class KickHunterState : HunterState
     public override void Enter()
     {
         base.Enter();
+        HunterWolf.Animator.SetBool("Kick", true);
+        HunterWolf.CanInitiateOtherState = false;
     }
     public override void Play()
     {
@@ -18,5 +20,6 @@ public class KickHunterState : HunterState
     public override void Exit()
     {
         base.Exit();
+        HunterWolf.Animator.SetBool("Kick", false);
     }
 }

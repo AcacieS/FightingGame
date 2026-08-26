@@ -7,10 +7,12 @@ public class FowardHunterState : HunterState
     {
         base.Enter();
         HunterWolf.ChangeSpeed(moveSpeed, 1);
+        HunterWolf.Animator.SetBool("Foward", true);
     }
     public override void Exit()
     {
         base.Exit();
         HunterWolf.ChangeSpeed(0);
+        HunterWolf.Animator.SetBool("Foward", false);
     }
 }
