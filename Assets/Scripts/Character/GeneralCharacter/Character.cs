@@ -34,12 +34,24 @@ public class Character: MonoBehaviour
     {
         anim.Play(animName);
     }
+    public bool IsAnimPlaying(string animName)
+    {
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsName(animName);
+    }
     public bool IsAnimFinished(string animName)
     {
         if (anim == null)
             return false;
 
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        Debug.Log(
+            $"{name} | " +
+            $"Current State: {stateInfo.fullPathHash} | " +
+            $"animName: {animName} | " +
+            $"normalizedTime: {stateInfo.normalizedTime} | " +
+            $"inTransition: {anim.IsInTransition(0)}"
+        );
 
         return stateInfo.IsName(animName) &&
             stateInfo.normalizedTime >= 1f &&
@@ -47,7 +59,7 @@ public class Character: MonoBehaviour
     }
     public virtual void Die()
     {
-        anim.SetTrigger("Death");
+        //anim.SetTrigger("Death");
     }
     public virtual void Awake()
     {
