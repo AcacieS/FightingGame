@@ -6,8 +6,6 @@ public class Player : Character
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 7f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
     private Vector2 moveInput;
 
     public override void Awake()

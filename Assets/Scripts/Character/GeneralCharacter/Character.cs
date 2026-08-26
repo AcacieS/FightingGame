@@ -12,8 +12,9 @@ public class Character: MonoBehaviour
     [Header("Debug")]
     [SerializeField] private int damageTest;
     [SerializeField] private bool isInterruptibleTest;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundCheckDistance = 0.05f;
+    [SerializeField] protected float groundCheckDistance = 0.2f;
+    [Header("Jump")]
+    [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected Collider2D characterCollider;
 
     public bool IsOnGround

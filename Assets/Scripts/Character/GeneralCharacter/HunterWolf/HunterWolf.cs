@@ -23,9 +23,6 @@ public class HunterWolf : Enemy
     [SerializeField] private float acceleration = 20f;
     float moveSpeed = 0;
 
-    [Header("Jump")]
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
 
     [Header("Combat Distance")]
     [SerializeField] private float tooFarDistance = 8f;
