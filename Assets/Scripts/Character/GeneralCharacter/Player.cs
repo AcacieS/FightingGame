@@ -6,8 +6,6 @@ public class Player : Character
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 7f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
     private Vector2 moveInput;
 
     public override void Awake()
@@ -66,5 +64,10 @@ public class Player : Character
             Vector3.down * groundCheckDistance,
             IsGrounded() ? Color.green : Color.red
         );
+    }
+    public void Stun()
+    {
+        //TODO: Should interrupt Player
+        Move(0);
     }
 }

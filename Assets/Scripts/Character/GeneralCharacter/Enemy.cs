@@ -24,6 +24,16 @@ public class Enemy : Character
         base.Start();
         
     }
+    public override void Hurt(int damage, bool isInterruptible = false)
+    {
+        if (_aiController != null && _aiController.TryBlock())
+        {
+            Debug.Log($"{name} blocked the attack!");
+            return;
+        }
+
+        base.Hurt(damage, isInterruptible);
+    }
 
     // Update is called once per frame
     void Update()

@@ -8,13 +8,41 @@ public class Character: MonoBehaviour
 {
     [SerializeField] private CharacterInfo characterInfo;
     [SerializeField] protected Rigidbody2D rb;
-    [SerializeField] private Animator anim;
+    [SerializeField] protected Animator anim;
     [Header("Debug")]
     [SerializeField] private int damageTest;
+    [SerializeField] private bool isInterruptibleTest;
+    [SerializeField] protected float groundCheckDistance = 0.2f;
+    [Header("Jump")]
+    [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] protected Collider2D characterCollider;
+
+    public bool IsOnGround
+    {
+        get
+        {
+            if (characterCollider == null)
+                return false;
+
+            Bounds bounds = characterCollider.bounds;
+
+            RaycastHit2D hit = Physics2D.BoxCast(
+                bounds.center,
+                bounds.size,
+                0f,
+                Vector2.down,
+                groundCheckDistance,
+                groundLayer
+            );
+
+            return hit.collider != null;
+        }
+    }
     public CharacterInfo Info => characterInfo;
     
     public event System.Action<int> OnHpChanged;
-    public event System.Action<int> OnHurt;
+    public event System.Action<int, bool> OnHurt;
+    //public bool OnGround=>
     private int hp;
     public int Hp
     {
@@ -47,13 +75,13 @@ public class Character: MonoBehaviour
             return false;
 
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        Debug.Log(
-            $"{name} | " +
-            $"Current State: {stateInfo.fullPathHash} | " +
-            $"animName: {animName} | " +
-            $"normalizedTime: {stateInfo.normalizedTime} | " +
-            $"inTransition: {anim.IsInTransition(0)}"
-        );
+        // Debug.Log(
+        //     $"{name} | " +
+        //     $"Current State: {stateInfo.fullPathHash} | " +
+        //     $"animName: {animName} | " +
+        //     $"normalizedTime: {stateInfo.normalizedTime} | " +
+        //     $"inTransition: {anim.IsInTransition(0)}"
+        // );
 
         return stateInfo.IsName(animName) &&
             stateInfo.normalizedTime >= 1f &&
@@ -73,6 +101,10 @@ public class Character: MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
+        if(characterCollider == null)
+        {
+            characterCollider = GetComponent<Collider2D>();
+        }
     }
 
     public virtual void Start()
@@ -87,12 +119,12 @@ public class Character: MonoBehaviour
     [ContextMenu("Hurt Test")]
     public void HurtTest()
     {
-        Hurt(damageTest);
+        Hurt(damageTest, isInterruptibleTest);
     }
-    public void Hurt(int damage)
+    public virtual void Hurt(int damage, bool isInterruptible = false)
     {
         Hp -= damage;
-        OnHurt?.Invoke(Hp);
+        OnHurt?.Invoke(Hp, isInterruptible);
         if(anim != null)
         {
             anim.SetTrigger("Hurt");         
