@@ -20,10 +20,8 @@ public class UtilityAction : MonoBehaviour
     [SerializeField] private float _testScore;
     public void Awake()
     {
-        //TODO: Might not need anymore state
         if (state == null)
         {
-            Debug.Log("gets state");
             state = GetComponent<State>();
         }
         
@@ -48,6 +46,7 @@ public class UtilityAction : MonoBehaviour
     public virtual void Initialize(AIController ai)
     {
         AI = ai;
+        state.Initialize(ai);
     }
 
     public State GetState()

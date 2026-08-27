@@ -16,6 +16,7 @@ public class Character: MonoBehaviour
     [Header("Jump")]
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected Collider2D characterCollider;
+    public Rigidbody2D Rb => rb;
 
     public bool IsOnGround
     {
@@ -117,10 +118,11 @@ public class Character: MonoBehaviour
     {
         Hurt(damageTest, isInterruptibleTest);
     }
-    public virtual void Hurt(int damage, bool isInterruptible = false)
+    public virtual bool Hurt(int damage, bool isInterruptible = false, bool isStun = false)
     {
         Hp -= damage;
         OnHurt?.Invoke(Hp, isInterruptible);
+        return true;
     }
     public void LookAt(Character target)
     {

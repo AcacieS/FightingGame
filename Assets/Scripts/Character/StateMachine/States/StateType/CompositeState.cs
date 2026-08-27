@@ -4,9 +4,6 @@ using UnityEngine;
 public class CompositeState : State
 {
     [SerializeField]
-    private List<State> states = new();
-
-    [SerializeField]
     private List<UtilityAction> actions = new();
 
     private Utility utility;
@@ -15,19 +12,13 @@ public class CompositeState : State
     [ContextMenu("SetStates")]
     private void SetStates()
     {
-        states = new List<State>();
+        //states = new List<State>();
         actions = new List<UtilityAction>();
         foreach (Transform childTransform in transform)
         {
             if (!childTransform.gameObject.activeSelf)
             continue;
-
-            State state = childTransform.GetComponent<State>();
             
-            if (state != null)
-            {
-                states.Add(state);
-            }
             UtilityAction action = childTransform.GetComponent<UtilityAction>();
             
             if (action != null)
@@ -41,12 +32,7 @@ public class CompositeState : State
         base.Initialize(ai);
         SetStates();
         utility = new Utility(actions);
-
-        foreach (State state in states)
-        {
-            state.Initialize(ai);
-        }
-
+        
         foreach (UtilityAction action in actions)
         {
             action.Initialize(ai);

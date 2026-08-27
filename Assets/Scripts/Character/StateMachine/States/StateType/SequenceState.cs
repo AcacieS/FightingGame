@@ -7,7 +7,7 @@ public class SequenceState : State
     private List<State> states = new();
 
     [ReadOnly, SerializeField]
-    private State currentChild;
+    protected State currentChild;
 
     [ReadOnly, SerializeField]
     private int currentIndex = -1;
@@ -56,6 +56,8 @@ public class SequenceState : State
 
     private void PlayNextState()
     {
+        GetDataCurrentState();
+        
         // Exit previous child
         currentChild?.Exit();
 
@@ -66,8 +68,7 @@ public class SequenceState : State
         {
             currentChild = null;
             currentIndex = -1;
-
-            RequestRootDecision();
+            SequenceFinish();
             return;
         }
 
@@ -79,6 +80,15 @@ public class SequenceState : State
 
         currentChild.Enter();
     }
+    protected virtual void GetDataCurrentState()
+    {
+        
+    }
+    protected virtual void SequenceFinish()
+    {
+        RequestDecision();
+    }
+
 
     public void ChildFinished()
     {

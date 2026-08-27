@@ -137,12 +137,12 @@ TextureImporter:
       name: Orc_Walk_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 39
-        width: 25
-        height: 20
+        x: 0
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,12 +159,12 @@ TextureImporter:
       name: Orc_Walk_1
       rect:
         serializedVersion: 2
-        x: 142
-        y: 39
-        width: 25
-        height: 21
+        x: 100
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -181,12 +181,12 @@ TextureImporter:
       name: Orc_Walk_2
       rect:
         serializedVersion: 2
-        x: 242
-        y: 39
-        width: 25
-        height: 20
+        x: 200
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -203,12 +203,12 @@ TextureImporter:
       name: Orc_Walk_3
       rect:
         serializedVersion: 2
-        x: 342
-        y: 39
-        width: 25
-        height: 19
+        x: 300
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -225,12 +225,12 @@ TextureImporter:
       name: Orc_Walk_4
       rect:
         serializedVersion: 2
-        x: 442
-        y: 39
-        width: 25
-        height: 20
+        x: 400
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: Orc_Walk_5
       rect:
         serializedVersion: 2
-        x: 542
-        y: 39
-        width: 25
-        height: 21
+        x: 500
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -269,19 +269,19 @@ TextureImporter:
       name: Orc_Walk_6
       rect:
         serializedVersion: 2
-        x: 642
-        y: 39
-        width: 25
-        height: 20
+        x: 600
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6f023c7b7fa5d4220800000000000000
+      spriteID: fbe77cae2129f6843977157bdb2c51eb
       internalID: 2471731790482710774
       vertices: []
       indices: 
@@ -291,19 +291,19 @@ TextureImporter:
       name: Orc_Walk_7
       rect:
         serializedVersion: 2
-        x: 742
-        y: 39
-        width: 25
-        height: 19
+        x: 700
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8be64b4bae4f273d0800000000000000
+      spriteID: 793fca0178911aa4093ecd0e6f129250
       internalID: -3210234295470494024
       vertices: []
       indices: 
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d796ff5af7b74fe47a971cc3881823eb
     internalID: 0
     vertices: []
     indices: 
@@ -321,7 +321,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":1.0},"gridSpriteSize":{"x":100.0,"y":100.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Orc_Walk_0: -783973874332692857
       Orc_Walk_1: -4374825176789774050

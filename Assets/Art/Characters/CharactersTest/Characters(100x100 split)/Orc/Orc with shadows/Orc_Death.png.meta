@@ -134,12 +134,12 @@ TextureImporter:
       name: Orc_Death_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 39
-        width: 25
-        height: 20
+        x: 0
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: Orc_Death_1
       rect:
         serializedVersion: 2
-        x: 139
-        y: 39
-        width: 28
-        height: 21
+        x: 100
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: Orc_Death_2
       rect:
         serializedVersion: 2
-        x: 236
-        y: 47
-        width: 17
-        height: 15
+        x: 200
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,12 +200,12 @@ TextureImporter:
       name: Orc_Death_3
       rect:
         serializedVersion: 2
-        x: 254
-        y: 41
-        width: 12
-        height: 14
+        x: 300
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -218,77 +218,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Orc_Death_4
-      rect:
-        serializedVersion: 2
-        x: 335
-        y: 39
-        width: 17
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6bae47eb82626df80800000000000000
-      internalID: -8082230524833895754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_Death_5
-      rect:
-        serializedVersion: 2
-        x: 354
-        y: 41
-        width: 12
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 564c45ee00debcd70800000000000000
-      internalID: 9064599263267570789
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc_Death_6
-      rect:
-        serializedVersion: 2
-        x: 238
-        y: 39
-        width: 15
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 489c1baa3c2e2d4f0800000000000000
-      internalID: -805332053335619196
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1815326fa0697a749993b59d61658f04
     internalID: 0
     vertices: []
     indices: 
@@ -296,15 +230,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":100.0,"y":100.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Orc_Death_0: -6634240400177418082
       Orc_Death_1: 370393475637858559
       Orc_Death_2: -9080859390935191118
       Orc_Death_3: 8470104493075811987
-      Orc_Death_4: -8082230524833895754
-      Orc_Death_5: 9064599263267570789
-      Orc_Death_6: -805332053335619196
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

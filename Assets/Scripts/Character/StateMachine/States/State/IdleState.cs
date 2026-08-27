@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class IdleState : State
+public class IdleState : ActionState
 {
-    private float timer;
     [SerializeField] private float minDuration = 5;
     [SerializeField] private float maxDuration = 5;
+    [ReadOnly, SerializeField] private float timer;
     private float duration;
     public override void Enter()
     {
@@ -21,7 +21,7 @@ public class IdleState : State
 
         if (timer >= duration)
         {
-            RequestRootDecision();
+            RequestDecision();
         }
     }
 }

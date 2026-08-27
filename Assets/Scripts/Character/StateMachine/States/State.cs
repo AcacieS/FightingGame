@@ -38,14 +38,21 @@ public abstract class State : MonoBehaviour
             Debug.Log($"{name} → Sequence ChildFinished()");
             sequence.ChildFinished();
         }
-        else if (Parent is CompositeState composite)
+        else
+        {
+            Debug.Log($"{name} → Root Decision");
+            RequestRootDecision();
+        }
+    }
+    protected void RequestParentCompositeDecision()
+    {
+        if (Parent is CompositeState composite)
         {
             Debug.Log($"{name} → Composite MakeDecision()");
             composite.MakeDecision();
         }
         else
         {
-            Debug.Log($"{name} → Root Decision");
             RequestRootDecision();
         }
     }

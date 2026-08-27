@@ -65,6 +65,19 @@ public class Player : Character
             IsGrounded() ? Color.green : Color.red
         );
     }
+    public override bool Hurt(int damage, bool isInterruptible = false, bool isStun = false)
+    {
+        //TODO: Add the check if Player is Blocking
+        // if (Block)
+        // {
+        //     Debug.Log($"{name} blocked the attack!");
+        //     return false;
+        // }
+
+        if(isStun) Stun();
+        base.Hurt(damage, isInterruptible, isStun);
+        return true;
+    }
     public void Stun()
     {
         //TODO: Should interrupt Player
