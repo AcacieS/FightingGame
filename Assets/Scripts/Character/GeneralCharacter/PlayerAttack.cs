@@ -33,6 +33,8 @@ public class PlayerAttack : MonoBehaviour
     private Vector2 moveInput;
     private float lastAttackTime = -999f;
 
+    private AttackData lastAttack;
+
     private void Awake()
     {
         if (character == null)
@@ -68,6 +70,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void DoAttack(AttackData attack)
     {
+        lastAttack = attack;
         character.PlayAnim(attack.animName);
 
         float facing = Mathf.Sign(transform.localScale.x);
@@ -84,6 +87,7 @@ public class PlayerAttack : MonoBehaviour
                 continue;
 
             character.Hit(target, attack.damage);
+            Debug.Log($"{name} hit {target.name} for {attack.damage} -> HP now {target.Hp}");
         }
     }
 
@@ -94,14 +98,16 @@ public class PlayerAttack : MonoBehaviour
         transform.localScale = scale;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         float facing = Mathf.Sign(transform.localScale.x);
-        Gizmos.color = Color.red;
         foreach (AttackData a in new[] { sweep, uppercut, downStrike })
         {
             if (a == null)
                 continue;
+            
+            bool justFired = a == lastAttack && Time.time < lastAttackTime +0.25f;
+            Gizmos.color = justFired ? Color.red : new Color(1f, 1f, 1f, 0.25f);
             Vector2 center = (Vector2)transform.position
                 + new Vector2(a.offset.x * facing, a.offset.y);
             Gizmos.DrawWireCube(center, a.size);

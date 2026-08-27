@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 694736901372132883}
   - component: {fileID: 3267652534414130768}
   - component: {fileID: 8915042286160013947}
+  - component: {fileID: 846466374908611304}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 430487460516885790, guid: e53491518fd80bd4982409583199c7a7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -108,13 +109,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   characterInfo: {fileID: 11400000, guid: 376aba6f11071744cb033b9eb662a2bd, type: 2}
-  moveSpeed: 5
-  acceleration: 20
-  jumpForce: 7
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  damageTest: 0
+  isInterruptibleTest: 0
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  characterCollider: {fileID: 0}
+  jumpForce: 7
 --- !u!61 &694736901372132883
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -294,3 +298,35 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &846466374908611304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807466522448351533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed86b6925d48e5e488474eed30186247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  character: {fileID: 0}
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  cooldown: 0.35
+  sweep:
+    animName: Attack
+    damage: 10
+    offset: {x: 0.9, y: 0}
+    size: {x: 1.2, y: 1}
+  uppercut:
+    animName: Uppercut
+    damage: 12
+    offset: {x: 0.5, y: 1}
+    size: {x: 1, y: 1.4}
+  downStrike:
+    animName: DownStrike
+    damage: 12
+    offset: {x: 0.5, y: -0.8}
+    size: {x: 1, y: 1}
