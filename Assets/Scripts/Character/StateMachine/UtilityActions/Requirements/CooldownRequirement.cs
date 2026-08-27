@@ -1,16 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
-public class CooldownRequirement : MonoBehaviour
+public class CooldownRequirement : Requirement
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float coolDownTime;
+
+    [ReadOnly, SerializeField] private float time;
+
+    private Coroutine cooldownCoroutine;
+
+    public override void Initialize()
     {
-        
+        StartCooldown();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool IsMet(Context context)
     {
-        
+        return time <= 0f;
+    }
+
+    public void StartCooldown()
+    {
+        if (cooldownCoroutine != null)
+        {
+            StopCoroutine(cooldownCoroutine);
+        }
+
+        cooldownCoroutine = StartCoroutine(Cooldown());
+    }
+
+    private IEnumerator Cooldown()
+    {
+        time = coolDownTime;
+
+        while (time > 0f)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+
+        time = 0f;
+        cooldownCoroutine = null;
     }
 }

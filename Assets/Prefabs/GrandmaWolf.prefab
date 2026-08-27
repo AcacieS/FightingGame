@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 7434321536310328806}
   - component: {fileID: 2246097042131121035}
   m_Layer: 0
-  m_Name: Offensive Composite
+  m_Name: Far Composite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b86cd6f7b839041bd9bbd7ecd085a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompositeState
-  stateWeight: 0.2
+  stateWeight: 0
   actions:
   - {fileID: 7181404233901564368}
   - {fileID: 403168651392326777}
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   weight: 0.3
   score: 0
   score_weight: 0
-  mode: 0
+  mode: 1
   minDistance: 2
   maxDistance: 2.1
   curve:
@@ -1224,8 +1224,10 @@ GameObject:
   - component: {fileID: 8190542592296833967}
   - component: {fileID: 272352771870777805}
   - component: {fileID: 596139106263552471}
+  - component: {fileID: 8416922475641176403}
+  - component: {fileID: 9121354955216307338}
   m_Layer: 0
-  m_Name: Defensive Composite
+  m_Name: Near Composite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,6 +1334,35 @@ MonoBehaviour:
   score: 0
   score_weight: 0
   lowHealthThreshold: 0.3
+--- !u!114 &8416922475641176403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551577291058336668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceRequirement
+  mode: 0
+  minDistance: 0
+  maxDistance: 0
+--- !u!114 &9121354955216307338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551577291058336668}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  coolDownTime: 10
+  time: 0
 --- !u!1 &3973462988292646085
 GameObject:
   m_ObjectHideFlags: 0
