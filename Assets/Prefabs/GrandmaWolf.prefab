@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8254826053932824534}
   - component: {fileID: 3197015000126426922}
   - component: {fileID: 5395379223412228828}
+  - component: {fileID: 7326497749433503989}
   m_Layer: 0
   m_Name: RollAttackState
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4787532557060414024}
-  m_Father: {fileID: 6212307711274433067}
+  m_Father: {fileID: 436746487476188113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2016332566978425217
 MonoBehaviour:
@@ -49,19 +50,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stateWeight: 0
-  animName: Attack01
+  animName: Roll
   damage: 10
   attackResult: 0
   attackPoint: {fileID: 4787532557060414024}
-  attackRange: 2.46
+  attackRange: 2.5
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
-  movementDistance: 3
+  coolDownRequirement: {fileID: 7326497749433503989}
+  movementDistance: 5
   moveAwayFromTarget: 0
   movementSpeed: 7
   movementAcceleration: 7
-  movementDirection: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  wallCheckDistance: 0.05
+  _movementDirection: 0
 --- !u!114 &8254826053932824534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +144,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7326497749433503989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21562573746842089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownRequirement
+  coolDownTime: 3
+  time: 0
+  initializeAtStartCooldown: 0
 --- !u!1 &47438708505379164
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +208,6 @@ MonoBehaviour:
   stateWeight: 0
   actions:
   - {fileID: 5142942473209291724}
-  - {fileID: 2282827606797258112}
   currentChild: {fileID: 0}
 --- !u!1 &82622767687730503
 GameObject:
@@ -283,16 +303,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1917418959951b3408e15f0194b0fc7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementState
-  stateWeight: 0
+  stateWeight: 0.1
   animName: Walk
-  _movementDistance: 3
+  _movementDistance: 4
   moveAwayFromTarget: 0
   _overrideMovementSettings: 0
   _movementSpeed: 3
   _movementAcceleration: 3
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   wallCheckDistance: 0.05
   _movementDirection: 0
 --- !u!114 &7181404233901564368
@@ -330,25 +350,34 @@ MonoBehaviour:
   weight: 0.5
   score: 0
   score_weight: 0
-  mode: 1
-  minDistance: 4
-  maxDistance: 0
+  mode: 2
+  minDistance: 2
+  maxDistance: 30
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.16672048
+      value: 0.5228839
+      inSlope: 1.5095342
+      outSlope: 1.5095342
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: -1
+      value: 1
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
@@ -423,7 +452,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4787532557060414024}
-  - component: {fileID: 4924245522637345812}
   m_Layer: 0
   m_Name: RollHitBox
   m_TagString: Untagged
@@ -446,27 +474,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3358603931235081608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4924245522637345812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735235653789676998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e23b6912ad0474485b3fc030a9346c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
-  owner: {fileID: 3923229689760700375}
-  target: {fileID: 0}
-  attackPoint: {fileID: 4787532557060414024}
-  damage: 10
-  attackRange: 2.5
-  charactersLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  attackResult: 0
 --- !u!1 &847486075429203871
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,10 +570,11 @@ MonoBehaviour:
   damage: 10
   attackResult: 0
   attackPoint: {fileID: 7562689284456734458}
-  attackRange: 4.54
+  attackRange: 5
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  coolDownRequirement: {fileID: 8394781922769725459}
 --- !u!1 &1076575132946352412
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,22 +624,68 @@ MonoBehaviour:
   animName: GrabAttack
   damage: 10
   attackResult: 0
+  coolDownRequirement: {fileID: 2790631344856362546}
   attackPrefab: {fileID: 6899531225980516719, guid: 5b361745e88589441bf35be6103145d6, type: 3}
   attackSpawnPoint: {fileID: 2890540261175122652}
   attackRange: 1
-  attackDistance: 10
-  attackAngle: 45
+  attackDistance: 7
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
-  throwSpeed: 2
-  throwAcceleration: 2
+  throwSpeed: 7
+  throwAcceleration: 7
   retreatSpeed: 10
   retreatAcceleration: 10
   currentAttack: {fileID: 0}
   startAngle: 0
   startDistance: 0
   facingDirection: 0
+--- !u!1 &1180783112164062281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4579713059521518653}
+  - component: {fileID: 7117365701571962248}
+  m_Layer: 0
+  m_Name: PreAttack State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4579713059521518653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180783112164062281}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 436746487476188113}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7117365701571962248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180783112164062281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17480b8616d42ff41abcd693bfa3140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
+  stateWeight: 0
+  animName: PreRoll
 --- !u!1 &1789196334357559063
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +801,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HitState
   stateWeight: 0
   animName: Hurt
+--- !u!1 &2220505490323222649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7723776894128498614}
+  - component: {fileID: 3035829745037251796}
+  m_Layer: 0
+  m_Name: PreRoll State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7723776894128498614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220505490323222649}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7586736248671561399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3035829745037251796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220505490323222649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17480b8616d42ff41abcd693bfa3140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
+  stateWeight: 0
+  animName: PreRoll
 --- !u!1 &2276924957141737316
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,12 +1095,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3358603931235081608}
+  - {fileID: 436746487476188113}
   - {fileID: 286047082302048335}
   - {fileID: 3199004143761683856}
-  - {fileID: 7586736248671561399}
   - {fileID: 3728003081294997890}
   - {fileID: 1467224322281213288}
+  - {fileID: 4286328108245169207}
+  - {fileID: 7586736248671561399}
   m_Father: {fileID: 1918465196380212777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1389478882887614381
@@ -1015,13 +1116,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b86cd6f7b839041bd9bbd7ecd085a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompositeState
-  stateWeight: 0
+  stateWeight: 1
   actions:
+  - {fileID: 1297655194010201964}
   - {fileID: 7181404233901564368}
   - {fileID: 403168651392326777}
   - {fileID: 8244155118026715207}
   - {fileID: 1484738629727537282}
   - {fileID: 8596718181021602396}
+  - {fileID: 7213406897797608418}
   currentChild: {fileID: 0}
 --- !u!114 &5142942473209291724
 MonoBehaviour:
@@ -1051,7 +1154,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2412229824454304830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
   m_Name: 
@@ -1093,7 +1196,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2412229824454304830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86a72d5bd132ccc45b894499b89906ae, type: 3}
   m_Name: 
@@ -1109,7 +1212,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2412229824454304830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53d8d34d3fa67d84dbf9da0b4cb445a6, type: 3}
   m_Name: 
@@ -1236,7 +1339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7613737245225254397
 Transform:
   m_ObjectHideFlags: 0
@@ -1250,7 +1353,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4286328108245169207}
   - {fileID: 5850512616180018260}
   m_Father: {fileID: 1918465196380212777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1367,6 +1469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   coolDownTime: 10
   time: 0
+  initializeAtStartCooldown: 0
 --- !u!1 &3973462988292646085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,13 +1559,14 @@ GameObject:
   - component: {fileID: 7008478014727493232}
   - component: {fileID: 8596718181021602396}
   - component: {fileID: 6583463339411615641}
+  - component: {fileID: 8394781922769725459}
   m_Layer: 0
   m_Name: GroundSlam Sequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1467224322281213288
 Transform:
   m_ObjectHideFlags: 0
@@ -1492,8 +1596,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ff8638a432a2246879757f31d59c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackSequenceState
-  stateWeight: 0.5
-  states: []
+  stateWeight: 0
+  states:
+  - {fileID: 2086202990274944940}
+  - {fileID: 3511958022215404784}
   currentChild: {fileID: 0}
   currentIndex: -1
   successComboActions:
@@ -1517,8 +1623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements: []
-  considerations: []
+  requirements:
+  - {fileID: 8394781922769725459}
+  considerations:
+  - {fileID: 6583463339411615641}
   state: {fileID: 0}
   _finalScore: 0
   _activateTestScore: 0
@@ -1535,10 +1643,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
-  weight: 0.5
+  weight: 1
   score: 0
   score_weight: 0
-  mode: 0
+  mode: 2
   minDistance: 0
   maxDistance: 5
   curve:
@@ -1546,18 +1654,36 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.31011474
       inSlope: 0
-      outSlope: -1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.5039545
+      value: 0.7482959
+      inSlope: -0.11459088
+      outSlope: -0.11459088
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8560758
+      value: 0.49579486
+      inSlope: -1.8251954
+      outSlope: -1.8251954
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.9931353
+      value: 0.112619884
       inSlope: -1
-      outSlope: 0
+      outSlope: -1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1565,6 +1691,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8394781922769725459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4221177097195578153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownRequirement
+  coolDownTime: 20
+  time: 0
+  initializeAtStartCooldown: 0
 --- !u!1 &4318369242888871275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,7 +1763,7 @@ GameObject:
   - component: {fileID: 109258688094565772}
   - component: {fileID: 4592984601272527922}
   m_Layer: 0
-  m_Name: StartBallAttack State
+  m_Name: BallAttack State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1656,15 +1797,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BounceAttackState
   stateWeight: 0
-  animName: 
-  bounceSpeed: 8
-  bounceAcceleration: 20
+  animName: Roll
+  bounceSpeed: 15
   nbBounce: 4
   characterCollider: {fileID: 2057084606582264556}
   environmentLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 520
   detectionDistance: 1.24
+  cooldownRequirement: {fileID: 5261264116630663894}
   direction: {x: 0, y: 0}
 --- !u!1 &4478417034295735007
 GameObject:
@@ -1878,13 +2019,14 @@ GameObject:
   - component: {fileID: 4670128934035079478}
   - component: {fileID: 8244155118026715207}
   - component: {fileID: 5007840750401553125}
+  - component: {fileID: 5261264116630663894}
   m_Layer: 0
-  m_Name: BallAttack Sequence
+  m_Name: Ultimate BallAttack Sequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7586736248671561399
 Transform:
   m_ObjectHideFlags: 0
@@ -1900,6 +2042,7 @@ Transform:
   m_Children:
   - {fileID: 1179182660230040177}
   - {fileID: 8594811100808997903}
+  - {fileID: 7723776894128498614}
   - {fileID: 109258688094565772}
   - {fileID: 8503820030292605390}
   m_Father: {fileID: 6212307711274433067}
@@ -1916,7 +2059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb366a7bac44224e8a33613a190b881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SequenceState
-  stateWeight: 0.1
+  stateWeight: 1
   states: []
   currentChild: {fileID: 0}
   currentIndex: -1
@@ -1952,6 +2095,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   wantOnGround: 1
+--- !u!114 &5261264116630663894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050440913604241974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownRequirement
+  coolDownTime: 60
+  time: 0
+  initializeAtStartCooldown: 1
 --- !u!1 &5571086131583890727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,8 +2321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb366a7bac44224e8a33613a190b881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SequenceState
-  stateWeight: 0.2
-  states: []
+  stateWeight: 0
+  states:
+  - {fileID: 2967473719436502271}
+  - {fileID: 5248666242726864739}
+  - {fileID: 7751317500888102857}
+  - {fileID: 2214545429384937754}
   currentChild: {fileID: 0}
   currentIndex: -1
 --- !u!114 &403168651392326777
@@ -2179,12 +2341,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements: []
+  requirements:
+  - {fileID: 2277394104148872649}
   considerations:
   - {fileID: 6358449034135622431}
   state: {fileID: 0}
   _finalScore: 0
-  _activateTestScore: 1
+  _activateTestScore: 0
   _testScore: 1
 --- !u!114 &2277394104148872649
 MonoBehaviour:
@@ -2193,14 +2356,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6602611535690284038}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaxDistanceRequirement
   mode: 0
   minDistance: 0
-  maxDistance: 5
+  maxDistance: 3
 --- !u!114 &6358449034135622431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2213,12 +2376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
-  weight: 1
+  weight: 0.5
   score: 0
   score_weight: 0
   mode: 0
   minDistance: 0
-  maxDistance: 20
+  maxDistance: 3
   curve:
     serializedVersion: 2
     m_Curve:
@@ -2309,6 +2472,7 @@ GameObject:
   - component: {fileID: 8656360181455207865}
   - component: {fileID: 7213406897797608418}
   - component: {fileID: 526024478659879388}
+  - component: {fileID: 2407161705965272681}
   m_Layer: 0
   m_Name: Retreat State
   m_TagString: Untagged
@@ -2329,7 +2493,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7613737245225254397}
+  m_Father: {fileID: 6212307711274433067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8656360181455207865
 MonoBehaviour:
@@ -2343,7 +2507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1917418959951b3408e15f0194b0fc7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetreatState
-  stateWeight: 0
+  stateWeight: 0.1
   animName: Walk
   _movementDistance: 3
   moveAwayFromTarget: 1
@@ -2352,7 +2516,7 @@ MonoBehaviour:
   _movementAcceleration: 3
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   wallCheckDistance: 0.05
   _movementDirection: 0
 --- !u!114 &7213406897797608418
@@ -2372,7 +2536,7 @@ MonoBehaviour:
   - {fileID: 526024478659879388}
   state: {fileID: 0}
   _finalScore: 0
-  _activateTestScore: 1
+  _activateTestScore: 0
   _testScore: 3
 --- !u!114 &526024478659879388
 MonoBehaviour:
@@ -2386,36 +2550,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
-  weight: 0.5
+  weight: 0.2
   score: 0
   score_weight: 0
-  mode: 0
+  mode: 2
   minDistance: 0
-  maxDistance: 30
+  maxDistance: 7
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
+      time: -0.013774872
+      value: 0.20321655
+      inSlope: -0.1520909
+      outSlope: -0.1520909
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
+      time: 0.22969359
+      value: 0.16618721
+      inSlope: -0.40666813
+      outSlope: -0.40666813
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.37217107
+      value: 0.07197464
+      inSlope: -0.45491752
+      outSlope: -0.45491752
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.47418416
+      value: 0.046615243
+      inSlope: -0.162531
+      outSlope: -0.162531
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.005188
+      value: 0.006008148
+      inSlope: -0.07647232
+      outSlope: -0.07647232
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2407161705965272681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7284841005335901241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af69a91cdcfc6344ba4ec8c21aca2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelfLowHealthConsideration
+  weight: 0.6
+  score: 0
+  score_weight: 0
+  lowHealthThreshold: 0.3
 --- !u!1 &7359245566630512893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,7 +3032,9 @@ GameObject:
   - component: {fileID: 3728003081294997890}
   - component: {fileID: 4803247681704909844}
   - component: {fileID: 1484738629727537282}
-  - component: {fileID: 7145886912991948470}
+  - component: {fileID: 4320194418443856128}
+  - component: {fileID: 8120767873593056920}
+  - component: {fileID: 2790631344856362546}
   m_Layer: 0
   m_Name: GrabAttack Sequence
   m_TagString: Untagged
@@ -2862,7 +3071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ff8638a432a2246879757f31d59c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackSequenceState
-  stateWeight: 0.2
+  stateWeight: 0.1
   states:
   - {fileID: 3401158595708566802}
   - {fileID: 7421614972552435173}
@@ -2889,14 +3098,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements: []
+  requirements:
+  - {fileID: 4320194418443856128}
+  - {fileID: 2790631344856362546}
   considerations:
-  - {fileID: 6358449034135622431}
+  - {fileID: 8120767873593056920}
   state: {fileID: 0}
   _finalScore: 0
-  _activateTestScore: 1
+  _activateTestScore: 0
   _testScore: 1
---- !u!114 &7145886912991948470
+--- !u!114 &4320194418443856128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510866973311799279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceRequirement
+  mode: 0
+  minDistance: 0
+  maxDistance: 10
+--- !u!114 &8120767873593056920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2911,26 +3137,219 @@ MonoBehaviour:
   weight: 1
   score: 0
   score_weight: 0
-  mode: 0
-  minDistance: 0
-  maxDistance: 20
+  mode: 2
+  minDistance: 2
+  maxDistance: 8
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
-      outSlope: -1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
+      time: 0.37209278
+      value: 0.5024479
+      inSlope: 1.5906423
+      outSlope: 1.5906423
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7226751
+      value: 0.7526404
+      inSlope: 0.28178975
+      outSlope: 0.28178975
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5580286
+    - serializedVersion: 3
+      time: 0.88537836
+      value: 0.7768753
+      inSlope: 0.15877457
+      outSlope: 0.15877457
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.96637905
+      value: 0.78991246
+      inSlope: 0.31236753
+      outSlope: 0.31236753
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0074118
+      value: 0.80367506
+      inSlope: 0.59919554
+      outSlope: 0.59919554
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0201416
+      value: 0.8121872
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2790631344856362546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510866973311799279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownRequirement
+  coolDownTime: 10
+  time: 0
+  initializeAtStartCooldown: 0
+--- !u!1 &9132560180426734363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 436746487476188113}
+  - component: {fileID: 6790082448347790973}
+  - component: {fileID: 1297655194010201964}
+  - component: {fileID: 8208216700608295047}
+  m_Layer: 0
+  m_Name: RollAttack Sequence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &436746487476188113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132560180426734363}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4579713059521518653}
+  - {fileID: 3358603931235081608}
+  m_Father: {fileID: 6212307711274433067}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6790082448347790973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132560180426734363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb366a7bac44224e8a33613a190b881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SequenceState
+  stateWeight: 0.1
+  states:
+  - {fileID: 7117365701571962248}
+  - {fileID: 2016332566978425217}
+  currentChild: {fileID: 0}
+  currentIndex: -1
+--- !u!114 &1297655194010201964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132560180426734363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
+  requirements: []
+  considerations:
+  - {fileID: 8208216700608295047}
+  state: {fileID: 0}
+  _finalScore: 0
+  _activateTestScore: 0
+  _testScore: 1
+--- !u!114 &8208216700608295047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132560180426734363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 1
+  score: 0
+  score_weight: 0
+  mode: 2
+  minDistance: 2
+  maxDistance: 30
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
       value: 0
-      inSlope: -1
+      inSlope: 0
       outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.07219586
+      value: 0.11432351
+      inSlope: 2.224285
+      outSlope: 2.224285
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30924827
+      outWeight: 0.13344128
+    - serializedVersion: 3
+      time: 0.18181819
+      value: 0.2815091
+      inSlope: 0.3812332
+      outSlope: 0.3812332
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.14710858
+    - serializedVersion: 3
+      time: 1.0096353
+      value: 0.8387407
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0

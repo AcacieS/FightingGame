@@ -3,12 +3,12 @@ using UnityEngine;
 public class GrabAttackState : AttackState
 {
     [Header("Attack")]
+    [SerializeField] private CooldownRequirement coolDownRequirement;
     [SerializeField] private GrabAttackObject attackPrefab;
     [SerializeField] private Transform attackSpawnPoint;
 
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private float attackDistance = 3f;
-    [SerializeField] private float attackAngle = 45f;
 
     [SerializeField] private LayerMask charactersLayer;
 
@@ -121,6 +121,7 @@ public class GrabAttackState : AttackState
     private void FinishAttack()
     {
         Debug.Log("AI → Grab Attack Finished");
+        coolDownRequirement.Initialize();
 
         attackResult =
             currentAttack.HasGrabPlayer

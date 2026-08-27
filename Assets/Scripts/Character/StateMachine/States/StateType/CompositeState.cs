@@ -73,9 +73,9 @@ public class CompositeState : State
 
         currentChild = state;
 
-        Debug.Log(
-            $"{name}: Entering child {currentChild.name}"
-        );
+        // Debug.Log(
+        //     $"{name}: Entering child {currentChild.name}"
+        // );
 
         currentChild.Enter();
     }

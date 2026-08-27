@@ -4,7 +4,6 @@ public class BallAttackState : ActionState
 {
     [Header("Bounce")]
     [SerializeField] private float bounceSpeed = 8f;
-    [SerializeField] private float bounceAcceleration = 20f;
     [SerializeField] private int nbBounce = 1;
     private int currentNbBounce;
 
@@ -12,12 +11,15 @@ public class BallAttackState : ActionState
     [SerializeField] private Collider2D characterCollider;
     [SerializeField] private LayerMask environmentLayer;
     [SerializeField] private float detectionDistance = 0.1f;
+    [SerializeField] private CooldownRequirement cooldownRequirement;
 
     [Header("Debug")]
     [ReadOnly, SerializeField] private Vector2 direction;
+    
 
     private Rigidbody2D rb;
     private float originalGravityScale;
+    
     public override void Enter()
     {
         base.Enter();
@@ -63,12 +65,7 @@ public class BallAttackState : ActionState
     private void SetVelocity()
     {
         Vector2 targetVelocity = direction * bounceSpeed;
-
-        rb.linearVelocity = Vector2.MoveTowards(
-            rb.linearVelocity,
-            targetVelocity,
-            bounceAcceleration * Time.deltaTime
-        );
+        rb.linearVelocity = targetVelocity;
     }
 
     private bool DetectCollision()
@@ -132,9 +129,9 @@ public class BallAttackState : ActionState
 
         return randomDirection.normalized;
     }
-
     public override void Exit()
     {
+        cooldownRequirement.Initialize();
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;

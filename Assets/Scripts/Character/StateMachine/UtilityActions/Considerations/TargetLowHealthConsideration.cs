@@ -12,10 +12,11 @@ public class TargetLowHealthConsideration : Consideration
         if (healthRatio >= lowHealthThreshold)
             return 0f;
 
-        return 1f - Mathf.InverseLerp(
+        return 1f;
+        /*- Mathf.InverseLerp(
             0f,
             lowHealthThreshold,
             healthRatio
-        );
+        );*/
     }
 }

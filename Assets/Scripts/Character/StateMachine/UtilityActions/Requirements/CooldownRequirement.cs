@@ -6,9 +6,16 @@ public class CooldownRequirement : Requirement
     [SerializeField] private float coolDownTime;
 
     [ReadOnly, SerializeField] private float time;
+    [SerializeField] private bool initializeAtStartCooldown = false;
 
     private Coroutine cooldownCoroutine;
-
+    private void Start()
+    {
+        if (initializeAtStartCooldown)
+        {
+            Initialize();
+        }
+    }
     public override void Initialize()
     {
         StartCooldown();

@@ -35,7 +35,6 @@ public class NearAttackState : AttackState
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, charactersLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
-            Debug.Log("We hit" + enemy.name);
             Character character = enemy.GetComponent<Character>();
             //TODO: It just search for the same gameObject Character.
             if( character == Context.Self) continue;
