@@ -8,6 +8,7 @@ public class GrabAttackState : AttackState
 
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private float attackDistance = 3f;
+    [SerializeField] private float attackAngle = 45f;
 
     [SerializeField] private LayerMask charactersLayer;
 
@@ -22,11 +23,35 @@ public class GrabAttackState : AttackState
     [ReadOnly, SerializeField]
     private GrabAttackObject currentAttack;
 
+    // Captured when the attack starts
+    [ReadOnly, SerializeField]
+    private float startAngle;
+
+    [ReadOnly, SerializeField]
+    private float startDistance;
+
+    [ReadOnly, SerializeField]
+    private float facingDirection;
+
     public override void Enter()
     {
         base.Enter();
 
         Debug.Log("AI → Grab Attack");
+
+        // Capture the situation when the attack STARTS.
+        startAngle = Context.AngleToTarget;
+        startDistance = Context.DistanceX;
+
+        facingDirection =
+            Mathf.Sign(Context.Self.transform.localScale.x);
+
+        Debug.Log(
+            $"Grab Start | " +
+            $"Distance: {startDistance:F2} | " +
+            $"Angle: {startAngle:F1}° | " +
+            $"Facing: {facingDirection}"
+        );
 
         SpawnAttack();
     }
@@ -39,6 +64,7 @@ public class GrabAttackState : AttackState
                 $"{name}: Attack Prefab is not assigned.",
                 this
             );
+
             RequestDecision();
             return;
         }
@@ -49,11 +75,10 @@ public class GrabAttackState : AttackState
                 $"{name}: Attack Spawn Point is not assigned.",
                 this
             );
+
             RequestDecision();
             return;
         }
-
-        float direction = Context.DirectionSign;
 
         currentAttack = Instantiate(
             attackPrefab,
@@ -64,13 +89,19 @@ public class GrabAttackState : AttackState
         currentAttack.Initialize(
             Context.Self,
             Context.Target,
-            direction,
+
+            facingDirection,
+            startAngle,
+
             throwSpeed,
             throwAcceleration,
+
             retreatSpeed,
             retreatAcceleration,
+
             attackRange,
             attackDistance,
+
             damage,
             charactersLayer
         );
@@ -90,12 +121,17 @@ public class GrabAttackState : AttackState
     private void FinishAttack()
     {
         Debug.Log("AI → Grab Attack Finished");
-        attackResult = currentAttack.HasGrabPlayer? AttackResult.Success: 
-            (currentAttack.PlayerHasBlocked? AttackResult.Blocked: 
-            AttackResult.Miss);
+
+        attackResult =
+            currentAttack.HasGrabPlayer
+                ? AttackResult.Success
+                : currentAttack.PlayerHasBlocked
+                    ? AttackResult.Blocked
+                    : AttackResult.Miss;
 
         Destroy(currentAttack.gameObject);
         currentAttack = null;
+
         RequestDecision();
     }
 

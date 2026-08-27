@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6174060271183133016}
   - component: {fileID: 4018705528762741610}
   - component: {fileID: 5340041359657791856}
+  - component: {fileID: 2260881649843848448}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8704601459526052219, guid: 756929d8e03edfb4490e90be41e774cb, type: 3}
+  m_Sprite: {fileID: -9150489477472823759, guid: 76a48b96b7f61384aa568548a897b840, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,11 +112,13 @@ MonoBehaviour:
   rb: {fileID: 0}
   anim: {fileID: 0}
   damageTest: 0
-  jumpForce: 7
+  isInterruptibleTest: 0
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  characterCollider: {fileID: 0}
+  jumpForce: 7
 --- !u!61 &6174060271183133016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,17 +153,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.008552721, y: 0.51608396}
+  m_Offset: {x: 0.007964645, y: -0.04688218}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.30434778, y: -2.222222}
-    oldSize: {x: 0.23, y: 0.18}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.48, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.13935392, y: 0.22067809}
+  m_Size: {x: 0.09348408, y: 0.04296098}
   m_EdgeRadius: 0
 --- !u!50 &4018705528762741610
 Rigidbody2D:
@@ -219,3 +222,40 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!70 &2260881649843848448
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7469042764203623694}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.005278261, y: 0.0057603684}
+  m_Size: {x: 0.100686826, y: 0.150111}
+  m_Direction: 0

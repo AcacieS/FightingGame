@@ -620,6 +620,7 @@ MonoBehaviour:
   attackSpawnPoint: {fileID: 2890540261175122652}
   attackRange: 1
   attackDistance: 10
+  attackAngle: 45
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -628,6 +629,9 @@ MonoBehaviour:
   retreatSpeed: 10
   retreatAcceleration: 10
   currentAttack: {fileID: 0}
+  startAngle: 0
+  startDistance: 0
+  facingDirection: 0
 --- !u!1 &1789196334357559063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1042,7 @@ MonoBehaviour:
   - {fileID: 2246097042131121035}
   state: {fileID: 0}
   _finalScore: 0
-  _activateTestScore: 1
+  _activateTestScore: 0
   _testScore: 1
 --- !u!114 &2246632677505003931
 MonoBehaviour:
@@ -1348,7 +1352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DistanceRequirement
   mode: 0
   minDistance: 0
-  maxDistance: 0
+  maxDistance: 20
 --- !u!114 &9121354955216307338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1451,13 +1455,14 @@ GameObject:
   - component: {fileID: 1467224322281213288}
   - component: {fileID: 7008478014727493232}
   - component: {fileID: 8596718181021602396}
+  - component: {fileID: 6583463339411615641}
   m_Layer: 0
   m_Name: GroundSlam Sequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1467224322281213288
 Transform:
   m_ObjectHideFlags: 0
@@ -1518,6 +1523,48 @@ MonoBehaviour:
   _finalScore: 0
   _activateTestScore: 0
   _testScore: 0
+--- !u!114 &6583463339411615641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4221177097195578153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.5
+  score: 0
+  score_weight: 0
+  mode: 0
+  minDistance: 0
+  maxDistance: 5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4318369242888871275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,7 +1884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7586736248671561399
 Transform:
   m_ObjectHideFlags: 0

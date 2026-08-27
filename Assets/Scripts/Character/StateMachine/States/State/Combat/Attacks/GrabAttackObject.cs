@@ -7,7 +7,8 @@ public class GrabAttackObject : MonoBehaviour
     private Character owner;
     private Character target;
 
-    private float direction;
+    private Vector2 direction;
+
     private float speed;
     private float acceleration;
 
@@ -24,12 +25,14 @@ public class GrabAttackObject : MonoBehaviour
 
     private bool isReturning;
     private bool hasHit;
-    private Rigidbody2D grabbedRb;
-    private bool hasGrabPlayer;              
-    private bool playerHasBlocked = true;
-    public bool PlayerHasBlocked  => playerHasBlocked ;
-    public bool HasGrabPlayer => hasGrabPlayer;
 
+    private Rigidbody2D grabbedRb;
+
+    private bool hasGrabPlayer;
+    private bool playerHasBlocked;
+
+    public bool PlayerHasBlocked => playerHasBlocked;
+    public bool HasGrabPlayer => hasGrabPlayer;
     public bool IsReturning => isReturning;
 
     private void Awake()
@@ -48,20 +51,24 @@ public class GrabAttackObject : MonoBehaviour
     public void Initialize(
         Character owner,
         Character target,
-        float direction,
+
+        float facingDirection,
+        float angle,
+
         float speed,
         float acceleration,
+
         float returnSpeed,
         float returnAcceleration,
+
         float attackRange,
         float maxDistance,
+
         int damage,
         LayerMask charactersLayer)
     {
         this.owner = owner;
         this.target = target;
-
-        this.direction = direction;
 
         this.speed = speed;
         this.acceleration = acceleration;
@@ -71,14 +78,29 @@ public class GrabAttackObject : MonoBehaviour
 
         this.attackRange = attackRange;
         this.maxDistance = maxDistance;
-        this.damage = damage;
 
+        this.damage = damage;
         this.charactersLayer = charactersLayer;
 
         startPosition = transform.position;
 
         isReturning = false;
         hasHit = false;
+        hasGrabPlayer = false;
+        playerHasBlocked = false;
+
+        // Convert the angle relative to the character's
+        // facing direction into a world-space direction.
+        float radians = angle * Mathf.Deg2Rad;
+
+        direction = new Vector2(
+            Mathf.Cos(radians) * facingDirection,
+            Mathf.Sin(radians)
+        ).normalized;
+
+        Debug.Log(
+            $"{name}: Grab direction = {direction}"
+        );
     }
 
     private void FixedUpdate()
@@ -89,9 +111,6 @@ public class GrabAttackObject : MonoBehaviour
             return;
 
         CheckHit();
-
-        // The target wasn't hit, so return after
-        // reaching the maximum distance.
         CheckMaximumDistance();
     }
 
@@ -100,27 +119,24 @@ public class GrabAttackObject : MonoBehaviour
         if (rb == null)
             return;
 
-        float targetSpeed = direction * speed;
+        Vector2 targetVelocity =
+            direction * speed;
 
-        float newSpeed = Mathf.MoveTowards(
-            rb.linearVelocity.x,
-            targetSpeed,
+        rb.linearVelocity = Vector2.MoveTowards(
+            rb.linearVelocity,
+            targetVelocity,
             acceleration * Time.fixedDeltaTime
         );
-
-        rb.linearVelocity = new Vector2(
-            newSpeed,
-            rb.linearVelocity.y
-        );
     }
-    
+
     private void CheckHit()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
-            transform.position,
-            attackRange,
-            charactersLayer
-        );
+        Collider2D[] hitEnemies =
+            Physics2D.OverlapCircleAll(
+                transform.position,
+                attackRange,
+                charactersLayer
+            );
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -130,7 +146,7 @@ public class GrabAttackObject : MonoBehaviour
             if (character == null)
                 continue;
 
-            // Don't hit the character that created the attack.
+            // Don't hit the owner.
             if (character == owner)
                 continue;
 
@@ -150,37 +166,53 @@ public class GrabAttackObject : MonoBehaviour
             if (character is Player player)
             {
                 bool stun = true;
-                bool isHurt = player.Hurt(damage, false, stun);
-                if(isHurt) {
+
+                bool isHurt =
+                    player.Hurt(
+                        damage,
+                        false,
+                        stun
+                    );
+
+                if (isHurt)
+                {
                     hasGrabPlayer = true;
-                    grabbedRb = character.GetComponent<Rigidbody2D>();
+
+                    grabbedRb =
+                        character.GetComponent<Rigidbody2D>();
 
                     if (grabbedRb != null)
                     {
-                        grabbedRb.linearVelocity = Vector2.zero;
-                        grabbedRb.bodyType = RigidbodyType2D.Kinematic;
+                        grabbedRb.linearVelocity =
+                            Vector2.zero;
+
+                        grabbedRb.bodyType =
+                            RigidbodyType2D.Kinematic;
                     }
 
-                    character.transform.SetParent(transform);
+                    character.transform.SetParent(
+                        transform
+                    );
                 }
                 else
                 {
                     playerHasBlocked = true;
                 }
             }
+
             StartReturn();
 
             return;
         }
     }
-    
 
     private void CheckMaximumDistance()
     {
-        float distanceMoved = Mathf.Abs(
-            transform.position.x -
-            startPosition.x
-        );
+        float distanceMoved =
+            Vector2.Distance(
+                transform.position,
+                startPosition
+            );
 
         if (distanceMoved >= maxDistance)
         {
@@ -196,9 +228,12 @@ public class GrabAttackObject : MonoBehaviour
     {
         if (isReturning)
             return;
-        Debug.Log("Should Return");
+
+        Debug.Log("Grab → Return");
+
         isReturning = true;
 
+        // Return along the exact opposite direction.
         direction = -direction;
 
         speed = returnSpeed;
@@ -210,23 +245,28 @@ public class GrabAttackObject : MonoBehaviour
         if (!isReturning)
             return false;
 
-        float distanceFromStart = Mathf.Abs(
-            transform.position.x -
-            startPosition.x
-        );
-        bool hasReturned = distanceFromStart <= threshold;
-        if (hasReturned)
+        float distanceFromStart =
+            Vector2.Distance(
+                transform.position,
+                startPosition
+            );
+
+        if (distanceFromStart <= threshold)
         {
             ReleaseTarget();
+            return true;
         }
-        return hasReturned;
+
+        return false;
     }
-    
+
     private void ReleaseTarget()
     {
         if (grabbedRb != null)
         {
-            grabbedRb.bodyType = RigidbodyType2D.Dynamic;
+            grabbedRb.bodyType =
+                RigidbodyType2D.Dynamic;
+
             grabbedRb = null;
         }
 
@@ -235,6 +275,7 @@ public class GrabAttackObject : MonoBehaviour
             target.transform.SetParent(null);
         }
     }
+
     private void OnDisable()
     {
         ReleaseTarget();

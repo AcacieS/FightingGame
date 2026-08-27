@@ -14,7 +14,10 @@ public class Combo
 
     public float Weight => _comboWeight;
     public UtilityAction UtilityAction => utilityAction;
-
+    public bool IsEnable()
+    {
+        return UtilityAction.gameObject.activeSelf;
+    }
     public float CalculateScore(Context context)
     {
         if (utilityAction == null)

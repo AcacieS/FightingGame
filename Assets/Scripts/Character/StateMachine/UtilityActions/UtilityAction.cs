@@ -88,7 +88,6 @@ public class UtilityAction : MonoBehaviour
                 score = totalScore / totalWeight;
             }
         }
-
         score += state.Weight;
 
         _finalScore = score;

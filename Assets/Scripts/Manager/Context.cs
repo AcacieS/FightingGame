@@ -22,7 +22,17 @@ public class Context : MonoBehaviour
     public float DistanceX { get; private set; }
     public float Direction { get; private set; }
     public float DirectionSign => Mathf.Sign(Direction);
+    public float AngleToTarget { get; private set; }
 
+    public bool TargetIsAbove45 => AngleToTarget > 45f && AngleToTarget < 135f;
+    public bool TargetIsBelow45 => AngleToTarget < -45f && AngleToTarget > -135f;
+    public bool TargetIsInFront45
+    {
+        get
+        {
+            return Mathf.Abs(AngleToTarget) <= 45f;
+        }
+    }
     public float SelfHp => Self != null ? Self.Hp : 0;
     public float SelfMaxHp => Self != null ? Self.Info.Hp : 0;
 
@@ -63,15 +73,22 @@ public class Context : MonoBehaviour
     public void Update()
     {
         if (Self == null || Target == null)
-            return;
+        return;
 
-        Distance = Vector3.Distance(
-            Self.transform.position,
-            Target.transform.position
-        );
-        
-        Direction = Target.transform.position.x - Self.transform.position.x;
-        DistanceX = Mathf.Abs(Direction);
+        Vector2 toTarget =
+            Target.transform.position -
+            Self.transform.position;
+
+        Distance = toTarget.magnitude;
+
+        DistanceX = Mathf.Abs(toTarget.x);
+
+        Direction = toTarget.x;
+
+        AngleToTarget = Mathf.Atan2(
+            toTarget.y,
+            Mathf.Abs(toTarget.x)
+        ) * Mathf.Rad2Deg;
     }
     private void Awake()
     {

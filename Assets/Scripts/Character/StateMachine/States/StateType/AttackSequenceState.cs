@@ -64,6 +64,10 @@ public class AttackSequenceState : SequenceState
             if (combo == null)
                 continue;
 
+            // Ignore disabled Combo GameObjects.
+            if (!combo.IsEnable())
+                continue;
+
             float score = combo.CalculateScore(Context);
 
             Debug.Log(
