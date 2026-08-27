@@ -5,19 +5,30 @@ using UnityEngine;
 /// <summary>
 /// The GirlWolf boss.
 ///
-/// Wandering is the hub state. The boss prowls back and forth there until something
-/// triggers a move, performs that move, then drops straight back into Wandering.
+/// Wandering is the hub. The boss stands there on the idle animation deciding what to
+/// do, runs one move, then drops straight back into Wandering.
 ///
-///     Wandering --hp below 30%----> Accumulate --+
-///               --target within 1.5-> Bite     --+
-///               --Pounce() called---> Pounce   --+--> back to Wandering
-///               --Dash() called-----> Dash     --+
+/// Priority order, top to bottom - the first match wins:
 ///
-/// Bite and Accumulate trigger themselves off the world. Pounce and Dash keep the
-/// gates they always had and are still driven from the State / UtilityAction tree:
+///     Wandering --hp below 30%---------> Accumulate --+
+///               --inside Bite Range-----> Bite       --+
+///               --beyond Pounce Min-----> Pounce     --+--> back to Wandering
+///               --out of range, 1.2s----> Chasing    --+
+///               --Dash() called---------> Dash       --+
+///
+/// Chasing walks at the player and ends the moment it reaches Bite Range, handing back
+/// to Wandering which then fires the bite. Bite chains in place while the player stays
+/// in range. Wandering is the only place transitions are chosen, so the whole decision
+/// table is CheckWanderingTriggers.
+///
+/// Dash is still driven from the State / UtilityAction tree:
 ///
 ///     if (AI.Character is GirlWolf wolf)
 ///         wolf.Pounce();
+///
+/// Movement and facing go through Character. Animation is parameter-driven: every state
+/// owns one Bool on the Animator, raised on entry and lowered on exit by SetMove, so
+/// exactly one is true at a time and the transition graph owns which clip that plays.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -28,6 +39,7 @@ public class GirlWolf : Enemy
     public enum WolfMove
     {
         Wandering,
+        Chasing,
         Bite,
         Dash,
         Pounce,
@@ -37,7 +49,8 @@ public class GirlWolf : Enemy
     [Header("Movement")]
     [Tooltip("Used when the CharacterInfo asset leaves MoveSpeed at 0.")]
     [SerializeField] private float fallbackMoveSpeed = 4f;
-    [SerializeField] private float acceleration = 25f;
+    [Tooltip("Used when the CharacterInfo asset leaves Acceleration at 0.")]
+    [SerializeField] private float fallbackAcceleration = 25f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer = 1 << 3; // "Ground"
 
@@ -48,40 +61,47 @@ public class GirlWolf : Enemy
     [SerializeField] private string targetTag = "Player";
     [Tooltip("Seconds between re-scans while no target is held. Match spawns the player at runtime, so the boss has to keep looking.")]
     [SerializeField] private float targetSearchInterval = 0.5f;
-    [Tooltip("Let the boss turn to face its target. Character.LookAt also does this whenever a Context is configured.")]
+    [Tooltip("Let the boss turn to face its target. On, it tracks the player in every state.")]
     [SerializeField] private bool controlFacing = true;
+    [Tooltip("Tick when the source art is drawn facing LEFT. Only corrects which way the sprite is mirrored - hitboxes are unaffected.")]
+    [SerializeField] private bool spriteFacesLeft;
+    [Tooltip("Ignore turns while the target is within this many units horizontally, so the boss does not flip-flop when overlapping it.")]
+    [SerializeField] private float facingDeadzone = 0.05f;
 
-    [Header("Wandering (idle prowl)")]
-    [Tooltip("Fraction of MoveSpeed used while prowling, so idling reads slower than a committed approach.")]
-    [SerializeField, Range(0f, 1f)] private float wanderingMoveScale = 0.5f;
-    [SerializeField] private float wanderingMinWalkTime = 0.4f;
-    [SerializeField] private float wanderingMaxWalkTime = 1.2f;
-    [SerializeField] private float wanderingMinPauseTime = 0.3f;
-    [SerializeField] private float wanderingMaxPauseTime = 1f;
+    [Header("Wandering (idle)")]
+    [Tooltip("Seconds the boss stands and thinks before committing to a chase. Attack triggers still fire immediately.")]
+    [SerializeField] private float wanderingThinkTime = 1.2f;
+
+    [Header("Chasing")]
+    [Tooltip("Fraction of MoveSpeed used while closing in. The chase ends at Bite Range.")]
+    [SerializeField, Range(0f, 1f)] private float chaseMoveScale = 1f;
 
     [Header("Bite")]
     [SerializeField] private int biteDamage = 8;
-    [Tooltip("Wandering auto-triggers a bite when the target is closer than this.")]
-    [SerializeField] private float biteRange = 1.5f;
+    [Tooltip("The attack range. Wandering bites immediately inside this, and a chase ends when it reaches it.")]
+    [SerializeField] private float biteRange = 10f;
     [SerializeField] private float biteWindup = 0.15f;
     [SerializeField] private float biteRecovery = 0.25f;
-    [SerializeField] private float biteCooldown = 0.9f;
+    [Tooltip("Seconds between swings. While chaining, the boss holds the Bite state for this long so the clip keeps looping instead of dipping to Idle.")]
+    [SerializeField] private float biteCooldown = 1f;
     [SerializeField] private Vector2 biteHitboxOffset = new Vector2(0.9f, 0f);
     [SerializeField] private Vector2 biteHitboxSize = new Vector2(1.4f, 1.2f);
 
-    [Header("Pounce")]
+    [Header("Pounce (leap across the arena)")]
     [SerializeField] private int pounceDamage = 14;
-    [SerializeField] private float pounceMinRange = 2.5f;
-    [SerializeField] private float pounceMaxRange = 7f;
+    [Tooltip("Only leaps when the target is at least this far away.")]
+    [SerializeField] private float pounceMinRange = 20f;
+    [Tooltip("Upper bound, so the boss does not try to clear the whole level in one jump.")]
+    [SerializeField] private float pounceMaxRange = 40f;
     [SerializeField] private float pounceWindup = 0.35f;
-    [SerializeField] private float pounceHorizontalSpeed = 9f;
-    [SerializeField] private float pounceVerticalSpeed = 7f;
+    [Tooltip("How high above the launch point the arc peaks.")]
+    [SerializeField] private float pounceApexHeight = 6f;
+    [Tooltip("Lands at a random offset up to this far either side of the player's x. Wider than Damage Radius, so a leap can genuinely miss.")]
+    [SerializeField] private float pounceLandRadius = 7f;
+    [Tooltip("On landing, anything within this radius takes the hit.")]
+    [SerializeField] private float pounceDamageRadius = 4f;
     [SerializeField] private float pounceRecovery = 0.5f;
-    [SerializeField] private float pounceCooldown = 3f;
-    [Tooltip("Safety net so a pounce that never lands cannot lock the boss up.")]
-    [SerializeField] private float pounceMaxAirTime = 2.5f;
-    [SerializeField] private Vector2 pounceHitboxOffset = new Vector2(0.7f, -0.2f);
-    [SerializeField] private Vector2 pounceHitboxSize = new Vector2(1.6f, 1.6f);
+    [SerializeField] private float pounceCooldown = 10f;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 10f;
@@ -93,7 +113,6 @@ public class GirlWolf : Enemy
     [Tooltip("Wandering auto-triggers Accumulate once HP drops below this fraction of max.")]
     [SerializeField, Range(0f, 1f)] private float accumulateHealthThreshold = 0.3f;
     [SerializeField] private float accumulateChargeTime = 3f;
-    [Tooltip("Delay between the release trigger and the hit. Move this onto an animation event once the release clip exists.")]
     [SerializeField] private float accumulateReleaseWindup = 0.2f;
     [SerializeField] private float accumulateRecovery = 0.8f;
     [Tooltip("Stops the boss chain-casting once it is permanently below the HP threshold. Set very high for once per fight.")]
@@ -102,16 +121,17 @@ public class GirlWolf : Enemy
     [SerializeField] private Vector2 accumulateHitboxOffset = new Vector2(1.2f, 0f);
     [SerializeField] private Vector2 accumulateHitboxSize = new Vector2(3.5f, 2.5f);
 
-    [Header("Animator Triggers")]
-    [Tooltip("Triggers missing from the controller are skipped silently, so these are safe to leave as-is until the clips exist.")]
-    [SerializeField] private string wanderingTrigger = "Wandering";
-    [SerializeField] private string biteTrigger = "Bite";
-    [SerializeField] private string pounceWindupTrigger = "PounceWindup";
-    [SerializeField] private string pounceLaunchTrigger = "Pounce";
-    [SerializeField] private string pounceLandTrigger = "PounceLand";
-    [SerializeField] private string dashTrigger = "Dash";
-    [SerializeField] private string accumulateChargeTrigger = "Accumulate";
-    [SerializeField] private string accumulateReleaseTrigger = "AccumulateRelease";
+    [Header("Animator Parameters")]
+    [Tooltip("One Bool parameter per state. Entering a state raises its bool and lowers the previous one, so exactly one is ever true. Parameters the controller does not declare are skipped.")]
+    [SerializeField] private string idleParam = "Idle";
+    [SerializeField] private string chaseParam = "Walking";
+    [SerializeField] private string biteParam = "Tearing";
+    [SerializeField] private string dashParam = "Dash";
+    [SerializeField] private string pounceParam = "Pounce";
+    [SerializeField] private string accumulateParam = "Accumulate";
+
+    [Tooltip("On: damage lands only via AnimEvent_Hit() called from an animation event. Off: the serialized windup timers deal the damage. Turn this on once every attack clip has a contact-frame event.")]
+    [SerializeField] private bool useAnimationEvents;
 
     [Header("Debug")]
     [SerializeField] private bool drawGizmos = true;
@@ -128,7 +148,8 @@ public class GirlWolf : Enemy
     /// <summary>Raised when the tracked target changes, including to null when it despawns.</summary>
     public event System.Action<Character> OnTargetChanged;
 
-    private Rigidbody2D rb;
+    // Used to set the state bools and to read back which parameters the controller
+    // actually declares. The Animator graph decides which clip that maps to.
     private Animator animator;
     private Coroutine brainRoutine;
 
@@ -138,10 +159,15 @@ public class GirlWolf : Enemy
 
     private ContactFilter2D hitFilter;
     private readonly List<Collider2D> hitBuffer = new();
-    private readonly HashSet<string> animatorParameters = new();
+    private readonly HashSet<string> warnedOnce = new();
+    private readonly Dictionary<string, AnimatorControllerParameterType> animParameters = new();
 
     // The move Wandering should break out and run. Wandering means "nothing queued".
     private WolfMove pendingMove = WolfMove.Wandering;
+
+    // +1 = the boss is facing right. Kept separate from localScale so that art drawn
+    // facing left can be mirrored without inverting every hitbox offset.
+    private float facingSign = 1f;
 
     private float moveThrottle;
     private float lastMoveCommandTime = -Mathf.Infinity;
@@ -153,13 +179,19 @@ public class GirlWolf : Enemy
     private float lastAccumulateTime = -Mathf.Infinity;
 
     // A State drives walking by calling MoveTowardsTarget() every Update. If it stops
-    // calling (or forgets StopMoving() in Exit) the command goes stale and the boss
+    // calling (or forgets Halt() in Exit) the command goes stale and the boss
     // decelerates on its own instead of sliding away forever.
     private const float MoveCommandTimeout = 0.1f;
 
     #region Public API
 
-    public bool IsBusy => currentMove != WolfMove.Wandering;
+    /// <summary>
+    /// True only while a committed move is running. Wandering and Chasing are free
+    /// states: walking is allowed in both, so neither counts as busy.
+    /// </summary>
+    public bool IsBusy =>
+        currentMove != WolfMove.Wandering &&
+        currentMove != WolfMove.Chasing;
     public bool IsDead => isDead;
     public bool IsGrounded => grounded;
     public WolfMove CurrentMove => currentMove;
@@ -173,6 +205,9 @@ public class GirlWolf : Enemy
     public float MoveSpeed =>
         Info != null && Info.MoveSpeed > 0f ? Info.MoveSpeed : fallbackMoveSpeed;
 
+    public float MoveAcceleration =>
+        Info != null && Info.Acceleration > 0f ? Info.Acceleration : fallbackAcceleration;
+
     // Falls back to full, not empty: an unassigned CharacterInfo would otherwise read as
     // 0% health and pin the boss into Accumulate forever.
     public float HealthFraction =>
@@ -185,18 +220,18 @@ public class GirlWolf : Enemy
 
     public bool CanPounce =>
         CanAct &&
-        grounded &&
         Time.time >= lastPounceTime + pounceCooldown &&
         DistanceToTarget >= pounceMinRange &&
         DistanceToTarget <= pounceMaxRange;
 
     public bool CanDash =>
         CanAct &&
-        grounded &&
         Time.time >= lastDashTime + dashCooldown;
 
-    public bool CanAccumulate =>
-        CanAct &&
+    public bool CanAccumulate => CanAct && ShouldAccumulate;
+
+    /// <summary>Hurt enough to go desperate, and off cooldown. Outranks every other trigger.</summary>
+    private bool ShouldAccumulate =>
         HealthFraction < accumulateHealthThreshold &&
         Time.time >= lastAccumulateTime + accumulateCooldown;
 
@@ -206,10 +241,11 @@ public class GirlWolf : Enemy
     /// <summary>Walk away from the target. Call every frame from RetreatState.Update().</summary>
     public void MoveAwayFromTarget() => SetExternalMoveCommand(-DirectionToTarget);
 
-    public void StopMoving()
+    /// <summary>Clears any queued walk command and zeroes horizontal velocity.</summary>
+    public void Halt()
     {
-        moveThrottle = 0f;
-        lastMoveCommandTime = -Mathf.Infinity;
+        ClearMoveCommand();
+        StopMoving();
     }
 
     /// <summary>
@@ -227,11 +263,34 @@ public class GirlWolf : Enemy
     /// <summary>Queues a move. Returns false when busy, dead, or still on cooldown.</summary>
     public bool Bite() => TryQueue(WolfMove.Bite, Time.time >= lastBiteTime + biteCooldown);
 
-    public bool Pounce() => TryQueue(WolfMove.Pounce, grounded && Time.time >= lastPounceTime + pounceCooldown);
+    public bool Pounce() => TryQueue(WolfMove.Pounce, Time.time >= lastPounceTime + pounceCooldown);
 
-    public bool Dash() => TryQueue(WolfMove.Dash, grounded && Time.time >= lastDashTime + dashCooldown);
+    public bool Dash() => TryQueue(WolfMove.Dash, Time.time >= lastDashTime + dashCooldown);
 
     public bool Accumulate() => TryQueue(WolfMove.Accumulate, Time.time >= lastAccumulateTime + accumulateCooldown);
+
+    /// <summary>
+    /// Animation Event hook. Put this on the contact frame of Bite / Pounce /
+    /// AccumulateRelease, then tick Use Animation Events so the timers stop dealing
+    /// the damage themselves. The hitbox used follows whichever move is running.
+    /// </summary>
+    public void AnimEvent_Hit()
+    {
+        switch (currentMove)
+        {
+            case WolfMove.Bite:
+                TryHit(biteHitboxOffset, biteHitboxSize, biteDamage);
+                break;
+
+            case WolfMove.Pounce:
+                TryHitRadius(pounceDamageRadius, pounceDamage);
+                break;
+
+            case WolfMove.Accumulate:
+                TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage);
+                break;
+        }
+    }
 
     /// <summary>Interrupts whatever is running and drops the boss back into Wandering.</summary>
     public void CancelMove()
@@ -245,8 +304,7 @@ public class GirlWolf : Enemy
         SetMove(WolfMove.Wandering);
         pendingMove = WolfMove.Wandering;
 
-        StopMoving();
-        StopHorizontal();
+        Halt();
 
         if (!isDead && isActiveAndEnabled)
             brainRoutine = StartCoroutine(BrainRoutine());
@@ -258,19 +316,23 @@ public class GirlWolf : Enemy
 
     public override void Awake()
     {
+        // Caches rb and anim, and validates CharacterInfo.
         base.Awake();
 
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         // RequireComponent adds a default Rigidbody2D; without this the boss topples
         // over the first time it is pushed.
-        rb.freezeRotation = true;
+        if (rb != null)
+            rb.freezeRotation = true;
 
         hitFilter = new ContactFilter2D { useTriggers = true };
         hitFilter.SetLayerMask(targetLayer);
 
-        CacheAnimatorParameters();
+        // Normalise the scale so the sprite and facingSign agree before the first turn.
+        SetFacing(facingSign);
+
+        InitAnimParameters();
 
         if (targetLayer == 0)
             Debug.LogWarning($"{name}: Target Layer is set to Nothing, so attacks will never connect.", this);
@@ -279,7 +341,7 @@ public class GirlWolf : Enemy
     public override void Start()
     {
         // Started before base.Start() so a throw in the base class can never leave the
-        // boss alive but brainless. Character logs its own missing-Context warning.
+        // boss alive but brainless.
         brainRoutine = StartCoroutine(BrainRoutine());
 
         base.Start();
@@ -336,6 +398,10 @@ public class GirlWolf : Enemy
 
             switch (move)
             {
+                case WolfMove.Chasing:
+                    yield return ChasingRoutine();
+                    break;
+
                 case WolfMove.Bite:
                     yield return BiteRoutine();
                     break;
@@ -361,94 +427,119 @@ public class GirlWolf : Enemy
     }
 
     /// <summary>
-    /// The resting state: prowl left/pause/right/pause at random until a trigger fires
-    /// or something external queues a move.
+    /// The resting state: stand still on the idle animation and decide what to do next.
+    /// Every transition out of here is chosen by CheckWanderingTriggers.
     /// </summary>
     private IEnumerator WanderingRoutine()
     {
         SetMove(WolfMove.Wandering);
-        StopMoving();
-        PlayTrigger(wanderingTrigger);
+        Halt();
 
-        float stepTimer = 0f;
-        float wanderDirection = 0f;
-        bool pausing = true;
+        float enteredAt = Time.time;
 
         while (pendingMove == WolfMove.Wandering && !isDead)
         {
-            if (CheckWanderingTriggers())
+            if (CheckWanderingTriggers(enteredAt))
                 break;
-
-            // A State is steering us this frame, so do not fight it with the prowl.
-            if (Time.time - lastExternalMoveTime <= MoveCommandTimeout)
-            {
-                yield return null;
-                continue;
-            }
-
-            stepTimer -= Time.deltaTime;
-
-            if (stepTimer <= 0f)
-            {
-                pausing = !pausing;
-
-                if (pausing)
-                {
-                    wanderDirection = 0f;
-                    stepTimer = Random.Range(wanderingMinPauseTime, wanderingMaxPauseTime);
-                }
-                else
-                {
-                    wanderDirection = Random.value < 0.5f ? -1f : 1f;
-                    stepTimer = Random.Range(wanderingMinWalkTime, wanderingMaxWalkTime);
-                }
-            }
-
-            if (Mathf.Approximately(wanderDirection, 0f))
-                StopMoving();
-            else
-                SetMoveCommand(wanderDirection * wanderingMoveScale);
 
             yield return null;
         }
 
-        StopMoving();
+        Halt();
     }
 
-    /// <summary>Self-triggers that only fire out of Wandering. Accumulate outranks Bite.</summary>
-    private bool CheckWanderingTriggers()
+    /// <summary>
+    /// Everything the boss decides is decided here. Order is the priority order:
+    /// desperation, then attack, then close the gap.
+    /// </summary>
+    private bool CheckWanderingTriggers(float enteredAt)
     {
-        // Nothing to attack: keep prowling rather than mauling a corpse or empty air.
+        // Nothing to attack: stand and keep looking rather than maul a corpse or empty air.
         if (!TargetIsAlive)
         {
             AcquireTarget();
             return false;
         }
 
-        if (HealthFraction < accumulateHealthThreshold &&
-            Time.time >= lastAccumulateTime + accumulateCooldown)
+        if (ShouldAccumulate)
         {
             pendingMove = WolfMove.Accumulate;
             return true;
         }
 
-        if (Time.time >= lastBiteTime + biteCooldown &&
-            DistanceToTarget < biteRange)
+        float distance = DistanceToTarget;
+
+        // In range: attack straight away, no thinking pause.
+        if (distance <= biteRange &&
+            Time.time >= lastBiteTime + biteCooldown)
         {
             pendingMove = WolfMove.Bite;
+            return true;
+        }
+
+        // Far enough to be worth crossing the arena in one jump.
+        if (distance >= pounceMinRange &&
+            distance <= pounceMaxRange &&
+            Time.time >= lastPounceTime + pounceCooldown)
+        {
+            pendingMove = WolfMove.Pounce;
+            return true;
+        }
+
+        // Out of range: stand and think, then commit to a chase.
+        if (distance > biteRange &&
+            Time.time - enteredAt >= wanderingThinkTime)
+        {
+            pendingMove = WolfMove.Chasing;
             return true;
         }
 
         return false;
     }
 
-    // Single funnel for state changes so observers (and the test view) see every one.
+    /// <summary>
+    /// Walks at the player until it reaches attack range, then hands back to Wandering,
+    /// which fires the bite on its next check.
+    /// </summary>
+    private IEnumerator ChasingRoutine()
+    {
+        SetMove(WolfMove.Chasing);
+
+        // pendingMove guards the loop so an external Pounce()/Dash() can cut the chase short.
+        while (!isDead && pendingMove == WolfMove.Wandering)
+        {
+            if (!TargetIsAlive)
+                break;
+
+            // Arrived - Wandering takes it from here.
+            if (DistanceToTarget <= biteRange)
+                break;
+
+            // Dropping low mid-chase outranks finishing it.
+            if (ShouldAccumulate)
+                break;
+
+            // A State is steering us this frame, so do not fight it with the chase.
+            if (Time.time - lastExternalMoveTime > MoveCommandTimeout)
+                SetMoveCommand(DirectionToTarget * chaseMoveScale);
+
+            yield return null;
+        }
+
+        Halt();
+    }
+
+    // Single funnel for state changes, so observers (and the test view) see every one and
+    // the Animator bools stay in lockstep with the logic - exactly one is ever true.
     private void SetMove(WolfMove move)
     {
         if (currentMove == move)
             return;
 
+        SetMoveBool(currentMove, false);
         currentMove = move;
+        SetMoveBool(move, true);
+
         OnMoveChanged?.Invoke(move);
     }
 
@@ -465,20 +556,41 @@ public class GirlWolf : Enemy
 
     #region Moves
 
+    /// <summary>
+    /// Chains swings while the player stays in range, rather than returning to Wandering
+    /// between each one. Leaving and re-entering would drop Tearing and raise Idle for a
+    /// few frames every swing, which reads as the animation restarting from idle.
+    /// The Tearing bool stays up for the whole chain, so the clip just keeps looping.
+    /// </summary>
     private IEnumerator BiteRoutine()
     {
         SetMove(WolfMove.Bite);
-        lastBiteTime = Time.time;
 
-        StopMoving();
-        StopHorizontal();
-        PlayTrigger(biteTrigger);
+        do
+        {
+            lastBiteTime = Time.time;
 
-        yield return new WaitForSeconds(biteWindup);
+            Halt();
 
-        TryHit(biteHitboxOffset, biteHitboxSize, biteDamage);
+            yield return new WaitForSeconds(biteWindup);
 
-        yield return new WaitForSeconds(biteRecovery);
+            if (!useAnimationEvents)
+                TryHit(biteHitboxOffset, biteHitboxSize, biteDamage);
+
+            yield return new WaitForSeconds(biteRecovery);
+
+            // Hold the state through whatever is left of the cooldown so the next swing
+            // starts straight from here instead of dipping through Idle first.
+            float remaining = biteCooldown - (Time.time - lastBiteTime);
+
+            if (remaining > 0f)
+                yield return new WaitForSeconds(remaining);
+        }
+        while (!isDead &&
+               pendingMove == WolfMove.Wandering &&
+               !ShouldAccumulate &&
+               TargetIsAlive &&
+               DistanceToTarget <= biteRange);
     }
 
     private IEnumerator PounceRoutine()
@@ -487,38 +599,22 @@ public class GirlWolf : Enemy
         lastPounceTime = Time.time;
 
         // Plant the feet and telegraph, so the player has a window to react.
-        StopMoving();
-        StopHorizontal();
-        PlayTrigger(pounceWindupTrigger);
+        Halt();
 
         yield return new WaitForSeconds(pounceWindup);
 
-        float direction = DirectionToTarget;
-        rb.linearVelocity = new Vector2(
-            direction * pounceHorizontalSpeed,
-            pounceVerticalSpeed
-        );
-        PlayTrigger(pounceLaunchTrigger);
+        float flightTime = LaunchTo(ChooseLandingSpot());
 
-        // One frame is not enough to clear the ground raycast, so wait until we are
-        // genuinely airborne before letting the landing check take over.
-        yield return new WaitForSeconds(0.1f);
+        // Pure ballistics from here: no steering, no ground probing. The arc is fully
+        // determined by the launch impulse, so its duration is known up front and we
+        // simply wait it out while gravity brings the boss down.
+        yield return new WaitForSeconds(flightTime);
 
-        float airTime = 0f;
-        bool hasHit = false;
+        StopMoving();
 
-        while (airTime < pounceMaxAirTime && !HasLanded())
-        {
-            // One target per leap, otherwise the hitbox chews through the player.
-            if (!hasHit)
-                hasHit = TryHit(pounceHitboxOffset, pounceHitboxSize, pounceDamage);
-
-            airTime += Time.deltaTime;
-            yield return null;
-        }
-
-        StopHorizontal();
-        PlayTrigger(pounceLandTrigger);
+        // The damage is the landing itself, so it resolves once, on touchdown.
+        if (!useAnimationEvents)
+            TryHitRadius(pounceDamageRadius, pounceDamage);
 
         yield return new WaitForSeconds(pounceRecovery);
     }
@@ -528,8 +624,7 @@ public class GirlWolf : Enemy
         SetMove(WolfMove.Dash);
         lastDashTime = Time.time;
 
-        StopMoving();
-        PlayTrigger(dashTrigger);
+        ClearMoveCommand();
 
         float direction = -DirectionToTarget;
         float elapsed = 0f;
@@ -545,32 +640,29 @@ public class GirlWolf : Enemy
             yield return null;
         }
 
-        StopHorizontal();
+        StopMoving();
 
         yield return new WaitForSeconds(dashRecovery);
     }
 
     /// <summary>
     /// Desperation move: root in place, charge for accumulateChargeTime, then release
-    /// one heavy hit. The release is timed in code for now; once the clip exists, drive
-    /// the hit from an animation event and drop accumulateReleaseWindup to 0.
+    /// one heavy hit.
     /// </summary>
     private IEnumerator AccumulateRoutine()
     {
         SetMove(WolfMove.Accumulate);
         lastAccumulateTime = Time.time;
 
-        StopMoving();
-        StopHorizontal();
-        PlayTrigger(accumulateChargeTrigger);
+        Halt();
 
         yield return new WaitForSeconds(accumulateChargeTime);
 
-        PlayTrigger(accumulateReleaseTrigger);
 
         yield return new WaitForSeconds(accumulateReleaseWindup);
 
-        TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage);
+        if (!useAnimationEvents)
+            TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage);
 
         yield return new WaitForSeconds(accumulateRecovery);
     }
@@ -675,37 +767,16 @@ public class GirlWolf : Enemy
         OnTargetChanged?.Invoke(next);
     }
 
-    private void UpdateFacing()
-    {
-        // Only while idle: re-facing mid-attack would teleport the hitbox to the other side.
-        if (!controlFacing || IsBusy || isDead)
-            return;
-
-        Character current = TargetCharacter;
-
-        if (current == null)
-            return;
-
-        float delta = current.transform.position.x - transform.position.x;
-
-        if (Mathf.Abs(delta) < 0.01f)
-            return;
-
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(delta);
-        transform.localScale = scale;
-    }
-
     private float DistanceToTarget
     {
         get
         {
-            Character target = TargetCharacter;
+            Character current = TargetCharacter;
 
-            if (target == null)
+            if (current == null)
                 return Mathf.Infinity;
 
-            return Vector2.Distance(transform.position, target.transform.position);
+            return Vector2.Distance(transform.position, current.transform.position);
         }
     }
 
@@ -714,11 +785,11 @@ public class GirlWolf : Enemy
     {
         get
         {
-            Character target = TargetCharacter;
+            Character current = TargetCharacter;
 
-            if (target != null)
+            if (current != null)
             {
-                float delta = target.transform.position.x - transform.position.x;
+                float delta = current.transform.position.x - transform.position.x;
 
                 if (!Mathf.Approximately(delta, 0f))
                     return Mathf.Sign(delta);
@@ -728,9 +799,44 @@ public class GirlWolf : Enemy
         }
     }
 
-    // Character.LookAt flips localScale.x toward the target, so the sign of the scale
-    // is the facing and the hitbox offsets mirror with it.
-    private float Facing => transform.localScale.x < 0f ? -1f : 1f;
+    /// <summary>
+    /// +1 when the boss is facing right. Hitbox offsets mirror off this rather than off
+    /// the raw localScale, so ticking Sprite Faces Left never inverts the attack boxes.
+    /// </summary>
+    private float Facing => facingSign;
+
+    /// <summary>
+    /// Turns to the target every physics step, in every state. Deliberately not gated on
+    /// IsBusy: the boss tracks the player through its attacks too.
+    /// </summary>
+    private void UpdateFacing()
+    {
+        if (!controlFacing || isDead)
+            return;
+
+        Character current = TargetCharacter;
+
+        if (current == null)
+            return;
+
+        float delta = current.transform.position.x - transform.position.x;
+
+        // Deadzone stops a jitter loop when the two are stacked on the same column.
+        if (Mathf.Abs(delta) < facingDeadzone)
+            return;
+
+        SetFacing(Mathf.Sign(delta));
+    }
+
+    private void SetFacing(float sign)
+    {
+        facingSign = sign;
+
+        // The extra flip is the art's own orientation, not the direction we are facing.
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * sign * (spriteFacesLeft ? -1f : 1f);
+        transform.localScale = scale;
+    }
 
     private void SetExternalMoveCommand(float throttle)
     {
@@ -738,7 +844,7 @@ public class GirlWolf : Enemy
         SetMoveCommand(throttle);
     }
 
-    // throttle is signed and normally +/-1, but Wandering scales it down to prowl.
+    // throttle is signed and normally +/-1, but the approach can scale it down.
     private void SetMoveCommand(float throttle)
     {
         if (isDead || IsBusy)
@@ -746,6 +852,12 @@ public class GirlWolf : Enemy
 
         moveThrottle = throttle;
         lastMoveCommandTime = Time.time;
+    }
+
+    private void ClearMoveCommand()
+    {
+        moveThrottle = 0f;
+        lastMoveCommandTime = -Mathf.Infinity;
     }
 
     private void ApplyWalk()
@@ -756,24 +868,96 @@ public class GirlWolf : Enemy
         if (Time.time - lastMoveCommandTime > MoveCommandTimeout)
             moveThrottle = 0f;
 
-        float targetSpeed = moveThrottle * MoveSpeed;
+        Move(moveThrottle, MoveSpeed, MoveAcceleration);
+    }
 
-        float newSpeed = Mathf.MoveTowards(
-            rb.linearVelocity.x,
-            targetSpeed,
-            acceleration * Time.fixedDeltaTime
+    /// <summary>
+    /// Picks a spot beside the player - front or back, chosen at random - so the leap
+    /// can cross over and land behind them rather than always arriving head-on.
+    /// </summary>
+    private Vector2 ChooseLandingSpot()
+    {
+        Character current = TargetCharacter;
+        Vector2 origin = transform.position;
+
+        if (current == null)
+            return origin + new Vector2(Facing * pounceLandRadius, 0f);
+
+        // Anywhere within pounceLandRadius of the player's x - in front, on top, or past
+        // them. Only the x is read; the arc returns to the height it launched from.
+        float landingX = current.transform.position.x +
+                         Random.Range(-pounceLandRadius, pounceLandRadius);
+
+        return new Vector2(landingX, origin.y);
+    }
+
+    /// <summary>
+    /// Solves the launch velocity that arcs from here to <paramref name="landing"/> while
+    /// peaking pounceApexHeight above the start, so the leap actually lands where it aimed
+    /// instead of being a fixed-speed lunge.
+    /// </summary>
+    /// <summary>
+    /// Fires one impulse that arcs from here to <paramref name="landing"/>, peaking
+    /// pounceApexHeight above the launch point, and returns how long that arc lasts.
+    /// Nothing touches the Rigidbody again until it is over - gravity does the rest.
+    /// </summary>
+    private float LaunchTo(Vector2 landing)
+    {
+        Vector2 origin = transform.position;
+        float gravity = Mathf.Abs(Physics2D.gravity.y) * rb.gravityScale;
+
+        if (gravity <= 0.01f)
+        {
+            WarnOnce(
+                "~nogravity",
+                "Rigidbody2D Gravity Scale is 0, so Pounce has no arc to fall through. Set it to 1"
+            );
+            return 0f;
+        }
+
+        // Symmetric arc: up to the apex, then back down to the launch height.
+        float vy = Mathf.Sqrt(2f * gravity * Mathf.Max(pounceApexHeight, 0.01f));
+        float dy = landing.y - origin.y;
+
+        // Descending root of  dy = vy*t - 0.5*g*t^2  is the full flight time. A negative
+        // discriminant means the apex sits below the landing height, so clamp to the apex.
+        float discriminant = Mathf.Max(vy * vy - 2f * gravity * dy, 0f);
+        float flightTime = (vy + Mathf.Sqrt(discriminant)) / gravity;
+
+        float vx = flightTime > 0.01f
+            ? (landing.x - origin.x) / flightTime
+            : 0f;
+
+        // Impulse rather than a velocity write, scaled by mass so the resulting velocity
+        // is exactly (vx, vy) whatever the Rigidbody weighs.
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(new Vector2(vx, vy) * rb.mass, ForceMode2D.Impulse);
+
+        return flightTime;
+    }
+
+    private bool TryHitRadius(float radius, int damage)
+    {
+        int count = Physics2D.OverlapCircle(
+            transform.position,
+            radius,
+            hitFilter,
+            hitBuffer
         );
 
-        rb.linearVelocity = new Vector2(newSpeed, rb.linearVelocity.y);
-    }
+        for (int i = 0; i < count; i++)
+        {
+            Character victim = hitBuffer[i].GetComponentInParent<Character>();
 
-    private void StopHorizontal()
-    {
-        if (rb != null)
-            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-    }
+            if (victim == null || victim == this)
+                continue;
 
-    private bool HasLanded() => grounded && rb.linearVelocity.y <= 0.01f;
+            Hit(victim, damage);
+            return true;
+        }
+
+        return false;
+    }
 
     private bool TryHit(Vector2 offset, Vector2 size, int damage)
     {
@@ -796,27 +980,89 @@ public class GirlWolf : Enemy
         return false;
     }
 
-    private void CacheAnimatorParameters()
+    private string ParamFor(WolfMove move) => move switch
     {
-        animatorParameters.Clear();
+        WolfMove.Wandering => idleParam,
+        WolfMove.Chasing => chaseParam,
+        WolfMove.Bite => biteParam,
+        WolfMove.Dash => dashParam,
+        WolfMove.Pounce => pounceParam,
+        WolfMove.Accumulate => accumulateParam,
+        _ => null
+    };
 
-        if (animator.runtimeAnimatorController == null)
+    private void SetMoveBool(WolfMove move, bool value)
+    {
+        string parameter = ParamFor(move);
+
+        if (!IsBoolParameter(parameter))
             return;
 
-        foreach (AnimatorControllerParameter parameter in animator.parameters)
-        {
-            animatorParameters.Add(parameter.name);
-        }
+        animator.SetBool(parameter, value);
     }
 
-    // Skips triggers the controller does not declare, so the boss runs without warnings
-    // while the animations are still being authored.
-    private void PlayTrigger(string trigger)
+    /// <summary>
+    /// Checked against the cached parameter list rather than called blind, because
+    /// SetBool on a parameter the controller does not declare warns on every single call.
+    /// </summary>
+    private bool IsBoolParameter(string parameter)
     {
-        if (string.IsNullOrEmpty(trigger) || !animatorParameters.Contains(trigger))
+        if (string.IsNullOrEmpty(parameter))
+            return false;
+
+        if (animator == null || animator.runtimeAnimatorController == null)
+        {
+            WarnOnce("~nocontroller", "the Animator has no controller assigned, so no animation will ever play");
+            return false;
+        }
+
+        if (!animParameters.TryGetValue(parameter, out AnimatorControllerParameterType type))
+        {
+            WarnOnce(parameter, $"the controller has no parameter named '{parameter}', so that state will not animate");
+            return false;
+        }
+
+        if (type != AnimatorControllerParameterType.Bool)
+        {
+            WarnOnce(parameter, $"parameter '{parameter}' is a {type}, but it needs to be a Bool");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void WarnOnce(string key, string message)
+    {
+        // HashSet.Add returns false when already present, so each problem logs once.
+        if (!warnedOnce.Add(key))
             return;
 
-        animator.SetTrigger(trigger);
+        Debug.LogWarning($"{name}: {message}.", this);
+    }
+
+    /// <summary>
+    /// Caches the declared parameters, clears every move bool, then raises the current
+    /// one. The raise is needed because SetMove early-returns on an unchanged state, so
+    /// the starting Wandering state would otherwise never assert its bool.
+    /// </summary>
+    private void InitAnimParameters()
+    {
+        animParameters.Clear();
+
+        if (animator != null && animator.runtimeAnimatorController != null)
+        {
+            foreach (AnimatorControllerParameter parameter in animator.parameters)
+            {
+                animParameters[parameter.name] = parameter.type;
+            }
+        }
+
+        foreach (WolfMove move in System.Enum.GetValues(typeof(WolfMove)))
+        {
+            SetMoveBool(move, false);
+        }
+
+        SetMoveBool(currentMove, true);
     }
 
     #endregion
@@ -836,10 +1082,7 @@ public class GirlWolf : Enemy
         );
 
         Gizmos.color = new Color(1f, 0.5f, 0f);
-        Gizmos.DrawWireCube(
-            position + new Vector2(pounceHitboxOffset.x * facing, pounceHitboxOffset.y),
-            pounceHitboxSize
-        );
+        Gizmos.DrawWireSphere(position, pounceDamageRadius);
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(

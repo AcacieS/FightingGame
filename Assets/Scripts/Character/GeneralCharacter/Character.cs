@@ -63,12 +63,24 @@ public class Character: MonoBehaviour
     }
     public virtual void Awake()
     {
-        Hp = characterInfo.Hp;
-        anim = GetComponent<Animator>();
+        // Components are cached before Hp is assigned: the Hp setter can call Die(),
+        // and overrides of Die() reach for anim and rb.
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
         }
+
+        if (characterInfo == null)
+        {
+            Debug.LogError($"{name}: CharacterInfo is not assigned, so Hp stays at 0.", this);
+            return;
+        }
+
+        Hp = characterInfo.Hp;
     }
 
     public virtual void Start()
