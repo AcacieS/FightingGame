@@ -91,6 +91,10 @@ public class ContextEditor : Editor
             context.Distance
         );
         EditorGUILayout.FloatField(
+            "DistanceX",
+            context.DistanceX
+        );
+        EditorGUILayout.FloatField(
             "Direction",
             context.Direction
         );

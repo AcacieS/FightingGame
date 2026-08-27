@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Context : MonoBehaviour
@@ -18,6 +19,7 @@ public class Context : MonoBehaviour
 
     // Runtime data
     public float Distance { get; private set; }
+    public float DistanceX { get; private set; }
     public float Direction { get; private set; }
     public float DirectionSign => Mathf.Sign(Direction);
 
@@ -67,7 +69,9 @@ public class Context : MonoBehaviour
             Self.transform.position,
             Target.transform.position
         );
+        
         Direction = Target.transform.position.x - Self.transform.position.x;
+        DistanceX = Mathf.Abs(Direction);
     }
     private void Awake()
     {
@@ -78,6 +82,5 @@ public class Context : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 }

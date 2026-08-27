@@ -7,16 +7,16 @@ public class DistanceGraduateConsideration : Consideration
 
     protected override float Calculate(Context context)
     {
-        if (context.Distance >= maxDistance)
+        if (context.DistanceX >= maxDistance)
             return 0f;
 
-        if (context.Distance <= idealDistance)
+        if (context.DistanceX <= idealDistance)
             return 1f;
 
         return 1f - Mathf.InverseLerp(
             idealDistance,
             maxDistance,
-            context.Distance
+            context.DistanceX
         );
     }
 }

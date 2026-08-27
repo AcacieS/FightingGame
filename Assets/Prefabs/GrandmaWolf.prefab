@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlamAttackState
   stateWeight: 0
-  animName: 
+  animName: SlamAttack
   damage: 10
   attackResult: 0
   attackPoint: {fileID: 7562689284456734458}
