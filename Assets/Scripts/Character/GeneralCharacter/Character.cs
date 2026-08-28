@@ -61,6 +61,8 @@ public class Character: MonoBehaviour
     }
     public void PlayAnim(string animName)
     {
+        if(anim == null)
+            return;
         anim.Play(animName);
     }
     public bool IsAnimPlaying(string animName)
@@ -93,7 +95,9 @@ public class Character: MonoBehaviour
     public virtual void Awake()
     {
         Hp = characterInfo.Hp;
-        anim = GetComponent<Animator>();
+        if (anim == null){
+            anim = GetComponent<Animator>();
+        }
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
@@ -108,9 +112,11 @@ public class Character: MonoBehaviour
     {
         
     }
-    public void Hit(Character target, int damage)
+    // isInterruptible rides along so a heavy move can stagger the victim while a light
+    // one only chips it. Defaulted, so existing two-argument calls are unaffected.
+    public void Hit(Character target, int damage, bool isInterruptible = false)
     {
-        target.Hurt(damage) ;
+        target.Hurt(damage, isInterruptible);
     }
 
     [ContextMenu("Hurt Test")]
@@ -122,6 +128,10 @@ public class Character: MonoBehaviour
     {
         Hp -= damage;
         OnHurt?.Invoke(Hp, isInterruptible);
+        if(anim != null)
+        {
+            anim.SetTrigger("Hurt");         
+        }
         return true;
     }
     public void LookAt(Character target)
