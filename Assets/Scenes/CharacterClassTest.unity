@@ -312,6 +312,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2276924957141737316, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
   m_PrefabInstance: {fileID: 7950046969507158487}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &143142832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3923229689760700375, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+  m_PrefabInstance: {fileID: 7950046969507158487}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143142831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514bd09587e19dc4eb60e8ec6f0dee6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
 --- !u!95 &143142835 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7512285242537677168, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
@@ -577,10 +588,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de304960ca52464388df6b06f03cfa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Context
-  _overrideCharactersSettings: 0
-  _self: {fileID: 0}
-  _target: {fileID: 0}
-  _selfController: {fileID: 0}
+  _overrideCharactersSettings: 1
+  _self: {fileID: 143142832}
+  _target: {fileID: 1116168827}
+  _selfController: {fileID: 1209153535}
   selfState: {fileID: 0}
 --- !u!1 &497470117
 GameObject:
@@ -1858,6 +1869,17 @@ Transform:
   - {fileID: 663995430}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1209153535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5032976480902668414, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+  m_PrefabInstance: {fileID: 7950046969507158487}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6a4b1a4fba29b4c878d14537875170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterController
 --- !u!1 &1231805664
 GameObject:
   m_ObjectHideFlags: 0

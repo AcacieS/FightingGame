@@ -49,15 +49,15 @@ public class Context : MonoBehaviour
     private void OnEnable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.Match.OnMatchPreReady += HandleMatchChanged;
+            GameManager.Instance.OnMatchStart += HandleMatchChanged;
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.Match.OnMatchPreReady -= HandleMatchChanged;
+            GameManager.Instance.OnMatchStart -= HandleMatchChanged;
     }
-    void HandleMatchChanged()
+    public void HandleMatchChanged()
     {
         Match currentMatch = GameManager.Instance.Match;
         if (!_overrideCharactersSettings)

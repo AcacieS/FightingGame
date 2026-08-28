@@ -12,7 +12,6 @@ public class ReadyState : ActionState
     {
         if (Context.Self.IsAnimFinished(animName))
         {
-            GameManager.Instance.Match.FinishReadyAnimation(AI.Character);
             AI.StopState();
         }
     }

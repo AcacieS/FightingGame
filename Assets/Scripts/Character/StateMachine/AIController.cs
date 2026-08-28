@@ -152,19 +152,8 @@ public class AIController : MonoBehaviour
         if (character != null)
             character.OnHurt -= HandleHurt;
     }
-    private void OnEnable()
-    {
-        //TODO: might too early to call
-        GameManager.Instance.Match.OnMatchPreReady += StartReadyPhase;
-        GameManager.Instance.Match.OnMatchFighting += StartFightingPhase;
-    }
     private void OnDisable()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.Match.OnMatchPreReady -= StartReadyPhase;
-            GameManager.Instance.Match.OnMatchFighting -= StartFightingPhase;
-        }
         if (character != null)
         {
             character.OnHurt-=HandleHurt;
