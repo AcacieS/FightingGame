@@ -20,7 +20,7 @@ public class GirlWolfDebugView : MonoBehaviour
     [SerializeField] private Color wandering = new Color(0.20f, 0.40f, 1.00f);   // blue
     [SerializeField] private Color chasing = new Color(0.20f, 0.80f, 0.30f);    // green
     [SerializeField] private Color bite = new Color(0.45f, 0.05f, 0.05f);       // dark red
-    [SerializeField] private Color dash = new Color(0.10f, 0.90f, 0.90f);       // cyan
+    [SerializeField] private Color scratch = new Color(0.10f, 0.90f, 0.90f);    // cyan
     [SerializeField] private Color pounce = new Color(1.00f, 0.55f, 0.10f);     // orange
     [SerializeField] private Color accumulate = new Color(0.70f, 0.20f, 0.90f); // purple
     [SerializeField] private Color dead = new Color(0.35f, 0.35f, 0.35f);       // grey
@@ -116,7 +116,7 @@ public class GirlWolfDebugView : MonoBehaviour
         GirlWolf.WolfMove.Wandering => wandering,
         GirlWolf.WolfMove.Chasing => chasing,
         GirlWolf.WolfMove.Bite => bite,
-        GirlWolf.WolfMove.Dash => dash,
+        GirlWolf.WolfMove.Scratch => scratch,
         GirlWolf.WolfMove.Pounce => pounce,
         GirlWolf.WolfMove.Accumulate => accumulate,
         _ => Color.white

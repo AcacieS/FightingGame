@@ -111,9 +111,11 @@ public class Character: MonoBehaviour
     {
         
     }
-    public void Hit(Character target, int damage)
+    // isInterruptible rides along so a heavy move can stagger the victim while a light
+    // one only chips it. Defaulted, so existing two-argument calls are unaffected.
+    public void Hit(Character target, int damage, bool isInterruptible = false)
     {
-        target.Hurt(damage) ;
+        target.Hurt(damage, isInterruptible);
     }
 
     [ContextMenu("Hurt Test")]

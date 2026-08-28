@@ -10,18 +10,25 @@ using UnityEngine;
 ///
 /// Priority order, top to bottom - the first match wins:
 ///
-///     Wandering --hp below 30%---------> Accumulate --+
-///               --inside Bite Range-----> Bite       --+
-///               --beyond Pounce Min-----> Pounce     --+--> back to Wandering
-///               --out of range, 1.2s----> Chasing    --+
-///               --Dash() called---------> Dash       --+
+///     Wandering --hp below 30%-------------> Accumulate --+
+///               --Scratch ready------------> Scratch    --+
+///               --Bite ready---------------> Bite       --+--> back to Wandering
+///               --Pounce ready-------------> Pounce     --+
+///               --nothing ready, think-----> Chasing    --+
 ///
-/// Chasing walks at the player and ends the moment it reaches Bite Range, handing back
-/// to Wandering which then fires the bite. Bite chains in place while the player stays
-/// in range. Wandering is the only place transitions are chosen, so the whole decision
-/// table is CheckWanderingTriggers.
+/// "Ready" means in range AND off cooldown - never range alone. The Chasing row is the
+/// unconditional catch-all: if no attack is available the boss closes distance rather than
+/// standing still, which is what stops it parking in Idle beside the player waiting for a
+/// long cooldown to tick down.
 ///
-/// Dash is still driven from the State / UtilityAction tree:
+/// Scratch is checked before Bite because it is the closer-range move: inside its range it
+/// wins, and once it goes on cooldown the check falls through to the bite. Chasing walks at
+/// the player and ends the moment an attack becomes available, handing back to Wandering
+/// which then fires it; it also re-checks for Scratch on a fixed interval so a player who
+/// closes the gap fast gets swiped mid-chase. Bite chains in place while the player stays
+/// in range; Scratch is always a single swing.
+///
+/// Moves can also be driven from the State / UtilityAction tree:
 ///
 ///     if (AI.Character is GirlWolf wolf)
 ///         wolf.Pounce();
@@ -41,7 +48,7 @@ public class GirlWolf : Enemy
         Wandering,
         Chasing,
         Bite,
-        Dash,
+        Scratch,
         Pounce,
         Accumulate
     }
@@ -70,7 +77,7 @@ public class GirlWolf : Enemy
 
     [Header("Wandering (idle)")]
     [Tooltip("Seconds the boss stands and thinks before committing to a chase. Attack triggers still fire immediately.")]
-    [SerializeField] private float wanderingThinkTime = 1.2f;
+    [SerializeField] private float wanderingThinkTime = 0.6f;
 
     [Header("Chasing")]
     [Tooltip("Fraction of MoveSpeed used while closing in. The chase ends at Bite Range.")]
@@ -80,12 +87,58 @@ public class GirlWolf : Enemy
     [SerializeField] private int biteDamage = 8;
     [Tooltip("The attack range. Wandering bites immediately inside this, and a chase ends when it reaches it.")]
     [SerializeField] private float biteRange = 10f;
-    [SerializeField] private float biteWindup = 0.15f;
+    [Tooltip("Delay from the swing starting to the hitbox going live. This is the window the player has to read the bite and get out of it.")]
+    [SerializeField] private float biteWindup = 0.4f;
     [SerializeField] private float biteRecovery = 0.25f;
     [Tooltip("Seconds between swings. While chaining, the boss holds the Bite state for this long so the clip keeps looping instead of dipping to Idle.")]
     [SerializeField] private float biteCooldown = 1f;
+    [Tooltip("Optional. Assign BiteColliderBox to damage by trigger overlap. Left empty, the Hitbox Offset/Size below are used as a one-frame overlap test instead.")]
+    [SerializeField] private DamageTriggerBox biteHitbox;
+    [Tooltip("How long the bite hitbox stays live, in seconds. Only used when Bite Hitbox is assigned.")]
+    [SerializeField] private float biteActiveTime = 0.12f;
+    [Tooltip("Fallback hitbox, used only when Bite Hitbox is empty.")]
     [SerializeField] private Vector2 biteHitboxOffset = new Vector2(0.9f, 0f);
     [SerializeField] private Vector2 biteHitboxSize = new Vector2(1.4f, 1.2f);
+    [Tooltip("Whether a bite staggers the victim. Off by default - a light nip should not interrupt.")]
+    [SerializeField] private bool biteInterrupts;
+
+    [Header("Scratch")]
+    [SerializeField] private int scratchDamage = 6;
+    [Tooltip("The close-range attack. Checked before Bite, so inside this distance the boss swipes instead of biting.")]
+    [SerializeField] private float scratchRange = 7f;
+    [Tooltip("Delay from the swipe starting to the hitbox going live. This is the window the player has to read the scratch and get out of it.")]
+    [SerializeField] private float scratchWindup = 0.3f;
+    [SerializeField] private float scratchRecovery = 0.2f;
+    [Tooltip("Seconds before the boss may scratch again. While this is running, an in-range player gets bitten instead, so the two attacks alternate.")]
+    [SerializeField] private float scratchCooldown = 1.5f;
+    [Tooltip("How often a running chase re-checks whether the player has come inside Scratch Range.")]
+    [SerializeField] private float scratchChaseCheckInterval = 3f;
+    [Tooltip("Optional. Assign ScratchColliderBox to damage by trigger overlap. Left empty, the Hitbox Offset/Size below are used as a one-frame overlap test instead.")]
+    [SerializeField] private DamageTriggerBox scratchHitbox;
+    [Tooltip("How long the scratch hitbox stays live, in seconds. Only used when Scratch Hitbox is assigned.")]
+    [SerializeField] private float scratchActiveTime = 0.12f;
+    [Tooltip("Fallback hitbox, used only when Scratch Hitbox is empty.")]
+    [SerializeField] private Vector2 scratchHitboxOffset = new Vector2(1f, 0f);
+    [SerializeField] private Vector2 scratchHitboxSize = new Vector2(1.6f, 1.4f);
+    [Tooltip("Whether a scratch staggers the victim.")]
+    [SerializeField] private bool scratchInterrupts;
+
+    [Header("Scratch Shockwaves")]
+    [Tooltip("The projectile fired by a scratch. Leave empty to disable shockwaves entirely.")]
+    [SerializeField] private Shockwave shockwavePrefab;
+    [Tooltip("How many go out per scratch.")]
+    [SerializeField] private int shockwaveCount = 2;
+    [Tooltip("Seconds between one shockwave and the next.")]
+    [SerializeField] private float shockwaveGap = 0.15f;
+    [Tooltip("Delay from the swipe starting to the FIRST shockwave. Independent of Scratch Windup, so the waves and the claws can be timed separately.")]
+    [SerializeField] private float shockwaveDelay = 0.3f;
+    [Tooltip("Horizontal travel speed. Aimed once at spawn and never re-aimed.")]
+    [SerializeField] private float shockwaveSpeed = 10f;
+    [SerializeField] private int shockwaveDamage = 4;
+    [Tooltip("Spawn point relative to the boss. X mirrors with facing, so enter it as if facing right.")]
+    [SerializeField] private Vector2 shockwaveSpawnOffset = new Vector2(1.5f, 0f);
+    [Tooltip("Whether a shockwave staggers the victim.")]
+    [SerializeField] private bool shockwaveInterrupts;
 
     [Header("Pounce (leap across the arena)")]
     [SerializeField] private int pounceDamage = 14;
@@ -102,12 +155,8 @@ public class GirlWolf : Enemy
     [SerializeField] private float pounceDamageRadius = 4f;
     [SerializeField] private float pounceRecovery = 0.5f;
     [SerializeField] private float pounceCooldown = 10f;
-
-    [Header("Dash")]
-    [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashRecovery = 0.15f;
-    [SerializeField] private float dashCooldown = 1.5f;
+    [Tooltip("A full-body landing staggers the victim by default.")]
+    [SerializeField] private bool pounceInterrupts = true;
 
     [Header("Accumulate (desperation attack)")]
     [Tooltip("Wandering auto-triggers Accumulate once HP drops below this fraction of max.")]
@@ -120,13 +169,15 @@ public class GirlWolf : Enemy
     [SerializeField] private int accumulateDamage = 30;
     [SerializeField] private Vector2 accumulateHitboxOffset = new Vector2(1.2f, 0f);
     [SerializeField] private Vector2 accumulateHitboxSize = new Vector2(3.5f, 2.5f);
+    [Tooltip("The desperation attack staggers the victim by default.")]
+    [SerializeField] private bool accumulateInterrupts = true;
 
     [Header("Animator Parameters")]
     [Tooltip("One Bool parameter per state. Entering a state raises its bool and lowers the previous one, so exactly one is ever true. Parameters the controller does not declare are skipped.")]
     [SerializeField] private string idleParam = "Idle";
     [SerializeField] private string chaseParam = "Walking";
     [SerializeField] private string biteParam = "Tearing";
-    [SerializeField] private string dashParam = "Dash";
+    [SerializeField] private string scratchParam = "Scratch";
     [SerializeField] private string pounceParam = "Pounce";
     [SerializeField] private string accumulateParam = "Accumulate";
 
@@ -153,6 +204,10 @@ public class GirlWolf : Enemy
     private Animator animator;
     private Coroutine brainRoutine;
 
+    // Runs alongside the Scratch state rather than inside it, so the wave timing can outlast
+    // the swipe without stretching the state (and the animation) to match.
+    private Coroutine shockwaveRoutine;
+
     private Character target;
     private float nextTargetSearchTime;
     private bool warnedNoTarget;
@@ -174,8 +229,8 @@ public class GirlWolf : Enemy
     private float lastExternalMoveTime = -Mathf.Infinity;
 
     private float lastBiteTime = -Mathf.Infinity;
+    private float lastScratchTime = -Mathf.Infinity;
     private float lastPounceTime = -Mathf.Infinity;
-    private float lastDashTime = -Mathf.Infinity;
     private float lastAccumulateTime = -Mathf.Infinity;
 
     // A State drives walking by calling MoveTowardsTarget() every Update. If it stops
@@ -213,20 +268,34 @@ public class GirlWolf : Enemy
     public float HealthFraction =>
         Info != null && Info.Hp > 0 ? (float)Hp / Info.Hp : 1f;
 
-    public bool CanBite =>
-        CanAct &&
-        Time.time >= lastBiteTime + biteCooldown &&
-        DistanceToTarget < biteRange;
+    public bool CanBite => CanAct && BiteReady;
 
-    public bool CanPounce =>
-        CanAct &&
-        Time.time >= lastPounceTime + pounceCooldown &&
+    public bool CanScratch => CanAct && ScratchReady;
+
+    public bool CanPounce => CanAct && PounceReady;
+
+    // Cooldown gates. Each move's timer is read in exactly one place, so no path can enter
+    // a state whose cooldown is still running.
+    private bool BiteOffCooldown => Time.time >= lastBiteTime + biteCooldown;
+
+    private bool ScratchOffCooldown => Time.time >= lastScratchTime + scratchCooldown;
+
+    private bool PounceOffCooldown => Time.time >= lastPounceTime + pounceCooldown;
+
+    /// <summary>
+    /// "In range AND off cooldown" - the real availability test. Both the Wandering decision
+    /// table and the chase's exit condition key off these rather than off range alone,
+    /// because an attack that is in range but cooling down is not a reason to stand still
+    /// and wait for it.
+    /// </summary>
+    private bool BiteReady => DistanceToTarget <= biteRange && BiteOffCooldown;
+
+    private bool ScratchReady => DistanceToTarget <= scratchRange && ScratchOffCooldown;
+
+    private bool PounceReady =>
         DistanceToTarget >= pounceMinRange &&
-        DistanceToTarget <= pounceMaxRange;
-
-    public bool CanDash =>
-        CanAct &&
-        Time.time >= lastDashTime + dashCooldown;
+        DistanceToTarget <= pounceMaxRange &&
+        PounceOffCooldown;
 
     public bool CanAccumulate => CanAct && ShouldAccumulate;
 
@@ -250,22 +319,26 @@ public class GirlWolf : Enemy
 
     /// <summary>
     /// Convenience entry point for the shared AttackState: pounces when there is room,
-    /// otherwise bites. Boss-specific states should call Pounce()/Bite() directly.
+    /// swipes when the player is right on top of us, otherwise bites. Boss-specific
+    /// states should call Pounce()/Scratch()/Bite() directly.
     /// </summary>
     public bool Attack()
     {
         if (CanPounce)
             return Pounce();
 
+        if (CanScratch)
+            return Scratch();
+
         return Bite();
     }
 
     /// <summary>Queues a move. Returns false when busy, dead, or still on cooldown.</summary>
-    public bool Bite() => TryQueue(WolfMove.Bite, Time.time >= lastBiteTime + biteCooldown);
+    public bool Bite() => TryQueue(WolfMove.Bite, BiteOffCooldown);
 
-    public bool Pounce() => TryQueue(WolfMove.Pounce, Time.time >= lastPounceTime + pounceCooldown);
+    public bool Scratch() => TryQueue(WolfMove.Scratch, ScratchOffCooldown);
 
-    public bool Dash() => TryQueue(WolfMove.Dash, Time.time >= lastDashTime + dashCooldown);
+    public bool Pounce() => TryQueue(WolfMove.Pounce, PounceOffCooldown);
 
     public bool Accumulate() => TryQueue(WolfMove.Accumulate, Time.time >= lastAccumulateTime + accumulateCooldown);
 
@@ -279,15 +352,19 @@ public class GirlWolf : Enemy
         switch (currentMove)
         {
             case WolfMove.Bite:
-                TryHit(biteHitboxOffset, biteHitboxSize, biteDamage);
+                StartCoroutine(BiteContact());
+                break;
+
+            case WolfMove.Scratch:
+                StartCoroutine(ScratchContact());
                 break;
 
             case WolfMove.Pounce:
-                TryHitRadius(pounceDamageRadius, pounceDamage);
+                TryHitRadius(pounceDamageRadius, pounceDamage, pounceInterrupts);
                 break;
 
             case WolfMove.Accumulate:
-                TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage);
+                TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage, accumulateInterrupts);
                 break;
         }
     }
@@ -303,6 +380,16 @@ public class GirlWolf : Enemy
 
         SetMove(WolfMove.Wandering);
         pendingMove = WolfMove.Wandering;
+
+        // The emitter is not nested inside the brain, so stopping the brain does not stop it.
+        StopShockwaves();
+
+        // Killing the brain mid-swing would otherwise leave a box live forever.
+        if (biteHitbox != null)
+            biteHitbox.Disarm();
+
+        if (scratchHitbox != null)
+            scratchHitbox.Disarm();
 
         Halt();
 
@@ -406,12 +493,12 @@ public class GirlWolf : Enemy
                     yield return BiteRoutine();
                     break;
 
-                case WolfMove.Pounce:
-                    yield return PounceRoutine();
+                case WolfMove.Scratch:
+                    yield return ScratchRoutine();
                     break;
 
-                case WolfMove.Dash:
-                    yield return DashRoutine();
+                case WolfMove.Pounce:
+                    yield return PounceRoutine();
                     break;
 
                 case WolfMove.Accumulate:
@@ -467,28 +554,34 @@ public class GirlWolf : Enemy
             return true;
         }
 
-        float distance = DistanceToTarget;
+        // Scratch outranks Bite because it is the shorter-ranged move: right on top of the
+        // player it swipes. While its cooldown runs it is simply not available, so this
+        // falls through to the bite rather than reserving the slot for a move that cannot fire.
+        if (ScratchReady)
+        {
+            pendingMove = WolfMove.Scratch;
+            return true;
+        }
 
-        // In range: attack straight away, no thinking pause.
-        if (distance <= biteRange &&
-            Time.time >= lastBiteTime + biteCooldown)
+        // Available: attack straight away, no thinking pause.
+        if (BiteReady)
         {
             pendingMove = WolfMove.Bite;
             return true;
         }
 
         // Far enough to be worth crossing the arena in one jump.
-        if (distance >= pounceMinRange &&
-            distance <= pounceMaxRange &&
-            Time.time >= lastPounceTime + pounceCooldown)
+        if (PounceReady)
         {
             pendingMove = WolfMove.Pounce;
             return true;
         }
 
-        // Out of range: stand and think, then commit to a chase.
-        if (distance > biteRange &&
-            Time.time - enteredAt >= wanderingThinkTime)
+        // Nothing is available right now: think, then chase - whatever the distance.
+        // Deliberately unconditional. Gating this on range left a hole where the boss was
+        // too close to chase but had no attack off cooldown either, so no trigger matched
+        // and it stood in Idle until a timer happened to expire.
+        if (Time.time - enteredAt >= wanderingThinkTime)
         {
             pendingMove = WolfMove.Chasing;
             return true;
@@ -498,26 +591,44 @@ public class GirlWolf : Enemy
     }
 
     /// <summary>
-    /// Walks at the player until it reaches attack range, then hands back to Wandering,
-    /// which fires the bite on its next check.
+    /// Walks at the player until an attack actually becomes available, then hands back to
+    /// Wandering, which fires it. Exiting on availability rather than on range is what keeps
+    /// the boss moving through a cooldown instead of parking in Idle next to the player.
+    /// Scratch is polled on a fixed interval so a player who runs in mid-chase gets swiped.
     /// </summary>
     private IEnumerator ChasingRoutine()
     {
         SetMove(WolfMove.Chasing);
 
-        // pendingMove guards the loop so an external Pounce()/Dash() can cut the chase short.
+        float nextScratchCheck = Time.time + scratchChaseCheckInterval;
+
+        // pendingMove guards the loop so an external Pounce()/Scratch() can cut the chase short.
         while (!isDead && pendingMove == WolfMove.Wandering)
         {
             if (!TargetIsAlive)
                 break;
 
-            // Arrived - Wandering takes it from here.
-            if (DistanceToTarget <= biteRange)
-                break;
-
             // Dropping low mid-chase outranks finishing it.
             if (ShouldAccumulate)
                 break;
+
+            // Something is off cooldown and in range - Wandering takes it from here.
+            if (BiteReady || PounceReady)
+                break;
+
+            // Sampled rather than tested every frame: this is a deliberate reaction delay,
+            // so the boss can be caught mid-stride instead of swiping the instant you touch
+            // the edge of its range.
+            if (Time.time >= nextScratchCheck)
+            {
+                nextScratchCheck = Time.time + scratchChaseCheckInterval;
+
+                if (ScratchReady)
+                {
+                    pendingMove = WolfMove.Scratch;
+                    break;
+                }
+            }
 
             // A State is steering us this frame, so do not fight it with the chase.
             if (Time.time - lastExternalMoveTime > MoveCommandTimeout)
@@ -562,6 +673,12 @@ public class GirlWolf : Enemy
     /// few frames every swing, which reads as the animation restarting from idle.
     /// The Tearing bool stays up for the whole chain, so the clip just keeps looping.
     /// </summary>
+    /// <summary>
+    /// Chains swings while the player stays in range, rather than returning to Wandering
+    /// between each one. Leaving and re-entering would drop Tearing and raise Idle for a
+    /// few frames every swing, which reads as the animation restarting from idle.
+    /// The Tearing bool stays up for the whole chain, so the clip just keeps looping.
+    /// </summary>
     private IEnumerator BiteRoutine()
     {
         SetMove(WolfMove.Bite);
@@ -575,7 +692,7 @@ public class GirlWolf : Enemy
             yield return new WaitForSeconds(biteWindup);
 
             if (!useAnimationEvents)
-                TryHit(biteHitboxOffset, biteHitboxSize, biteDamage);
+                yield return BiteContact();
 
             yield return new WaitForSeconds(biteRecovery);
 
@@ -591,6 +708,26 @@ public class GirlWolf : Enemy
                !ShouldAccumulate &&
                TargetIsAlive &&
                DistanceToTarget <= biteRange);
+    }
+
+    /// <summary>
+    /// The bite's contact window. With BiteColliderBox assigned it opens a real trigger
+    /// window, so a player who walks into the jaws mid-swing still gets hit; without one
+    /// it falls back to a single-frame overlap test.
+    /// </summary>
+    private IEnumerator BiteContact()
+    {
+        if (biteHitbox == null)
+        {
+            TryHit(biteHitboxOffset, biteHitboxSize, biteDamage, biteInterrupts);
+            yield break;
+        }
+
+        biteHitbox.Arm(biteDamage, biteInterrupts);
+
+        yield return new WaitForSeconds(biteActiveTime);
+
+        biteHitbox.Disarm();
     }
 
     private IEnumerator PounceRoutine()
@@ -614,35 +751,105 @@ public class GirlWolf : Enemy
 
         // The damage is the landing itself, so it resolves once, on touchdown.
         if (!useAnimationEvents)
-            TryHitRadius(pounceDamageRadius, pounceDamage);
+            TryHitRadius(pounceDamageRadius, pounceDamage, pounceInterrupts);
 
         yield return new WaitForSeconds(pounceRecovery);
     }
 
-    private IEnumerator DashRoutine()
+    /// <summary>
+    /// The close-range swipe. Unlike Bite this never chains: one swing, then straight back
+    /// to Wandering, which re-reads the distance and picks the next move from scratch.
+    /// </summary>
+    private IEnumerator ScratchRoutine()
     {
-        SetMove(WolfMove.Dash);
-        lastDashTime = Time.time;
+        SetMove(WolfMove.Scratch);
+        lastScratchTime = Time.time;
 
-        ClearMoveCommand();
+        Halt();
 
-        float direction = -DirectionToTarget;
-        float elapsed = 0f;
+        // Started, not yielded on: the waves keep coming on their own schedule even after
+        // the swipe itself has recovered, so Shockwave Gap is free of the state's length.
+        StopShockwaves();
+        shockwaveRoutine = StartCoroutine(EmitShockwaves());
 
-        while (elapsed < dashDuration)
+        yield return new WaitForSeconds(scratchWindup);
+
+        if (!useAnimationEvents)
+            yield return ScratchContact();
+
+        yield return new WaitForSeconds(scratchRecovery);
+    }
+
+    /// <summary>
+    /// The scratch's contact window. With ScratchColliderBox assigned it opens a real
+    /// trigger window, so a player who walks into the claws mid-swing still gets hit;
+    /// without one it falls back to a single-frame overlap test.
+    /// </summary>
+    private IEnumerator ScratchContact()
+    {
+        if (scratchHitbox == null)
         {
-            rb.linearVelocity = new Vector2(
-                direction * dashSpeed,
-                rb.linearVelocity.y
-            );
-
-            elapsed += Time.deltaTime;
-            yield return null;
+            TryHit(scratchHitboxOffset, scratchHitboxSize, scratchDamage, scratchInterrupts);
+            yield break;
         }
 
-        StopMoving();
+        scratchHitbox.Arm(scratchDamage, scratchInterrupts);
 
-        yield return new WaitForSeconds(dashRecovery);
+        yield return new WaitForSeconds(scratchActiveTime);
+
+        scratchHitbox.Disarm();
+    }
+
+    /// <summary>
+    /// Fires the scratch's shockwaves: one after Shockwave Delay, the rest spaced by
+    /// Shockwave Gap. Each is aimed as it spawns, so if the player crosses to the other
+    /// side between the two, the second wave chases the new side while the first carries on.
+    /// </summary>
+    private IEnumerator EmitShockwaves()
+    {
+        if (shockwavePrefab == null || shockwaveCount <= 0)
+        {
+            shockwaveRoutine = null;
+            yield break;
+        }
+
+        if (shockwaveDelay > 0f)
+            yield return new WaitForSeconds(shockwaveDelay);
+
+        for (int i = 0; i < shockwaveCount; i++)
+        {
+            SpawnShockwave();
+
+            if (i < shockwaveCount - 1 && shockwaveGap > 0f)
+                yield return new WaitForSeconds(shockwaveGap);
+        }
+
+        shockwaveRoutine = null;
+    }
+
+    private void SpawnShockwave()
+    {
+        // Aimed here and then locked. The wave commits to where the player is standing right
+        // now, which is what makes stepping over it a real option.
+        float travelDirection = DirectionToTarget;
+
+        Vector2 origin = (Vector2)transform.position +
+                         new Vector2(shockwaveSpawnOffset.x * Facing, shockwaveSpawnOffset.y);
+
+        // No parent: the boss's localScale is mirrored for facing, and a child would inherit
+        // that flip on top of the one Shockwave applies itself.
+        Shockwave wave = Instantiate(shockwavePrefab, origin, Quaternion.identity);
+
+        wave.Launch(this, travelDirection, shockwaveSpeed, shockwaveDamage, shockwaveInterrupts);
+    }
+
+    private void StopShockwaves()
+    {
+        if (shockwaveRoutine == null)
+            return;
+
+        StopCoroutine(shockwaveRoutine);
+        shockwaveRoutine = null;
     }
 
     /// <summary>
@@ -662,7 +869,7 @@ public class GirlWolf : Enemy
         yield return new WaitForSeconds(accumulateReleaseWindup);
 
         if (!useAnimationEvents)
-            TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage);
+            TryHit(accumulateHitboxOffset, accumulateHitboxSize, accumulateDamage, accumulateInterrupts);
 
         yield return new WaitForSeconds(accumulateRecovery);
     }
@@ -936,7 +1143,7 @@ public class GirlWolf : Enemy
         return flightTime;
     }
 
-    private bool TryHitRadius(float radius, int damage)
+    private bool TryHitRadius(float radius, int damage, bool isInterruptible)
     {
         int count = Physics2D.OverlapCircle(
             transform.position,
@@ -952,14 +1159,14 @@ public class GirlWolf : Enemy
             if (victim == null || victim == this)
                 continue;
 
-            Hit(victim, damage);
+            Hit(victim, damage, isInterruptible);
             return true;
         }
 
         return false;
     }
 
-    private bool TryHit(Vector2 offset, Vector2 size, int damage)
+    private bool TryHit(Vector2 offset, Vector2 size, int damage, bool isInterruptible)
     {
         Vector2 center = (Vector2)transform.position +
                          new Vector2(offset.x * Facing, offset.y);
@@ -973,7 +1180,7 @@ public class GirlWolf : Enemy
             if (victim == null || victim == this)
                 continue;
 
-            Hit(victim, damage);
+            Hit(victim, damage, isInterruptible);
             return true;
         }
 
@@ -985,7 +1192,7 @@ public class GirlWolf : Enemy
         WolfMove.Wandering => idleParam,
         WolfMove.Chasing => chaseParam,
         WolfMove.Bite => biteParam,
-        WolfMove.Dash => dashParam,
+        WolfMove.Scratch => scratchParam,
         WolfMove.Pounce => pounceParam,
         WolfMove.Accumulate => accumulateParam,
         _ => null
@@ -1081,6 +1288,19 @@ public class GirlWolf : Enemy
             biteHitboxSize
         );
 
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(
+            position + new Vector2(scratchHitboxOffset.x * facing, scratchHitboxOffset.y),
+            scratchHitboxSize
+        );
+
+        // Where the shockwaves are born, and the line they travel along.
+        Vector2 spawn = position + new Vector2(shockwaveSpawnOffset.x * facing, shockwaveSpawnOffset.y);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(spawn, 0.2f);
+        Gizmos.DrawLine(spawn, spawn + new Vector2(facing * 3f, 0f));
+
         Gizmos.color = new Color(1f, 0.5f, 0f);
         Gizmos.DrawWireSphere(position, pounceDamageRadius);
 
@@ -1089,6 +1309,9 @@ public class GirlWolf : Enemy
             position + new Vector2(accumulateHitboxOffset.x * facing, accumulateHitboxOffset.y),
             accumulateHitboxSize
         );
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(position, scratchRange);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(position, biteRange);
