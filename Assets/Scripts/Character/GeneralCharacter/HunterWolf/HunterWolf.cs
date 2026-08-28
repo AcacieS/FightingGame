@@ -15,9 +15,7 @@ public class HunterWolf : Enemy
     [SerializeField] private State RechargeState;
     [SerializeField] private State ShootState;
     [SerializeField] private State StunState;
-
-    [SerializeField] private Animator animator;
-    public Animator Animator => animator;
+    public Animator Animator => anim;
 
     [Header("Movement")]
     [SerializeField] private float acceleration = 20f;
@@ -36,14 +34,22 @@ public class HunterWolf : Enemy
     public bool CanInitiateOtherState { get => canInitiateOtherState; set => canInitiateOtherState = value; }
     float distance;
     public float Distance => distance;
+    bool isAiming;
+    public bool IsAiming { get => isAiming; set => isAiming = value; }
+    bool isRecharging;
+    public bool IsRecharging { get => isRecharging; set => isRecharging = value; }
     bool hasABullet = true;
     public bool HasABullet { get => hasABullet; set => hasABullet = value; }
 
-    private Vector2 moveInput;
+    [SerializeField] float timeWaitBetweenState;
+    Timer timerWaitBetweenState;
+    public Timer TimerWaitBetweenState => timerWaitBetweenState;
 
     private void Awake()
     {
         ai = GetComponent<AIController>();
+
+        timerWaitBetweenState = new Timer(timeWaitBetweenState);
 
         AimState.Initialize(ai);
         FowardState.Initialize(ai);
@@ -60,34 +66,49 @@ public class HunterWolf : Enemy
         if (ai == null || ai.Target == null)
             return;
 
-        // Movement();
+        if (Mathf.Sign(transform.position.x - ai.Target.transform.position.x) != transform.localScale.x)
+        {
+            transform.localScale = new Vector3(Mathf.Sign(transform.position.x - ai.Target.transform.position.x), 1, 1);
+        }
+        Movement();
 
-        // distance = Vector2.Distance(transform.position, ai.Target.transform.position);
+        distance = Vector2.Distance(transform.position, ai.Target.transform.position);
 
-        // if (!canInitiateOtherState)
-        //     return;
+        if (!canInitiateOtherState)
+            return;
 
-        // if (distance >= tooFarDistance)
-        // {
-        //     ai.ChangeState(FowardState);
-        //     return;
-        // }
-        // else if (distance <= tooCloseDistance)
-        // {
-        //     ai.ChangeState(KickState);
-        //     return;
-        // }
-        // else
-        // {
-        //     ai.ChangeState(AimState);
-        //     return;
-        // }
+        if (!timerWaitBetweenState.IsOver())
+            return;
+
+        if (distance >= tooFarDistance && !isAiming)
+        {
+            ai.ChangeState(FowardState);
+            return;
+        }
+        else if (distance <= tooCloseDistance)
+        {
+            ai.ChangeState(KickState);
+            return;
+        }
+        else if (!isAiming && !isRecharging)
+        {
+            if (hasABullet)
+            {
+                ai.ChangeState(AimState);
+            }
+            else
+            {
+                ai.ChangeState(RechargeState);
+            }
+
+            return;
+        }
     }
 
 
     private void Movement()
     {
-        float targetSpeed = moveInput.x * moveSpeed * Mathf.Sign(transform.position.x - ai.Target.transform.position.x) * directionFoward;
+        float targetSpeed = moveSpeed * Mathf.Sign(ai.Target.transform.position.x - transform.position.x) * directionFoward;
 
         float newSpeed = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
 

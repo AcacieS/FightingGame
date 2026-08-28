@@ -6,11 +6,21 @@ public class StunHunterState : HunterState
     public override void Enter()
     {
         base.Enter();
+        HunterWolf.Animator.SetBool("Stun", true);
     }
-    public override void Play() { }
+    public override void Play()
+    {
+        if (timerState.IsOver())
+        {
+            IdleState.Initialize(AI);
+            AI.ChangeState(IdleState);
+        }
+    }
     public override void Exit()
     {
         base.Exit();
-        AI.ChangeState(IdleState);
+        HunterWolf.TimerWaitBetweenState.Restart();
+        HunterWolf.Animator.SetBool("Stun", true);
+        HunterWolf.CanInitiateOtherState = true;
     }
 }

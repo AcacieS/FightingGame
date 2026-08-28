@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6569ed9a8719f0d40aac7d2343a0a996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RechargeHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 1
   moveSpeed: 2
 --- !u!1 &652484936673921993
@@ -101,9 +101,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HunterBoss
   characterInfo: {fileID: 11400000, guid: a49e5244746743743acda694d991c230, type: 2}
   rb: {fileID: 3415264450789661364}
-  anim: {fileID: 0}
+  anim: {fileID: 7695137333891952207}
   damageTest: 0
-  _aiController: {fileID: 0}
+  isInterruptibleTest: 0
+  groundCheckDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  characterCollider: {fileID: 4466464594392953598}
+  _aiController: {fileID: 1724640271484324704}
   AimState: {fileID: 5086813171361175945}
   FowardState: {fileID: 821572652400314354}
   IdleState: {fileID: 6154156285600442179}
@@ -112,15 +118,11 @@ MonoBehaviour:
   RechargeState: {fileID: 7325551692095154391}
   ShootState: {fileID: 1212023687006649846}
   StunState: {fileID: 544602331803738416}
-  animator: {fileID: 0}
   acceleration: 20
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
   tooFarDistance: 8
   tooCloseDistance: 2
   gunEndPoint: {fileID: 8022663939705006456}
+  timeWaitBetweenState: 1
 --- !u!114 &1724640271484324704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +136,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   startingState: {fileID: 6154156285600442179}
+  readyState: {fileID: 0}
   hurtState: {fileID: 5135094510921727173}
+  hurtInterruptState: {fileID: 0}
   deadState: {fileID: 6492237317649841670}
+  percentageBlockState: 0
+  blockState: {fileID: 0}
   currentState: {fileID: 0}
 --- !u!50 &3415264450789661364
 Rigidbody2D:
@@ -245,10 +251,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9840bf5395e1754f98364d207c62b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 2
   moveSpeed: 8
   jumpForce: 7
+  IdleState: {fileID: 6154156285600442179}
 --- !u!1 &2193184271490622199
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90dc4a7dbe9e6184a9eb0e8f204de11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 0.25
 --- !u!1 &2402915677313167847
 GameObject:
@@ -339,9 +346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffa27e95cdc08445b4de0d90cb30e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StunHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 1
-  IdleState: {fileID: 0}
+  IdleState: {fileID: 6154156285600442179}
 --- !u!1 &3916326936667249219
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873f4b9f67fd41f44864652181ee071f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KickHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 1
   JumpState: {fileID: 1704113674502623430}
 --- !u!1 &4606218459624760411
@@ -433,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea807c2be17f59b4491540c5dc684f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FowardHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 0
   moveSpeed: 4
 --- !u!1 &5154716123925488109
@@ -595,7 +602,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8090325503295126530, guid: 495cb82f9ca8ed4408eea99000c4f147, type: 3}
+  m_Sprite: {fileID: -7101956345355355914, guid: f1b2a294f4a20ed429fbc3f6a3517d2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -671,11 +678,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ff12cf8fb6da74180bc164106b4231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 1
   BulletPool: {fileID: 5389173353630358080}
   BulletAmountToShoot: 0
-  IdleState: {fileID: 6154156285600442179}
+  StunState: {fileID: 544602331803738416}
 --- !u!1 &6477328026713872812
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec3d4a3c559246344a58f5738feb4c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LauchTrapHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 1
   TrapPool: {fileID: 5396158056496448499}
   TrapAmountToShoot: 0
@@ -768,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414f185b513192d4f945152071313164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleHunterWolf
-  animName: 
+  stateWeight: 0
   TimeState: 0
 --- !u!1 &7542578907663620796
 GameObject:
@@ -860,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ef8b6e4a37c4943898a2ea311880c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 1
 --- !u!1 &8578559676610142737
 GameObject:
@@ -906,7 +913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd836e2a47603db4b9efec58fa7446e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AimHunterState
-  animName: 
+  stateWeight: 0
   TimeState: 2
   moveSpeed: 1
   ShootState: {fileID: 1212023687006649846}

@@ -381,9 +381,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Context
   _overrideCharactersSettings: 1
-  _self: {fileID: 1542685156}
-  _target: {fileID: 1326996270}
-  _selfController: {fileID: 0}
+  _self: {fileID: 1326996270}
+  _target: {fileID: 1542685156}
+  _selfController: {fileID: 1326996269}
   selfState: {fileID: 0}
 --- !u!4 &528626507 stripped
 Transform:
@@ -434,23 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9e1fed5c4e82043989cf7e9965a568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  participants:
-    player: {fileID: 7469042764203623694, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-    enemies:
-    - {fileID: 2276924957141737316, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
-    - {fileID: 4889810009924403310, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
-    - {fileID: 652484936673921993, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
   currentMatch:
+    matchState: 0
     battleParticipants:
       player: {fileID: 0}
       enemy: {fileID: 0}
-  playerSpawn: {fileID: 0}
-  enemySpawn: {fileID: 0}
---- !u!95 &698439431 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7695137333891952207, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
-  m_PrefabInstance: {fileID: 1326996265}
-  m_PrefabAsset: {fileID: 0}
+      hasPlayerFinishAnim: 0
+      hasEnemyFinishAnim: 0
 --- !u!1001 &1326996265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -460,20 +450,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -2193729117433910815, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 698439431}
-    - target: {fileID: -2193729117433910815, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 698439431}
-    - target: {fileID: -2193729117433910815, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
-      propertyPath: _aiController
-      value: 
-      objectReference: {fileID: 1326996269}
+      propertyPath: tooFarDistance
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 652484936673921993, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
       propertyPath: m_Name
       value: HunterWolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212023687006649846, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: BulletAmountToShoot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704113674502623430, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: TimeState
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6660301385218996750, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -514,6 +504,18 @@ PrefabInstance:
     - target: {fileID: 6660301385218996750, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325551692095154391, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: IdleState
+      value: 
+      objectReference: {fileID: 1610488207}
+    - target: {fileID: 7804798345033300385, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: TrapAmountToShoot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022663939705006456, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -737,6 +739,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4557753bfaac87148ba3e188ba4562ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+--- !u!114 &1610488207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154156285600442179, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+  m_PrefabInstance: {fileID: 1326996265}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414f185b513192d4f945152071313164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IdleHunterWolf
 --- !u!1 &1701713257
 GameObject:
   m_ObjectHideFlags: 0

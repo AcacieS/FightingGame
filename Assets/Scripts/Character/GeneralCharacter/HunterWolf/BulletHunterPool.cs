@@ -24,6 +24,8 @@ public class BulletHunterPool : MonoBehaviour
 
         availableBullets.Enqueue(bullet);
 
+        bullet.Initialize(this);
+
         return bullet;
     }
 
