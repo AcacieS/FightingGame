@@ -27,6 +27,7 @@ public class LauchTrapHunterState : HunterState
     public override void Exit()
     {
         base.Exit();
+        HunterWolf.TimerWaitBetweenState.Restart();
         HunterWolf.Animator.SetBool("LauchTrap", false);
         HunterWolf.CanInitiateOtherState = true;
     }

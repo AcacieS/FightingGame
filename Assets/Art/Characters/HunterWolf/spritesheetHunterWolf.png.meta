@@ -1,0 +1,2447 @@
+fileFormatVersion: 2
+guid: f1b2a294f4a20ed429fbc3f6a3517d2d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7101956345355355914
+    second: spritesheetHunterWolf_0
+  - first:
+      213: 8425205674182216868
+    second: spritesheetHunterWolf_1
+  - first:
+      213: -6444684589911033964
+    second: spritesheetHunterWolf_2
+  - first:
+      213: 2895319438968281924
+    second: spritesheetHunterWolf_3
+  - first:
+      213: 5938626424228873707
+    second: spritesheetHunterWolf_4
+  - first:
+      213: -5570662529401619497
+    second: spritesheetHunterWolf_5
+  - first:
+      213: 323443534589877677
+    second: spritesheetHunterWolf_6
+  - first:
+      213: 1031175995231239346
+    second: spritesheetHunterWolf_7
+  - first:
+      213: -8766326854946819328
+    second: spritesheetHunterWolf_8
+  - first:
+      213: -648655898057765341
+    second: spritesheetHunterWolf_9
+  - first:
+      213: 1033434982094212528
+    second: spritesheetHunterWolf_10
+  - first:
+      213: -4342122262873252778
+    second: spritesheetHunterWolf_11
+  - first:
+      213: 5013965210892025503
+    second: spritesheetHunterWolf_12
+  - first:
+      213: 9198615656729576531
+    second: spritesheetHunterWolf_13
+  - first:
+      213: 5342678590334637912
+    second: spritesheetHunterWolf_14
+  - first:
+      213: 5800958419531410325
+    second: spritesheetHunterWolf_15
+  - first:
+      213: 8306164118975049458
+    second: spritesheetHunterWolf_16
+  - first:
+      213: 1605739096794328480
+    second: spritesheetHunterWolf_17
+  - first:
+      213: -2318176430619826167
+    second: spritesheetHunterWolf_18
+  - first:
+      213: -991812833717263756
+    second: spritesheetHunterWolf_19
+  - first:
+      213: -1726784989784265920
+    second: spritesheetHunterWolf_20
+  - first:
+      213: 1544964638452382933
+    second: spritesheetHunterWolf_21
+  - first:
+      213: 5442970776487949130
+    second: spritesheetHunterWolf_22
+  - first:
+      213: 5360978431065482175
+    second: spritesheetHunterWolf_23
+  - first:
+      213: 4259563709886939866
+    second: spritesheetHunterWolf_24
+  - first:
+      213: 1587617711963513078
+    second: spritesheetHunterWolf_25
+  - first:
+      213: -7106751771846266219
+    second: spritesheetHunterWolf_26
+  - first:
+      213: -6317918844105909972
+    second: spritesheetHunterWolf_27
+  - first:
+      213: 4803839071398873405
+    second: spritesheetHunterWolf_28
+  - first:
+      213: 201965042093084854
+    second: spritesheetHunterWolf_29
+  - first:
+      213: -1280480214815933402
+    second: spritesheetHunterWolf_30
+  - first:
+      213: 6827553954851381885
+    second: spritesheetHunterWolf_31
+  - first:
+      213: -7573228737775329232
+    second: spritesheetHunterWolf_32
+  - first:
+      213: -4777110999280142774
+    second: spritesheetHunterWolf_33
+  - first:
+      213: 790068580723211557
+    second: spritesheetHunterWolf_34
+  - first:
+      213: 4041841877647850955
+    second: spritesheetHunterWolf_35
+  - first:
+      213: 8935888773422338203
+    second: spritesheetHunterWolf_36
+  - first:
+      213: 2471557496563170382
+    second: spritesheetHunterWolf_37
+  - first:
+      213: 76938383672125355
+    second: spritesheetHunterWolf_38
+  - first:
+      213: 8278983811626523831
+    second: spritesheetHunterWolf_39
+  - first:
+      213: -8109143003835758536
+    second: spritesheetHunterWolf_40
+  - first:
+      213: 1347792722450111605
+    second: spritesheetHunterWolf_41
+  - first:
+      213: 6519507722746731514
+    second: spritesheetHunterWolf_42
+  - first:
+      213: -7320063196802763242
+    second: spritesheetHunterWolf_43
+  - first:
+      213: 698756006642480101
+    second: spritesheetHunterWolf_44
+  - first:
+      213: -357241446335445109
+    second: spritesheetHunterWolf_45
+  - first:
+      213: 4645457155867902632
+    second: spritesheetHunterWolf_46
+  - first:
+      213: 2822195006978275374
+    second: spritesheetHunterWolf_47
+  - first:
+      213: 1073030021055100379
+    second: spritesheetHunterWolf_48
+  - first:
+      213: 5902774780399212983
+    second: spritesheetHunterWolf_49
+  - first:
+      213: -3294839954922813314
+    second: spritesheetHunterWolf_50
+  - first:
+      213: 5560192111583662212
+    second: spritesheetHunterWolf_51
+  - first:
+      213: -5563176308385843067
+    second: spritesheetHunterWolf_52
+  - first:
+      213: 1758802922237112493
+    second: spritesheetHunterWolf_53
+  - first:
+      213: 3398753833993091574
+    second: spritesheetHunterWolf_54
+  - first:
+      213: 7202659487847891567
+    second: spritesheetHunterWolf_55
+  - first:
+      213: 3288491788166587958
+    second: spritesheetHunterWolf_56
+  - first:
+      213: -2987861939631626193
+    second: spritesheetHunterWolf_57
+  - first:
+      213: -4403631412898141605
+    second: spritesheetHunterWolf_58
+  - first:
+      213: 3952190650496104254
+    second: spritesheetHunterWolf_59
+  - first:
+      213: -1093840442064790388
+    second: spritesheetHunterWolf_60
+  - first:
+      213: 6898590643586289271
+    second: spritesheetHunterWolf_61
+  - first:
+      213: -5742841634859747738
+    second: spritesheetHunterWolf_62
+  - first:
+      213: -3446232926674047914
+    second: spritesheetHunterWolf_63
+  - first:
+      213: 4323916984084213855
+    second: spritesheetHunterWolf_64
+  - first:
+      213: -6430518905591620233
+    second: spritesheetHunterWolf_65
+  - first:
+      213: 8651004336078778590
+    second: spritesheetHunterWolf_66
+  - first:
+      213: 6191054865208172264
+    second: spritesheetHunterWolf_67
+  - first:
+      213: -5861315783061539078
+    second: spritesheetHunterWolf_68
+  - first:
+      213: -4222102361021109916
+    second: spritesheetHunterWolf_69
+  - first:
+      213: -3234448131002229742
+    second: spritesheetHunterWolf_70
+  - first:
+      213: -90430725201565333
+    second: spritesheetHunterWolf_71
+  - first:
+      213: -4223222735856509017
+    second: spritesheetHunterWolf_72
+  - first:
+      213: -3999065181587307212
+    second: spritesheetHunterWolf_73
+  - first:
+      213: -1510363664968522619
+    second: spritesheetHunterWolf_74
+  - first:
+      213: -792905272495431986
+    second: spritesheetHunterWolf_75
+  - first:
+      213: -1847245066391527783
+    second: spritesheetHunterWolf_76
+  - first:
+      213: 4577997707748088290
+    second: spritesheetHunterWolf_77
+  - first:
+      213: 757740288633628957
+    second: spritesheetHunterWolf_78
+  - first:
+      213: 2794410401767136047
+    second: spritesheetHunterWolf_79
+  - first:
+      213: -4408406359680861043
+    second: spritesheetHunterWolf_80
+  - first:
+      213: 2216659923763136243
+    second: spritesheetHunterWolf_81
+  - first:
+      213: -1315455328917621456
+    second: spritesheetHunterWolf_82
+  - first:
+      213: -9192994640426757749
+    second: spritesheetHunterWolf_83
+  - first:
+      213: 6368531544193018013
+    second: spritesheetHunterWolf_84
+  - first:
+      213: 5733584521760905427
+    second: spritesheetHunterWolf_85
+  - first:
+      213: -1471234610686986903
+    second: spritesheetHunterWolf_86
+  - first:
+      213: -3747134421174565543
+    second: spritesheetHunterWolf_87
+  - first:
+      213: -2854459692388959304
+    second: spritesheetHunterWolf_88
+  - first:
+      213: -4359146253939353091
+    second: spritesheetHunterWolf_89
+  - first:
+      213: -5049052657108865906
+    second: spritesheetHunterWolf_90
+  - first:
+      213: 3345611879702516342
+    second: spritesheetHunterWolf_91
+  - first:
+      213: 1581542108887928241
+    second: spritesheetHunterWolf_92
+  - first:
+      213: 2951952843610780442
+    second: spritesheetHunterWolf_93
+  - first:
+      213: -2767080305234684089
+    second: spritesheetHunterWolf_94
+  - first:
+      213: 5354039360449489783
+    second: spritesheetHunterWolf_95
+  - first:
+      213: 5326556357717675189
+    second: spritesheetHunterWolf_96
+  - first:
+      213: -7748048692927852471
+    second: spritesheetHunterWolf_97
+  - first:
+      213: -3918139475496036396
+    second: spritesheetHunterWolf_98
+  - first:
+      213: 2418804036892929482
+    second: spritesheetHunterWolf_99
+  - first:
+      213: 6272357221193272859
+    second: spritesheetHunterWolf_100
+  - first:
+      213: -9023234087910027433
+    second: spritesheetHunterWolf_101
+  - first:
+      213: -5965775403686350267
+    second: spritesheetHunterWolf_102
+  - first:
+      213: 4752985800268864328
+    second: spritesheetHunterWolf_103
+  - first:
+      213: -5046787481499945710
+    second: spritesheetHunterWolf_104
+  - first:
+      213: 345732492605509392
+    second: spritesheetHunterWolf_105
+  - first:
+      213: -4362985732014459910
+    second: spritesheetHunterWolf_106
+  - first:
+      213: 6618016168562099937
+    second: spritesheetHunterWolf_107
+  - first:
+      213: -4097951167110066183
+    second: spritesheetHunterWolf_108
+  - first:
+      213: 4475163701771124755
+    second: spritesheetHunterWolf_109
+  - first:
+      213: 4553465640194125877
+    second: spritesheetHunterWolf_110
+  - first:
+      213: -648954345821651833
+    second: spritesheetHunterWolf_111
+  - first:
+      213: -4423761345014714828
+    second: spritesheetHunterWolf_112
+  - first:
+      213: 7930297602537083102
+    second: spritesheetHunterWolf_113
+  - first:
+      213: -6019258989062797147
+    second: spritesheetHunterWolf_114
+  - first:
+      213: -1236425449370972128
+    second: spritesheetHunterWolf_115
+  - first:
+      213: 2681496985434855916
+    second: spritesheetHunterWolf_116
+  - first:
+      213: 7326655958661625262
+    second: spritesheetHunterWolf_117
+  - first:
+      213: 417753982027880090
+    second: spritesheetHunterWolf_118
+  - first:
+      213: 309614365276491169
+    second: spritesheetHunterWolf_119
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15360
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f833c8e458c07d90800000000000000
+      internalID: -7101956345355355914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 15360
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac8c390ce75ce470800000000000000
+      internalID: 8425205674182216868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_2
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 15360
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4973be8c281ef86a0800000000000000
+      internalID: -6444684589911033964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_3
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 15360
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44bdcfe80bd3e2820800000000000000
+      internalID: 2895319438968281924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_4
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 15360
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be509e5c44d3a6250800000000000000
+      internalID: 5938626424228873707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_5
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 15360
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dbff63b1f701b2b0800000000000000
+      internalID: -5570662529401619497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 14336
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dad50285e2a1d7400800000000000000
+      internalID: 323443534589877677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_7
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 14336
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bcfaa0ba197f4e00800000000000000
+      internalID: 1031175995231239346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_8
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 14336
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0037de1eb20c75680800000000000000
+      internalID: -8766326854946819328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_9
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 14336
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32e0eceb5e28ff6f0800000000000000
+      internalID: -648655898057765341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_10
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 14336
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bd003e04af775e00800000000000000
+      internalID: 1033434982094212528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_11
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 14336
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65cdf16beceadb3c0800000000000000
+      internalID: -4342122262873252778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13312
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9eb26f4bce259540800000000000000
+      internalID: 5013965210892025503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_13
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 13312
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35486b4143c08af70800000000000000
+      internalID: 9198615656729576531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 13312
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8571bf50fd1052a40800000000000000
+      internalID: 5342678590334637912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_15
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 13312
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59b2bf0a2f4218050800000000000000
+      internalID: 5800958419531410325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_16
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 13312
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fe6a9d124c654370800000000000000
+      internalID: 8306164118975049458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_17
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 13312
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ade162733bb84610800000000000000
+      internalID: 1605739096794328480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12288
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 908e83e81de24dfd0800000000000000
+      internalID: -2318176430619826167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_19
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 12288
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 472eb9a8b7f5c32f0800000000000000
+      internalID: -991812833717263756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_20
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 12288
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04bae60633a3908e0800000000000000
+      internalID: -1726784989784265920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11264
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc7e713721d07510800000000000000
+      internalID: 1544964638452382933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_22
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 11264
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4375674511598b40800000000000000
+      internalID: 5442970776487949130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_23
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 11264
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb36038ba75066a40800000000000000
+      internalID: 5360978431065482175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_24
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 11264
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad2c4f140a20d1b30800000000000000
+      internalID: 4259563709886939866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_25
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 11264
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f024b0c5e9580610800000000000000
+      internalID: 1587617711963513078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_26
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 11264
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592b93caaeebf5d90800000000000000
+      internalID: -7106751771846266219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10240
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c291259f84e3258a0800000000000000
+      internalID: -6317918844105909972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_28
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 10240
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d394fd00f2aaaa240800000000000000
+      internalID: 4803839071398873405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_29
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 10240
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b0510fb2268dc200800000000000000
+      internalID: 201965042093084854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_30
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 10240
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62cfaf56702da3ee0800000000000000
+      internalID: -1280480214815933402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_31
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 10240
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d72eab3e52850ce50800000000000000
+      internalID: 6827553954851381885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_32
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 10240
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0302f12769c76e690800000000000000
+      internalID: -7573228737775329232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9216
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a46bb4b3bda44bdb0800000000000000
+      internalID: -4777110999280142774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_34
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 9216
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d343e2033e6fa00800000000000000
+      internalID: 790068580723211557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_35
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 9216
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcd7f7be5c1871830800000000000000
+      internalID: 4041841877647850955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8192
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b905d3cbe77a20c70800000000000000
+      internalID: 8935888773422338203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_37
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 8192
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4cf990c27cbc4220800000000000000
+      internalID: 2471557496563170382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_38
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 8192
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7ae546d07511100800000000000000
+      internalID: 76938383672125355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7168
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc5539a9ebd4e270800000000000000
+      internalID: 8278983811626523831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_40
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 7168
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 838868fe669867f80800000000000000
+      internalID: -8109143003835758536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_41
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 7168
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57cde74175254b210800000000000000
+      internalID: 1347792722450111605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6144
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afb1cb46bb1f97a50800000000000000
+      internalID: 6519507722746731514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_43
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 6144
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 616392d4e49e96a90800000000000000
+      internalID: -7320063196802763242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_44
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 6144
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e37898c2ea72b900800000000000000
+      internalID: 698756006642480101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_45
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 6144
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b87012c1cc2da0bf0800000000000000
+      internalID: -357241446335445109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_46
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 6144
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a28dcaabaaf77040800000000000000
+      internalID: 4645457155867902632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_47
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 6144
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2832ddf7637a2720800000000000000
+      internalID: 2822195006978275374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5120
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd5b1567e1b24ee00800000000000000
+      internalID: 1073030021055100379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_49
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 5120
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b954d6736edae150800000000000000
+      internalID: 5902774780399212983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_50
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 5120
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e78cf0f84806642d0800000000000000
+      internalID: -3294839954922813314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_51
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 5120
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4809fdd2445c92d40800000000000000
+      internalID: 5560192111583662212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_52
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 5120
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 588facb5f90abc2b0800000000000000
+      internalID: -5563176308385843067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_53
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 5120
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da0bcd170f5886810800000000000000
+      internalID: 1758802922237112493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4096
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f9b72aca9cca2f20800000000000000
+      internalID: 3398753833993091574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_55
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 4096
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f62454394acf4f360800000000000000
+      internalID: 7202659487847891567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_56
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 4096
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6366570bbd113ad20800000000000000
+      internalID: 3288491788166587958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_57
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 4096
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f28e852756bf886d0800000000000000
+      internalID: -2987861939631626193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_58
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 4096
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5a6478bf8823e2c0800000000000000
+      internalID: -4403631412898141605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_59
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 4096
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e37b07ff47009d630800000000000000
+      internalID: 3952190650496104254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3072
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c95c1d9e5e1d0f0800000000000000
+      internalID: -1093840442064790388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_61
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 3072
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e4bc9d3a7bcbf50800000000000000
+      internalID: 6898590643586289271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_62
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3072
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6667cd0c5f35d40b0800000000000000
+      internalID: -5742841634859747738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_63
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3072
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65ca65089658c20d0800000000000000
+      internalID: -3446232926674047914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_64
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 3072
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f503e928693a10c30800000000000000
+      internalID: 4323916984084213855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_65
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 3072
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77d17ce202532c6a0800000000000000
+      internalID: -6430518905591620233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_66
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed0f652db9a8e0870800000000000000
+      internalID: 8651004336078778590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_67
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eedfa9299b0be550800000000000000
+      internalID: 6191054865208172264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_68
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af6f932995c68aea0800000000000000
+      internalID: -5861315783061539078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_69
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 469aff5b5441865c0800000000000000
+      internalID: -4222102361021109916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_70
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c9f2bcf8eec13d0800000000000000
+      internalID: -3234448131002229742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_71
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b69649b0cb9bebef0800000000000000
+      internalID: -90430725201565333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7af5bed1c491465c0800000000000000
+      internalID: -4223222735856509017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_73
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4350bd1c7677088c0800000000000000
+      internalID: -3999065181587307212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_74
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 584e4ebbf3c1a0be0800000000000000
+      internalID: -1510363664968522619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_75
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ece106c0bd80ff4f0800000000000000
+      internalID: -792905272495431986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_76
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99ed3a436644d56e0800000000000000
+      internalID: -1847245066391527783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_77
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e990e0f8a0588f30800000000000000
+      internalID: 4577997707748088290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_78
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d19620027c8048a00800000000000000
+      internalID: 757740288633628957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_79
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2b9cf9747db7c620800000000000000
+      internalID: 2794410401767136047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_80
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8c36a9c5c132d2c0800000000000000
+      internalID: -4408406359680861043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_81
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f60fbfc47823ce10800000000000000
+      internalID: 2216659923763136243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_82
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03578f119509ebde0800000000000000
+      internalID: -1315455328917621456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_83
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b811b43c41ceb6080800000000000000
+      internalID: -9192994640426757749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheetHunterWolf_84
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d98ae7092b1916850800000000000000
+      internalID: 6368531544193018013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 15a28a9d779c68f49aba4ebf80fff7f2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1024.0,"y":1024.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      spritesheetHunterWolf_0: -7101956345355355914
+      spritesheetHunterWolf_1: 8425205674182216868
+      spritesheetHunterWolf_10: 1033434982094212528
+      spritesheetHunterWolf_11: -4342122262873252778
+      spritesheetHunterWolf_12: 5013965210892025503
+      spritesheetHunterWolf_13: 9198615656729576531
+      spritesheetHunterWolf_14: 5342678590334637912
+      spritesheetHunterWolf_15: 5800958419531410325
+      spritesheetHunterWolf_16: 8306164118975049458
+      spritesheetHunterWolf_17: 1605739096794328480
+      spritesheetHunterWolf_18: -2318176430619826167
+      spritesheetHunterWolf_19: -991812833717263756
+      spritesheetHunterWolf_2: -6444684589911033964
+      spritesheetHunterWolf_20: -1726784989784265920
+      spritesheetHunterWolf_21: 1544964638452382933
+      spritesheetHunterWolf_22: 5442970776487949130
+      spritesheetHunterWolf_23: 5360978431065482175
+      spritesheetHunterWolf_24: 4259563709886939866
+      spritesheetHunterWolf_25: 1587617711963513078
+      spritesheetHunterWolf_26: -7106751771846266219
+      spritesheetHunterWolf_27: -6317918844105909972
+      spritesheetHunterWolf_28: 4803839071398873405
+      spritesheetHunterWolf_29: 201965042093084854
+      spritesheetHunterWolf_3: 2895319438968281924
+      spritesheetHunterWolf_30: -1280480214815933402
+      spritesheetHunterWolf_31: 6827553954851381885
+      spritesheetHunterWolf_32: -7573228737775329232
+      spritesheetHunterWolf_33: -4777110999280142774
+      spritesheetHunterWolf_34: 790068580723211557
+      spritesheetHunterWolf_35: 4041841877647850955
+      spritesheetHunterWolf_36: 8935888773422338203
+      spritesheetHunterWolf_37: 2471557496563170382
+      spritesheetHunterWolf_38: 76938383672125355
+      spritesheetHunterWolf_39: 8278983811626523831
+      spritesheetHunterWolf_4: 5938626424228873707
+      spritesheetHunterWolf_40: -8109143003835758536
+      spritesheetHunterWolf_41: 1347792722450111605
+      spritesheetHunterWolf_42: 6519507722746731514
+      spritesheetHunterWolf_43: -7320063196802763242
+      spritesheetHunterWolf_44: 698756006642480101
+      spritesheetHunterWolf_45: -357241446335445109
+      spritesheetHunterWolf_46: 4645457155867902632
+      spritesheetHunterWolf_47: 2822195006978275374
+      spritesheetHunterWolf_48: 1073030021055100379
+      spritesheetHunterWolf_49: 5902774780399212983
+      spritesheetHunterWolf_5: -5570662529401619497
+      spritesheetHunterWolf_50: -3294839954922813314
+      spritesheetHunterWolf_51: 5560192111583662212
+      spritesheetHunterWolf_52: -5563176308385843067
+      spritesheetHunterWolf_53: 1758802922237112493
+      spritesheetHunterWolf_54: 3398753833993091574
+      spritesheetHunterWolf_55: 7202659487847891567
+      spritesheetHunterWolf_56: 3288491788166587958
+      spritesheetHunterWolf_57: -2987861939631626193
+      spritesheetHunterWolf_58: -4403631412898141605
+      spritesheetHunterWolf_59: 3952190650496104254
+      spritesheetHunterWolf_6: 323443534589877677
+      spritesheetHunterWolf_60: -1093840442064790388
+      spritesheetHunterWolf_61: 6898590643586289271
+      spritesheetHunterWolf_62: -5742841634859747738
+      spritesheetHunterWolf_63: -3446232926674047914
+      spritesheetHunterWolf_64: 4323916984084213855
+      spritesheetHunterWolf_65: -6430518905591620233
+      spritesheetHunterWolf_66: 8651004336078778590
+      spritesheetHunterWolf_67: 6191054865208172264
+      spritesheetHunterWolf_68: -5861315783061539078
+      spritesheetHunterWolf_69: -4222102361021109916
+      spritesheetHunterWolf_7: 1031175995231239346
+      spritesheetHunterWolf_70: -3234448131002229742
+      spritesheetHunterWolf_71: -90430725201565333
+      spritesheetHunterWolf_72: -4223222735856509017
+      spritesheetHunterWolf_73: -3999065181587307212
+      spritesheetHunterWolf_74: -1510363664968522619
+      spritesheetHunterWolf_75: -792905272495431986
+      spritesheetHunterWolf_76: -1847245066391527783
+      spritesheetHunterWolf_77: 4577997707748088290
+      spritesheetHunterWolf_78: 757740288633628957
+      spritesheetHunterWolf_79: 2794410401767136047
+      spritesheetHunterWolf_8: -8766326854946819328
+      spritesheetHunterWolf_80: -4408406359680861043
+      spritesheetHunterWolf_81: 2216659923763136243
+      spritesheetHunterWolf_82: -1315455328917621456
+      spritesheetHunterWolf_83: -9192994640426757749
+      spritesheetHunterWolf_84: 6368531544193018013
+      spritesheetHunterWolf_9: -648655898057765341
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

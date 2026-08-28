@@ -9,6 +9,7 @@ public class AimHunterState : HunterState
         base.Enter();
         HunterWolf.ChangeSpeed(moveSpeed);
         HunterWolf.Animator.SetBool("Aim", true);
+        HunterWolf.IsAiming = true;
     }
     public override void Play()
     {
@@ -23,5 +24,6 @@ public class AimHunterState : HunterState
         base.Exit();
         HunterWolf.ChangeSpeed(0);
         HunterWolf.Animator.SetBool("Aim", false);
+        HunterWolf.IsAiming = false;
     }
 }

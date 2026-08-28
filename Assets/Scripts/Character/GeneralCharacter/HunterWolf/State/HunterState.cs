@@ -4,7 +4,7 @@ public class HunterState : State
 {
     protected HunterWolf HunterWolf;
     protected Timer timerState;
-    [SerializeField] float TimeState = 1;
+    [SerializeField] protected float TimeState = 1;
     public override void Enter()
     {
         timerState = new Timer(TimeState);

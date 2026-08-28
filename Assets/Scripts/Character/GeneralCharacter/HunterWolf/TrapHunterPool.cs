@@ -24,6 +24,8 @@ public class TrapHunterPool : MonoBehaviour
 
         availableTraps.Enqueue(Trap);
 
+        Trap.Initialize(this);
+
         return Trap;
     }
 
