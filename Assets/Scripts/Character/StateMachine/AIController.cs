@@ -31,6 +31,7 @@ public class AIController : MonoBehaviour
     
     public void StartReadyPhase()
     {
+        Debug.Log("Should be in Ready State");
         ChangeState(readyState);
     }
     public void StartFightingPhase()

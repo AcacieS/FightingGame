@@ -1762,38 +1762,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1116168827}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1116168827}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayReadyAnim
-      objectReference: {fileID: 0}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMatch
-      objectReference: {fileID: 0}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Player, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Player, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4882956512689088743, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 7469042764203623694, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
       propertyPath: m_Name
       value: Player
