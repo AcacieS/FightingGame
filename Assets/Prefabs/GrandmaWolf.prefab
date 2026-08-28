@@ -522,6 +522,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stateWeight: 0
   animName: Fall
+--- !u!1 &900453460928895794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2786966851683710622}
+  - component: {fileID: 2270733856972301600}
+  m_Layer: 0
+  m_Name: ReadyState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2786966851683710622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900453460928895794}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1601426502482911426}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2270733856972301600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900453460928895794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1170f7663310d247868713927508291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  stateWeight: 0
+  animName: Ready
 --- !u!1 &961069119062600486
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +913,7 @@ GameObject:
   - component: {fileID: 4811092851955184588}
   - component: {fileID: 2057084606582264556}
   - component: {fileID: 3923229689760700375}
+  - component: {fileID: 5781135077960641529}
   m_Layer: 8
   m_Name: GrandmaWolf
   m_TagString: Untagged
@@ -1067,6 +1114,51 @@ MonoBehaviour:
     m_Bits: 8
   characterCollider: {fileID: 0}
   _aiController: {fileID: 5032976480902668414}
+--- !u!114 &5781135077960641529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276924957141737316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4ba7be49a52a4d947abccc2fbe8f81cd, type: 2}
+    - {fileID: 11400000, guid: 01e8009f340a5b647b12ba3b033c3e61, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5032976480902668414}
+          m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+          m_MethodName: StartReadyPhase
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ready
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5032976480902668414}
+          m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+          m_MethodName: StartFightingPhase
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2412229824454304830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,6 +2306,7 @@ Transform:
   - {fileID: 6756577892693293877}
   - {fileID: 3954787837390963876}
   - {fileID: 9092702129437061650}
+  - {fileID: 2786966851683710622}
   m_Father: {fileID: 6291960767165015311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5892367741761591754
@@ -2462,6 +2555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   startingState: {fileID: 4942487213927423936}
+  readyState: {fileID: 2270733856972301600}
   hurtState: {fileID: 1874824113098935437}
   hurtInterruptState: {fileID: 4630193694779743522}
   deadState: {fileID: 5696296692847041610}

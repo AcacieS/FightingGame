@@ -4,8 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     [SerializeField] private Match currentMatch;
-    public event System.Action<Match> OnMatchStart;
-    
+    public Match Match => currentMatch;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -20,16 +19,7 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-        StartMatch();
-    }
-    private void StartMatch()
-    {
-        if (currentMatch == null)
-        {
-            Debug.LogError("Please assigned Player and Enemy in GameManager");
-            return;
-        }
-        OnMatchStart?.Invoke(currentMatch);  
+        currentMatch.SetMatchState(MatchState.Intro);
     }
 
 }

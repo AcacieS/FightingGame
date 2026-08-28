@@ -9,6 +9,7 @@ public class AIController : MonoBehaviour
     [SerializeField] private State startingState;
     [Header("Reaction State")]
     private State reactionState;
+    [SerializeField] private State readyState;
     [SerializeField] private State hurtState;
     [SerializeField] private State hurtInterruptState;
     [SerializeField] private State deadState;
@@ -26,6 +27,15 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         
+    }
+    
+    public void StartReadyPhase()
+    {
+        ChangeState(readyState);
+    }
+    public void StartFightingPhase()
+    {
+        ChangeState(startingState);
     }
 
     private void Start()
@@ -51,15 +61,8 @@ public class AIController : MonoBehaviour
             deadState.Initialize(this);
         if(blockState!=null)
             blockState.Initialize(this);
-
-        ChangeState(startingState);
-    }
-    private void OnDisable()
-    {
-        if (character != null)
-        {
-            character.OnHurt-=HandleHurt;
-        }
+        if(readyState!=null)
+            readyState.Initialize(this);
         
     }
     
@@ -113,6 +116,11 @@ public class AIController : MonoBehaviour
         reactionState = null;
 
     }
+    public void StopState()
+    {
+        currentState?.Exit();
+        currentState = null;
+    }
     public void RequestDecision()
     {
         ChangeState(startingState);
@@ -143,5 +151,23 @@ public class AIController : MonoBehaviour
     {
         if (character != null)
             character.OnHurt -= HandleHurt;
+    }
+    private void OnEnable()
+    {
+        //TODO: might too early to call
+        GameManager.Instance.Match.OnMatchPreReady += StartReadyPhase;
+        GameManager.Instance.Match.OnMatchFighting += StartFightingPhase;
+    }
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Match.OnMatchPreReady -= StartReadyPhase;
+            GameManager.Instance.Match.OnMatchFighting -= StartFightingPhase;
+        }
+        if (character != null)
+        {
+            character.OnHurt-=HandleHurt;
+        }
     }
 }

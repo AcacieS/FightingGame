@@ -49,16 +49,17 @@ public class Context : MonoBehaviour
     private void OnEnable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.OnMatchStart += HandleMatchChanged;
+            GameManager.Instance.Match.OnMatchPreReady += HandleMatchChanged;
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.OnMatchStart -= HandleMatchChanged;
+            GameManager.Instance.Match.OnMatchPreReady -= HandleMatchChanged;
     }
-    void HandleMatchChanged(Match currentMatch)
+    void HandleMatchChanged()
     {
+        Match currentMatch = GameManager.Instance.Match;
         if (!_overrideCharactersSettings)
         {
             _self = currentMatch.Enemy;

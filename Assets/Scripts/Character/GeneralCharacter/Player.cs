@@ -45,6 +45,14 @@ public class Player : Character
 
         rb.linearVelocity = new Vector2(newSpeed, rb.linearVelocity.y);
     }
+    public void PlayReadyAnim()
+    {
+        //TODO: Play Ready Anim Logic;
+    }
+    public void StartMatch()
+    {
+        //TODO: Player now can do whatever it can do, like moving and all
+    }
 
     private void Jump()
     {
