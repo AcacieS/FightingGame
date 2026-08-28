@@ -59,40 +59,7 @@ public class Character: MonoBehaviour
             }
         }
     }
-    public void PlayAnim(string animName)
-    {
-        if(anim == null) return;
-        anim.Play(animName, 0, 0f);
-    }
-    // public void PlayAnim(string animName)
-    // {
-        
-    //     if(anim == null) return;
-    //     anim.Play(animName);
-    // }
-    public bool IsAnimPlaying(string animName)
-    {
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsName(animName);
-    }
-    public bool IsAnimFinished(string animName)
-    {
-        if (anim == null)
-            return false;
-
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        // Debug.Log(
-        //     $"{name} | " +
-        //     $"Current State: {stateInfo.fullPathHash} | " +
-        //     $"animName: {animName} | " +
-        //     $"normalizedTime: {stateInfo.normalizedTime} | " +
-        //     $"inTransition: {anim.IsInTransition(0)}"
-        // );
-
-        return stateInfo.IsName(animName) &&
-            stateInfo.normalizedTime >= 1f &&
-            !anim.IsInTransition(0);
-    }
+    
     public virtual void Die()
     {
         //anim.SetTrigger("Death");
@@ -112,6 +79,7 @@ public class Character: MonoBehaviour
             characterCollider = GetComponent<Collider2D>();
         }
     }
+    
 
     public virtual void Start()
     {
@@ -212,5 +180,73 @@ public class Character: MonoBehaviour
             0f,
             rb.linearVelocity.y
         );
+    }
+    //---------------------------------- ANIMATOR ---------------------------
+    public void PlayAnim(string animName, float desiredDuration = 0)
+    {
+        if(anim == null) return;
+        if (desiredDuration != 0)
+        {
+            SetAnimationSpeed(animName, desiredDuration);
+        }
+        anim.Play(animName, 0, 0f);
+    }
+    private void SetAnimationSpeed(string animName, float desiredDuration)
+    {
+        RuntimeAnimatorController controller =
+            anim.runtimeAnimatorController;
+
+        if (controller == null)
+            return;
+
+        foreach (AnimationClip clip in controller.animationClips)
+        {
+            if (clip.name != animName)
+                continue;
+
+            float originalDuration = clip.length;
+
+            if (originalDuration <= 0f)
+                return;
+
+            anim.speed =
+                originalDuration / desiredDuration;
+
+            Debug.Log(
+                $"{name}: {animName} | " +
+                $"Original: {originalDuration:F2}s | " +
+                $"Desired: {desiredDuration:F2}s | " +
+                $"Speed: {anim.speed:F2}x"
+            );
+
+            return;
+        }
+
+        Debug.LogWarning(
+            $"{name}: Could not find animation clip '{animName}'."
+        );
+    }
+    public bool IsAnimPlaying(string animName)
+    {
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsName(animName);
+    }
+    public bool IsAnimFinished(string animName)
+    {
+        if (anim == null)
+            return false;
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        // Debug.Log(
+        //     $"{name} | " +
+        //     $"Current State: {stateInfo.fullPathHash} | " +
+        //     $"animName: {animName} | " +
+        //     $"normalizedTime: {stateInfo.normalizedTime} | " +
+        //     $"inTransition: {anim.IsInTransition(0)}"
+        // );
+
+        return stateInfo.IsName(animName) &&
+            stateInfo.normalizedTime >= 1f &&
+            !anim.IsInTransition(0);
     }
 }

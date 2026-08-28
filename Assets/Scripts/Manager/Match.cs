@@ -5,9 +5,7 @@ using UnityEngine;
 [Serializable]
 public class Match
 {
-    [ReadOnly, SerializeField] MatchState matchState; 
     [SerializeField] private BattleParticipants battleParticipants;
-    public MatchState State => matchState;
     public Character Player => battleParticipants.Player;
     public Enemy Enemy => battleParticipants.Enemy;
     public Match(GameObject playerPrefab, Transform playerPos, GameObject enemyPrefab, Transform enemyPos)
