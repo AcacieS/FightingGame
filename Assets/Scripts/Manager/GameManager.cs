@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Please assigned Player and Enemy in GameManager");
             return;
         }
+        currentMatch.StartMatch();
         OnMatchStart?.Invoke();  
     }
 

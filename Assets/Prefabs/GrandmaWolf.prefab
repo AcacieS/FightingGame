@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3358603931235081608}
   - component: {fileID: 2016332566978425217}
   - component: {fileID: 8254826053932824534}
-  - component: {fileID: 5395379223412228828}
   - component: {fileID: 7675795019265646420}
   - component: {fileID: 1972289403416745982}
   m_Layer: 0
@@ -51,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stateWeight: 0
   animName: Roll
+  overrideDuration: 0
+  desiredDuration: 1
   damage: 10
   _doesStun: 0
   _doesInterrupt: 0
@@ -83,53 +84,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
   requirements: []
   considerations:
-  - {fileID: 5395379223412228828}
+  - {fileID: 0}
   state: {fileID: 0}
   _finalScore: 0
   _activateTestScore: 0
   _testScore: 0
---- !u!114 &5395379223412228828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21562573746842089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
-  weight: 1
-  score: 0
-  score_weight: 0
-  mode: 1
-  minDistance: 4
-  maxDistance: 5
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &7675795019265646420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
   animName: PreNearAttack
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &333550442782229821
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementState
   stateWeight: 0.1
   animName: Walk
+  overrideDuration: 0
+  desiredDuration: 1
   _movementDistance: 4
   moveAwayFromTarget: 0
   _overrideMovementSettings: 0
@@ -529,6 +492,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RetreatState
   stateWeight: 0.1
   animName: Walk
+  overrideDuration: 0
+  desiredDuration: 1
   _movementDistance: 3
   moveAwayFromTarget: 1
   _overrideMovementSettings: 0
@@ -720,6 +685,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stateWeight: 0
   animName: Fall
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &900453460928895794
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +733,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stateWeight: 0
   animName: Ready
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &961069119062600486
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +782,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlamAttackState
   stateWeight: 0
   animName: SlamAttack
+  overrideDuration: 0
+  desiredDuration: 1
   damage: 10
   _doesStun: 0
   _doesInterrupt: 0
@@ -870,6 +841,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrabAttackState
   stateWeight: 0
   animName: GrabAttack
+  overrideDuration: 0
+  desiredDuration: 1
   damage: 10
   _doesStun: 0
   _doesInterrupt: 0
@@ -936,6 +909,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
   animName: PreRoll
+  overrideDuration: 0
+  desiredDuration: 1
+--- !u!1 &1293241515429500064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4565086181031498108}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4565086181031498108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293241515429500064}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7256892413287835832}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1452329350415305053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7256892413287835832}
+  - component: {fileID: 3035228766516757060}
+  m_Layer: 0
+  m_Name: NearAttack 2 Front State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7256892413287835832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452329350415305053}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4565086181031498108}
+  m_Father: {fileID: 3199004143761683856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3035228766516757060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452329350415305053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5093e045fd9447b4c896803fa9ec6e0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  stateWeight: 0
+  animName: NearAttack
+  overrideDuration: 0
+  desiredDuration: 1
+  damage: 10
+  _doesStun: 0
+  _doesInterrupt: 0
+  attackResult: 0
+  attackPoint: {fileID: 4565086181031498108}
+  attackRange: 1
+  charactersLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1789196334357559063
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1047,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   stateWeight: 0.1
   animName: Tired
+  overrideDuration: 0
+  desiredDuration: 1
   minDuration: 5
   maxDuration: 5
   timer: 0
@@ -1051,6 +1117,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HitState
   stateWeight: 0
   animName: Hurt
+  overrideDuration: 0
+  desiredDuration: 1
+--- !u!1 &1823676227520211597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7541096932330940110}
+  - component: {fileID: 8250896399755128976}
+  m_Layer: 0
+  m_Name: PreAttack State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7541096932330940110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823676227520211597}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 550567050207658441}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8250896399755128976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823676227520211597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17480b8616d42ff41abcd693bfa3140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
+  stateWeight: 0
+  animName: PreNearAttack
+  overrideDuration: 1
+  desiredDuration: 0.2
 --- !u!1 &2220505490323222649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
   animName: PreRoll
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &2276924957141737316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1681,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HurtState
   stateWeight: 0
   animName: 
+  overrideDuration: 0
+  desiredDuration: 1
   characterHurt: {fileID: 2106342742317194220}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.4
@@ -1612,6 +1732,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stateWeight: 0
   animName: Jump
+  overrideDuration: 0
+  desiredDuration: 1
   jumpForce: 8
 --- !u!1 &3551577291058336668
 GameObject:
@@ -1812,6 +1934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
   animName: PreJump
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &4122533716166435316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
   animName: PreJump
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &4370146903850504059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,6 +2220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BounceAttackState
   stateWeight: 0
   animName: Roll
+  overrideDuration: 0
+  desiredDuration: 1
   bounceSpeed: 15
   nbBounce: 8
   characterCollider: {fileID: 2057084606582264556}
@@ -2150,6 +2278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   stateWeight: 0.1
   animName: Tired
+  overrideDuration: 0
+  desiredDuration: 1
   minDuration: 5
   maxDuration: 5
   timer: 0
@@ -2218,6 +2348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DeadState
   stateWeight: 0
   animName: Death
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &4845606570715368493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,12 +2361,12 @@ GameObject:
   - component: {fileID: 1370959968177124016}
   - component: {fileID: 7751317500888102857}
   m_Layer: 0
-  m_Name: NearAttack2 State
+  m_Name: NearAttack Above State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1370959968177124016
 Transform:
   m_ObjectHideFlags: 0
@@ -2265,6 +2397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stateWeight: 0
   animName: NearAttack
+  overrideDuration: 0
+  desiredDuration: 1
   damage: 10
   _doesStun: 0
   _doesInterrupt: 0
@@ -2462,6 +2596,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FallState
   stateWeight: 0
   animName: Fall
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &5571086131583890727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,7 +2623,7 @@ Transform:
   m_GameObject: {fileID: 5571086131583890727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.081, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2592,6 +2728,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5678450955514356851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6180727009431542708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550567050207658441}
+  - component: {fileID: 5430043491523270893}
+  m_Layer: 0
+  m_Name: 'While: Attack Continuously'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &550567050207658441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6180727009431542708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7541096932330940110}
+  - {fileID: 2732512437894757323}
+  m_Father: {fileID: 3199004143761683856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5430043491523270893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6180727009431542708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ccbeba56b1964408f7229b6c052ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhileSequenceState
+  stateWeight: 0
+  states: []
+  currentChild: {fileID: 0}
+  currentIndex: -1
+  maxLoops: 4
+  currentLoop: 0
+  failed: 0
 --- !u!1 &6257422425604724432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,6 +2812,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7396914260794443580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6356952282083402328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8001661126336763466}
+  - component: {fileID: 4866878392754927703}
+  m_Layer: 0
+  m_Name: Choose Near Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8001661126336763466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356952282083402328}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3199004143761683856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4866878392754927703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356952282083402328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b86cd6f7b839041bd9bbd7ecd085a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CompositeState
+  stateWeight: 0
+  actions: []
+  currentChild: {fileID: 0}
 --- !u!1 &6602611535690284038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,8 +2893,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5915356260263374732}
-  - {fileID: 2732512437894757323}
+  - {fileID: 550567050207658441}
   - {fileID: 1370959968177124016}
+  - {fileID: 7256892413287835832}
+  - {fileID: 8001661126336763466}
   - {fileID: 2771803206824555115}
   - {fileID: 2195606832982475193}
   m_Father: {fileID: 6212307711274433067}
@@ -2678,7 +2916,7 @@ MonoBehaviour:
   stateWeight: 0
   states:
   - {fileID: 2967473719436502271}
-  - {fileID: 5248666242726864739}
+  - {fileID: 0}
   - {fileID: 7751317500888102857}
   - {fileID: 2214545429384937754}
   currentChild: {fileID: 0}
@@ -2864,6 +3102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RetreatState
   stateWeight: 0.1
   animName: Walk
+  overrideDuration: 0
+  desiredDuration: 1
   _movementDistance: 3
   moveAwayFromTarget: 1
   _overrideMovementSettings: 0
@@ -3182,6 +3422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
   animName: PreGrabAttack
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &7585775164088562559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,6 +3515,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockState
   stateWeight: 0.2
   animName: Block
+  overrideDuration: 0
+  desiredDuration: 1
 --- !u!1 &8078697392778653983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3319,6 +3563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaunchBallAttackState
   stateWeight: 0
   animName: Jump
+  overrideDuration: 0
+  desiredDuration: 1
   targetHeight: 5
   launchSpeed: 8
   launchAcceleration: 20
@@ -3331,9 +3577,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2732512437894757323}
-  - component: {fileID: 5248666242726864739}
+  - component: {fileID: 4024529164946381414}
   m_Layer: 0
-  m_Name: NearAttack1 State
+  m_Name: NearAttack Front State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3353,9 +3599,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6322833035511713684}
-  m_Father: {fileID: 3199004143761683856}
+  m_Father: {fileID: 550567050207658441}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5248666242726864739
+--- !u!114 &4024529164946381414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3364,11 +3610,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8151938368951143590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5093e045fd9447b4c896803fa9ec6e0b, type: 3}
+  m_Script: {fileID: 11500000, guid: e6ea8e45954d07647a353c5dbfb69793, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackState
   stateWeight: 0
   animName: NearAttack
+  overrideDuration: 0
+  desiredDuration: 1
   damage: 10
   _doesStun: 0
   _doesInterrupt: 0

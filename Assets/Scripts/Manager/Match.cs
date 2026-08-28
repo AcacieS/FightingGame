@@ -15,8 +15,11 @@ public class Match
         GameObject player = UnityEngine.Object.Instantiate(playerPrefab, playerPos.position, Quaternion.identity);
         GameObject enemy = UnityEngine.Object.Instantiate(enemyPrefab, enemyPos.position, Quaternion.identity);
 
-        UIManager.Instance.UpdateUI(player.GetComponent<Character>(), enemy.GetComponent<Character>());
         battleParticipants = new BattleParticipants(player, enemy);
+    }
+    public void StartMatch()
+    {
+        UIManager.Instance.UpdateUI(Player, Enemy);
     }
     public void EndMatch()
     {
