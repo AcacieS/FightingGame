@@ -4,13 +4,13 @@ using UnityEngine;
 public class SequenceState : State
 {
     [SerializeField]
-    private List<State> states = new();
+    protected List<State> states = new();
 
     [ReadOnly, SerializeField]
     protected State currentChild;
 
     [ReadOnly, SerializeField]
-    private int currentIndex = -1;
+    protected int currentIndex = -1;
 
     public override void Initialize(AIController ai)
     {
@@ -54,8 +54,13 @@ public class SequenceState : State
         currentChild?.Play();
     }
 
-    private void PlayNextState()
+    protected void PlayNextState()
     {
+        Debug.Log(
+            $"{name}: PlayNextState BEFORE | " +
+            $"currentIndex={currentIndex}, " +
+            $"currentChild={(currentChild ? currentChild.name : "NULL")}"
+        );
         GetDataCurrentState();
         
         // Exit previous child
@@ -80,6 +85,11 @@ public class SequenceState : State
 
         currentChild.Enter();
     }
+    protected void RestartSequence()
+    {
+        currentIndex = -1;
+        PlayNextState();
+    }
     protected virtual void GetDataCurrentState()
     {
         
@@ -90,7 +100,7 @@ public class SequenceState : State
     }
 
 
-    public void ChildFinished()
+    public virtual void ChildFinished()
     {
         PlayNextState();
     }

@@ -61,10 +61,15 @@ public class Character: MonoBehaviour
     }
     public void PlayAnim(string animName)
     {
-        if(anim == null)
-            return;
-        anim.Play(animName);
+        if(anim == null) return;
+        anim.Play(animName, 0, 0f);
     }
+    // public void PlayAnim(string animName)
+    // {
+        
+    //     if(anim == null) return;
+    //     anim.Play(animName);
+    // }
     public bool IsAnimPlaying(string animName)
     {
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
