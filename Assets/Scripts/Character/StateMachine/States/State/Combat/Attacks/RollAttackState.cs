@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class RollAttackState : NearAttackState
 {
-    [SerializeField] private CooldownRequirement coolDownRequirement;
     //Movement are same as Movement State but for now we will just copy
     [Header("Roll Movement")]
     [SerializeField] private float movementDistance = 3f;
@@ -92,7 +91,6 @@ public class RollAttackState : NearAttackState
 
         if (distanceMoved >= movementDistance)
         {
-            coolDownRequirement.Initialize();
             RequestDecision();
         }
     }

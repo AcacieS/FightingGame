@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3358603931235081608}
   - component: {fileID: 2016332566978425217}
   - component: {fileID: 8254826053932824534}
-  - component: {fileID: 3197015000126426922}
   - component: {fileID: 5395379223412228828}
-  - component: {fileID: 7326497749433503989}
+  - component: {fileID: 7675795019265646420}
+  - component: {fileID: 1972289403416745982}
   m_Layer: 0
   m_Name: RollAttackState
   m_TagString: Untagged
@@ -60,11 +60,10 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
-  coolDownRequirement: {fileID: 7326497749433503989}
-  movementDistance: 5
+  movementDistance: 8
   moveAwayFromTarget: 0
-  movementSpeed: 7
-  movementAcceleration: 7
+  movementSpeed: 20
+  movementAcceleration: 100
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -89,21 +88,6 @@ MonoBehaviour:
   _finalScore: 0
   _activateTestScore: 0
   _testScore: 0
---- !u!114 &3197015000126426922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21562573746842089}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MaxDistanceRequirement
-  mode: 1
-  minDistance: 1
-  maxDistance: 5
 --- !u!114 &5395379223412228828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +130,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7326497749433503989
+--- !u!114 &7675795019265646420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,12 +139,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 21562573746842089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CooldownRequirement
-  coolDownTime: 3
-  time: 0
-  initializeAtStartCooldown: 0
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.5
+  score: 0
+  score_weight: 0
+  mode: 2
+  minDistance: 2
+  maxDistance: 30
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.16672048
+      value: 0.5228839
+      inSlope: 1.5095342
+      outSlope: 1.5095342
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1972289403416745982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21562573746842089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59793f659128db84facbfe3202e5963b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceRequirement
+  mode: 1
+  minDistance: 2
+  maxDistance: 0
 --- !u!1 &47438708505379164
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &286047082302048335
 Transform:
   m_ObjectHideFlags: 0
@@ -445,6 +480,169 @@ MonoBehaviour:
   mode: 1
   minDistance: 2
   maxDistance: 0
+--- !u!1 &706517381900874169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2771803206824555115}
+  - component: {fileID: 4848626875413390173}
+  - component: {fileID: 2334480236736647333}
+  - component: {fileID: 1215110991566409679}
+  - component: {fileID: 5439913516819651575}
+  m_Layer: 0
+  m_Name: Retreat State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2771803206824555115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706517381900874169}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3199004143761683856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4848626875413390173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706517381900874169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1917418959951b3408e15f0194b0fc7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetreatState
+  stateWeight: 0.1
+  animName: Walk
+  _movementDistance: 3
+  moveAwayFromTarget: 1
+  _overrideMovementSettings: 0
+  _movementSpeed: 3
+  _movementAcceleration: 3
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  wallCheckDistance: 0.05
+  _movementDirection: 0
+--- !u!114 &2334480236736647333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706517381900874169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
+  requirements: []
+  considerations:
+  - {fileID: 1215110991566409679}
+  state: {fileID: 0}
+  _finalScore: 0
+  _activateTestScore: 0
+  _testScore: 3
+--- !u!114 &1215110991566409679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706517381900874169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463aeafe4eeb16468450a9488519acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DistanceConsideration
+  weight: 0.2
+  score: 0
+  score_weight: 0
+  mode: 2
+  minDistance: 0
+  maxDistance: 7
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.013774872
+      value: 0.20321655
+      inSlope: -0.1520909
+      outSlope: -0.1520909
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.22969359
+      value: 0.16618721
+      inSlope: -0.40666813
+      outSlope: -0.40666813
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.37217107
+      value: 0.07197464
+      inSlope: -0.45491752
+      outSlope: -0.45491752
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.47418416
+      value: 0.046615243
+      inSlope: -0.162531
+      outSlope: -0.162531
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.005188
+      value: 0.006008148
+      inSlope: -0.07647232
+      outSlope: -0.07647232
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5439913516819651575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706517381900874169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af69a91cdcfc6344ba4ec8c21aca2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelfLowHealthConsideration
+  weight: 0.6
+  score: 0
+  score_weight: 0
+  lowHealthThreshold: 0.3
 --- !u!1 &735235653789676998
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,14 +878,14 @@ MonoBehaviour:
   attackPrefab: {fileID: 6899531225980516719, guid: 5b361745e88589441bf35be6103145d6, type: 3}
   attackSpawnPoint: {fileID: 2890540261175122652}
   attackRange: 1
-  attackDistance: 7
+  attackDistance: 10
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
-  throwSpeed: 7
-  throwAcceleration: 7
-  retreatSpeed: 10
-  retreatAcceleration: 10
+  throwSpeed: 12
+  throwAcceleration: 12
+  retreatSpeed: 20
+  retreatAcceleration: 20
   currentAttack: {fileID: 0}
   startAngle: 0
   startDistance: 0
@@ -1613,7 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
-  animName: PreNearAttack
+  animName: PreJump
 --- !u!1 &4122533716166435316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,7 +2095,7 @@ MonoBehaviour:
   stateWeight: 0
   animName: Roll
   bounceSpeed: 15
-  nbBounce: 4
+  nbBounce: 8
   characterCollider: {fileID: 2057084606582264556}
   environmentLayer:
     serializedVersion: 2
@@ -2144,6 +2342,7 @@ Transform:
   - {fileID: 8594811100808997903}
   - {fileID: 7723776894128498614}
   - {fileID: 109258688094565772}
+  - {fileID: 6357730429541146008}
   - {fileID: 8503820030292605390}
   m_Father: {fileID: 6212307711274433067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2160,7 +2359,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SequenceState
   stateWeight: 1
-  states: []
+  states:
+  - {fileID: 6297353525051558351}
+  - {fileID: 3866625171655374456}
+  - {fileID: 3035829745037251796}
+  - {fileID: 4592984601272527922}
+  - {fileID: 4516664430517506919}
+  - {fileID: 2421061073472855902}
   currentChild: {fileID: 0}
   currentIndex: -1
 --- !u!114 &8244155118026715207
@@ -2175,9 +2380,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements: []
-  considerations:
-  - {fileID: 0}
+  requirements:
+  - {fileID: 5007840750401553125}
+  - {fileID: 5261264116630663894}
+  considerations: []
   state: {fileID: 0}
   _finalScore: 0
   _activateTestScore: 0
@@ -2210,6 +2416,52 @@ MonoBehaviour:
   coolDownTime: 60
   time: 0
   initializeAtStartCooldown: 1
+--- !u!1 &5174062883309003767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6357730429541146008}
+  - component: {fileID: 4516664430517506919}
+  m_Layer: 0
+  m_Name: Fall State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6357730429541146008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174062883309003767}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7586736248671561399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4516664430517506919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174062883309003767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e4f93612f9a93439acdcf9b8dfd448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FallState
+  stateWeight: 0
+  animName: Fall
 --- !u!1 &5571086131583890727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,6 +2659,7 @@ Transform:
   - {fileID: 5915356260263374732}
   - {fileID: 2732512437894757323}
   - {fileID: 1370959968177124016}
+  - {fileID: 2771803206824555115}
   - {fileID: 2195606832982475193}
   m_Father: {fileID: 6212307711274433067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3065,7 +3318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaunchBallAttackState
   stateWeight: 0
-  animName: 
+  animName: Jump
   targetHeight: 5
   launchSpeed: 8
   launchAcceleration: 20

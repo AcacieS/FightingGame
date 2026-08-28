@@ -108,13 +108,17 @@ public class GrabAttackObject : MonoBehaviour
             $"{name}: Grab direction = {direction}"
         );
     }
-
+    private Vector2 previousPosition;
     private void FixedUpdate()
     {
+        previousPosition = transform.position;
         Move();
 
         if (isReturning)
+        {
+            CheckReturn();
             return;
+        }
 
         CheckHit();
         CheckMaximumDistance();
@@ -228,7 +232,7 @@ public class GrabAttackObject : MonoBehaviour
             StartReturn();
         }
     }
-
+    private bool hasReturned;
     private void StartReturn()
     {
         if (isReturning)
@@ -237,6 +241,7 @@ public class GrabAttackObject : MonoBehaviour
         Debug.Log("Grab → Return");
 
         isReturning = true;
+        hasReturned = false;
 
         // Return along the exact opposite direction.
         direction = -direction;
@@ -244,26 +249,50 @@ public class GrabAttackObject : MonoBehaviour
         speed = returnSpeed;
         acceleration = returnAcceleration;
     }
-
-    public bool HasReturned(float threshold = 0.1f)
+    private void CheckReturn()
     {
-        if (!isReturning)
-            return false;
+        float distanceFromStart = Vector2.Distance(
+            transform.position,
+            startPosition
+        );
 
-        float distanceFromStart =
-            Vector2.Distance(
-                transform.position,
-                startPosition
+        float threshold =
+            Mathf.Max(
+                0.1f,
+                returnSpeed * Time.fixedDeltaTime
             );
 
         if (distanceFromStart <= threshold)
         {
-            ReleaseTarget();
-            return true;
-        }
+            Debug.Log($"{name}: Returned to start!");
 
-        return false;
+            ReleaseTarget();
+            hasReturned = true;
+        }
     }
+    public bool HasReturned()
+{
+    return hasReturned;
+}
+    // public bool HasReturned(float threshold = 0.1f)
+    // {
+    //     if (!isReturning)
+    //         return false;
+
+    //     float distanceFromStart =
+    //         Vector2.Distance(
+    //             transform.position,
+    //             startPosition
+    //         );
+
+    //     if (distanceFromStart <= threshold)
+    //     {
+    //         ReleaseTarget();
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
 
     private void ReleaseTarget()
     {
