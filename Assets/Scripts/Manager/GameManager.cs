@@ -3,12 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    [SerializeField] private Participants participants;
-    [ReadOnly, SerializeField] private Match currentMatch;
-    [SerializeField] private Transform playerSpawn;
-    [SerializeField] private Transform enemySpawn;
-    public event System.Action<Match> OnMatchChanged;
-    [ReadOnly] private int indexMatch = -1;
+    [SerializeField] private Match currentMatch;
+    public event System.Action<Match> OnMatchStart;
     
     private void Awake()
     {
@@ -19,36 +15,21 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-
-        if (participants == null)
-        {
-            Debug.LogError("participants null please assign");
-        }
     }
+    
     
     private void Start()
     {
-        StartNewMatch();
+        StartMatch();
     }
-    
-    [ContextMenu("Start New Match")]
-    public void StartNewMatch()
+    private void StartMatch()
     {
-        if (indexMatch >= participants.EnemiesCount)
+        if (currentMatch == null)
         {
-            Debug.LogError("Too Much Matches"); 
+            Debug.LogError("Please assigned Player and Enemy in GameManager");
             return;
         }
-
-        if (currentMatch != null && indexMatch!=-1)
-        {
-            Debug.Log("end match: "+currentMatch);
-            currentMatch.EndMatch();
-        }
-        indexMatch++;
-        GameObject player = participants.Player;
-        GameObject enemy = participants.Enemy(indexMatch);
-        currentMatch = new Match(player, playerSpawn, enemy, enemySpawn);
-        OnMatchChanged?.Invoke(currentMatch);  
+        OnMatchStart?.Invoke(currentMatch);  
     }
+
 }

@@ -52,6 +52,8 @@ MonoBehaviour:
   stateWeight: 0
   animName: Roll
   damage: 10
+  _doesStun: 0
+  _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 4787532557060414024}
   attackRange: 2.5
@@ -568,6 +570,8 @@ MonoBehaviour:
   stateWeight: 0
   animName: SlamAttack
   damage: 10
+  _doesStun: 0
+  _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 7562689284456734458}
   attackRange: 5
@@ -623,6 +627,8 @@ MonoBehaviour:
   stateWeight: 0
   animName: GrabAttack
   damage: 10
+  _doesStun: 0
+  _doesInterrupt: 0
   attackResult: 0
   coolDownRequirement: {fileID: 2790631344856362546}
   attackPrefab: {fileID: 6899531225980516719, guid: 5b361745e88589441bf35be6103145d6, type: 3}
@@ -929,8 +935,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1508938299
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9150489477472823759, guid: ec4964f737b49164dabc1d05bfa39632, type: 3}
@@ -1970,6 +1976,8 @@ MonoBehaviour:
   stateWeight: 0
   animName: NearAttack
   damage: 10
+  _doesStun: 0
+  _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 4226499880138963421}
   attackRange: 1
@@ -3015,6 +3023,8 @@ MonoBehaviour:
   stateWeight: 0
   animName: NearAttack
   damage: 10
+  _doesStun: 0
+  _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 6322833035511713684}
   attackRange: 1

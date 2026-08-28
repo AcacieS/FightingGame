@@ -45,15 +45,17 @@ public class Context : MonoBehaviour
 
     public bool TargetIsAttacking { get; set; }
     public bool TargetIsBlocking { get; set; }
+
     private void OnEnable()
     {
-        GameManager.Instance.OnMatchChanged += HandleMatchChanged;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnMatchStart += HandleMatchChanged;
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.OnMatchChanged -= HandleMatchChanged;
+            GameManager.Instance.OnMatchStart -= HandleMatchChanged;
     }
     void HandleMatchChanged(Match currentMatch)
     {

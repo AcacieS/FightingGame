@@ -45,7 +45,7 @@ public class NearAttackState : AttackState
     }
     protected virtual void OnAttackHit()
     {
-        bool isHurt = Context.Target.Hurt(damage);
+        bool isHurt = Context.Target.Hurt(damage, _doesInterrupt, _doesStun);
         //TODO: CHECK SUCCESSFULLY
         attackResult = isHurt? AttackResult.Success: AttackResult.Blocked;
         
