@@ -47,7 +47,7 @@ public class NearAttackState : AttackState
     {
         bool isHurt = Context.Target.Hurt(damage, _doesInterrupt, _doesStun);
         //TODO: CHECK SUCCESSFULLY
-        attackResult = isHurt? AttackResult.Success: AttackResult.Blocked;
+        AttackResult = isHurt? AttackResult.Success: AttackResult.Blocked;
         
     }
     void OnDrawGizmosSelected()

@@ -119,6 +119,10 @@ public class ContextEditor : Editor
             "Target HP",
             context.TargetHp
         );
+        EditorGUILayout.FloatField(
+            "Angle To Target",
+            context.AngleToTarget
+        );
 
         EditorGUILayout.Space(5);
 

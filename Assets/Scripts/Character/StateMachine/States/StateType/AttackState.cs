@@ -6,11 +6,23 @@ public abstract class AttackState : ActionState
     [SerializeField] protected int damage = 10;
     [SerializeField] protected bool _doesStun;
     [SerializeField] protected bool _doesInterrupt;
-    [ReadOnly, SerializeField] protected AttackResult attackResult;
-    public AttackResult AttackResult => attackResult;
+    [ReadOnly, SerializeField] private AttackResult attackResult;
+    public AttackResult AttackResult
+    {
+        get => attackResult;
+        protected set
+        {
+            attackResult = value;
+            Context.SetAttackResult(value);
+        }
+    }
     public override void Enter()
     {
-        attackResult = AttackResult.None;
+        AttackResult = AttackResult.None;
         base.Enter();
+    }
+    public override void Exit()
+    {
+        base.Exit();
     }
 }
