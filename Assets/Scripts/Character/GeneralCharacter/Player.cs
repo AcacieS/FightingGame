@@ -14,7 +14,7 @@ public class Player : Character
     [SerializeField] private string blockAnimName = "Block";
 
     [Header("Stun")]
-    [SerializeField] private float stunDuration = 2f;
+    [SerializeField] private float defaultStunDuration = 2f;
     [SerializeField] private string stunAnimName = "Stunned";
 
     [ReadOnly, SerializeField] private bool isStunned;
@@ -192,7 +192,7 @@ public class Player : Character
     public override bool Hurt(
         int damage,
         bool isInterruptible = false,
-        bool isStun = false)
+        float stunDuration = 0f)
     {
         if (isBlocking)
         {
@@ -200,11 +200,11 @@ public class Player : Character
             return false;
         }
 
-        base.Hurt(damage, isInterruptible, isStun); //moved here so anims play
+        base.Hurt(damage, isInterruptible, stunDuration); //moved here so anims play
 
-        if (isStun)
+        if (stunDuration != 0f)
         {
-            Stun();
+            Stun(stunDuration);
         }        
 
         return true;
@@ -232,7 +232,7 @@ public class Player : Character
 
     public void Stun()
     {
-        Stun(stunDuration);
+        Stun(defaultStunDuration);
     }
 
     public void Stun(float duration)
@@ -263,6 +263,6 @@ public class Player : Character
     [ContextMenu("Stun Test")]
     private void StunTest()
     {
-        Hurt(5, false, true);
+        Hurt(5, false, 2f);
     }
 }

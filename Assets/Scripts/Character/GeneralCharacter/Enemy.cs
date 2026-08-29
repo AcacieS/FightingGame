@@ -24,7 +24,7 @@ public class Enemy : Character
         base.Start();
         
     }
-    public override bool Hurt(int damage, bool isInterruptible = false, bool isStun = false)
+    public override bool Hurt(int damage, bool isInterruptible = false, float stunDuration = 0f)
     {
         if (_aiController != null && _aiController.TryBlock())
         {
