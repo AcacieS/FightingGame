@@ -4969,7 +4969,7 @@ MonoBehaviour:
   ShootState: {fileID: 1212023687006649846}
   StunState: {fileID: 544602331803738416}
   acceleration: 20
-  tooFarDistance: 30
+  tooFarDistance: 60
   tooCloseDistance: 2
   gunEndPoint: {fileID: 8022663939705006456}
   lauchEndPoint: {fileID: 1534293214437688767}
@@ -15064,7 +15064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FowardHunterState
   stateWeight: 0
   TimeState: 0
-  moveSpeed: 4
+  moveSpeed: 8
 --- !u!1 &4909604531849510296
 GameObject:
   m_ObjectHideFlags: 0
@@ -19978,6 +19978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9aafc68c2e615479de8d0f28ff2cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletHunterPool
+  HunterWolf: {fileID: -2193729117433910815}
   bulletPrefab: {fileID: 1557503357724637707, guid: d094b7ec2f56dc54dadbf869142ee7c1, type: 3}
   poolSize: 6
 --- !u!1 &5172410335324209517
@@ -20285,6 +20286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afbdf536ea7af23469cda43090f87899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapHunterPool
+  HunterWolf: {fileID: -2193729117433910815}
   trapPrefab: {fileID: 5218686359659795106, guid: a972fb244f2450548999ee07b4a98181, type: 3}
   poolSize: 20
 --- !u!1 &8144512822301419580
