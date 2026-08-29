@@ -39,6 +39,7 @@ public class TrapHunterPool : MonoBehaviour
         TrapHunterWolf Trap = availableTraps.Dequeue();
 
         Trap.gameObject.SetActive(true);
+        Trap.transform.parent = null;
 
         return Trap;
     }
@@ -46,6 +47,9 @@ public class TrapHunterPool : MonoBehaviour
     public void ReturnTrap(TrapHunterWolf Trap)
     {
         Trap.gameObject.SetActive(false);
+
+        Trap.transform.parent = transform;
+        Trap.transform.position = transform.position;
 
         availableTraps.Enqueue(Trap);
     }

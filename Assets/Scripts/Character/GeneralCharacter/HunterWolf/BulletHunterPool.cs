@@ -40,12 +40,17 @@ public class BulletHunterPool : MonoBehaviour
 
         bullet.gameObject.SetActive(true);
 
+        bullet.transform.parent = null;
+
         return bullet;
     }
 
     public void ReturnBullet(BulletHunterWolf bullet)
     {
         bullet.gameObject.SetActive(false);
+
+        bullet.transform.parent = transform;
+        bullet.transform.position = transform.position;
 
         availableBullets.Enqueue(bullet);
     }

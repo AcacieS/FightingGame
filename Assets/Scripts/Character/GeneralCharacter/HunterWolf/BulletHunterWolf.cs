@@ -8,6 +8,7 @@ public class BulletHunterWolf : MonoBehaviour
 
     private Rigidbody2D rb;
     private BulletHunterPool pool;
+    private HunterWolf owner;
 
     private Timer timer;
 
@@ -53,6 +54,16 @@ public class BulletHunterWolf : MonoBehaviour
         if (hit.collider != null)
         {
             rb.position = hit.point;
+
+            if (hit.collider.CompareTag("Player"))
+            {
+                Character character = hit.collider.GetComponent<Character>();
+
+                if (character != null)
+                {
+                    owner.Hit(character, 10, false);
+                }
+            }
 
             ReturnToPool();
         }
