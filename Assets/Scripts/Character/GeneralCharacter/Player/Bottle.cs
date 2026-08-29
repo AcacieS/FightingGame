@@ -4,7 +4,9 @@ public class Bottle : MonoBehaviour
 {
     private Character owner;
     private int damage;
+
     private LayerMask charactersLayer;
+    private LayerMask groundLayer;
 
     private Rigidbody2D rb;
 
@@ -12,11 +14,13 @@ public class Bottle : MonoBehaviour
         Character owner,
         int damage,
         Vector2 velocity,
-        LayerMask charactersLayer)
+        LayerMask charactersLayer,
+        LayerMask groundLayer)
     {
         this.owner = owner;
         this.damage = damage;
         this.charactersLayer = charactersLayer;
+        this.groundLayer = groundLayer;
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -35,12 +39,24 @@ public class Bottle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Only react to character layers.
-        if ((charactersLayer.value &
-             (1 << other.gameObject.layer)) == 0)
+        // =========================
+        // GROUND
+        // =========================
+
+        if (IsLayerInMask(other.gameObject.layer, groundLayer))
         {
+            Debug.Log($"{name}: Bottle hit ground.");
+
+            Destroy(gameObject);
             return;
         }
+
+        // =========================
+        // CHARACTER
+        // =========================
+
+        if (!IsLayerInMask(other.gameObject.layer, charactersLayer))
+            return;
 
         Character character =
             other.GetComponentInParent<Character>();
@@ -48,7 +64,7 @@ public class Bottle : MonoBehaviour
         if (character == null)
             return;
 
-        // Don't hurt the person throwing the bottle.
+        // Don't hurt the owner.
         if (character == owner)
             return;
 
@@ -56,10 +72,13 @@ public class Bottle : MonoBehaviour
             $"{name}: Bottle hit {character.name}"
         );
 
-        character.Hurt(
-            damage
-        );
+        character.Hurt(damage);
 
         Destroy(gameObject);
+    }
+
+    private bool IsLayerInMask(int layer, LayerMask mask)
+    {
+        return (mask.value & (1 << layer)) != 0;
     }
 }

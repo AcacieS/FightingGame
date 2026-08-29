@@ -737,7 +737,10 @@ MonoBehaviour:
   playerUI:
     profileImg: {fileID: 47846730}
     nameText: {fileID: 819800598}
-    bottles: []
+    bottles:
+    - {fileID: 1220478728}
+    - {fileID: 1220478727}
+    - {fileID: 1220478726}
     currentCharacter: {fileID: 0}
   enemyUI:
     profileImg: {fileID: 232476561}
@@ -1088,6 +1091,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6a4b1a4fba29b4c878d14537875170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
+--- !u!114 &1220478726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5527534876940661579, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 1286535517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &1220478727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2676182163856029374, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 1286535517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &1220478728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8008155159079106810, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 1286535517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1269474460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,9 +1458,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3406766816754923970, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.79
+    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: jumpAnimName
+      value: PreJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: bottleInfo.throwAngle
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: bottleInfo.bottleSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: bottleInfo.groundWallLayer.m_Bits
+      value: 520
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543647383849467929, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
@@ -2293,6 +2345,10 @@ PrefabInstance:
     - target: {fileID: 6264657806095282118, guid: 41e7159c9aad85645bc4db9514ad6a88, type: 3}
       propertyPath: m_Name
       value: Bottle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6264657806095282118, guid: 41e7159c9aad85645bc4db9514ad6a88, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7989599678651198184, guid: 41e7159c9aad85645bc4db9514ad6a88, type: 3}
       propertyPath: m_LocalPosition.x

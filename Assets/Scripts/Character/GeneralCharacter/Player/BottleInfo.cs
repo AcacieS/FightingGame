@@ -15,7 +15,7 @@ public class BottleInfo
     [SerializeField] private float throwAngle = 45f;
     [SerializeField] private int bottleDamage = 10;
     [SerializeField] private LayerMask charactersLayer;
-
+    [SerializeField] private LayerMask groundWallLayer;
     [ReadOnly, SerializeField] private int nbBottle;
 
     public GameObject Prefab => bottlePrefab;
@@ -85,7 +85,8 @@ public class BottleInfo
             owner,
             bottleDamage,
             velocity,
-            charactersLayer
+            charactersLayer,
+            groundWallLayer
         );
     }
 }
