@@ -197,7 +197,8 @@ GameObject:
   - component: {fileID: 8319515839610944663}
   - component: {fileID: 374076413680572600}
   - component: {fileID: 8734088133559924500}
-  m_Layer: 0
+  - component: {fileID: 1852757112305648574}
+  m_Layer: 8
   m_Name: GirlWolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,6 +364,7 @@ MonoBehaviour:
   pounceParam: Pounce
   accumulateParam: Accumulate
   useAnimationEvents: 0
+  readyAnimName: Ready
   drawGizmos: 1
   currentMove: 0
   grounded: 0
@@ -495,6 +497,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.5205421, y: 4.140945}
   m_EdgeRadius: 0
+--- !u!114 &1852757112305648574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889810009924403310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4ba7be49a52a4d947abccc2fbe8f81cd, type: 2}
+    - {fileID: 11400000, guid: 01e8009f340a5b647b12ba3b033c3e61, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4889810009924403310}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4889810009924403310}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5401432157155523129
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,10 +633,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25ac01267e5e1f4c9f3d8432a2cf36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageTriggerBox
-  owner: {fileID: 0}
+  owner: {fileID: 4417312939778411887}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   drawGizmos: 1
 --- !u!1 &6889703640462670374
 GameObject:

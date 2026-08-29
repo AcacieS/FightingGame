@@ -75,12 +75,12 @@ public class Player : Character
             StopBlock();
         }
     }
-    public void PlayReadyAnim()
+    public override void PlayReadyAnim()
     {
         //Do Ready Animation
     }
     
-    public void StartPlayerMatch()
+    public override void StartCharacterMatch()
     {
         //TODO Allow Player to move and all
     }

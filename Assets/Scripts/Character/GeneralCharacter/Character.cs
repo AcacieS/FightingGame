@@ -59,6 +59,15 @@ public class Character: MonoBehaviour
             }
         }
     }
+    public virtual void PlayReadyAnim()
+    {
+        //Do Ready Animation
+    }
+    
+    public virtual void StartCharacterMatch()
+    {
+        //TODO Allow Player to move and all
+    }
     
     public virtual void Die()
     {
