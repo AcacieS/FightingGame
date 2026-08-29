@@ -9,10 +9,13 @@ public class Context : MonoBehaviour
     [SerializeField] private Character _target;
     [SerializeField] private AIController _selfController;
     [ReadOnly, SerializeField] private State selfState;
+    [ReadOnly, SerializeField] private AttackResult attackResult;
     public static Context Instance { get; private set; }
     public Character Self => _self;
     public Character Target => _target;
     public AIController AIController => AIController;
+    public AttackResult AttackResult => attackResult;
+    public void SetAttackResult(AttackResult newAttackResult) => attackResult = newAttackResult;
 
     public State SelfState => selfState;
     public void SetCurrentState(State newSelfState) => selfState = newSelfState;

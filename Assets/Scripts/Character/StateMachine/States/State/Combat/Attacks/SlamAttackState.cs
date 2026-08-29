@@ -16,6 +16,6 @@ public class SlamAttackState : MeleeAttackState
             player.Stun();
         }
         //TODO: CHECK SUCCESSFULLY
-        attackResult = AttackResult.Success;
+        AttackResult = AttackResult.Success;
     }
 }

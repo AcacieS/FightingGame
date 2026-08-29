@@ -6,30 +6,12 @@ using UnityEngine;
 public class CharacterUI
 {
     [SerializeField] private Image profileImg;
-    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private TextMeshProUGUI nameText;
     [ReadOnly, SerializeField] private Character currentCharacter;
     public void UpdateCharacterUI(Character character)
     {
-        Deregister();
         currentCharacter = character;
         profileImg.sprite = currentCharacter.Info.ProfileImg;
-        currentCharacter.OnHpChanged += UpdateHealthBar;
-        UpdateHealthBar(currentCharacter.Hp);
-    }
-    public void OnDisable()
-    {
-        
-    }
-    public void Deregister()
-    {
-        if (currentCharacter != null)
-        {
-            currentCharacter.OnHpChanged -= UpdateHealthBar;
-        }
-    }
-
-    private void UpdateHealthBar(int newHp)
-    {
-        hpText.text = newHp.ToString();
+        nameText.text = currentCharacter.Info.Name;
     }
 }

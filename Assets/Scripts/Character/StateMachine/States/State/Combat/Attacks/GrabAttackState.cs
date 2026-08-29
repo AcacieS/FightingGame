@@ -43,8 +43,7 @@ public class GrabAttackState : AttackState
         startAngle = Context.AngleToTarget;
         startDistance = Context.DistanceX;
 
-        facingDirection =
-            Mathf.Sign(Context.Self.transform.localScale.x);
+        facingDirection = Context.DirectionSign;
 
         Debug.Log(
             $"Grab Start | " +
@@ -125,7 +124,7 @@ public class GrabAttackState : AttackState
         Debug.Log("AI → Grab Attack Finished");
         coolDownRequirement.Initialize();
 
-        attackResult =
+        AttackResult =
             currentAttack.HasGrabPlayer
                 ? AttackResult.Success
                 : currentAttack.PlayerHasBlocked

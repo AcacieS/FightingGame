@@ -58,8 +58,6 @@ public class GirlWolf : Enemy
     [SerializeField] private float fallbackMoveSpeed = 4f;
     [Tooltip("Used when the CharacterInfo asset leaves Acceleration at 0.")]
     [SerializeField] private float fallbackAcceleration = 25f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer = 1 << 3; // "Ground"
 
     [Header("Targeting")]
     [Tooltip("Layers an attack can damage. Player sits on Default, so leave this as Everything unless you add a Player layer.")]
@@ -183,6 +181,7 @@ public class GirlWolf : Enemy
 
     [Tooltip("On: damage lands only via AnimEvent_Hit() called from an animation event. Off: the serialized windup timers deal the damage. Turn this on once every attack clip has a contact-frame event.")]
     [SerializeField] private bool useAnimationEvents;
+    [SerializeField] private string readyAnimName = "Ready";
 
     [Header("Debug")]
     [SerializeField] private bool drawGizmos = true;
@@ -426,6 +425,20 @@ public class GirlWolf : Enemy
     }
 
     public override void Start()
+    {
+        // Started before base.Start() so a throw in the base class can never leave the
+        // boss alive but brainless.
+        
+        // brainRoutine = StartCoroutine(BrainRoutine());
+
+        // base.Start();
+    }
+    public override void PlayReadyAnim()
+    {
+        PlayAnim(readyAnimName);
+    }
+    
+    public override void StartCharacterMatch()
     {
         // Started before base.Start() so a throw in the base class can never leave the
         // boss alive but brainless.

@@ -20,7 +20,7 @@ public abstract class ActionState : State
     {
         base.Enter();
 
-        Context.Self.LookAt(Context.Target);
+        Context.Self.LookAt(Context.Target, true);
 
         animator = Context.Self.GetComponent<Animator>();
 

@@ -59,6 +59,15 @@ public class Character: MonoBehaviour
             }
         }
     }
+    public virtual void PlayReadyAnim()
+    {
+        //Do Ready Animation
+    }
+    
+    public virtual void StartCharacterMatch()
+    {
+        //TODO Allow Player to move and all
+    }
     
     public virtual void Die()
     {
@@ -107,18 +116,25 @@ public class Character: MonoBehaviour
         }
         return true;
     }
-    public void LookAt(Character target)
+    public void LookAt(Character target, bool isInverse = false)
     {
         if (target == null)
             return;
 
-        float direction = target.transform.position.x - transform.position.x;
+        float direction =
+            target.transform.position.x - transform.position.x;
 
         if (Mathf.Approximately(direction, 0f))
             return;
 
+        if (isInverse)
+            direction = -direction;
+
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(direction);
+
+        scale.x =
+            Mathf.Abs(scale.x) * Mathf.Sign(direction);
+
         transform.localScale = scale;
     }
 
