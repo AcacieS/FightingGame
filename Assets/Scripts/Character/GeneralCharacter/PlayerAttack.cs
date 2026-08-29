@@ -54,6 +54,10 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack(InputValue value)
     {
+        Player player = character as Player;
+        if(player != null && (player.IsStunned || player.IsBlocking))
+            return;
+        
         if (!value.isPressed || Time.time < lastAttackTime + cooldown)
             return;
 

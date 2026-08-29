@@ -13,6 +13,15 @@ public class Player : Character
     [SerializeField] private float blockCooldown = 1f;
     [SerializeField] private string blockAnimName = "Block";
 
+    [Header("Stun")]
+    [SerializeField] private float stunDuration = 2f;
+    [SerializeField] private string stunAnimName = "Stunned";
+
+    [ReadOnly, SerializeField] private bool isStunned;
+    private Coroutine stunCouroutine;
+
+    public bool IsStunned => isStunned;
+
     [Header("Animator Parameters")]
     [SerializeField] private string isMovingParameter = "IsMoving";
     [SerializeField] private string isGroundedParameter = "IsGrounded";
@@ -55,7 +64,7 @@ public class Player : Character
 
     public void OnJump(InputValue value)
     {
-        if (value.isPressed && IsOnGround)
+        if (value.isPressed && !isStunned && IsOnGround)
         {
             Jump();
         }
@@ -78,6 +87,8 @@ public class Player : Character
 
     private void TryBlock()
     {
+        if(isStunned) return;
+
         if (isBlocking)
             return;
 
@@ -144,6 +155,8 @@ public class Player : Character
 
     private void Movement()
     {
+        if (isStunned) return;
+
         float targetSpeed = moveInput.x * Info.MoveSpeed;
 
         float newSpeed = Mathf.MoveTowards(
@@ -187,12 +200,12 @@ public class Player : Character
             return false;
         }
 
+        base.Hurt(damage, isInterruptible, isStun); //moved here so anims play
+
         if (isStun)
         {
             Stun();
-        }
-
-        base.Hurt(damage, isInterruptible, isStun);
+        }        
 
         return true;
     }
@@ -219,6 +232,37 @@ public class Player : Character
 
     public void Stun()
     {
-        Move(0);
+        Stun(stunDuration);
+    }
+
+    public void Stun(float duration)
+    {
+        if (stunCouroutine != null)
+            StopCoroutine(stunCouroutine);
+        
+        stunCouroutine = StartCoroutine(StunRoutine(duration));
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        isStunned = true;
+
+        if (isBlocking)
+            StopBlock();
+        
+        StopMoving();
+        PlayAnim(stunAnimName);
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
+        stunCouroutine = null;
+        PlayAnim("Idle");
+    }
+
+    [ContextMenu("Stun Test")]
+    private void StunTest()
+    {
+        Hurt(5, false, true);
     }
 }
