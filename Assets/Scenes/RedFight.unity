@@ -652,18 +652,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 846466374908611304, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: sweep.animName
-      value: FrontAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 846466374908611304, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: uppercut.animName
-      value: FrontAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 846466374908611304, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: downStrike.animName
-      value: FrontAttack
-      objectReference: {fileID: 0}
     - target: {fileID: 2206925923544164841, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8
