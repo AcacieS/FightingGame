@@ -27,9 +27,9 @@ Transform:
   m_GameObject: {fileID: 6558518288762407629}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24, y: 1.11, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.37, z: 0.35}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.24, y: 1.72, z: 0}
+  m_LocalScale: {x: 0.72, y: 0.7611429, z: 0.72}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2206925923544164841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8063977478435738105, guid: af0ed534c6d07cd4b91970decd4a95e9, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 1929685790754269422, guid: affa43a70f97be343b6adf6b37c0a7c5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 8915042286160013947}
   - component: {fileID: 846466374908611304}
   - component: {fileID: 6494158251503499481}
+  - component: {fileID: 621738349422227579}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -179,15 +180,28 @@ MonoBehaviour:
   blockDuration: 2
   blockCooldown: 1
   blockAnimName: Block
-  stunDuration: 2
+  defaultStunDuration: 2
   stunAnimName: Stunned
   isStunned: 0
+  bottleInfo:
+    maxBottle: 3
+    bottleAnim: BottleAttack
+    bottlePrefab: {fileID: 0}
+    spawnBottlePoint: {fileID: 0}
+    bottleSpeed: 8
+    throwAngle: 45
+    bottleDamage: 10
+    charactersLayer:
+      serializedVersion: 2
+      m_Bits: 0
+    nbBottle: 0
   isMovingParameter: IsMoving
   isGroundedParameter: IsGrounded
   verticalVelocityParameter: VerticalVelocity
   horizontalSpeedParameter: HorizontalSpeed
   isBlocking: 0
   blockOnCooldown: 0
+  controlsLocked: 0
 --- !u!61 &694736901372132883
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -452,3 +466,48 @@ CapsuleCollider2D:
   m_Offset: {x: 0.02517128, y: -0.1803953}
   m_Size: {x: 0.76849556, y: 1.4111334}
   m_Direction: 0
+--- !u!114 &621738349422227579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807466522448351533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4ba7be49a52a4d947abccc2fbe8f81cd, type: 2}
+    - {fileID: 11400000, guid: 01e8009f340a5b647b12ba3b033c3e61, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7099070683233864819}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PlayReadyAnim
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7099070683233864819}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: StartCharacterMatch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
