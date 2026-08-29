@@ -64,7 +64,7 @@ public class Player : Character
 
     public void OnJump(InputValue value)
     {
-        if (value.isPressed && !isStunned && IsOnGround)
+        if (value.isPressed && !isStunned && !controlsLocked && IsOnGround)
         {
             Jump();
         }
@@ -84,19 +84,28 @@ public class Player : Character
             StopBlock();
         }
     }
+
+    [ReadOnly, SerializeField] private bool controlsLocked;
+    public bool IsControlsLocked => controlsLocked;
+
     public override void PlayReadyAnim()
     {
         //Do Ready Animation
+        controlsLocked = true;
+        StopMoving();
+        PlayAnim("Ready");
     }
     
     public override void StartCharacterMatch()
     {
         //TODO Allow Player to move and all
+        controlsLocked = false;
+        PlayAnim("Idle");
     }
 
     private void TryBlock()
     {
-        if(isStunned) return;
+        if(isStunned && controlsLocked) return;
 
         if (isBlocking)
             return;
@@ -164,7 +173,7 @@ public class Player : Character
 
     private void Movement()
     {
-        if (isStunned) return;
+        if (isStunned || controlsLocked) return;
 
         float targetSpeed = moveInput.x * Info.MoveSpeed;
 

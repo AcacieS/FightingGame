@@ -46,7 +46,9 @@ public class PlayerAttack : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
-        if (Mathf.Abs(moveInput.x) > 0.01f)
+        Player player = character as Player;
+        if (Mathf.Abs(moveInput.x) > 0.01f
+            && (player == null || (!player.IsStunned && !player.IsControlsLocked)))
         {
             Face(Mathf.Sign(moveInput.x));
         }
@@ -55,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack(InputValue value)
     {
         Player player = character as Player;
-        if(player != null && (player.IsStunned || player.IsBlocking))
+        if(player != null && (player.IsStunned || player.IsControlsLocked || player.IsBlocking))
             return;
         
         if (!value.isPressed || Time.time < lastAttackTime + cooldown)
