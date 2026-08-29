@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,12 @@ public class Player : Character
     [SerializeField] private string stunAnimName = "Stunned";
 
     [ReadOnly, SerializeField] private bool isStunned;
+    [Header("Range Attack")]
+    [SerializeField] private int maxBottle = 3;
+    [SerializeField] private string bottleAnim = "BottleAttack";
+    [ReadOnly, SerializeField] private int nbBottle;
+    public int MaxBottle => maxBottle;
+    public System.Action<int> OnBottleChanged;
     private Coroutine stunCouroutine;
 
     public bool IsStunned => isStunned;
@@ -45,6 +52,7 @@ public class Player : Character
     {
         base.Awake();
     }
+    
 
     private void Update()
     {
@@ -84,10 +92,39 @@ public class Player : Character
             StopBlock();
         }
     }
+    
+    public void OnShoot(InputValue value)
+    {
+        // Debug.Log($"OnBlock called: {value.isPressed}");
+
+        if (value.isPressed)
+        {
+            TryShoot();
+        }
+    }
+    
+    public void TryShoot()
+    {
+        if (nbBottle >= 0)
+        {
+            nbBottle--;
+            OnBottleChanged?.Invoke(nbBottle);
+            PlayAnim(bottleAnim);
+        }
+    }
+    private void SetBottle()
+    {
+        nbBottle = maxBottle;
+        OnBottleChanged?.Invoke(nbBottle);
+    }
 
     [ReadOnly, SerializeField] private bool controlsLocked;
     public bool IsControlsLocked => controlsLocked;
-
+    public override void Start()
+    {
+        base.Start();
+        controlsLocked = true;
+    }
     public override void PlayReadyAnim()
     {
         //Do Ready Animation
@@ -282,5 +319,16 @@ public class Player : Character
     private void StunTest()
     {
         Hurt(5, false, 2f);
+    }
+    private void OnEnable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnMatchStart += SetBottle;
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnMatchStart -= SetBottle;
     }
 }

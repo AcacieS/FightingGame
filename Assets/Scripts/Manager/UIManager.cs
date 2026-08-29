@@ -26,4 +26,16 @@ public class UIManager : MonoBehaviour
         playerUI.UpdateCharacterUI(player);
         enemyUI.UpdateCharacterUI(enemy);
     }
+    public void OnDisable()
+    {
+        if (playerUI != null)
+        {
+            playerUI.OnDisable();
+        }
+        if (enemyUI != null)
+        {
+            enemyUI.OnDisable();
+        }
+        
+    }
 }

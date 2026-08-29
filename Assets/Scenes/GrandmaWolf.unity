@@ -737,10 +737,12 @@ MonoBehaviour:
   playerUI:
     profileImg: {fileID: 47846730}
     nameText: {fileID: 819800598}
+    bottles: []
     currentCharacter: {fileID: 0}
   enemyUI:
     profileImg: {fileID: 232476561}
     nameText: {fileID: 1798340802}
+    bottles: []
     currentCharacter: {fileID: 0}
 --- !u!1 &816342495
 GameObject:
@@ -1507,7 +1509,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 215752154}
           m_TargetAssemblyTypeName: Player, Assembly-CSharp
-          m_MethodName: StartPlayerMatch
+          m_MethodName: StartCharacterMatch
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
