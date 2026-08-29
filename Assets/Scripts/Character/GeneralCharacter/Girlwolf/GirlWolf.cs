@@ -182,6 +182,13 @@ public class GirlWolf : Enemy
     [Tooltip("On: damage lands only via AnimEvent_Hit() called from an animation event. Off: the serialized windup timers deal the damage. Turn this on once every attack clip has a contact-frame event.")]
     [SerializeField] private bool useAnimationEvents;
     [SerializeField] private string readyAnimName = "Ready";
+    [Header("Audio")]
+    [SerializeField] private Audio[] growlsAudio;
+    [SerializeField] private Audio slashAudio;
+    [SerializeField] private Audio slashHitAudio;
+    [SerializeField] private Audio snarlAudio;
+    [SerializeField] private Audio wrenchAttackAudio;
+    [SerializeField] private Audio wrenchGroundAudio;
 
     [Header("Debug")]
     [SerializeField] private bool drawGizmos = true;
@@ -783,6 +790,7 @@ public class GirlWolf : Enemy
         // Started, not yielded on: the waves keep coming on their own schedule even after
         // the swipe itself has recovered, so Shockwave Gap is free of the state's length.
         StopShockwaves();
+        AudioEventChannel.Instance.Play(snarlAudio);
         shockwaveRoutine = StartCoroutine(EmitShockwaves());
 
         yield return new WaitForSeconds(scratchWindup);
@@ -800,6 +808,7 @@ public class GirlWolf : Enemy
     /// </summary>
     private IEnumerator ScratchContact()
     {
+        AudioEventChannel.Instance.Play(slashAudio);
         if (scratchHitbox == null)
         {
             TryHit(scratchHitboxOffset, scratchHitboxSize, scratchDamage, scratchInterrupts);

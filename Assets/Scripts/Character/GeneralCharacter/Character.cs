@@ -71,7 +71,7 @@ public class Character: MonoBehaviour
     
     public virtual void Die()
     {
-        //anim.SetTrigger("Death");
+        anim.SetTrigger("Death");
     }
     public virtual void Awake()
     {
