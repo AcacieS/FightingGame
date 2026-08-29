@@ -15,13 +15,6 @@ public class JumpHunterState : HunterState
         float directionX = Mathf.Sign(transform.position.x - AI.Target.transform.position.x);
 
         RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.left * -directionX * 2 * HunterWolf.transform.localScale.x, new Vector2(directionX * HunterWolf.transform.localScale.x, 0), 10f, colliderLayer);
-        Debug.DrawRay(
-    (Vector2)transform.position + Vector2.left * -directionX * 2 * HunterWolf.transform.localScale.x,
-    new Vector2(directionX * HunterWolf.transform.localScale.x, 0) * 10f,
-    Color.red,
-
-100f
-);
 
         if (hit)
         {
@@ -36,10 +29,18 @@ public class JumpHunterState : HunterState
     private IEnumerator DelayEnterCoroutine()
     {
         yield return new WaitForSeconds(.6f);
+        if(Context.Instance.SelfState is DeadState)
+        {
+            yield break;
+        }
         JumpParticle.Play();
         HunterWolf.ChangeSpeed(moveSpeed);
         HunterWolf.Jump(jumpForce);
         yield return new WaitForSeconds(1f);
+        if(Context.Instance.SelfState is DeadState)
+        {
+            yield break;
+        }
         JumpParticle.Play();
 
     }

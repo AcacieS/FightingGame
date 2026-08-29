@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 11e6f279ade864c6d951e8db74c11b54, type: 3}
+  m_Sprite: {fileID: 2066955260129907943, guid: 0bbdf6a92d083584e89a1f3f8b73707b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,7 +145,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -265,6 +265,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  sr: {fileID: 7572623709507732596}
+  spriteGround: {fileID: 8867726902795195679, guid: fc82268b6f496fa4ba5008e615b6b5d9, type: 3}
 --- !u!50 &2681010649237156086
 Rigidbody2D:
   serializedVersion: 5

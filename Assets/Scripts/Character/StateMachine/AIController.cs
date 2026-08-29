@@ -145,6 +145,7 @@ public class AIController : MonoBehaviour
         currentState?.Exit();
 
         currentState = newState;
+        context.SetCurrentState(currentState);
 
         currentState.Enter();
     }

@@ -5,11 +5,15 @@ public class OwnSceneManager : MonoBehaviour
 {
     void Update()
     {
-        Context.Instance.AIController
-    }
-    public void PlayerDied()
-    {
+        if (Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
+        {
+            LoadNextScene();
+        }
 
+        if (Context.Instance.AIController.Target)
+        {
+            RestartScene();
+        }
     }
 
     private void RestartScene()

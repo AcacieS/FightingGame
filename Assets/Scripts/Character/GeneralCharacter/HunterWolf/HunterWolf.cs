@@ -49,6 +49,7 @@ public class HunterWolf : Enemy
 
     private void Awake()
     {
+        base.Awake();
         ai = GetComponent<AIController>();
 
         timerWaitBetweenState = new Timer(timeWaitBetweenState);

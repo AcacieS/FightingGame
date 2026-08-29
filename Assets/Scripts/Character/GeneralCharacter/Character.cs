@@ -18,6 +18,8 @@ public class Character: MonoBehaviour
     [SerializeField] protected Collider2D characterCollider;
     public Rigidbody2D Rb => rb;
 
+    bool IsDead = false;
+
     public bool IsOnGround
     {
         get
@@ -71,6 +73,7 @@ public class Character: MonoBehaviour
     
     public virtual void Die()
     {
+        IsDead = true;
         //anim.SetTrigger("Death");
     }
     public virtual void Awake()

@@ -9,6 +9,11 @@ public class DeadHunterState : HunterState
         HunterWolf.CanInitiateOtherState = false;
         HunterWolf.ChangeSpeed(0);
     }
+
+    public override void Play()
+    {
+        HunterWolf.ChangeSpeed(0);
+    }
     public override void Exit()
     {
         base.Exit();
