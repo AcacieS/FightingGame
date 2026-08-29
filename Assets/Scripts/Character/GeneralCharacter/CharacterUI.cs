@@ -18,7 +18,7 @@ public class CharacterUI
         // Unsubscribe from previous character
         if (currentCharacter is Player oldPlayer)
         {
-            oldPlayer.OnBottleChanged -= UpdateBottle;
+            oldPlayer.BottleInfo.OnBottleChanged -= UpdateBottle;
         }
 
         currentCharacter = character;
@@ -31,10 +31,10 @@ public class CharacterUI
 
         if (currentCharacter is Player player)
         {
-            player.OnBottleChanged += UpdateBottle;
+            player.BottleInfo.OnBottleChanged += UpdateBottle;
 
             // Update immediately
-            UpdateBottle(player.MaxBottle);
+            UpdateBottle(player.BottleInfo.MaxBottle);
         }
     }
 
@@ -42,7 +42,7 @@ public class CharacterUI
     {
         if (currentCharacter is Player player)
         {
-            player.OnBottleChanged -= UpdateBottle;
+            player.BottleInfo.OnBottleChanged -= UpdateBottle;
         }
 
         currentCharacter = null;
