@@ -103,7 +103,7 @@ public class GrabAttackState : AttackState
 
             damage,
             _doesInterrupt,
-            _doesStun,
+            _stunDuration,
             charactersLayer
         );
     }

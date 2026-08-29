@@ -19,7 +19,7 @@ public class GrabAttackObject : MonoBehaviour
     private float maxDistance;
     private int damage;
     private bool _doesInterrupt;
-    private bool _doesStun;
+    private float _stunDuration;
 
     private LayerMask charactersLayer;
 
@@ -68,7 +68,7 @@ public class GrabAttackObject : MonoBehaviour
 
         int damage,
         bool _doesInterrupt,
-        bool _doesStun,
+        float _stunDuration,
         LayerMask charactersLayer)
     {
         this.owner = owner;
@@ -85,7 +85,7 @@ public class GrabAttackObject : MonoBehaviour
 
         this.damage = damage;
         this._doesInterrupt = _doesInterrupt;
-        this._doesStun = _doesStun;
+        this._stunDuration = _stunDuration;
         this.charactersLayer = charactersLayer;
 
         startPosition = transform.position;
@@ -180,7 +180,7 @@ public class GrabAttackObject : MonoBehaviour
                     player.Hurt(
                         damage,
                         _doesInterrupt, 
-                        _doesStun
+                        _stunDuration
                     );
 
                 if (isHurt)

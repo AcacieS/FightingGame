@@ -106,7 +106,7 @@ public class Character: MonoBehaviour
     {
         Hurt(damageTest, isInterruptibleTest);
     }
-    public virtual bool Hurt(int damage, bool isInterruptible = false, bool isStun = false)
+    public virtual bool Hurt(int damage, bool isInterruptible = false, float stunDuration = 0f)
     {
         Hp -= damage;
         OnHurt?.Invoke(Hp, isInterruptible);

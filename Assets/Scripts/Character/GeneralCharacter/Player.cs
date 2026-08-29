@@ -13,6 +13,15 @@ public class Player : Character
     [SerializeField] private float blockCooldown = 1f;
     [SerializeField] private string blockAnimName = "Block";
 
+    [Header("Stun")]
+    [SerializeField] private float defaultStunDuration = 2f;
+    [SerializeField] private string stunAnimName = "Stunned";
+
+    [ReadOnly, SerializeField] private bool isStunned;
+    private Coroutine stunCouroutine;
+
+    public bool IsStunned => isStunned;
+
     [Header("Animator Parameters")]
     [SerializeField] private string isMovingParameter = "IsMoving";
     [SerializeField] private string isGroundedParameter = "IsGrounded";
@@ -55,7 +64,7 @@ public class Player : Character
 
     public void OnJump(InputValue value)
     {
-        if (value.isPressed && IsOnGround)
+        if (value.isPressed && !isStunned && !controlsLocked && IsOnGround)
         {
             Jump();
         }
@@ -75,18 +84,29 @@ public class Player : Character
             StopBlock();
         }
     }
+
+    [ReadOnly, SerializeField] private bool controlsLocked;
+    public bool IsControlsLocked => controlsLocked;
+
     public override void PlayReadyAnim()
     {
         //Do Ready Animation
+        controlsLocked = true;
+        StopMoving();
+        PlayAnim("Ready");
     }
     
     public override void StartCharacterMatch()
     {
         //TODO Allow Player to move and all
+        controlsLocked = false;
+        PlayAnim("Idle");
     }
 
     private void TryBlock()
     {
+        if(isStunned && controlsLocked) return;
+
         if (isBlocking)
             return;
 
@@ -153,6 +173,8 @@ public class Player : Character
 
     private void Movement()
     {
+        if (isStunned || controlsLocked) return;
+
         float targetSpeed = moveInput.x * Info.MoveSpeed;
 
         float newSpeed = Mathf.MoveTowards(
@@ -188,7 +210,7 @@ public class Player : Character
     public override bool Hurt(
         int damage,
         bool isInterruptible = false,
-        bool isStun = false)
+        float stunDuration = 0f)
     {
         if (isBlocking)
         {
@@ -196,12 +218,12 @@ public class Player : Character
             return false;
         }
 
-        if (isStun)
-        {
-            Stun();
-        }
+        base.Hurt(damage, isInterruptible, stunDuration); //moved here so anims play
 
-        base.Hurt(damage, isInterruptible, isStun);
+        if (stunDuration != 0f)
+        {
+            Stun(stunDuration);
+        }        
 
         return true;
     }
@@ -228,6 +250,37 @@ public class Player : Character
 
     public void Stun()
     {
-        Move(0);
+        Stun(defaultStunDuration);
+    }
+
+    public void Stun(float duration)
+    {
+        if (stunCouroutine != null)
+            StopCoroutine(stunCouroutine);
+        
+        stunCouroutine = StartCoroutine(StunRoutine(duration));
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        isStunned = true;
+
+        if (isBlocking)
+            StopBlock();
+        
+        StopMoving();
+        PlayAnim(stunAnimName);
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
+        stunCouroutine = null;
+        PlayAnim("Idle");
+    }
+
+    [ContextMenu("Stun Test")]
+    private void StunTest()
+    {
+        Hurt(5, false, 2f);
     }
 }

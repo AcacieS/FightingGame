@@ -4,7 +4,7 @@ public abstract class AttackState : ActionState
 {
     [Header("Attack State")]
     [SerializeField] protected int damage = 10;
-    [SerializeField] protected bool _doesStun;
+    [SerializeField] protected float _stunDuration = 0f;
     [SerializeField] protected bool _doesInterrupt;
     [ReadOnly, SerializeField] private AttackResult attackResult;
     public AttackResult AttackResult

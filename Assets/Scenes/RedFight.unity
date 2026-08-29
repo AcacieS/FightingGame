@@ -434,18 +434,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9e1fed5c4e82043989cf7e9965a568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  participants:
-    player: {fileID: 7469042764203623694, guid: a4179d1e84fd5e849814ce9fde733158, type: 3}
-    enemies:
-    - {fileID: 2276924957141737316, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
-    - {fileID: 4889810009924403310, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
-    - {fileID: 652484936673921993, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
   currentMatch:
     battleParticipants:
       player: {fileID: 0}
       enemy: {fileID: 0}
-  playerSpawn: {fileID: 0}
-  enemySpawn: {fileID: 0}
 --- !u!95 &698439431 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7695137333891952207, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
