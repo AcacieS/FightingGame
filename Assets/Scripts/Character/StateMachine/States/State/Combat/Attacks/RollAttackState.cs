@@ -7,6 +7,7 @@ public class RollAttackState : NearAttackState
     // =========================
 
     [Header("Roll Movement")]
+    [SerializeField] private Audio grandmaRoll;
     [SerializeField] private float movementDistance = 3f;
 
     [Tooltip("If enabled, the character moves away from the target.")]
@@ -48,7 +49,7 @@ public class RollAttackState : NearAttackState
     [ReadOnly, SerializeField] private Quaternion initialRotation = Quaternion.identity;
 
     private Collider2D characterCollider;
-
+    
     public override void Enter()
     {
         Debug.Log("AI → Roll Attack");
@@ -58,7 +59,8 @@ public class RollAttackState : NearAttackState
         hasAttack = false;
 
         AI.Character.Move(0);
-        //initialRotation = Quaternion.identity;
+        
+        AudioEventChannel.Instance.Play(grandmaRoll);
 
         startPosition = AI.Character.transform.position;
 
@@ -135,6 +137,7 @@ public class RollAttackState : NearAttackState
 
         if (distanceMoved >= movementDistance)
         {
+            AudioEventChannel.Instance.Stop(grandmaRoll);
             RequestDecision();
         }
     }

@@ -43,8 +43,7 @@ public class GrabAttackState : AttackState
         startAngle = Context.AngleToTarget;
         startDistance = Context.DistanceX;
 
-        facingDirection =
-            Mathf.Sign(Context.Self.transform.localScale.x);
+        facingDirection = Context.DirectionSign;
 
         Debug.Log(
             $"Grab Start | " +
