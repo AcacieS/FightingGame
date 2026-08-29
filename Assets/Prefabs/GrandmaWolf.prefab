@@ -1636,7 +1636,7 @@ MonoBehaviour:
   animName: 
   overrideDuration: 0
   desiredDuration: 1
-  characterHurt: {fileID: 0}
+  characterHurt: {fileID: 3453598486024450045}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.4
 --- !u!1 &2768825297877893734
@@ -2957,7 +2957,7 @@ MonoBehaviour:
   hurtState: {fileID: 1874824113098935437}
   hurtInterruptState: {fileID: 4630193694779743522}
   deadState: {fileID: 5696296692847041610}
-  percentageBlockState: 0.5
+  percentageBlockState: 0.2
   blockState: {fileID: 6846137075048816991}
   currentState: {fileID: 0}
 --- !u!1 &7181266794110205276

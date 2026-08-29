@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89ab37530dc95146a425035e94d36f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaySceneMusic
-  music: {fileID: 11400000, guid: 0dfd89608b8a77449a227f79d19c7d80, type: 2}
+  music: {fileID: 11400000, guid: 6a34a1bed4c07e548b4275e21e198dde, type: 2}
   fadeInDuration: 2
   fadeOutDuration: 2
