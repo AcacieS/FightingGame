@@ -4,33 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> pages = new List<GameObject>();
-    [SerializeField] private string girlWolfScene = "Scenes/GirlWolf_Final";
-    [ReadOnly, SerializeField] private int index = -1;
-    public void Start()
-    {
-        foreach(GameObject page in pages)
-        {
-            page.SetActive(false);
-        }
-        Next();
-    }
-    
     public void Next()
     {
-        if (index >= 0)
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextScene < SceneManager.sceneCountInBuildSettings)
         {
-            pages[index].SetActive(false);
+            SceneManager.LoadScene(nextScene);
         }
-        index++;
-        if (index >= pages.Count)
+        else
         {
-            SceneManager.LoadScene(girlWolfScene);
+            Debug.Log("No next scene available.");
         }
-        pages[index].SetActive(true);
-        
-        
-        
     }
 
 }

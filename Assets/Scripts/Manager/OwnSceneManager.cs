@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class OwnSceneManager : MonoBehaviour
 {
+    bool isLoadingScene = false;
     void Update()
     {
         if (Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
@@ -12,12 +13,20 @@ public class OwnSceneManager : MonoBehaviour
 
         if (Context.Instance.AIController.Target)
         {
-            RestartScene();
+            Character character = Context.Instance.AIController.Target.GetComponent<Character>();
+            if (character.IsDead)
+            {
+                if (!isLoadingScene)
+                {
+                    RestartScene();
+                }
+            }
         }
     }
 
     private void RestartScene()
     {
+        isLoadingScene = true;
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }

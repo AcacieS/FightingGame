@@ -21,16 +21,16 @@ public class TrapHunterWolf : MonoBehaviour
     private Timer timer;
 
     private bool isFlying;
-    private bool isActivated;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(TrapHunterPool pool)
+    public void Initialize(TrapHunterPool pool, HunterWolf owner)
     {
         this.pool = pool;
+        this.owner = owner;
     }
 
     public void Launch(Vector2 velocity)
@@ -38,7 +38,6 @@ public class TrapHunterWolf : MonoBehaviour
         timer = new Timer(lifeTime);
 
         isFlying = true;
-        isActivated = false;
 
         rb.linearVelocity = velocity;
     }
@@ -68,7 +67,7 @@ public class TrapHunterWolf : MonoBehaviour
             groundLayer
         );
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.z + .1f));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + 30f));
 
         if (hit.collider != null)
         {
@@ -84,20 +83,14 @@ public class TrapHunterWolf : MonoBehaviour
     private void ActivateTrap()
     {
         isFlying = false;
-        isActivated = true;
 
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
+        transform.position = new Vector3(transform.position.x, transform.position.y + .2f, transform.position.z);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isActivated)
-            return;
-
-        if (((1 << other.gameObject.layer) & playerLayer) == 0)
-            return;
-
         if (other.CompareTag("Player"))
         {
             Character character = other.GetComponent<Character>();
@@ -106,15 +99,14 @@ public class TrapHunterWolf : MonoBehaviour
             {
                 owner.Hit(character, 10, false);
             }
-        }
 
-        ReturnToPool();
+            ReturnToPool();
+        }
     }
 
     private void ReturnToPool()
     {
         isFlying = false;
-        isActivated = false;
 
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Dynamic;

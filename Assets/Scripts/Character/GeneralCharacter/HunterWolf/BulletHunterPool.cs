@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class BulletHunterPool : MonoBehaviour
 {
+    [SerializeField] private HunterWolf HunterWolf;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private int poolSize = 20;
 
@@ -24,7 +25,7 @@ public class BulletHunterPool : MonoBehaviour
 
         availableBullets.Enqueue(bullet);
 
-        bullet.Initialize(this);
+        bullet.Initialize(this, HunterWolf);
 
         return bullet;
     }

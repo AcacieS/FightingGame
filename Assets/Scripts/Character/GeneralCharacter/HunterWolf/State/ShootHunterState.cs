@@ -18,7 +18,10 @@ public class ShootHunterState : HunterState
     private IEnumerator ShootCoroutine()
     {
         yield return new WaitForSeconds(TimeState / 2);
-
+        if (Context.Instance.SelfState is DeadState)
+        {
+            yield break;
+        }
         HunterWolf.HasABullet = false;
         for (int i = 0; i < BulletAmountToShoot; i++)
         {
@@ -31,7 +34,10 @@ public class ShootHunterState : HunterState
         BoomParticule.Play();
 
         yield return new WaitForSeconds(TimeState / 2);
-
+        if (Context.Instance.SelfState is DeadState)
+        {
+            yield break;
+        }
         StunState.Initialize(AI);
         AI.ChangeState(StunState);
     }

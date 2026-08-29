@@ -12,14 +12,13 @@ public class JumpHunterState : HunterState
     {
         base.Enter();
 
-        float directionX = Mathf.Sign(transform.position.x - AI.Target.transform.position.x);
-
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.left * -directionX * 2 * HunterWolf.transform.localScale.x, new Vector2(directionX * HunterWolf.transform.localScale.x, 0), 10f, colliderLayer);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.left * 2 * -HunterWolf.transform.localScale.x, new Vector2(HunterWolf.transform.localScale.x, 0), 10f, colliderLayer);
 
         if (hit)
         {
             IdleState.Initialize(AI);
             AI.ChangeState(IdleState);
+            HunterWolf.CanInitiateOtherState = true;
             return;
         }
 

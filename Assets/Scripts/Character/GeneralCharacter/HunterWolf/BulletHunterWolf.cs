@@ -18,9 +18,10 @@ public class BulletHunterWolf : MonoBehaviour
         timer = new Timer(lifeTime);
     }
 
-    public void Initialize(BulletHunterPool pool)
+    public void Initialize(BulletHunterPool pool, HunterWolf owner)
     {
         this.pool = pool;
+        this.owner = owner;
     }
 
     public void Launch(Vector2 direction)
@@ -62,10 +63,14 @@ public class BulletHunterWolf : MonoBehaviour
                 if (character != null)
                 {
                     owner.Hit(character, 10, false);
+                    ReturnToPool();
                 }
             }
 
-            ReturnToPool();
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                ReturnToPool();
+            }
         }
     }
 

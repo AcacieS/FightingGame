@@ -47,7 +47,7 @@ public class HunterWolf : Enemy
     [SerializeField] float timeWaitBetweenTrap;
     Timer timerWaitBetweenTrap;
 
-    private void Awake()
+    public override void Awake()
     {
         base.Awake();
         ai = GetComponent<AIController>();

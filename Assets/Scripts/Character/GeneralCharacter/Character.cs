@@ -16,6 +16,8 @@ public class Character: MonoBehaviour
     [Header("Jump")]
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected Collider2D characterCollider;
+    private bool isDead = false;
+    public bool IsDead => isDead;
     public Rigidbody2D Rb => rb;
 
     public bool IsOnGround
@@ -71,7 +73,7 @@ public class Character: MonoBehaviour
     
     public virtual void Die()
     {
-        anim.SetTrigger("Death");
+        isDead = true;
     }
     public virtual void Awake()
     {
@@ -110,9 +112,13 @@ public class Character: MonoBehaviour
     {
         Hp -= damage;
         OnHurt?.Invoke(Hp, isInterruptible);
-        if(anim != null)
+        if (anim != null)
         {
-            anim.SetTrigger("Hurt");         
+            anim.SetTrigger("Hurt");
+        }
+        if(Hp <= 0)
+        {
+            Die();
         }
         return true;
     }

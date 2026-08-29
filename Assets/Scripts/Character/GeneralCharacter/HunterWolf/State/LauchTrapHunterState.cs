@@ -19,6 +19,10 @@ public class LauchTrapHunterState : HunterState
     private IEnumerator ShootCoroutine()
     {
         yield return new WaitForSeconds(TimeState / 2);
+        if (Context.Instance.SelfState is DeadState)
+        {
+            yield break;
+        }
 
         float randomSpeed = Random.Range(.8f, 1.2f);
         float speedToAddBasedOnDistance = Mathf.Abs(AI.Target.transform.position.x - transform.position.x) * .2f;
@@ -30,7 +34,10 @@ public class LauchTrapHunterState : HunterState
         }
 
         yield return new WaitForSeconds(TimeState / 2);
-
+        if (Context.Instance.SelfState is DeadState)
+        {
+            yield break;
+        }
         IdleState.Initialize(AI);
         AI.ChangeState(IdleState);
     }

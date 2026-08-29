@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class TrapHunterPool : MonoBehaviour
 {
+    [SerializeField] private HunterWolf HunterWolf;
     [SerializeField] private GameObject trapPrefab;
     [SerializeField] private int poolSize = 20;
 
@@ -24,7 +25,7 @@ public class TrapHunterPool : MonoBehaviour
 
         availableTraps.Enqueue(Trap);
 
-        Trap.Initialize(this);
+        Trap.Initialize(this, HunterWolf);
 
         return Trap;
     }
