@@ -9,7 +9,6 @@ public class RechargeHunterState : HunterState
         base.Enter();
         HunterWolf.ChangeSpeed(moveSpeed);
         HunterWolf.Animator.SetBool("Recharge", true);
-        HunterWolf.IsRecharging = true;
         HunterWolf.CanInitiateOtherState = false;
     }
     public override void Play()
@@ -27,7 +26,6 @@ public class RechargeHunterState : HunterState
         HunterWolf.TimerWaitBetweenState.Restart();
         HunterWolf.HasABullet = true;
         HunterWolf.Animator.SetBool("Recharge", false);
-        HunterWolf.IsRecharging = false;
         HunterWolf.CanInitiateOtherState = true;
     }
 }

@@ -13,7 +13,7 @@ public class Context : MonoBehaviour
     public static Context Instance { get; private set; }
     public Character Self => _self;
     public Character Target => _target;
-    public AIController AIController => AIController;
+    public AIController AIController => _selfController;
     public AttackResult AttackResult => attackResult;
     public void SetAttackResult(AttackResult newAttackResult) => attackResult = newAttackResult;
 

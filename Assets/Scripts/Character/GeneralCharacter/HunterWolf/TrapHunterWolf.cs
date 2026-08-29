@@ -11,9 +11,12 @@ public class TrapHunterWolf : MonoBehaviour
     [Header("Trap")]
     [SerializeField] private float stunDuration = 2f;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Sprite spriteGround;
 
     private Rigidbody2D rb;
     private TrapHunterPool pool;
+    private HunterWolf owner;
 
     private Timer timer;
 
@@ -65,9 +68,14 @@ public class TrapHunterWolf : MonoBehaviour
             groundLayer
         );
 
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.z + .1f));
+
         if (hit.collider != null)
         {
             rb.position = hit.point;
+
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            sr.sprite = spriteGround;
 
             ActivateTrap();
         }
@@ -90,7 +98,15 @@ public class TrapHunterWolf : MonoBehaviour
         if (((1 << other.gameObject.layer) & playerLayer) == 0)
             return;
 
-        // Stun the player here
+        if (other.CompareTag("Player"))
+        {
+            Character character = other.GetComponent<Character>();
+
+            if (character != null)
+            {
+                owner.Hit(character, 10, false);
+            }
+        }
 
         ReturnToPool();
     }
