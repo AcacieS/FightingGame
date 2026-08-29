@@ -28,6 +28,8 @@ public class HunterWolf : Enemy
 
     [SerializeField] Transform gunEndPoint;
     public Transform GunEndPoint => gunEndPoint;
+    [SerializeField] Transform lauchEndPoint;
+    public Transform LauchEndPoint => lauchEndPoint;
 
     int directionFoward = 1;
     bool canInitiateOtherState = true;
@@ -36,20 +38,21 @@ public class HunterWolf : Enemy
     public float Distance => distance;
     bool isAiming;
     public bool IsAiming { get => isAiming; set => isAiming = value; }
-    bool isRecharging;
-    public bool IsRecharging { get => isRecharging; set => isRecharging = value; }
     bool hasABullet = true;
     public bool HasABullet { get => hasABullet; set => hasABullet = value; }
 
     [SerializeField] float timeWaitBetweenState;
     Timer timerWaitBetweenState;
     public Timer TimerWaitBetweenState => timerWaitBetweenState;
+    [SerializeField] float timeWaitBetweenTrap;
+    Timer timerWaitBetweenTrap;
 
     private void Awake()
     {
         ai = GetComponent<AIController>();
 
         timerWaitBetweenState = new Timer(timeWaitBetweenState);
+        timerWaitBetweenTrap = new Timer(timeWaitBetweenTrap);
 
         AimState.Initialize(ai);
         FowardState.Initialize(ai);
@@ -64,6 +67,9 @@ public class HunterWolf : Enemy
     private void Update()
     {
         if (ai == null || ai.Target == null)
+            return;
+
+        if (Context.Instance.SelfState is DeadHunterState)
             return;
 
         if (Mathf.Sign(transform.position.x - ai.Target.transform.position.x) != transform.localScale.x)
@@ -82,6 +88,10 @@ public class HunterWolf : Enemy
 
         if (distance >= tooFarDistance && !isAiming)
         {
+            if (!hasABullet)
+            {
+                ai.ChangeState(RechargeState);
+            }
             ai.ChangeState(FowardState);
             return;
         }
@@ -90,15 +100,24 @@ public class HunterWolf : Enemy
             ai.ChangeState(KickState);
             return;
         }
-        else if (!isAiming && !isRecharging)
+        else if (!isAiming)
         {
-            if (hasABullet)
+            float LauchOrNo = Random.Range(1, 3);
+            if (LauchOrNo == 1 && timerWaitBetweenTrap.IsOver())
             {
-                ai.ChangeState(AimState);
+                timerWaitBetweenTrap.Restart();
+                ai.ChangeState(LauchTrapState);
             }
             else
             {
-                ai.ChangeState(RechargeState);
+                if (hasABullet)
+                {
+                    ai.ChangeState(AimState);
+                }
+                else
+                {
+                    ai.ChangeState(RechargeState);
+                }
             }
 
             return;

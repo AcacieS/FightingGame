@@ -20,7 +20,7 @@ public class StunHunterState : HunterState
     {
         base.Exit();
         HunterWolf.TimerWaitBetweenState.Restart();
-        HunterWolf.Animator.SetBool("Stun", true);
+        HunterWolf.Animator.SetBool("Stun", false);
         HunterWolf.CanInitiateOtherState = true;
     }
 }
