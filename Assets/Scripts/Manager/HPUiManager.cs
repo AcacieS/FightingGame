@@ -48,6 +48,9 @@ public class HPUiManager : MonoBehaviour
     [Header("Animation")]
     [Tooltip("Seconds for the bar to travel its full length. 0 snaps instantly.")]
     [SerializeField] private float drainDuration = 0.25f;
+    [Header("Debug")]
+    [ReadOnly, SerializeField] private int currentHealth;
+    [ReadOnly, SerializeField] private int maxHealth;
 
     private RectTransform coverRect;
     private float fullWidth;
@@ -138,10 +141,23 @@ public class HPUiManager : MonoBehaviour
     private void Bind(Character next)
     {
         Unsubscribe(character);
+
         character = next;
+
         Subscribe(character);
 
-        targetFraction = FractionOf(character);
+        if (character != null)
+        {
+            currentHealth = character.Hp;
+            maxHealth = character.Info.Hp;
+            targetFraction = FractionOf(character);
+        }
+        else
+        {
+            currentHealth = 0;
+            maxHealth = 0;
+            targetFraction = 1f;
+        }
     }
 
     private void Resolve()
@@ -205,7 +221,13 @@ public class HPUiManager : MonoBehaviour
             target.OnHpChanged -= HandleHpChanged;
     }
 
-    private void HandleHpChanged(int hp) => targetFraction = FractionOf(character);
+    private void HandleHpChanged(int hp)
+    {
+        currentHealth = hp;
+        maxHealth = character.Info.Hp;
+
+        targetFraction = FractionOf(character);
+    }
 
     private static float FractionOf(Character target)
     {

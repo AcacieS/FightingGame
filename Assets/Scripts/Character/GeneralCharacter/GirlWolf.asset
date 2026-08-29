@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146755f28227dc846a80f98691727f49, type: 3}
   m_Name: GirlWolf
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
+  characterName: GIRL WOLF
   hp: 80
   profileImg: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  moveSpeed: 0
+  accelerationSpeed: 0

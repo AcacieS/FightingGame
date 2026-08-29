@@ -58,8 +58,6 @@ public class GirlWolf : Enemy
     [SerializeField] private float fallbackMoveSpeed = 4f;
     [Tooltip("Used when the CharacterInfo asset leaves Acceleration at 0.")]
     [SerializeField] private float fallbackAcceleration = 25f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer = 1 << 3; // "Ground"
 
     [Header("Targeting")]
     [Tooltip("Layers an attack can damage. Player sits on Default, so leave this as Everything unless you add a Player layer.")]

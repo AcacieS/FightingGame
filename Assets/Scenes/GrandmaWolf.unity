@@ -1242,11 +1242,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerUI:
     profileImg: {fileID: 637011264}
-    hpText: {fileID: 393208619}
+    nameText: {fileID: 0}
     currentCharacter: {fileID: 0}
   enemyUI:
     profileImg: {fileID: 648342179}
-    hpText: {fileID: 1231805666}
+    nameText: {fileID: 0}
     currentCharacter: {fileID: 0}
 --- !u!1 &775172956
 GameObject:
@@ -2069,13 +2069,61 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1427520118}
   m_SourcePrefab: {fileID: 100100000, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
 --- !u!4 &1427520117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2206925923544164841, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
   m_PrefabInstance: {fileID: 1427520116}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427520118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215752148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4ba7be49a52a4d947abccc2fbe8f81cd, type: 2}
+    - {fileID: 11400000, guid: 01e8009f340a5b647b12ba3b033c3e61, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 215752154}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PlayReadyAnim
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 215752154}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: StartPlayerMatch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1438479902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,11 +2993,11 @@ PrefabInstance:
     - target: {fileID: 8032660636215874782, guid: d36fd793e09a05f44a02969ad9ca0888, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 215752148}
     - target: {fileID: 8032660636215874782, guid: d36fd793e09a05f44a02969ad9ca0888, type: 3}
       propertyPath: m_SceneBindings.Array.data[8].value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1427520118}
     - target: {fileID: 8032660636215874782, guid: d36fd793e09a05f44a02969ad9ca0888, type: 3}
       propertyPath: m_SceneBindings.Array.data[9].value
       value: 
@@ -2965,7 +3013,7 @@ PrefabInstance:
     - target: {fileID: 8032660636215874782, guid: d36fd793e09a05f44a02969ad9ca0888, type: 3}
       propertyPath: m_SceneBindings.Array.data[12].value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1427520118}
     - target: {fileID: 8032660636215874782, guid: d36fd793e09a05f44a02969ad9ca0888, type: 3}
       propertyPath: m_SceneBindings.Array.data[13].value
       value: 

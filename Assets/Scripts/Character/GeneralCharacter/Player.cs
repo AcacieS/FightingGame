@@ -75,6 +75,15 @@ public class Player : Character
             StopBlock();
         }
     }
+    public void PlayReadyAnim()
+    {
+        //Do Ready Animation
+    }
+    
+    public void StartPlayerMatch()
+    {
+        //TODO Allow Player to move and all
+    }
 
     private void TryBlock()
     {
