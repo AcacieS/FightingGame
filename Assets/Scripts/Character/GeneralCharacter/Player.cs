@@ -19,12 +19,10 @@ public class Player : Character
     [SerializeField] private string stunAnimName = "Stunned";
 
     [ReadOnly, SerializeField] private bool isStunned;
-    [Header("Range Attack")]
-    [SerializeField] private int maxBottle = 3;
-    [SerializeField] private string bottleAnim = "BottleAttack";
-    [ReadOnly, SerializeField] private int nbBottle;
-    public int MaxBottle => maxBottle;
-    public System.Action<int> OnBottleChanged;
+    [Header("Bottle")]
+    [SerializeField] private BottleInfo bottleInfo;
+    public BottleInfo BottleInfo => bottleInfo;
+
     private Coroutine stunCouroutine;
 
     public bool IsStunned => isStunned;
@@ -105,17 +103,21 @@ public class Player : Character
     
     public void TryShoot()
     {
-        if (nbBottle >= 0)
-        {
-            nbBottle--;
-            OnBottleChanged?.Invoke(nbBottle);
-            PlayAnim(bottleAnim);
-        }
-    }
-    private void SetBottle()
-    {
-        nbBottle = maxBottle;
-        OnBottleChanged?.Invoke(nbBottle);
+        if (isStunned || controlsLocked)
+            return;
+
+        if (!bottleInfo.ThrowBottle())
+            return;
+
+        PlayAnim(bottleInfo.AnimName);
+
+        float facingDirection =
+            Mathf.Sign(transform.localScale.x);
+
+        bottleInfo.SpawnBottle(
+            this,
+            facingDirection
+        );
     }
 
     [ReadOnly, SerializeField] private bool controlsLocked;
@@ -323,12 +325,12 @@ public class Player : Character
     private void OnEnable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.OnMatchStart += SetBottle;
+            GameManager.Instance.OnMatchStart += BottleInfo.InitalizeBottle;
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.OnMatchStart -= SetBottle;
+            GameManager.Instance.OnMatchStart -= BottleInfo.InitalizeBottle;
     }
 }
