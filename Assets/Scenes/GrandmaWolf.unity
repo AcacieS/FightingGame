@@ -1040,6 +1040,7 @@ Transform:
   - {fileID: 6171837527696479798}
   - {fileID: 325407325}
   - {fileID: 460336061}
+  - {fileID: 1683406034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1129475589
@@ -1421,6 +1422,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3406766816754923970, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.79
+      objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1762,6 +1767,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1278379592452609124, guid: f598557bfff4ff6468696a91ead19513, type: 3}
   m_PrefabInstance: {fileID: 1286535517}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683406033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1683406034}
+  - component: {fileID: 1683406035}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1683406034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683406033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1075323677}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1683406035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683406033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7d91fce9f7a284c9eecfa6937914ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OwnSceneManager
 --- !u!114 &1798340802 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2429098768208495064, guid: f598557bfff4ff6468696a91ead19513, type: 3}
