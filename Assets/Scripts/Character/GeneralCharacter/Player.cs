@@ -46,9 +46,12 @@ public class Player : Character
 
     public bool IsBlocking => isBlocking;
 
+    [SerializeField] private PlayerAttack playerAttack;
+
     public override void Awake()
     {
         base.Awake();
+        if (playerAttack == null) playerAttack = GetComponent<PlayerAttack>();
     }
     
 
@@ -108,7 +111,8 @@ public class Player : Character
 
     public void TryShoot()
     {
-        if (isStunned || controlsLocked || isBlocking || throwRoutine != null)
+        if (isStunned || controlsLocked || isBlocking || throwRoutine != null
+            || (playerAttack != null && playerAttack.IsAttacking))
             return;
 
         if (!bottleInfo.ThrowBottle())

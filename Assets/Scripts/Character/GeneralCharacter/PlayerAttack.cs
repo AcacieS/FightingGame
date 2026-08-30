@@ -39,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime = -999f;
     [SerializeField]private float maxSwingDuration = 2f;
     private Coroutine swingRoutine;
+    public bool IsAttacking => swingRoutine != null;
 
     private AttackData lastAttack;
 
@@ -65,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack(InputValue value)
     {
         Player player = character as Player;
-        if(player != null && (player.IsStunned || player.IsControlsLocked || player.IsBlocking))
+        if(player != null && (player.IsStunned || player.IsControlsLocked || player.IsBlocking || player.IsThrowing))
             return;
         
         if (!value.isPressed || swingRoutine != null ||Time.time < lastAttackTime + cooldown)
