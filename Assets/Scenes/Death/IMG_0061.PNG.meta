@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7cf41e6883035bf4fa5c47c9452c18a9
+guid: 604494b11c6d4ab4a916da4c1c0cbff7
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -122,12 +122,12 @@ TextureImporter:
       name: IMG_0061_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 4440
-        height: 2834
+        x: 2118
+        y: 350
+        width: 1910
+        height: 1476
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,11 +140,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: IMG_0061_1
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 1749
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40bbd934ca5c2b020800000000000000
+      internalID: 2356162898727648004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0061_2
+      rect:
+        serializedVersion: 2
+        x: 2492
+        y: 328
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 327c2c37c2ad72e10800000000000000
+      internalID: 2172945229685114659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6f05f4831767f684bac05fa025c9687a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -152,11 +196,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":4440.0,"y":2834.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
       IMG_0061_0: 4567630134608687415
+      IMG_0061_1: 2356162898727648004
+      IMG_0061_2: 2172945229685114659
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

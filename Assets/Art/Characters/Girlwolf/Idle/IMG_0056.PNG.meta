@@ -1,16 +1,37 @@
 fileFormatVersion: 2
-guid: 7cf41e6883035bf4fa5c47c9452c18a9
+guid: 66c7bef69da3d9a42a51c08ddd126d43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4567630134608687415
-    second: IMG_0061_0
+      213: 3567162168385976313
+    second: IMG_0056_0
   - first:
-      213: 2356162898727648004
-    second: IMG_0061_1
+      213: 927876757571662234
+    second: IMG_0056_1
   - first:
-      213: 2172945229685114659
-    second: IMG_0061_2
+      213: 179116563769586749
+    second: IMG_0056_2
+  - first:
+      213: -3600915917096207305
+    second: IMG_0056_3
+  - first:
+      213: -2141007009679651106
+    second: IMG_0056_4
+  - first:
+      213: -6910834255952178951
+    second: IMG_0056_5
+  - first:
+      213: 312783595278971430
+    second: IMG_0056_6
+  - first:
+      213: 7265657227753578207
+    second: IMG_0056_7
+  - first:
+      213: 7375754327917302204
+    second: IMG_0056_8
+  - first:
+      213: 3000314940176639776
+    second: IMG_0056_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,7 +140,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_0061_0
+      name: IMG_0056_0
       rect:
         serializedVersion: 2
         x: 0
@@ -134,8 +155,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 73178b6386b736f30800000000000000
-      internalID: 4567630134608687415
+      spriteID: 9f7bbdea71b118130800000000000000
+      internalID: 3567162168385976313
       vertices: []
       indices: 
       edges: []
@@ -144,7 +165,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6f05f4831767f684bac05fa025c9687a
+    spriteID: 5710c1747875bb044adeb7352aacddd0
     internalID: 0
     vertices: []
     indices: 
@@ -156,7 +177,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":4440.0,"y":2834.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      IMG_0061_0: 4567630134608687415
+      IMG_0056_0: 3567162168385976313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

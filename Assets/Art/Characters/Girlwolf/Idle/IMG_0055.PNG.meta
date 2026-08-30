@@ -1,10 +1,76 @@
 fileFormatVersion: 2
-guid: ac6d75e31c3aa6b4ca9b47dc6a5e161d
+guid: c4ff6d99b7022044d9c5a238b821b01e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 798082891578628707
-    second: IMG_3210_0
+      213: -4153505282276118728
+    second: IMG_0055_0
+  - first:
+      213: -3425249035327711739
+    second: IMG_0055_1
+  - first:
+      213: -4780915985048031584
+    second: IMG_0055_2
+  - first:
+      213: -6879217492720016416
+    second: IMG_0055_3
+  - first:
+      213: -5513010569314424231
+    second: IMG_0055_4
+  - first:
+      213: -4515000136799716024
+    second: IMG_0055_5
+  - first:
+      213: -2291165537667963356
+    second: IMG_0055_6
+  - first:
+      213: 2931369321236780308
+    second: IMG_0055_7
+  - first:
+      213: 690795246032405918
+    second: IMG_0055_8
+  - first:
+      213: 5664757037409929744
+    second: IMG_0055_9
+  - first:
+      213: 5141243147942234205
+    second: IMG_0055_10
+  - first:
+      213: 3273225996520718313
+    second: IMG_0055_11
+  - first:
+      213: -2322824807215979096
+    second: IMG_0055_12
+  - first:
+      213: -6970062997373456471
+    second: IMG_0055_13
+  - first:
+      213: -3754612495517121406
+    second: IMG_0055_14
+  - first:
+      213: -6262349059445966290
+    second: IMG_0055_15
+  - first:
+      213: 3664454530640391489
+    second: IMG_0055_16
+  - first:
+      213: 4281914138157551346
+    second: IMG_0055_17
+  - first:
+      213: 553213146790349965
+    second: IMG_0055_18
+  - first:
+      213: -6678127266130696979
+    second: IMG_0055_19
+  - first:
+      213: -8094697867341903591
+    second: IMG_0055_20
+  - first:
+      213: 2690139169715733933
+    second: IMG_0055_21
+  - first:
+      213: 6502219016687113762
+    second: IMG_0055_22
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +179,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_3210_0
+      name: IMG_0055_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 3839
-        height: 1061
+        width: 4440
+        height: 2834
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 36a5cd5592c531b00800000000000000
-      internalID: 798082891578628707
+      spriteID: 83f2935b3f8cb56c0800000000000000
+      internalID: -4153505282276118728
       vertices: []
       indices: 
       edges: []
@@ -138,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e52b984a6e37cfd4d95a6a51bef30cf3
     internalID: 0
     vertices: []
     indices: 
@@ -146,9 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":4440.0,"y":2834.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      IMG_3210_0: 798082891578628707
+      IMG_0055_0: -4153505282276118728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
