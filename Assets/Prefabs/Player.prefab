@@ -181,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 6408989578934936450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.36, y: 2.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 3690938835707519134}
   - component: {fileID: 3583925650833673724}
   - component: {fileID: 7088001839451219547}
+  - component: {fileID: 6840146501624135408}
   m_Layer: 7
   m_Name: Player Img
   m_TagString: Untagged
@@ -304,6 +305,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6840146501624135408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6558518288762407629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0c0446e82b2004c9755bd305cffa43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationEvents
+  player: {fileID: 7099070683233864819}
 --- !u!1 &8807466522448351533
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +393,7 @@ MonoBehaviour:
     bottleAnim: BottleAttack
     bottlePrefab: {fileID: 6264657806095282118, guid: 41e7159c9aad85645bc4db9514ad6a88, type: 3}
     spawnBottlePoint: {fileID: 8543647383849467929}
-    bottleSpeed: 8
+    bottleSpeed: 13.5
     throwAngle: 45
     bottleDamage: 10
     charactersLayer:

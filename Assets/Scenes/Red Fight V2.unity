@@ -1076,22 +1076,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: bottleInfo.maxBottle
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: bottleInfo.bottleSpeed
-      value: 13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543647383849467929, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543647383849467929, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.47
-      objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1099,10 +1083,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6558518288762407629, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1543942023}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
 --- !u!114 &1542685151 stripped
 MonoBehaviour:
@@ -1131,24 +1112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4557753bfaac87148ba3e188ba4562ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
---- !u!1 &1543942019 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6558518288762407629, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-  m_PrefabInstance: {fileID: 1542685150}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1543942023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543942019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0c0446e82b2004c9755bd305cffa43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationEvents
-  player: {fileID: 1542685156}
 --- !u!114 &1641204850 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2993115954118165224, guid: f598557bfff4ff6468696a91ead19513, type: 3}
