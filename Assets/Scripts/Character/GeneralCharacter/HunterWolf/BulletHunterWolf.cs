@@ -70,20 +70,20 @@ public class BulletHunterWolf : MonoBehaviour
                 {
                     owner.Hit(character, 10, false);
                     ReturnToPool();
-}
+                }
             }
 
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-{
-    ReturnToPool();
-}
+            {
+                ReturnToPool();
+            }
         }
     }
 
     private void ReturnToPool()
-{
-    rb.linearVelocity = Vector2.zero;
+    {
+        rb.linearVelocity = Vector2.zero;
 
-    pool.ReturnBullet(this);
-}
+        pool.ReturnBullet(this);
+    }
 }

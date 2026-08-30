@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BallAttackState : ActionState
+public class BallAttackState : AttackState
 {
     [Header("Bounce")]
     [SerializeField] private float bounceSpeed = 8f;
@@ -24,6 +24,7 @@ public class BallAttackState : ActionState
     [Header("Detection")]
     [SerializeField] private Collider2D characterCollider;
     [SerializeField] private LayerMask environmentLayer;
+    [SerializeField] private LayerMask charactersLayer;
     [SerializeField] private float detectionDistance = 0.1f;
     [SerializeField] private CooldownRequirement cooldownRequirement;
 
@@ -186,40 +187,73 @@ public class BallAttackState : ActionState
     // =========================================================
 
     private bool DetectCollision()
+{
+    if (characterCollider == null)
+        return false;
+
+    Bounds bounds = characterCollider.bounds;
+
+    // Check characters first
+    RaycastHit2D characterHit = Physics2D.BoxCast(
+        bounds.center,
+        bounds.size,
+        0f,
+        direction,
+        detectionDistance,
+        charactersLayer
+    );
+
+    if (characterHit.collider)
     {
-        if (characterCollider == null)
-            return false;
+        Character character =
+            characterHit.collider.GetComponentInParent<Character>();
 
-        Bounds bounds = characterCollider.bounds;
-
-        RaycastHit2D hit = Physics2D.BoxCast(
-            bounds.center,
-            bounds.size,
-            0f,
-            direction,
-            detectionDistance,
-            environmentLayer
-        );
-
-        if (!hit.collider)
-            return false;
-
-        Debug.Log(
-            $"{name}: Bounce hit {hit.collider.name}"
-        );
-
-        currentNbBounce++;
-
-        if (currentNbBounce >= nbBounce)
+        if (character != null && character != Context.Self)
         {
+            Debug.Log(
+                $"{name}: Ball hit {character.name}"
+            );
+
+            character.Hurt(damage);
+
             RequestDecision();
             return true;
         }
-
-        Bounce(hit.normal);
-
-        return false;
     }
+
+    // Then check environment
+    RaycastHit2D environmentHit = Physics2D.BoxCast(
+        bounds.center,
+        bounds.size,
+        0f,
+        direction,
+        detectionDistance,
+        environmentLayer
+    );
+
+    if (!environmentHit.collider)
+        return false;
+
+    Debug.Log(
+        $"{name}: Bounce hit {environmentHit.collider.name}"
+    );
+
+    currentNbBounce++;
+
+    Debug.Log(
+        $"{name}: Bounce {currentNbBounce}/{nbBounce}"
+    );
+
+    if (currentNbBounce >= nbBounce)
+    {
+        RequestDecision();
+        return true;
+    }
+
+    Bounce(environmentHit.normal);
+
+    return false;
+}
 
     private void Bounce(Vector2 normal)
     {

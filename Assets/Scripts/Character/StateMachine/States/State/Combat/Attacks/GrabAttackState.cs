@@ -122,7 +122,7 @@ public class GrabAttackState : AttackState
     private void FinishAttack()
     {
         Debug.Log("AI → Grab Attack Finished");
-        Context.Instance.Target.Hurt(0, false, _stunDuration);
+
         coolDownRequirement.Initialize();
 
         AttackResult =
@@ -131,7 +131,10 @@ public class GrabAttackState : AttackState
                 : currentAttack.PlayerHasBlocked
                     ? AttackResult.Blocked
                     : AttackResult.Miss;
-
+        if(AttackResult == AttackResult.Success)
+        {
+            Context.Instance.Target.Hurt(0, false, _stunDuration);
+        }
         Destroy(currentAttack.gameObject);
         currentAttack = null;
 
