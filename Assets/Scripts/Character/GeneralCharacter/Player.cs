@@ -101,14 +101,23 @@ public class Player : Character
         }
     }
     
+    private Coroutine throwRoutine;
+    private bool bottleReleased;
+
+    public bool IsThrowing => throwRoutine != null;
+
     public void TryShoot()
     {
-        if (isStunned || controlsLocked)
+        if (isStunned || controlsLocked || isBlocking || throwRoutine != null)
             return;
 
         if (!bottleInfo.ThrowBottle())
             return;
 
+        throwRoutine = StartCoroutine(ThrowRoutine());
+
+
+    /*
         PlayAnim(bottleInfo.AnimName);
 
         float facingDirection =
@@ -118,6 +127,49 @@ public class Player : Character
             this,
             facingDirection
         );
+        */
+    }
+
+    private IEnumerator ThrowRoutine()
+    {
+        bottleReleased = false;
+        PlayAnim(bottleInfo.AnimName);
+
+        float start = Time.time;
+        while(Time.time < start + 2f)
+        {
+            if (isStunned || controlsLocked)
+            {
+                throwRoutine = null;
+                yield break; //interrupted mid throw
+            }
+
+            if (IsAnimFinished(bottleInfo.AnimName))
+                break;
+            
+            yield return null;
+        }
+
+        if (!bottleReleased)
+        {
+            Debug.LogWarning($"{name}: BottleAttack clip has no realease event, spawning at anim end");
+            ReleaseBottle();
+        }
+
+        PlayAnim("Idle");
+        throwRoutine = null;
+    }
+
+    //called by the animation event on the bottle clip via PlayerAnimationEvents
+    public void ReleaseBottle()
+    {
+        if (bottleReleased || throwRoutine == null)
+            return;
+
+        bottleReleased = true;
+
+        float facingDirection = Mathf.Sign(transform.localScale.x);
+        bottleInfo.SpawnBottle(this, facingDirection);
     }
 
     [ReadOnly, SerializeField] private bool controlsLocked;
