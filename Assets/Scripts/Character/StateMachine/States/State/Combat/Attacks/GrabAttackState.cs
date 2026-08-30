@@ -11,6 +11,8 @@ public class GrabAttackState : AttackState
     [SerializeField] private float attackDistance = 3f;
 
     [SerializeField] private LayerMask charactersLayer;
+    [SerializeField] private Audio hookAttackAudio;
+    [SerializeField] private Audio hookGrabAudio;
 
     [Header("Throw")]
     [SerializeField] private float throwSpeed = 8f;
@@ -19,6 +21,7 @@ public class GrabAttackState : AttackState
     [Header("Return")]
     [SerializeField] private float retreatSpeed = 8f;
     [SerializeField] private float retreatAcceleration = 20f;
+    
 
     [ReadOnly, SerializeField]
     private GrabAttackObject currentAttack;
@@ -32,6 +35,7 @@ public class GrabAttackState : AttackState
 
     [ReadOnly, SerializeField]
     private float facingDirection;
+    
 
     public override void Enter()
     {
@@ -51,7 +55,7 @@ public class GrabAttackState : AttackState
             $"Angle: {startAngle:F1}° | " +
             $"Facing: {facingDirection}"
         );
-
+        AudioEventChannel.Instance.Play(hookAttackAudio);
         SpawnAttack();
     }
 
@@ -104,7 +108,8 @@ public class GrabAttackState : AttackState
             damage,
             _doesInterrupt,
             _stunDuration,
-            charactersLayer
+            charactersLayer,
+            hookGrabAudio
         );
     }
 

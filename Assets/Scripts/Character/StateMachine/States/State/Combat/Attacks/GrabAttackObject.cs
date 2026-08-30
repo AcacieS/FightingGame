@@ -32,6 +32,7 @@ public class GrabAttackObject : MonoBehaviour
 
     private bool hasGrabPlayer;
     private bool playerHasBlocked;
+    private Audio hookGrabAudio;
 
     public bool PlayerHasBlocked => playerHasBlocked;
     public bool HasGrabPlayer => hasGrabPlayer;
@@ -69,7 +70,8 @@ public class GrabAttackObject : MonoBehaviour
         int damage,
         bool _doesInterrupt,
         float _stunDuration,
-        LayerMask charactersLayer)
+        LayerMask charactersLayer,
+        Audio hookGrabAudio)
     {
         this.owner = owner;
         this.target = target;
@@ -87,7 +89,7 @@ public class GrabAttackObject : MonoBehaviour
         this._doesInterrupt = _doesInterrupt;
         this._stunDuration = _stunDuration;
         this.charactersLayer = charactersLayer;
-
+        this.hookGrabAudio = hookGrabAudio;
         startPosition = transform.position;
 
         isReturning = false;
@@ -186,7 +188,7 @@ public class GrabAttackObject : MonoBehaviour
                 if (isHurt)
                 {
                     hasGrabPlayer = true;
-
+                    AudioEventChannel.Instance.Play(hookGrabAudio);
                     grabbedRb =
                         character.GetComponent<Rigidbody2D>();
 

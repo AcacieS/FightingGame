@@ -1749,6 +1749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7d91fce9f7a284c9eecfa6937914ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OwnSceneManager
+  deathDelay: 2
 --- !u!114 &1798340802 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2429098768208495064, guid: f598557bfff4ff6468696a91ead19513, type: 3}
@@ -2283,6 +2284,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrandmaWolf
       objectReference: {fileID: 0}
+    - target: {fileID: 7421614972552435173, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: hookGrabAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: ca792a13ceecd684e8777feb88f73172, type: 2}
+    - target: {fileID: 7421614972552435173, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: hookAttackAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: 74a6d2cd5df34f94fae32e6d944c29c5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
