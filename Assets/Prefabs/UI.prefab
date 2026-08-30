@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4754886819016419366}
   - component: {fileID: 2497736481258162816}
   m_Layer: 5
-  m_Name: ProfileImg Player
+  m_Name: ProfileImg Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5625628670083266225}
+  m_Father: {fileID: 5774492454904427456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -242,7 +242,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2807506827111302319}
+  - {fileID: 168406558908554576}
   m_Father: {fileID: 5712876893982187388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1235,7 +1235,7 @@ GameObject:
   - component: {fileID: 7012433745109548633}
   - component: {fileID: 6985450973487329131}
   m_Layer: 5
-  m_Name: ProfileBG Enemy
+  m_Name: ProfileBG Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1253,7 +1253,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5774492454904427456}
+  m_Father: {fileID: 5625628670083266225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1576,7 +1576,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 168406558908554576}
+  - {fileID: 2807506827111302319}
   m_Father: {fileID: 5712876893982187388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
