@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "FigthingGame.slnx"
+    "dotnet.defaultSolution": "FightingGame.slnx"
 }

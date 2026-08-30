@@ -741,7 +741,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   drawGizmos: 1
 --- !u!1 &7294286432466440259
 GameObject:

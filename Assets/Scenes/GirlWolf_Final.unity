@@ -519,12 +519,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4417312939778411887, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: biteRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417312939778411887, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: verticalVelocityParameter
       value: VelocityY
       objectReference: {fileID: 0}
     - target: {fileID: 4889810009924403310, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: m_Name
       value: GirlWolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292586626908188148, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Size.x
+      value: 17.368706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292586626908188148, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Size.y
+      value: 10.718274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292586626908188148, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Offset.x
+      value: -2.1702883
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292586626908188148, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.8422885
       objectReference: {fileID: 0}
     - target: {fileID: 6308891441767746558, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: m_LocalPosition.x
@@ -569,6 +589,18 @@ PrefabInstance:
     - target: {fileID: 8203484743338988481, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319515839610944663, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734088133559924500, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Size.y
+      value: 8.215945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734088133559924500, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Offset.y
+      value: -4.134752
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1307,6 +1339,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Size.x
+      value: 1.903441
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Size.y
+      value: 3.3762894
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.240937
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.6741624
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: bottleInfo.groundWallLayer.m_Bits
       value: 520
@@ -1925,7 +1977,7 @@ Transform:
   m_GameObject: {fileID: 1924520888}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9493179, y: 1.0007538, z: -5}
+  m_LocalPosition: {x: 0.0000068926006, y: 0.2462138, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
