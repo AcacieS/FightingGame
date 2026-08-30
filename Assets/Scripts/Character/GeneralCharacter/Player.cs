@@ -322,6 +322,19 @@ public class Player : Character
 
         return true;
     }
+
+    public override void Die()
+    {
+        if(IsDead) 
+            return;
+        
+        base.Die();
+
+        controlsLocked = true;
+        StopMoving();
+        StopAllCoroutines();
+    }
+
     private void UpdateAnimator()
     {
         if (anim == null)
