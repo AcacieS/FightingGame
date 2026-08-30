@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
   characterName: LITTLE RED RIDING HOOD
   hp: 100
-  profileImg: {fileID: 5489575817163785838, guid: 129e9221808d6224197220131fffe287, type: 3}
+  profileImg: {fileID: 7230444388775826970, guid: a4d40d21baeb7d74e95fcddf138ab120, type: 3}
   moveSpeed: 10
   accelerationSpeed: 10

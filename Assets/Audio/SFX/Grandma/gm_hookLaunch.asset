@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8b62bf7494f52448d3024fa155ae77, type: 3}
   m_Name: gm_hookLaunch
   m_EditorClassIdentifier: Assembly-CSharp::Audio
-  AudioClip: {fileID: 8300000, guid: 953b275a9b90ffc45bfb3a34a620dc42, type: 3}
+  AudioClip: {fileID: 8300000, guid: 0da9f7f0e746e414d8099cbb397441a0, type: 3}
   Type: 0
-  Volume: 0.555
+  Volume: 1
   Loop: 0
   Pan: 0
   Pitch: 1
