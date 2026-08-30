@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba8b62bf7494f52448d3024fa155ae77, type: 3}
-  m_Name: bg_girl
+  m_Name: gw_snarl2
   m_EditorClassIdentifier: Assembly-CSharp::Audio
-  AudioClip: {fileID: 8300000, guid: 48143b00ca8841f4c98df507480a079b, type: 3}
-  Type: 1
-  Volume: 0.5
-  Loop: 1
+  AudioClip: {fileID: 8300000, guid: cd0d78b8c6d1cde47b720c2bb0eed3d1, type: 3}
+  Type: 0
+  Volume: 1
+  Loop: 0
   Pan: 0
   Pitch: 1
   PitchVariation: 0

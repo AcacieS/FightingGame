@@ -155,6 +155,10 @@ public class GirlWolf : Enemy
     [SerializeField] private float pounceCooldown = 10f;
     [Tooltip("A full-body landing staggers the victim by default.")]
     [SerializeField] private bool pounceInterrupts = true;
+    [Tooltip("Optional. Assign PounceColliderBox to damage by trigger overlap on landing. Left empty, Damage Radius below is used as a one-frame overlap test instead.")]
+    [SerializeField] private DamageTriggerBox pounceHitbox;
+    [Tooltip("How long the pounce hitbox stays live, in seconds. Only used when Pounce Hitbox is assigned.")]
+    [SerializeField] private float pounceActiveTime = 0.2f;
     [SerializeField] private string verticalVelocityParameter = "VerticalVelocity";
     [SerializeField] private string isGroundedParameter = "IsGround";
 
@@ -185,12 +189,24 @@ public class GirlWolf : Enemy
     [SerializeField] private bool useAnimationEvents;
     [SerializeField] private string readyAnimName = "Ready";
     [Header("Audio")]
+    [Tooltip("Played once on the opening/ready animation, before the match starts.")]
+    [SerializeField] private Audio openingAudio;
+    [Tooltip("Played when the boss drops back into Wandering. Shares the growl throttle below.")]
+    [SerializeField] private Audio wanderingAudio;
+    [Tooltip("Picked at random when the boss commits to a chase. Leave empty for silence.")]
     [SerializeField] private Audio[] growlsAudio;
-    [SerializeField] private Audio slashAudio;
-    [SerializeField] private Audio slashHitAudio;
-    [SerializeField] private Audio snarlAudio;
-    [SerializeField] private Audio wrenchAttackAudio;
-    [SerializeField] private Audio wrenchGroundAudio;
+    [Tooltip("Minimum seconds between any two growls - Wandering and Chasing share this clock, so entering one straight after the other cannot double up.")]
+    [SerializeField] private float growlMinInterval = 4f;
+    [Tooltip("Played at the start of every bite swing, including each one in a chain.")]
+    [SerializeField] private Audio biteAudio;
+    [Tooltip("Played as the boss opens a scratch.")]
+    [SerializeField] private Audio scratchAudio;
+    [Tooltip("Played as the boss launches into a pounce.")]
+    [SerializeField] private Audio pounceAudio;
+    [Tooltip("The pounce landing slam, played on touchdown.")]
+    [SerializeField] private Audio pounceLandAudio;
+    [Tooltip("Impact. Played when an attack actually connects, not when it swings.")]
+    [SerializeField] private Audio hitAudio;
 
     [Header("Debug")]
     [SerializeField] private bool drawGizmos = true;
@@ -239,6 +255,7 @@ public class GirlWolf : Enemy
     private float lastScratchTime = -Mathf.Infinity;
     private float lastPounceTime = -Mathf.Infinity;
     private float lastAccumulateTime = -Mathf.Infinity;
+    private float lastGrowlTime = -Mathf.Infinity;
 
     // A State drives walking by calling MoveTowardsTarget() every Update. If it stops
     // calling (or forgets Halt() in Exit) the command goes stale and the boss
@@ -366,7 +383,7 @@ public class GirlWolf : Enemy
                 break;
 
             case WolfMove.Pounce:
-                TryHitRadius(pounceDamageRadius, pounceDamage, pounceInterrupts);
+                StartCoroutine(PounceContact());
                 break;
 
             case WolfMove.Accumulate:
@@ -396,6 +413,9 @@ public class GirlWolf : Enemy
 
         if (scratchHitbox != null)
             scratchHitbox.Disarm();
+
+        if (pounceHitbox != null)
+            pounceHitbox.Disarm();
 
         Halt();
 
@@ -429,6 +449,31 @@ public class GirlWolf : Enemy
 
         if (targetLayer == 0)
             Debug.LogWarning($"{name}: Target Layer is set to Nothing, so attacks will never connect.", this);
+
+        // Impact audio needs to know a hit actually connected. The boxes deal the damage
+        // themselves, so they raise Landed rather than the wolf inferring it from timers.
+        if (biteHitbox != null)
+            biteHitbox.Landed += HandleHitLanded;
+
+        if (scratchHitbox != null)
+            scratchHitbox.Landed += HandleHitLanded;
+
+        if (pounceHitbox != null)
+            pounceHitbox.Landed += HandleHitLanded;
+    }
+
+    private void OnDestroy()
+    {
+        // The boxes are children and normally die with the boss, but an explicitly
+        // destroyed wolf would otherwise leave them holding a reference to a dead object.
+        if (biteHitbox != null)
+            biteHitbox.Landed -= HandleHitLanded;
+
+        if (scratchHitbox != null)
+            scratchHitbox.Landed -= HandleHitLanded;
+
+        if (pounceHitbox != null)
+            pounceHitbox.Landed -= HandleHitLanded;
     }
 
     public override void Start()
@@ -443,6 +488,8 @@ public class GirlWolf : Enemy
     public override void PlayReadyAnim()
     {
         PlayAnim(readyAnimName);
+
+        PlaySfx(openingAudio);
     }
     
     public override void StartCharacterMatch()
@@ -558,6 +605,8 @@ public class GirlWolf : Enemy
     private IEnumerator WanderingRoutine()
     {
         SetMove(WolfMove.Wandering);
+
+        PlayGrowl(wanderingAudio);
         Halt();
 
         float enteredAt = Time.time;
@@ -637,6 +686,8 @@ public class GirlWolf : Enemy
     private IEnumerator ChasingRoutine()
     {
         SetMove(WolfMove.Chasing);
+
+        PlayRandomGrowl();
 
         float nextScratchCheck = Time.time + scratchChaseCheckInterval;
 
@@ -725,6 +776,8 @@ public class GirlWolf : Enemy
         {
             lastBiteTime = Time.time;
 
+            PlaySfx(biteAudio);
+
             Halt();
 
             yield return new WaitForSeconds(biteWindup);
@@ -773,6 +826,8 @@ public class GirlWolf : Enemy
         SetMove(WolfMove.Pounce);
         lastPounceTime = Time.time;
 
+        PlaySfx(pounceAudio);
+
         // Plant the feet and telegraph, so the player has a window to react.
         Halt();
 
@@ -787,11 +842,33 @@ public class GirlWolf : Enemy
 
         StopMoving();
 
+        PlaySfx(pounceLandAudio);
+
         // The damage is the landing itself, so it resolves once, on touchdown.
         if (!useAnimationEvents)
-            TryHitRadius(pounceDamageRadius, pounceDamage, pounceInterrupts);
+            yield return PounceContact();
 
         yield return new WaitForSeconds(pounceRecovery);
+    }
+
+    /// <summary>
+    /// The pounce's contact window. With PounceColliderBox assigned it opens a real trigger
+    /// window on touchdown, so a player who steps into the crater as it lands still gets
+    /// hit; without one it falls back to the single-frame radius test.
+    /// </summary>
+    private IEnumerator PounceContact()
+    {
+        if (pounceHitbox == null)
+        {
+            TryHitRadius(pounceDamageRadius, pounceDamage, pounceInterrupts);
+            yield break;
+        }
+
+        pounceHitbox.Arm(pounceDamage, pounceInterrupts);
+
+        yield return new WaitForSeconds(pounceActiveTime);
+
+        pounceHitbox.Disarm();
     }
 
     /// <summary>
@@ -808,7 +885,7 @@ public class GirlWolf : Enemy
         // Started, not yielded on: the waves keep coming on their own schedule even after
         // the swipe itself has recovered, so Shockwave Gap is free of the state's length.
         StopShockwaves();
-        AudioEventChannel.Instance.Play(snarlAudio);
+        PlaySfx(scratchAudio);
         shockwaveRoutine = StartCoroutine(EmitShockwaves());
 
         yield return new WaitForSeconds(scratchWindup);
@@ -826,7 +903,6 @@ public class GirlWolf : Enemy
     /// </summary>
     private IEnumerator ScratchContact()
     {
-        AudioEventChannel.Instance.Play(slashAudio);
         if (scratchHitbox == null)
         {
             TryHit(scratchHitboxOffset, scratchHitboxSize, scratchDamage, scratchInterrupts);
@@ -1310,6 +1386,67 @@ public class GirlWolf : Enemy
         }
 
         SetMoveBool(currentMove, true);
+    }
+
+    #endregion
+
+    #region Audio
+
+    /// <summary>
+    /// Null-guarded play. AudioEventChannel.Instance is a Resources.Load singleton, so it
+    /// comes back null if that asset is ever moved or missing - and an NRE raised inside an
+    /// attack coroutine would kill the brain mid-swing and strand the hitbox armed.
+    /// </summary>
+    private void PlaySfx(Audio clip)
+    {
+        if (clip == null)
+            return;
+
+        AudioEventChannel channel = AudioEventChannel.Instance;
+
+        if (channel == null)
+        {
+            WarnOnce("~noaudiochannel", "no AudioEventChannel was found in Resources, so the boss is silent");
+            return;
+        }
+
+        channel.Play(clip);
+    }
+
+    /// <summary>
+    /// A growl, rate-limited. Wandering and Chasing alternate quickly while an attack is on
+    /// cooldown, and they share this one clock, so entering one straight after the other
+    /// yields a single growl rather than two stacked on top of each other.
+    /// </summary>
+    private void PlayGrowl(Audio clip)
+    {
+        if (clip == null)
+            return;
+
+        if (Time.time < lastGrowlTime + growlMinInterval)
+            return;
+
+        lastGrowlTime = Time.time;
+
+        PlaySfx(clip);
+    }
+
+    /// <summary>One of the chase growls at random, subject to the same throttle.</summary>
+    private void PlayRandomGrowl()
+    {
+        if (growlsAudio == null || growlsAudio.Length == 0)
+            return;
+
+        PlayGrowl(growlsAudio[Random.Range(0, growlsAudio.Length)]);
+    }
+
+    /// <summary>
+    /// Impact audio. Raised by whichever DamageTriggerBox connected, so it fires on contact
+    /// rather than on the swing - a bite that whiffs stays silent.
+    /// </summary>
+    private void HandleHitLanded(Character victim)
+    {
+        PlaySfx(hitAudio);
     }
 
     #endregion
