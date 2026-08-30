@@ -25,10 +25,10 @@ public class CharacterUI
 
         if (currentCharacter == null)
             return;
-
+        profileImg.preserveAspect = true;
         profileImg.sprite = currentCharacter.Info.ProfileImg;
         nameText.text = currentCharacter.Info.Name;
-
+        
         if (currentCharacter is Player player)
         {
             player.BottleInfo.OnBottleChanged += UpdateBottle;
