@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MeleeAttackState : NearAttackState
 {
+    [SerializeField] private Audio panAudio;
     private bool hasAttack = false;
     public override void Enter()
     {
@@ -22,6 +23,10 @@ public class MeleeAttackState : NearAttackState
         if (!hasAttack && Attack())
         {
             hasAttack = true;
+            if (panAudio)
+            {
+                AudioEventChannel.Instance.Play(panAudio);
+            }
         }
         if (Context.Self.IsAnimFinished(animName))
         {
