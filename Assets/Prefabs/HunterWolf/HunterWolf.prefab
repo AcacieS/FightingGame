@@ -15936,7 +15936,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -20145,6 +20145,7 @@ MonoBehaviour:
   BulletAmountToShoot: 1
   StunState: {fileID: 544602331803738416}
   BoomParticule: {fileID: 4317284499231481080}
+  shootAudio: {fileID: 11400000, guid: b1cbbcee3fe99d64485e231082683d98, type: 2}
 --- !u!1 &6477328026713872812
 GameObject:
   m_ObjectHideFlags: 0

@@ -1050,6 +1050,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7d91fce9f7a284c9eecfa6937914ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OwnSceneManager
+  loseUI: {fileID: 8891326214696409682}
+  winUI: {fileID: 8891326214696409681}
+  winDelay: 3
   deathDelay: 2
 --- !u!4 &549501985
 Transform:
@@ -2360,6 +2363,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 549501984}
+    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OwnSceneManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2803012359293011082, guid: f598557bfff4ff6468696a91ead19513, type: 3}
       propertyPath: m_Name
       value: UI
@@ -2399,6 +2418,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &8891326214696409681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4407259430102228986, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 8891326214696409678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8891326214696409682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9204615552004875088, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 8891326214696409678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
