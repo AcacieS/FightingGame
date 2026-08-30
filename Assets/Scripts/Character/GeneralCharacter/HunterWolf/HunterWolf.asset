@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HunterWolf
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
   characterName: HUNTER WOLF
-  hp: 120
+  hp: 200
   profileImg: {fileID: 553169931504800688, guid: 3005216c55a422f4aaf19b7c056580a1, type: 3}
   moveSpeed: 0
   accelerationSpeed: 0

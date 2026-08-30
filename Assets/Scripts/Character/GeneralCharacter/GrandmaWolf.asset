@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmaWolf
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
   characterName: GRANDMA WOLF
-  hp: 200
+  hp: 400
   profileImg: {fileID: 5489575817163785838, guid: 129e9221808d6224197220131fffe287, type: 3}
   moveSpeed: 2
   accelerationSpeed: 2

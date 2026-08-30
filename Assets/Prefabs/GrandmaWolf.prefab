@@ -53,7 +53,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 5
-  _stunDuration: 0
+  _stunDuration: 1
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 4787532557060414024}
@@ -743,8 +743,8 @@ MonoBehaviour:
   animName: SlamAttack
   overrideDuration: 0
   desiredDuration: 1
-  damage: 10
-  _stunDuration: 3
+  damage: 5
+  _stunDuration: 7
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 7562689284456734458}
@@ -804,7 +804,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 5
-  _stunDuration: 1
+  _stunDuration: 2
   _doesInterrupt: 0
   attackResult: 0
   grabFinishAnim: GrabEnd
@@ -1237,7 +1237,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.26392412, y: 0.024535894}
+  m_Offset: {x: 0.067698, y: -0.36006737}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1247,7 +1247,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10.830592, y: 10.6285095}
+  m_Size: {x: 9.9985895, y: 9.765114}
   m_EdgeRadius: 0
 --- !u!114 &3923229689760700375
 MonoBehaviour:
@@ -1366,7 +1366,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4649637839022679400, guid: f73ea1f21c7acd7439ba46a472060350, type: 3}
+  m_Sprite: {fileID: 420551708918086480, guid: 46f846ada55f32a4f9d3aa2b1eb6aa1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1432,8 +1432,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.064291425, y: 0}
-  m_Radius: 5.6140084
+  m_Offset: {x: 0.64936745, y: 0}
+  m_Radius: 4.5371914
 --- !u!1 &2412229824454304830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   score_weight: 0
   mode: 2
   minDistance: 0
-  maxDistance: 5
+  maxDistance: 4
   curve:
     serializedVersion: 2
     m_Curve:
@@ -1995,8 +1995,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 0.9931353
-      value: 0.112619884
+      time: 0.99588186
+      value: 0.31080103
       inSlope: -1
       outSlope: -1
       tangentMode: 0
@@ -2018,7 +2018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18a7843e8d3d0445b3580d71fbc7e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CooldownRequirement
-  coolDownTime: 20
+  coolDownTime: 10
   time: 0
   initializeAtStartCooldown: 0
 --- !u!1 &4318369242888871275

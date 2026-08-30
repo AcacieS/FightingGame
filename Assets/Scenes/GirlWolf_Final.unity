@@ -1394,46 +1394,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3583925650833673724, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1929685790754269422, guid: affa43a70f97be343b6adf6b37c0a7c5, type: 3}
-    - target: {fileID: 3583925650833673724, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3583925650833673724, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3583925650833673724, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Size.x
-      value: 1.903441
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Size.y
-      value: 3.3762894
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.240937
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.6741624
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494158251503499481, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: bottleInfo.groundWallLayer.m_Bits
-      value: 520
-      objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
       value: Player
