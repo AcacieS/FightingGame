@@ -730,7 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerUI:
-    profileImg: {fileID: 1046415859}
+    profileImg: {fileID: 8891326214696409679}
     nameText: {fileID: 1242805716}
     bottles:
     - {fileID: 105713388}
@@ -738,7 +738,7 @@ MonoBehaviour:
     - {fileID: 97395396}
     currentCharacter: {fileID: 0}
   enemyUI:
-    profileImg: {fileID: 1616113969}
+    profileImg: {fileID: 8891326214696409680}
     nameText: {fileID: 782550038}
     bottles: []
     currentCharacter: {fileID: 0}
@@ -1293,17 +1293,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4067434074276851671, guid: 50fda5decd216b24d819da136ee34e57, type: 3}
   m_PrefabInstance: {fileID: 832896041}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1046415859 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5638074455152717927, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-  m_PrefabInstance: {fileID: 8891326214696409678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1135989013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,17 +1995,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6015536665013778117, guid: 82a9b4a6d5de92844afd00bdc454d760, type: 3}
   m_PrefabInstance: {fileID: 1536066185}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1616113969 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2993115954118165224, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-  m_PrefabInstance: {fileID: 8891326214696409678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1808893725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5390777162349260794, guid: f598557bfff4ff6468696a91ead19513, type: 3}
@@ -2399,6 +2377,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+--- !u!114 &8891326214696409679 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6985450973487329131, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 8891326214696409678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &8891326214696409680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2497736481258162816, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+  m_PrefabInstance: {fileID: 8891326214696409678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
