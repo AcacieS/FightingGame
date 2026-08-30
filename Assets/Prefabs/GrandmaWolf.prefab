@@ -597,6 +597,7 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  panAudio: {fileID: 0}
 --- !u!1 &847486075429203871
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +752,7 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  panAudio: {fileID: 0}
   coolDownRequirement: {fileID: 8394781922769725459}
 --- !u!1 &1076575132946352412
 GameObject:
@@ -805,6 +807,7 @@ MonoBehaviour:
   _stunDuration: 1
   _doesInterrupt: 0
   attackResult: 0
+  grabFinishAnim: GrabEnd
   coolDownRequirement: {fileID: 2790631344856362546}
   attackPrefab: {fileID: 6899531225980516719, guid: 5b361745e88589441bf35be6103145d6, type: 3}
   attackSpawnPoint: {fileID: 2890540261175122652}
@@ -813,6 +816,8 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  hookAttackAudio: {fileID: 11400000, guid: 74a6d2cd5df34f94fae32e6d944c29c5, type: 2}
+  hookGrabAudio: {fileID: 11400000, guid: ca792a13ceecd684e8777feb88f73172, type: 2}
   throwSpeed: 12
   throwAcceleration: 12
   retreatSpeed: 20
@@ -1637,8 +1642,8 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   characterHurt: {fileID: 3453598486024450045}
-  hurtColor: {r: 1, g: 0.18396229, b: 0.18396229, a: 0.45882353}
-  duration: 0.4
+  hurtColor: {r: 1, g: 0.4339623, b: 0.4339623, a: 1}
+  duration: 0.2
 --- !u!1 &2768825297877893734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,6 +1861,7 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  panAudio: {fileID: 0}
 --- !u!1 &4221177097195578153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2553,7 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  panAudio: {fileID: 0}
 --- !u!1 &5683356695455184944
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,6 +3540,7 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
+  panAudio: {fileID: 11400000, guid: 14e013120940c824db8e3297d1056a14, type: 2}
 --- !u!1 &8502939113764401248
 GameObject:
   m_ObjectHideFlags: 0
