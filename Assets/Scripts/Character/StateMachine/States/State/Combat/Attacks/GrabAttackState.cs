@@ -3,6 +3,7 @@ using UnityEngine;
 public class GrabAttackState : AttackState
 {
     [Header("Attack")]
+    [SerializeField] private string grabFinishAnim;
     [SerializeField] private CooldownRequirement coolDownRequirement;
     [SerializeField] private GrabAttackObject attackPrefab;
     [SerializeField] private Transform attackSpawnPoint;
@@ -123,13 +124,13 @@ public class GrabAttackState : AttackState
             FinishAttack();
         }
     }
-
+    
     private void FinishAttack()
     {
         Debug.Log("AI → Grab Attack Finished");
 
         coolDownRequirement.Initialize();
-
+        Context.Self.PlayAnim(grabFinishAnim);
         AttackResult =
             currentAttack.HasGrabPlayer
                 ? AttackResult.Success
