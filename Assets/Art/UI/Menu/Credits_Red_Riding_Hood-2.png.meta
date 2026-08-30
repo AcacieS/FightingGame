@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: fb70bad4d8e0d3845998c3817ba4a7f0
+guid: 7a56a6671944221419ec7e55fada4508
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3521533298244992984
-    second: Menu_StartText_UI_0
-  - first:
-      213: 2330150212915150927
-    second: Menu_StartText_UI_1
-  - first:
-      213: -6053704380003283341
-    second: Menu_StartText_UI_2
-  - first:
-      213: 7712425109850396655
-    second: Menu_StartText_UI_3
-  - first:
-      213: 8375883757485327643
-    second: Menu_StartText_UI_4
+      213: 3577834951968065442
+    second: Credits_Red_Riding_Hood-2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Menu_StartText_UI_0
+      name: Credits_Red_Riding_Hood-2_0
       rect:
         serializedVersion: 2
-        x: 650
-        y: 306
-        width: 62
-        height: 63
+        x: 0
+        y: 0
+        width: 960
+        height: 540
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8df3a9a70effed030800000000000000
-      internalID: 3521533298244992984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_StartText_UI_1
-      rect:
-        serializedVersion: 2
-        x: 706
-        y: 307
-        width: 55
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f40cb12e54b565020800000000000000
-      internalID: 2330150212915150927
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_StartText_UI_2
-      rect:
-        serializedVersion: 2
-        x: 751
-        y: 308
-        width: 42
-        height: 59
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 37e8da6b0fbecfba0800000000000000
-      internalID: -6053704380003283341
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_StartText_UI_3
-      rect:
-        serializedVersion: 2
-        x: 807
-        y: 309
-        width: 59
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fe79f6576c9080b60800000000000000
-      internalID: 7712425109850396655
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_StartText_UI_4
-      rect:
-        serializedVersion: 2
-        x: 872
-        y: 305
-        width: 50
-        height: 71
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b1580ec66ed1d3470800000000000000
-      internalID: 8375883757485327643
+      spriteID: 2a78801cee507a130800000000000000
+      internalID: 3577834951968065442
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Menu_StartText_UI_0: 3521533298244992984
-      Menu_StartText_UI_1: 2330150212915150927
-      Menu_StartText_UI_2: -6053704380003283341
-      Menu_StartText_UI_3: 7712425109850396655
-      Menu_StartText_UI_4: 8375883757485327643
+      Credits_Red_Riding_Hood-2_0: 3577834951968065442
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
