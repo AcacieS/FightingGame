@@ -403,6 +403,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 520
     nbBottle: 0
+  hurtAudios:
+  - {fileID: 11400000, guid: 066bc05afb8be644c99c115d6446975f, type: 2}
+  - {fileID: 11400000, guid: c81c336be618caf4c925a083aa84f451, type: 2}
   isMovingParameter: IsMoving
   isGroundedParameter: IsGrounded
   verticalVelocityParameter: VerticalVelocity

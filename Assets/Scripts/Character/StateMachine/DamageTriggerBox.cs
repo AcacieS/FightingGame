@@ -32,6 +32,13 @@ public class DamageTriggerBox : MonoBehaviour
 
     public bool IsArmed => armed;
 
+    /// <summary>
+    /// Raised with the victim each time this box lands a hit, so the attacker can react -
+    /// impact audio, hitstop, a counter. Fires in step with hitThisSwing, so it is raised
+    /// once per character per swing rather than every frame of the overlap.
+    /// </summary>
+    public event System.Action<Character> Landed;
+
     private void Awake()
     {
         box = GetComponent<Collider2D>();
@@ -93,6 +100,8 @@ public class DamageTriggerBox : MonoBehaviour
             return;
 
         owner.Hit(victim, damage, interrupts);
+
+        Landed?.Invoke(victim);
     }
 
     private void OnDrawGizmos()
