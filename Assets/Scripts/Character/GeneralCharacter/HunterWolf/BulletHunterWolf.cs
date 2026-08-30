@@ -52,6 +52,12 @@ public class BulletHunterWolf : MonoBehaviour
             collisionLayer
         );
 
+        if (rb.linearVelocity.sqrMagnitude > 0.01f)
+        {
+            float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+
         if (hit.collider != null)
         {
             rb.position = hit.point;
@@ -64,20 +70,20 @@ public class BulletHunterWolf : MonoBehaviour
                 {
                     owner.Hit(character, 10, false);
                     ReturnToPool();
-                }
+}
             }
 
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                ReturnToPool();
-            }
+{
+    ReturnToPool();
+}
         }
     }
 
     private void ReturnToPool()
-    {
-        rb.linearVelocity = Vector2.zero;
+{
+    rb.linearVelocity = Vector2.zero;
 
-        pool.ReturnBullet(this);
-    }
+    pool.ReturnBullet(this);
+}
 }
