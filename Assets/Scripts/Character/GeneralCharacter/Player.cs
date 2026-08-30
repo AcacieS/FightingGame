@@ -23,6 +23,10 @@ public class Player : Character
     [SerializeField] private BottleInfo bottleInfo;
     public BottleInfo BottleInfo => bottleInfo;
 
+    [Header("Audio")]
+    [Tooltip("Picked at random each time a hit lands. One clip works fine; two or more stop the same yelp repeating.")]
+    [SerializeField] private Audio[] hurtAudios;
+
     private Coroutine stunCouroutine;
 
     public bool IsStunned => isStunned;
@@ -315,6 +319,8 @@ public class Player : Character
 
         base.Hurt(damage, isInterruptible, stunDuration); //moved here so anims play
 
+        PlayRandomHurt();
+
         if (stunDuration != 0f)
         {
             Stun(stunDuration);
@@ -322,6 +328,32 @@ public class Player : Character
 
         return true;
     }
+
+    /// <summary>
+    /// One hurt cry at random. Lives in Hurt() rather than on a hitbox so it covers every
+    /// damage source - bite, scratch, pounce, shockwave - and stays silent on a blocked hit,
+    /// because the block check above returns before this is reached.
+    /// </summary>
+    private void PlayRandomHurt()
+    {
+        if (hurtAudios == null || hurtAudios.Length == 0)
+            return;
+
+        Audio clip = hurtAudios[UnityEngine.Random.Range(0, hurtAudios.Length)];
+
+        if (clip == null)
+            return;
+
+        // Resources.Load singleton: null if the channel asset is ever moved or missing, and
+        // an NRE here would fire on every hit.
+        AudioEventChannel channel = AudioEventChannel.Instance;
+
+        if (channel == null)
+            return;
+
+        channel.Play(clip);
+    }
+
     private void UpdateAnimator()
     {
         if (anim == null)
