@@ -1354,10 +1354,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4064398818684557301, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064398818684557301, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 69
+      objectReference: {fileID: 0}
     - target: {fileID: 5149420404900469314, guid: f598557bfff4ff6468696a91ead19513, type: 3}
       propertyPath: character
       value: 
       objectReference: {fileID: 215752154}
+    - target: {fileID: 6754516767136887563, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754516767136887563, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754516767136887563, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754516767136887563, guid: f598557bfff4ff6468696a91ead19513, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: f73e6859433cd0f4aafe66727a1493d2, type: 3}
     - target: {fileID: 9161248383275540444, guid: f598557bfff4ff6468696a91ead19513, type: 3}
       propertyPath: character
       value: 
