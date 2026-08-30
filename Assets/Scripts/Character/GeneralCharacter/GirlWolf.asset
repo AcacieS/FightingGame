@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
   characterName: GIRL WOLF
   hp: 80
-  profileImg: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  profileImg: {fileID: -5080380782421725508, guid: 4519aa8d73c9f4b49bc754dacd81ad6f, type: 3}
   moveSpeed: 0
   accelerationSpeed: 0

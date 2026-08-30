@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: f1ecd571902bc1a4d8634ab86c98e0d9
+guid: 129e9221808d6224197220131fffe287
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3700995779151726915
-    second: 02 walk_0
-  - first:
-      213: 3625764916960470583
-    second: 02 walk_1
-  - first:
-      213: -8539951056328090317
-    second: 02 walk_2
-  - first:
-      213: -6193241763100745313
-    second: 02 walk_3
+      213: 5489575817163785838
+    second: ProfileThumbnail_Grandma_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 02 walk_0
+      name: ProfileThumbnail_Grandma_0
       rect:
         serializedVersion: 2
-        x: 588
-        y: 1302
-        width: 1305
-        height: 945
+        x: 2292
+        y: 2434
+        width: 698
+        height: 852
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: db6f07492fb63acc0800000000000000
-      internalID: -3700995779151726915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 02 walk_1
-      rect:
-        serializedVersion: 2
-        x: 913
-        y: 1277
-        width: 59
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 736a08a5bfd415230800000000000000
-      internalID: 3625764916960470583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 02 walk_2
-      rect:
-        serializedVersion: 2
-        x: 947
-        y: 1276
-        width: 122
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 33d9758c2cffb7980800000000000000
-      internalID: -8539951056328090317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 02 walk_3
-      rect:
-        serializedVersion: 2
-        x: 1205
-        y: 1261
-        width: 171
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f91244efd6f2d0aa0800000000000000
-      internalID: -6193241763100745313
+      spriteID: e664f95ee14ee2c40800000000000000
+      internalID: 5489575817163785838
       vertices: []
       indices: 
       edges: []
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      02 walk_0: -3700995779151726915
-      02 walk_1: 3625764916960470583
-      02 walk_2: -8539951056328090317
-      02 walk_3: -6193241763100745313
+      ProfileThumbnail_Grandma_0: 5489575817163785838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
