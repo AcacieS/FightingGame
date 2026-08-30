@@ -6,14 +6,15 @@ public class OwnSceneManager : MonoBehaviour
     bool isLoadingScene = false;
     void Update()
     {
-        if (Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
+        if (Context.Instance.Self.IsDead|| Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
         {
+            Debug.LogWarning("update next");
             LoadNextScene();
         }
 
-        if (Context.Instance.AIController.Target)
+        if (Context.Instance.Target)
         {
-            Character character = Context.Instance.AIController.Target.GetComponent<Character>();
+            Character character = Context.Instance.Target;
             if (character.IsDead)
             {
                 if (!isLoadingScene)

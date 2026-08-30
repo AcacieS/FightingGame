@@ -1229,9 +1229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de304960ca52464388df6b06f03cfa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Context
-  _overrideCharactersSettings: 0
-  _self: {fileID: 0}
-  _target: {fileID: 0}
+  _overrideCharactersSettings: 1
+  _self: {fileID: 1359260418}
+  _target: {fileID: 354661167}
   _selfController: {fileID: 0}
   selfState: {fileID: 0}
   attackResult: 0

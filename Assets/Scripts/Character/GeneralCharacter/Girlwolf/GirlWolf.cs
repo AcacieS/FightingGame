@@ -196,7 +196,6 @@ public class GirlWolf : Enemy
     [SerializeField] private bool drawGizmos = true;
     [ReadOnly, SerializeField] private WolfMove currentMove = WolfMove.Wandering;
     [ReadOnly, SerializeField] private bool grounded;
-    [ReadOnly, SerializeField] private bool isDead;
 
     /// <summary>Raised with the move that just ended, right before the boss returns to Wandering.</summary>
     public event System.Action<WolfMove> OnMoveFinished;
@@ -255,7 +254,6 @@ public class GirlWolf : Enemy
     public bool IsBusy =>
         currentMove != WolfMove.Wandering &&
         currentMove != WolfMove.Chasing;
-    public bool IsDead => isDead;
     public bool IsGrounded => grounded;
     public WolfMove CurrentMove => currentMove;
 
@@ -401,7 +399,7 @@ public class GirlWolf : Enemy
 
         Halt();
 
-        if (!isDead && isActiveAndEnabled)
+        if (!IsDead && isActiveAndEnabled)
             brainRoutine = StartCoroutine(BrainRoutine());
     }
 
@@ -491,10 +489,8 @@ public class GirlWolf : Enemy
 
     public override void Die()
     {
-        if (isDead)
+        if (IsDead)
             return;
-
-        isDead = true;
 
         // isDead is set first so CancelMove does not restart the brain.
         CancelMove();
@@ -515,11 +511,11 @@ public class GirlWolf : Enemy
     // CancelMove tears down the running move with it.
     private IEnumerator BrainRoutine()
     {
-        while (!isDead)
+        while (!IsDead)
         {
             yield return WanderingRoutine();
 
-            if (isDead)
+            if (IsDead)
                 yield break;
 
             WolfMove move = pendingMove;
@@ -566,7 +562,7 @@ public class GirlWolf : Enemy
 
         float enteredAt = Time.time;
 
-        while (pendingMove == WolfMove.Wandering && !isDead)
+        while (pendingMove == WolfMove.Wandering && !IsDead)
         {
             if (CheckWanderingTriggers(enteredAt))
                 break;
@@ -645,7 +641,7 @@ public class GirlWolf : Enemy
         float nextScratchCheck = Time.time + scratchChaseCheckInterval;
 
         // pendingMove guards the loop so an external Pounce()/Scratch() can cut the chase short.
-        while (!isDead && pendingMove == WolfMove.Wandering)
+        while (!IsDead && pendingMove == WolfMove.Wandering)
         {
             if (!TargetIsAlive)
                 break;
@@ -745,7 +741,7 @@ public class GirlWolf : Enemy
             if (remaining > 0f)
                 yield return new WaitForSeconds(remaining);
         }
-        while (!isDead &&
+        while (!IsDead &&
                pendingMove == WolfMove.Wandering &&
                !ShouldAccumulate &&
                TargetIsAlive &&
@@ -923,7 +919,7 @@ public class GirlWolf : Enemy
     #region Helpers
 
     private bool CanAct =>
-        !isDead &&
+        !IsDead &&
         currentMove == WolfMove.Wandering &&
         pendingMove == WolfMove.Wandering;
 
@@ -1062,7 +1058,7 @@ public class GirlWolf : Enemy
     /// </summary>
     private void UpdateFacing()
     {
-        if (!controlFacing || isDead)
+        if (!controlFacing || IsDead)
             return;
 
         Character current = TargetCharacter;
@@ -1098,7 +1094,7 @@ public class GirlWolf : Enemy
     // throttle is signed and normally +/-1, but the approach can scale it down.
     private void SetMoveCommand(float throttle)
     {
-        if (isDead || IsBusy)
+        if (IsDead || IsBusy)
             return;
 
         moveThrottle = throttle;
@@ -1113,7 +1109,7 @@ public class GirlWolf : Enemy
 
     private void ApplyWalk()
     {
-        if (IsBusy || isDead)
+        if (IsBusy || IsDead)
             return;
 
         if (Time.time - lastMoveCommandTime > MoveCommandTimeout)
