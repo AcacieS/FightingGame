@@ -1458,6 +1458,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3675153062249359185, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855513457266094312, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167549211194211855, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600924128219676252, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7099070683233864819, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: jumpAnimName
       value: PreJump
@@ -1478,9 +1494,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.56
       objectReference: {fileID: 0}
+    - target: {fileID: 8544330455495429035, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142046537372711990, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
