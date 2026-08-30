@@ -122,6 +122,7 @@ public class GrabAttackState : AttackState
     private void FinishAttack()
     {
         Debug.Log("AI → Grab Attack Finished");
+        Context.Instance.Target.Hurt(0, false, _stunDuration);
         coolDownRequirement.Initialize();
 
         AttackResult =

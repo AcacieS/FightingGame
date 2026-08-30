@@ -53,7 +53,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 0
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 4787532557060414024}
@@ -589,7 +589,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 0
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 568397849377174906}
@@ -743,7 +743,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 3
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 7562689284456734458}
@@ -802,7 +802,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 1
   _doesInterrupt: 0
   attackResult: 0
   coolDownRequirement: {fileID: 2790631344856362546}
@@ -1940,7 +1940,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 0
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 3959528963896670535}
@@ -2619,7 +2619,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 0
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 7523939826013960463}
@@ -3605,7 +3605,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   damage: 10
-  _doesStun: 0
+  _stunDuration: 0
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 6322833035511713684}

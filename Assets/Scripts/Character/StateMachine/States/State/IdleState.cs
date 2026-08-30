@@ -13,6 +13,8 @@ public class IdleState : ActionState
         duration = Random.Range(minDuration, maxDuration);
         Debug.Log("AI → Idle");
         AI.Character.Move(0);
+        Context.Self.transform.rotation =
+            Quaternion.identity;
     }
 
     public override void Play()

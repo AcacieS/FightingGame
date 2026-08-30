@@ -7,6 +7,20 @@ public class BallAttackState : ActionState
     [SerializeField] private int nbBounce = 1;
     private int currentNbBounce;
 
+    [Header("Direction")]
+    [Tooltip("How strongly the initial direction is biased toward the target.")]
+    [SerializeField, Range(0f, 1f)] private float targetDirectionBias = 0.75f;
+
+    [Tooltip("Maximum random angle added to the direction toward the target.")]
+    [SerializeField] private float randomAngle = 45f;
+
+    [Header("Rotation")]
+    [Tooltip("How many degrees the character rotates per unit of movement.")]
+    [SerializeField] private float rotationPerUnit = 180f;
+
+    [Tooltip("Rotate based on the actual movement speed.")]
+    [SerializeField] private bool rotateBasedOnSpeed = true;
+
     [Header("Detection")]
     [SerializeField] private Collider2D characterCollider;
     [SerializeField] private LayerMask environmentLayer;
@@ -15,11 +29,13 @@ public class BallAttackState : ActionState
 
     [Header("Debug")]
     [ReadOnly, SerializeField] private Vector2 direction;
-    
+    [ReadOnly, SerializeField] private float currentRotationSpeed;
 
     private Rigidbody2D rb;
     private float originalGravityScale;
-    
+
+    // Store this so we can restore it when the state exits.
+
     public override void Enter()
     {
         base.Enter();
@@ -31,21 +47,24 @@ public class BallAttackState : ActionState
             Debug.LogError($"{name}: Rigidbody2D not found.");
             return;
         }
+
         currentNbBounce = 0;
-        // Save normal gravity.
+
+        // Save gravity.
         originalGravityScale = rb.gravityScale;
 
-        // Disable gravity for the bounce attack.
+        // Disable gravity during attack.
         rb.gravityScale = 0f;
-
 
         if (characterCollider == null)
         {
-            characterCollider = Context.Self.GetComponent<Collider2D>();
+            characterCollider =
+                Context.Self.GetComponent<Collider2D>();
         }
 
-        // Pick the first random direction.
-        direction = GetRandomDirection();
+        // Get a direction toward the target,
+        // with some randomness.
+        direction = GetTargetBiasedDirection();
 
         SetVelocity();
     }
@@ -56,17 +75,115 @@ public class BallAttackState : ActionState
             return;
 
         if (DetectCollision())
-        return;
+            return;
 
-        // Keep the bounce moving.
+        // Keep moving.
         SetVelocity();
+
+        // Rotate the character while moving.
+        RotateBall();
     }
 
     private void SetVelocity()
     {
-        Vector2 targetVelocity = direction * bounceSpeed;
-        rb.linearVelocity = targetVelocity;
+        rb.linearVelocity = direction * bounceSpeed;
     }
+
+    // =========================================================
+    // DIRECTION
+    // =========================================================
+
+    private Vector2 GetTargetBiasedDirection()
+    {
+        if (Context.Target == null)
+            return GetRandomDirection();
+
+        Vector2 toTarget =
+            Context.Target.transform.position -
+            Context.Self.transform.position;
+
+        if (toTarget.sqrMagnitude <= 0.001f)
+            return GetRandomDirection();
+
+        Vector2 targetDirection = toTarget.normalized;
+
+        // Random direction.
+        Vector2 randomDirection = GetRandomDirection();
+
+        // Bias between random and target.
+        Vector2 finalDirection = Vector2.Lerp(
+            randomDirection,
+            targetDirection,
+            targetDirectionBias
+        );
+
+        return finalDirection.normalized;
+    }
+
+    private Vector2 RotateVector(Vector2 vector, float angle)
+    {
+        float radians = angle * Mathf.Deg2Rad;
+
+        float cos = Mathf.Cos(radians);
+        float sin = Mathf.Sin(radians);
+
+        return new Vector2(
+            vector.x * cos - vector.y * sin,
+            vector.x * sin + vector.y * cos
+        );
+    }
+
+    private Vector2 GetRandomDirection()
+    {
+        float angle = Random.Range(0f, 360f);
+
+        return new Vector2(
+            Mathf.Cos(angle * Mathf.Deg2Rad),
+            Mathf.Sin(angle * Mathf.Deg2Rad)
+        ).normalized;
+    }
+
+    // =========================================================
+    // ROTATION
+    // =========================================================
+
+    private void RotateBall()
+    {
+        float speed = rb.linearVelocity.magnitude;
+
+        if (rotateBasedOnSpeed)
+        {
+            currentRotationSpeed =
+                speed * rotationPerUnit;
+        }
+        else
+        {
+            currentRotationSpeed =
+                bounceSpeed * rotationPerUnit;
+        }
+
+        // Rotate around its own Z axis.
+        //
+        // The sign determines clockwise/counter-clockwise.
+        float rotationDirection =
+            Mathf.Sign(rb.linearVelocity.x);
+
+        if (Mathf.Approximately(rotationDirection, 0f))
+            rotationDirection = 1f;
+
+        Context.Self.transform.Rotate(
+            0f,
+            0f,
+            -rotationDirection *
+            currentRotationSpeed *
+            Time.deltaTime,
+            Space.Self
+        );
+    }
+
+    // =========================================================
+    // COLLISION
+    // =========================================================
 
     private bool DetectCollision()
     {
@@ -87,7 +204,9 @@ public class BallAttackState : ActionState
         if (!hit.collider)
             return false;
 
-        Debug.Log($"{name}: Bounce hit {hit.collider.name}");
+        Debug.Log(
+            $"{name}: Bounce hit {hit.collider.name}"
+        );
 
         currentNbBounce++;
 
@@ -104,39 +223,50 @@ public class BallAttackState : ActionState
 
     private void Bounce(Vector2 normal)
     {
-        // Reflect the current direction off the surface.
-        Vector2 newDirection = Vector2.Reflect(direction, normal);
+        // Natural reflection.
+        Vector2 reflectedDirection =
+            Vector2.Reflect(direction, normal).normalized;
 
-        // Normalize to make sure speed stays consistent.
-        newDirection.Normalize();
-        
-        direction = newDirection;
+        // Direction toward target.
+        Vector2 targetDirection =
+            (Context.Target.transform.position -
+            Context.Self.transform.position).normalized;
+
+        // Blend the reflected direction with the target direction.
+        Vector2 newDirection = Vector2.Lerp(
+            reflectedDirection,
+            targetDirection,
+            targetDirectionBias
+        );
+
+        direction = newDirection.normalized;
 
         Debug.Log(
-            $"{name}: New bounce direction = {direction}"
+            $"{name}: Bounce → " +
+            $"Reflected: {reflectedDirection} | " +
+            $"Target: {targetDirection} | " +
+            $"Final: {direction}"
         );
     }
 
-    private Vector2 GetRandomDirection()
-    {
-        // Random angle around the character.
-        float angle = Random.Range(0f, 360f);
+    // =========================================================
+    // EXIT
+    // =========================================================
 
-        Vector2 randomDirection = new Vector2(
-            Mathf.Cos(angle * Mathf.Deg2Rad),
-            Mathf.Sin(angle * Mathf.Deg2Rad)
-        );
-
-        return randomDirection.normalized;
-    }
     public override void Exit()
     {
         cooldownRequirement.Initialize();
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
             rb.gravityScale = originalGravityScale;
         }
+        
+        // Return character to the rotation it had before the attack.
+        Context.Self.transform.rotation =
+            Quaternion.identity;
+        Debug.Log("should return normal rotation");
     }
 
     private void OnDrawGizmosSelected()
