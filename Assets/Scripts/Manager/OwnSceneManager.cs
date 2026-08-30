@@ -90,14 +90,8 @@ public class OwnSceneManager : MonoBehaviour
 
         Scene currentScene = SceneManager.GetActiveScene();
 
-        DeathSequence sequence = null;
-
-        if (Context.Instance != null && Context.Instance.Target != null)
-            sequence = SequenceOn(Context.Instance.Target);
-
         StartCoroutine(LoadAfterDelay(
-            () => SceneManager.LoadScene(currentScene.buildIndex),
-            sequence
+            () => SceneManager.LoadScene(currentScene.buildIndex)
         ));
     }
 
@@ -176,13 +170,9 @@ public class OwnSceneManager : MonoBehaviour
         return who != null ? who.GetComponent<DeathSequence>() : null;
     }
 
-    private IEnumerator LoadAfterDelay(Action load, DeathSequence sequence)
+    private IEnumerator LoadAfterDelay(Action load)
     {
-        if (sequence != null)
-            yield return sequence.WaitForFinish();
-        else if (deathDelay > 0f)
-            yield return new WaitForSeconds(deathDelay);
-
+        yield return null;
         load();
     }
 }
