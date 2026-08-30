@@ -8,8 +8,11 @@ public class OwnSceneManager : MonoBehaviour
     {
         if (Context.Instance.Self.IsDead || Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
         {
-            Debug.LogWarning("update next");
-            LoadNextScene();
+            if (!isLoadingScene)
+            {
+                Debug.LogWarning("update next");
+                LoadNextScene();
+            }
         }
 
         if (Context.Instance.Target)
@@ -36,15 +39,16 @@ public class OwnSceneManager : MonoBehaviour
     {
         isLoadingScene = true;
         string nextScene = "";
-        if(SceneManager.GetActiveScene().name == "GrandmaWolf")
+        string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "GrandmaWolf")
         {
-            nextScene = "HunterWolf";
+            nextScene = "HunterFight";
         }
-        if(SceneManager.GetActiveScene().name == "HunterWolf")
+        if(sceneName == "HunterFight")
         {
             nextScene = "GirlWolf_Final";
         }
-        if(SceneManager.GetActiveScene().name == "GirlWolf_Final")
+        if(sceneName == "GirlWolf_Final")
         {
             nextScene = "ThankYou";
         }

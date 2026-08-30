@@ -10,6 +10,13 @@ public class Bottle : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    [SerializeField] private float maxLifetime = 5f;
+
+    private void Start()
+    {
+        Destroy(gameObject, maxLifetime);
+    }
+
     public void Initialize(
         Character owner,
         int damage,

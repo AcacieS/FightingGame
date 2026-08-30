@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,9 +14,13 @@ public class PlayerAttack : MonoBehaviour
     {
         public string animName;
         public int damage = 10;
+        /*
         [Tooltip("Hitbox center relative to the player, x flips with facing")]
         public Vector2 offset = new Vector2(0.9f, 0f);
         public Vector2 size = new Vector2(1.2f, 1f);
+        */
+        [Tooltip("Trigger collider child of Player Img with any shape; anims can move it")]
+        public Collider2D hitbox;
     }
 
     [SerializeField] private Character character;
@@ -24,14 +29,17 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Attacks (pick by held direction)")]
     [SerializeField] private AttackData sweep = new AttackData
-    { animName = "Attack", damage = 10, offset = new Vector2(0.9f, 0f), size = new Vector2(1.2f, 1f) };
+    { animName = "Attack"};//, damage = 10, offset = new Vector2(0.9f, 0f), size = new Vector2(1.2f, 1f) };
     [SerializeField] private AttackData uppercut = new AttackData
-    { animName = "Uppercut", damage = 12, offset = new Vector2(0.5f, 1f), size = new Vector2(1f, 1.4f) };
+    { animName = "Uppercut"};//, damage = 12, offset = new Vector2(0.5f, 1f), size = new Vector2(1f, 1.4f) };
     [SerializeField] private AttackData downStrike = new AttackData
-    { animName = "DownStrike", damage = 12, offset = new Vector2(0.5f, -0.8f), size = new Vector2(1f, 1f) };
+    { animName = "DownStrike"};//, damage = 12, offset = new Vector2(0.5f, -0.8f), size = new Vector2(1f, 1f) };
 
     private Vector2 moveInput;
     private float lastAttackTime = -999f;
+    [SerializeField]private float maxSwingDuration = 2f;
+    private Coroutine swingRoutine;
+    public bool IsAttacking => swingRoutine != null;
 
     private AttackData lastAttack;
 
@@ -54,13 +62,14 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+
     public void OnAttack(InputValue value)
     {
         Player player = character as Player;
-        if(player != null && (player.IsStunned || player.IsControlsLocked || player.IsBlocking))
+        if(player != null && (player.IsStunned || player.IsControlsLocked || player.IsBlocking || player.IsThrowing))
             return;
         
-        if (!value.isPressed || Time.time < lastAttackTime + cooldown)
+        if (!value.isPressed || swingRoutine != null ||Time.time < lastAttackTime + cooldown)
             return;
 
         lastAttackTime = Time.time;
@@ -71,9 +80,63 @@ public class PlayerAttack : MonoBehaviour
         else if (moveInput.y < -0.5f)
             attack = downStrike;
 
-        DoAttack(attack);
+        //DoAttack(attack);
+        swingRoutine = StartCoroutine(SwingRoutine(attack));
     }
 
+     private IEnumerator SwingRoutine(AttackData attack)
+    {
+        if (attack.hitbox == null)
+            Debug.LogWarning($"{name}: no hitbox assigned for '{attack.animName}' — swing will deal no damage");
+        else
+            attack.hitbox.enabled = true;
+
+        character.PlayAnim(attack.animName);
+
+        Player player = character as Player;
+        bool hasHit = false;
+        float start = Time.time;
+
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(hitMask);
+        filter.useTriggers = true;
+        Collider2D[] results = new Collider2D[8];
+
+        while (Time.time < start + maxSwingDuration)
+        {
+            if (player != null && (player.IsStunned || player.IsControlsLocked))
+                break; // interrupted: stun/cutscene anim owns the animator now
+
+            if (!hasHit && attack.hitbox != null && attack.hitbox.isActiveAndEnabled)
+            {
+                int count = attack.hitbox.Overlap(filter, results);
+                for (int i = 0; i < count; i++)
+                {
+                    Character target = results[i].GetComponentInParent<Character>();
+                    if (target == null || target == character)
+                        continue;
+
+                    character.Hit(target, attack.damage);
+                    Debug.Log($"{name} hit {target.name} for {attack.damage} -> HP now {target.Hp}");
+                    hasHit = true;
+                    break;
+                }
+            }
+
+            if (character.IsAnimFinished(attack.animName))
+            {
+                character.PlayAnim("Idle");
+                break;
+            }
+
+            yield return null;
+        }
+
+        if (attack.hitbox != null)
+            attack.hitbox.enabled = false;
+        swingRoutine = null;
+    }
+/*
     private void DoAttack(AttackData attack)
     {
         lastAttack = attack;
@@ -96,6 +159,7 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log($"{name} hit {target.name} for {attack.damage} -> HP now {target.Hp}");
         }
     }
+*/
 
     private void Face(float sign)
     {
@@ -103,7 +167,7 @@ public class PlayerAttack : MonoBehaviour
         scale.x = Mathf.Abs(scale.x) * sign;
         transform.localScale = scale;
     }
-
+/*
     private void OnDrawGizmos()
     {
         float facing = Mathf.Sign(transform.localScale.x);
@@ -119,4 +183,5 @@ public class PlayerAttack : MonoBehaviour
             Gizmos.DrawWireCube(center, a.size);
         }
     }
+    */
 }
