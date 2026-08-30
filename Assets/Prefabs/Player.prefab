@@ -39,7 +39,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3675153062249359185}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3855513457266094312}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -181,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 6408989578934936450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.36, y: 2.47, z: 0}
+  m_LocalPosition: {x: 0.36, y: 1.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -381,7 +381,7 @@ MonoBehaviour:
     m_Bits: 8
   characterCollider: {fileID: 0}
   jumpForce: 7
-  jumpAnimName: Jump
+  jumpAnimName: PreJump
   blockDuration: 2
   blockCooldown: 1
   blockAnimName: Block
@@ -393,15 +393,15 @@ MonoBehaviour:
     bottleAnim: BottleAttack
     bottlePrefab: {fileID: 6264657806095282118, guid: 41e7159c9aad85645bc4db9514ad6a88, type: 3}
     spawnBottlePoint: {fileID: 8543647383849467929}
-    bottleSpeed: 13.5
-    throwAngle: 45
+    bottleSpeed: 10
+    throwAngle: 55
     bottleDamage: 10
     charactersLayer:
       serializedVersion: 2
       m_Bits: 256
     groundWallLayer:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 520
     nbBottle: 0
   isMovingParameter: IsMoving
   isGroundedParameter: IsGrounded
@@ -409,6 +409,7 @@ MonoBehaviour:
   horizontalSpeedParameter: HorizontalSpeed
   isBlocking: 0
   blockOnCooldown: 0
+  playerAttack: {fileID: 0}
   controlsLocked: 0
 --- !u!61 &694736901372132883
 BoxCollider2D:
@@ -756,7 +757,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9142046537372711990}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

@@ -7,12 +7,14 @@ public class ShootHunterState : HunterState
     [SerializeField] private int BulletAmountToShoot;
     [SerializeField] private State StunState;
     [SerializeField] private ParticleSystem BoomParticule;
+    [SerializeField] private Audio shootAudio;
     public override void Enter()
     {
         base.Enter();
         StartCoroutine(ShootCoroutine());
         HunterWolf.Animator.SetBool("Shoot", true);
         HunterWolf.CanInitiateOtherState = false;
+        AudioEventChannel.Instance.Play(shootAudio);
     }
 
     private IEnumerator ShootCoroutine()
