@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 77914405f1eb2f740838c154fa0b8c06
   - enabled: 1
-    path: Assets/Scenes/GrandmaWolf.unity
-    guid: 4ca383ba699dc064b805bfb4c36a9f8a
+    path: Assets/Scenes/GirlWolf_Final.unity
+    guid: 86089ba9c891edb42bec52821c4dc3d0
   - enabled: 1
     path: Assets/Scenes/HunterFight.unity
     guid: de8b0ac7ea3159f4ba36cc48d95fd797
   - enabled: 1
-    path: Assets/Scenes/GirlWolf_Final.unity
-    guid: 86089ba9c891edb42bec52821c4dc3d0
+    path: Assets/Scenes/GrandmaWolf.unity
+    guid: 4ca383ba699dc064b805bfb4c36a9f8a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
