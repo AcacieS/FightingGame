@@ -154,17 +154,6 @@ Transform:
   - {fileID: 528626507}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &291558382 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5638074455152717927, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-  m_PrefabInstance: {fileID: 642024753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &305950821
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +724,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7d91fce9f7a284c9eecfa6937914ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OwnSceneManager
+  loseUI: {fileID: 0}
+  winUI: {fileID: 0}
+  winDelay: 3
+  deathDelay: 2
 --- !u!1 &1175506619 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3621278753999190687, guid: f598557bfff4ff6468696a91ead19513, type: 3}
@@ -1076,14 +1069,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3690938835707519134, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 3690938835707519134, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.04
-      objectReference: {fileID: 0}
     - target: {fileID: 8807466522448351533, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1120,17 +1105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4557753bfaac87148ba3e188ba4562ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
---- !u!114 &1641204850 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2993115954118165224, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-  m_PrefabInstance: {fileID: 642024753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1701713257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,12 +1150,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerUI:
-    profileImg: {fileID: 291558382}
+    profileImg: {fileID: 0}
     nameText: {fileID: 915232344}
     bottles: []
     currentCharacter: {fileID: 0}
   enemyUI:
-    profileImg: {fileID: 1641204850}
+    profileImg: {fileID: 0}
     nameText: {fileID: 537182427}
     bottles: []
     currentCharacter: {fileID: 0}
