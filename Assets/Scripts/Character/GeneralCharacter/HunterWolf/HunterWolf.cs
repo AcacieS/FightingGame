@@ -41,6 +41,8 @@ public class HunterWolf : Enemy
     bool hasABullet = true;
     public bool HasABullet { get => hasABullet; set => hasABullet = value; }
 
+    bool controlsLocked = true;
+
     [SerializeField] float timeWaitBetweenState;
     Timer timerWaitBetweenState;
     public Timer TimerWaitBetweenState => timerWaitBetweenState;
@@ -67,6 +69,9 @@ public class HunterWolf : Enemy
 
     private void Update()
     {
+        if (controlsLocked)
+            return;
+
         if (ai == null || ai.Target == null)
             return;
 
@@ -144,5 +149,18 @@ public class HunterWolf : Enemy
     {
         moveSpeed = newMoveSpeed;
         directionFoward = newDirectionFoward;
+    }
+
+    public void StartPlay()
+    {
+        controlsLocked = false;
+        timerWaitBetweenState.Restart();
+        timerWaitBetweenTrap.Restart();
+    }
+
+    public void ReadyPlay()
+    {
+        timerWaitBetweenState.Restart();
+        timerWaitBetweenTrap.Restart();
     }
 }

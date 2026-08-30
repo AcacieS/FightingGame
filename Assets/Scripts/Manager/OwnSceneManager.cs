@@ -6,7 +6,7 @@ public class OwnSceneManager : MonoBehaviour
     bool isLoadingScene = false;
     void Update()
     {
-        if (Context.Instance.Self.IsDead|| Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
+        if (Context.Instance.Self.IsDead || Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
         {
             Debug.LogWarning("update next");
             LoadNextScene();
@@ -34,15 +34,21 @@ public class OwnSceneManager : MonoBehaviour
 
     private void LoadNextScene()
     {
-        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        isLoadingScene = true;
+        string nextScene = "";
+        if(SceneManager.GetActiveScene().name == "GrandmaWolf")
+        {
+            nextScene = "HunterWolf";
+        }
+        if(SceneManager.GetActiveScene().name == "HunterWolf")
+        {
+            nextScene = "GirlWolf_Final";
+        }
+        if(SceneManager.GetActiveScene().name == "GirlWolf_Final")
+        {
+            nextScene = "ThankYou";
+        }
 
-        if (nextScene < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(nextScene);
-        }
-        else
-        {
-            Debug.Log("No next scene available.");
-        }
+        SceneManager.LoadScene(nextScene);
     }
 }
