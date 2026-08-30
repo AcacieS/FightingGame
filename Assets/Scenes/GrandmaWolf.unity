@@ -2447,6 +2447,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrandmaWolf
       objectReference: {fileID: 0}
+    - target: {fileID: 3511958022215404784, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: _stunDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421614972552435173, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: _stunDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
