@@ -2415,16 +2415,40 @@ PrefabInstance:
       value: GrandmaWolf
       objectReference: {fileID: 0}
     - target: {fileID: 4592984601272527922, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: nbBounce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592984601272527922, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
       propertyPath: rotationPerUnit
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4592984601272527922, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
       propertyPath: targetDirectionBias
-      value: 1
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592984601272527922, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: charactersLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700749047630030280, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: jumpForce
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5261264116630663894, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
       propertyPath: coolDownTime
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6583463339411615641, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].time
+      value: 0.50035346
+      objectReference: {fileID: 0}
+    - target: {fileID: 6583463339411615641, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].value
+      value: 0.81138337
+      objectReference: {fileID: 0}
+    - target: {fileID: 7008478014727493232, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
+      propertyPath: stateWeight
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7421614972552435173, guid: d8b089a02217e2e478a510b3af9bac9e, type: 3}
       propertyPath: damage
