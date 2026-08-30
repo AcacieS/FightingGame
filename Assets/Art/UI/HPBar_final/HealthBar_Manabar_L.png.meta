@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 3e88497686521b04b8547fce2f529e2b
+guid: 0410c2a6a5d2a6b4fb6bfd53de5f1d48
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4824492747523733174
-    second: Menu_MenuText_UI_0
-  - first:
-      213: 8936363430080621764
-    second: Menu_MenuText_UI_1
-  - first:
-      213: 1324870957010701118
-    second: Menu_MenuText_UI_2
-  - first:
-      213: -5011978102716594409
-    second: Menu_MenuText_UI_3
+      213: -9087450069567595273
+    second: HealthBar_Manabar_L_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Menu_MenuText_UI_0
+      name: HealthBar_Manabar_L_0
       rect:
         serializedVersion: 2
-        x: 656
-        y: 565
-        width: 65
-        height: 80
+        x: 972
+        y: 3891
+        width: 2838
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a49466a4865fb0db0800000000000000
-      internalID: -4824492747523733174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_MenuText_UI_1
-      rect:
-        serializedVersion: 2
-        x: 730
-        y: 568
-        width: 51
-        height: 76
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4cc2fb95137540c70800000000000000
-      internalID: 8936363430080621764
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_MenuText_UI_2
-      rect:
-        serializedVersion: 2
-        x: 781
-        y: 569
-        width: 66
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e3bcaddad13e26210800000000000000
-      internalID: 1324870957010701118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_MenuText_UI_3
-      rect:
-        serializedVersion: 2
-        x: 866
-        y: 564
-        width: 49
-        height: 78
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7178a8d5870e17ab0800000000000000
-      internalID: -5011978102716594409
+      spriteID: 7fc13512f44e2e180800000000000000
+      internalID: -9087450069567595273
       vertices: []
       indices: 
       edges: []
@@ -223,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Menu_MenuText_UI_0: -4824492747523733174
-      Menu_MenuText_UI_1: 8936363430080621764
-      Menu_MenuText_UI_2: 1324870957010701118
-      Menu_MenuText_UI_3: -5011978102716594409
+      HealthBar_Manabar_L_0: -9087450069567595273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

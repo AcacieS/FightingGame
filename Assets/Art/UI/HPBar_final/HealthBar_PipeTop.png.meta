@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: fbb0b794402518e459c6a7a6ed566054
+guid: 8e4b767ca186aba438f45a0d62599e8e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4938076212112850302
-    second: Menu_CreditsText_UI_0
+      213: 7703023734246311559
+    second: HealthBar_PipeTop_0
   - first:
-      213: 7522517141245837074
-    second: Menu_CreditsText_UI_1
+      213: 8767388540859285607
+    second: HealthBar_PipeTop_1
   - first:
-      213: 2363119762004639886
-    second: Menu_CreditsText_UI_2
-  - first:
-      213: -4368295704148510695
-    second: Menu_CreditsText_UI_3
-  - first:
-      213: 1991703535857906121
-    second: Menu_CreditsText_UI_4
+      213: 3439510854983870150
+    second: HealthBar_PipeTop_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,30 +102,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Menu_CreditsText_UI_0
+      name: HealthBar_PipeTop_0
       rect:
         serializedVersion: 2
-        x: 638
-        y: 142
-        width: 106
-        height: 72
+        x: 3380
+        y: 3917
+        width: 1273
+        height: 538
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +121,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 282053f19dd687bb0800000000000000
-      internalID: -4938076212112850302
+      spriteID: 78687202643a6ea60800000000000000
+      internalID: 7703023734246311559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Menu_CreditsText_UI_1
+      name: HealthBar_PipeTop_1
       rect:
         serializedVersion: 2
-        x: 738
-        y: 144
-        width: 52
-        height: 67
+        x: 4533
+        y: 4039
+        width: 8
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 21fbeb4eb79556860800000000000000
-      internalID: 7522517141245837074
+      spriteID: 7608fb12d650ca970800000000000000
+      internalID: 8767388540859285607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Menu_CreditsText_UI_2
+      name: HealthBar_PipeTop_2
       rect:
         serializedVersion: 2
-        x: 779
-        y: 143
-        width: 48
-        height: 73
+        x: 4613
+        y: 4025
+        width: 18
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,52 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e800ef737ec7bc020800000000000000
-      internalID: 2363119762004639886
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_CreditsText_UI_3
-      rect:
-        serializedVersion: 2
-        x: 824
-        y: 143
-        width: 69
-        height: 69
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 918fc588332b063c0800000000000000
-      internalID: -4368295704148510695
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_CreditsText_UI_4
-      rect:
-        serializedVersion: 2
-        x: 869
-        y: 146
-        width: 65
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9c133b830d3f3ab10800000000000000
-      internalID: 1991703535857906121
+      spriteID: 6c6e96836e89bbf20800000000000000
+      internalID: 3439510854983870150
       vertices: []
       indices: 
       edges: []
@@ -248,11 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Menu_CreditsText_UI_0: -4938076212112850302
-      Menu_CreditsText_UI_1: 7522517141245837074
-      Menu_CreditsText_UI_2: 2363119762004639886
-      Menu_CreditsText_UI_3: -4368295704148510695
-      Menu_CreditsText_UI_4: 1991703535857906121
+      HealthBar_PipeTop_0: 7703023734246311559
+      HealthBar_PipeTop_1: 8767388540859285607
+      HealthBar_PipeTop_2: 3439510854983870150
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

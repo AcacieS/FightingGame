@@ -608,11 +608,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8319515839610944663, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734088133559924500, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Size.x
+      value: 13.659149
       objectReference: {fileID: 0}
     - target: {fileID: 8734088133559924500, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: m_Size.y
       value: 8.215945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734088133559924500, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
+      propertyPath: m_Offset.x
+      value: -7.937029
       objectReference: {fileID: 0}
     - target: {fileID: 8734088133559924500, guid: 4452e99e76329c94bad3c48ba01d0d22, type: 3}
       propertyPath: m_Offset.y
@@ -1042,6 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7d91fce9f7a284c9eecfa6937914ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OwnSceneManager
+  deathDelay: 2
 --- !u!4 &549501985
 Transform:
   m_ObjectHideFlags: 0
