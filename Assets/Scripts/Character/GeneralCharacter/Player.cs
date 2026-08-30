@@ -329,6 +329,7 @@ public class Player : Character
         return true;
     }
 
+
     /// <summary>
     /// One hurt cry at random. Lives in Hurt() rather than on a hitbox so it covers every
     /// damage source - bite, scratch, pounce, shockwave - and stays silent on a blocked hit,
@@ -352,6 +353,17 @@ public class Player : Character
             return;
 
         channel.Play(clip);
+    }
+    public override void Die()
+    {
+        if(IsDead) 
+            return;
+        
+        base.Die();
+
+        controlsLocked = true;
+        StopMoving();
+        StopAllCoroutines();
     }
 
     private void UpdateAnimator()

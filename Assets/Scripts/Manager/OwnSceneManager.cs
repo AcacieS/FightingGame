@@ -1,91 +1,178 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OwnSceneManager : MonoBehaviour
 {
-    [Tooltip("Fallback hold before the scene changes, used only for characters with no DeathSequence. A character that has one holds for its own death animation instead.")]
+    [Header("UI")]
+    [SerializeField] private GameObject loseUI;
+    [SerializeField] private GameObject winUI;
+
+    [Header("Win Settings")]
+    [SerializeField] private float winDelay = 3f;
+
+    [Header("Death Settings")]
+    [Tooltip("Fallback hold before the scene changes, used only for characters with no DeathSequence.")]
     [SerializeField] private float deathDelay = 2f;
 
-    bool isLoadingScene = false;
+    private bool isLoadingScene = false;
+    private bool hasWon = false;
+    private bool hasLost = false;
 
-    void Update()
+    private void Start()
     {
-        // One load is enough: without this the checks below would keep matching every frame
-        // for the whole of the hold and queue a fresh coroutine each time.
-        if (isLoadingScene)
+        // Make sure both UIs are hidden when the scene starts
+        if (loseUI != null)
+            loseUI.SetActive(false);
+
+        if (winUI != null)
+            winUI.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (isLoadingScene || hasWon || hasLost)
             return;
 
         if (Context.Instance == null || Context.Instance.Self == null)
             return;
 
-        if (Context.Instance.Self.IsDead || Context.Instance.SelfState is DeadHunterState || Context.Instance.SelfState is DeadState)
+        // =========================
+        // LOSE
+        // =========================
+        if (Context.Instance.Self.IsDead ||
+            Context.Instance.SelfState is DeadHunterState ||
+            Context.Instance.SelfState is DeadState)
         {
-            Debug.LogWarning("update next");
-            LoadNextScene();
+            Win();
             return;
         }
 
-        if (Context.Instance.Target)
+        // =========================
+        // WIN
+        // =========================
+        if (Context.Instance.Target != null)
         {
             Character character = Context.Instance.Target;
+
             if (character.IsDead)
             {
-                RestartScene();
+                Lose();
             }
         }
     }
 
-    private void RestartScene()
+    // ==========================================
+    // LOSE
+    // ==========================================
+
+    private void Lose()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        BeginLoad(() => SceneManager.LoadScene(currentScene.buildIndex), SequenceOn(Context.Instance.Target));
+        if (hasLost)
+            return;
+
+        hasLost = true;
+
+        Debug.Log("Player lost!");
+
+        if (loseUI != null)
+            loseUI.SetActive(true);
     }
+
+    // This function should be called by your Restart button
+    public void RestartScene()
+    {
+        if (isLoadingScene)
+            return;
+
+        isLoadingScene = true;
+
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        StartCoroutine(LoadAfterDelay(
+            () => SceneManager.LoadScene(currentScene.buildIndex)
+        ));
+    }
+
+    // ==========================================
+    // WIN
+    // ==========================================
+
+    private void Win()
+    {
+        if (hasWon)
+            return;
+
+        hasWon = true;
+
+        Debug.Log("Player won!");
+
+        // Show win UI
+        if (winUI != null)
+            winUI.SetActive(true);
+
+        // Start automatic transition
+        StartCoroutine(WinAndLoadNextScene());
+    }
+
+    private IEnumerator WinAndLoadNextScene()
+    {
+        // Then show the win UI for X seconds
+        if (winDelay > 0f)
+            yield return new WaitForSeconds(winDelay);
+
+        LoadNextScene();
+    }
+
+    // ==========================================
+    // NEXT SCENE
+    // ==========================================
 
     private void LoadNextScene()
     {
+        if (isLoadingScene)
+            return;
+
+        isLoadingScene = true;
+
         string nextScene = "";
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "GrandmaWolf")
+
+        if (sceneName == "GrandmaWolf")
         {
             nextScene = "HunterFight";
         }
-        if(sceneName == "HunterFight")
+        else if (sceneName == "HunterFight")
         {
             nextScene = "GirlWolf_Final";
         }
-        if(sceneName == "GirlWolf_Final")
+        else if (sceneName == "GirlWolf_Final")
         {
             nextScene = "ThankYou";
         }
 
-        BeginLoad(() => SceneManager.LoadScene(nextScene), SequenceOn(Context.Instance.Self));
+        if (string.IsNullOrEmpty(nextScene))
+        {
+            Debug.LogWarning("No next scene defined for: " + sceneName);
+            return;
+        }
+
+        SceneManager.LoadScene(nextScene);
     }
 
-    /// <summary>The dying character's DeathSequence, or null if it has not been given one.</summary>
-    private DeathSequence SequenceOn(Character who) =>
-        who != null ? who.GetComponent<DeathSequence>() : null;
+    // ==========================================
+    // DEATH SEQUENCE
+    // ==========================================
 
-    /// <summary>
-    /// Flags the load as started straight away, then waits, so the death animation gets to
-    /// play before the scene goes. The flag has to be set here rather than after the wait:
-    /// Update runs every frame, and the dead character stays dead for the whole hold.
-    /// </summary>
-    private void BeginLoad(System.Action load, DeathSequence sequence)
+    private DeathSequence SequenceOn(Character who)
     {
-        isLoadingScene = true;
-        StartCoroutine(LoadAfterDelay(load, sequence));
+        return who != null ? who.GetComponent<DeathSequence>() : null;
     }
 
-    private IEnumerator LoadAfterDelay(System.Action load, DeathSequence sequence)
+    private IEnumerator LoadAfterDelay(Action load)
     {
-        // A DeathSequence knows how long its own death animation actually runs, so prefer it.
-        // Death Delay is only the fallback for characters that have not been given one.
-        if (sequence != null)
-            yield return sequence.WaitForFinish();
-        else if (deathDelay > 0f)
-            yield return new WaitForSeconds(deathDelay);
-
+        yield return null;
         load();
     }
 }
