@@ -186,6 +186,10 @@ public class Player : Character
     {
         base.Start();
         controlsLocked = true;
+
+        bottleInfo.InitalizeBottle();
+        if(GameManager.Instance !=null)
+            GameManager.Instance.OnMatchStart += BottleInfo.InitalizeBottle;
     }
     public override void PlayReadyAnim()
     {
@@ -424,8 +428,7 @@ public class Player : Character
     }
     private void OnEnable()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnMatchStart += BottleInfo.InitalizeBottle;
+        
     }
 
     private void OnDisable()
