@@ -155,6 +155,8 @@ public class GirlWolf : Enemy
     [SerializeField] private float pounceCooldown = 10f;
     [Tooltip("A full-body landing staggers the victim by default.")]
     [SerializeField] private bool pounceInterrupts = true;
+    [SerializeField] private string verticalVelocityParameter = "VerticalVelocity";
+    [SerializeField] private string isGroundedParameter = "IsGround";
 
     [Header("Accumulate (desperation attack)")]
     [Tooltip("Wandering auto-triggers Accumulate once HP drops below this fraction of max.")]
@@ -465,6 +467,26 @@ public class GirlWolf : Enemy
 
         UpdateFacing();
         ApplyWalk();
+    }
+    public void Update()
+    {
+        UpdateAnimator();
+    }
+    private void UpdateAnimator()
+    {
+        if (anim == null)
+            return;
+
+        anim.SetBool(
+            isGroundedParameter,
+            IsOnGround
+        );
+
+        // PUT IT HERE
+        anim.SetFloat(
+            verticalVelocityParameter,
+            rb.linearVelocity.y
+        );
     }
 
     public override void Die()

@@ -180,7 +180,7 @@ SpriteRenderer:
   m_Size: {x: 9.988, y: 6.652164}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4889810009924403310
 GameObject:
@@ -215,8 +215,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5279984836871167853}
   - {fileID: 7325105167066458208}
@@ -365,6 +365,15 @@ MonoBehaviour:
   accumulateParam: Accumulate
   useAnimationEvents: 0
   readyAnimName: Ready
+  growlsAudio:
+  - {fileID: 11400000, guid: 537c50cdf1efd86419652a8b03ebde7f, type: 2}
+  - {fileID: 11400000, guid: f31668eda570556478a16cb6f9445580, type: 2}
+  - {fileID: 11400000, guid: f4b41edca6c14e24f9b5c884210a6d19, type: 2}
+  slashAudio: {fileID: 11400000, guid: 6bf8435e4a9ec4341b8ee1e249dcd78b, type: 2}
+  slashHitAudio: {fileID: 11400000, guid: 59d2684bee2068848967acafe7975657, type: 2}
+  snarlAudio: {fileID: 11400000, guid: cb9d00c00ea4b4c4181d3fd3d9bf9d9f, type: 2}
+  wrenchAttackAudio: {fileID: 11400000, guid: c53c720782ecc5a45b91624a6c123b13, type: 2}
+  wrenchGroundAudio: {fileID: 11400000, guid: b423648094137554ebc04138df154bc6, type: 2}
   drawGizmos: 1
   currentMove: 0
   grounded: 0
@@ -441,15 +450,15 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7913284869333941183, guid: ea9b4342e78a2e34890e0e673b363b72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 44.407284, y: 28.34}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!61 &8734088133559924500
 BoxCollider2D:
@@ -485,17 +494,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.7465906, y: 0.100037456}
+  m_Offset: {x: -7.0665493, y: -2.859723}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 44.407284, y: 28.34}
+    newSize: {x: 44.407284, y: 28.34}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.4126835, y: 4.8464813}
+  m_Size: {x: 13.051838, y: 10.766003}
   m_EdgeRadius: 0
 --- !u!114 &1852757112305648574
 MonoBehaviour:
