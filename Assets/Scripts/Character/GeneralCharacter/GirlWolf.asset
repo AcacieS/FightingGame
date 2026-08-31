@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GirlWolf
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
   characterName: GIRL WOLF
-  hp: 300
+  hp: 250
   profileImg: {fileID: -5080380782421725508, guid: 4519aa8d73c9f4b49bc754dacd81ad6f, type: 3}
   moveSpeed: 0
   accelerationSpeed: 0

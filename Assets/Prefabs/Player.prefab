@@ -271,14 +271,14 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1508938299
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1929685790754269422, guid: affa43a70f97be343b6adf6b37c0a7c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.48, y: 0.32}
+  m_Size: {x: 19.2, y: 19.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -383,7 +383,7 @@ MonoBehaviour:
   jumpForce: 10
   jumpAnimName: PreJump
   blockDuration: 2
-  blockCooldown: 1
+  blockCooldown: 2
   blockAnimName: Block
   defaultStunDuration: 2
   stunAnimName: Stunned
@@ -628,15 +628,15 @@ MonoBehaviour:
   cooldown: 0.35
   sweep:
     animName: FrontAttack
-    damage: 7
+    damage: 10
     hitbox: {fileID: 4167549211194211855}
   uppercut:
     animName: AboveAttack
-    damage: 15
+    damage: 20
     hitbox: {fileID: 5600924128219676252}
   downStrike:
     animName: BelowAttack
-    damage: 15
+    damage: 20
     hitbox: {fileID: 8544330455495429035}
   maxSwingDuration: 2
 --- !u!70 &6494158251503499481

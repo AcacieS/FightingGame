@@ -139,15 +139,15 @@ public class OwnSceneManager : MonoBehaviour
         string nextScene = "";
         string sceneName = SceneManager.GetActiveScene().name;
 
-        if (sceneName == "GrandmaWolf")
+        if (sceneName == "GirlWolf_Final")
         {
             nextScene = "HunterFight";
         }
         else if (sceneName == "HunterFight")
         {
-            nextScene = "GirlWolf_Final";
+            nextScene = "GrandmaWolf";
         }
-        else if (sceneName == "GirlWolf_Final")
+        else if (sceneName == "GrandmaWolf")
         {
             nextScene = "ThankYou";
         }
