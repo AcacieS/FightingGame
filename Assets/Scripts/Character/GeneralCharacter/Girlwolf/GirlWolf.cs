@@ -58,7 +58,7 @@ public class GirlWolf : Enemy
     [SerializeField] private float fallbackMoveSpeed = 4f;
     [Tooltip("Used when the CharacterInfo asset leaves Acceleration at 0.")]
     [SerializeField] private float fallbackAcceleration = 25f;
-
+    
     [Header("Targeting")]
     [Tooltip("Layers an attack can damage. Player sits on Default, so leave this as Everything unless you add a Player layer.")]
     [SerializeField] private LayerMask targetLayer = ~0;
@@ -99,6 +99,8 @@ public class GirlWolf : Enemy
     [SerializeField] private Vector2 biteHitboxSize = new Vector2(1.4f, 1.2f);
     [Tooltip("Whether a bite staggers the victim. Off by default - a light nip should not interrupt.")]
     [SerializeField] private bool biteInterrupts;
+    [SerializeField] private string biteAnimName;
+
 
     [Header("Scratch")]
     [SerializeField] private int scratchDamage = 6;
@@ -120,6 +122,7 @@ public class GirlWolf : Enemy
     [SerializeField] private Vector2 scratchHitboxSize = new Vector2(1.6f, 1.4f);
     [Tooltip("Whether a scratch staggers the victim.")]
     [SerializeField] private bool scratchInterrupts;
+    [SerializeField] private string scratchAnimName;
 
     [Header("Scratch Shockwaves")]
     [Tooltip("The projectile fired by a scratch. Leave empty to disable shockwaves entirely.")]
@@ -161,6 +164,7 @@ public class GirlWolf : Enemy
     [SerializeField] private float pounceActiveTime = 0.2f;
     [SerializeField] private string verticalVelocityParameter = "VerticalVelocity";
     [SerializeField] private string isGroundedParameter = "IsGround";
+    [SerializeField] private string pounceAnimName = "Jump";
 
     [Header("Accumulate (desperation attack)")]
     [Tooltip("Wandering auto-triggers Accumulate once HP drops below this fraction of max.")]
@@ -180,6 +184,7 @@ public class GirlWolf : Enemy
     [Tooltip("One Bool parameter per state. Entering a state raises its bool and lowers the previous one, so exactly one is ever true. Parameters the controller does not declare are skipped.")]
     [SerializeField] private string idleParam = "Idle";
     [SerializeField] private string chaseParam = "Walking";
+    [SerializeField] private string horizontalSpeedParameter;
     [SerializeField] private string biteParam = "Tearing";
     [SerializeField] private string scratchParam = "Scratch";
     [SerializeField] private string pounceParam = "Pounce";
@@ -521,7 +526,8 @@ public class GirlWolf : Enemy
     {
         if (anim == null)
             return;
-
+        
+        anim.SetFloat(horizontalSpeedParameter, Mathf.Abs(rb.linearVelocityX));
         anim.SetBool(
             isGroundedParameter,
             IsOnGround
@@ -808,12 +814,13 @@ public class GirlWolf : Enemy
     /// </summary>
     private IEnumerator BiteContact()
     {
+        Debug.Log("Bite Anim Name");
+        PlayAnim(biteAnimName, biteActiveTime);
         if (biteHitbox == null)
-        {
+        {   
             TryHit(biteHitboxOffset, biteHitboxSize, biteDamage, biteInterrupts);
             yield break;
         }
-
         biteHitbox.Arm(biteDamage, biteInterrupts);
 
         yield return new WaitForSeconds(biteActiveTime);
@@ -827,6 +834,7 @@ public class GirlWolf : Enemy
         lastPounceTime = Time.time;
 
         PlaySfx(pounceAudio);
+        PlayAnim(pounceAnimName);
 
         // Plant the feet and telegraph, so the player has a window to react.
         Halt();
@@ -903,8 +911,11 @@ public class GirlWolf : Enemy
     /// </summary>
     private IEnumerator ScratchContact()
     {
+        Debug.Log("ScratchAnim");
+        PlayAnim(scratchAnimName, scratchActiveTime);
         if (scratchHitbox == null)
         {
+            
             TryHit(scratchHitboxOffset, scratchHitboxSize, scratchDamage, scratchInterrupts);
             yield break;
         }
@@ -1281,14 +1292,13 @@ public class GirlWolf : Enemy
 
         return false;
     }
-
-    private bool TryHit(Vector2 offset, Vector2 size, int damage, bool isInterruptible)
+        private bool TryHit(Vector2 offset, Vector2 size, int damage, bool isInterruptible)
     {
         Vector2 center = (Vector2)transform.position +
                          new Vector2(offset.x * Facing, offset.y);
 
         int count = Physics2D.OverlapBox(center, size, 0f, hitFilter, hitBuffer);
-
+        
         for (int i = 0; i < count; i++)
         {
             Character victim = hitBuffer[i].GetComponentInParent<Character>();

@@ -269,8 +269,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1508938299
-  m_SortingLayer: 3
+  m_SortingLayerID: -1690932513
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1929685790754269422, guid: affa43a70f97be343b6adf6b37c0a7c5, type: 3}
@@ -382,9 +382,9 @@ MonoBehaviour:
   characterCollider: {fileID: 0}
   jumpForce: 10
   jumpAnimName: PreJump
-  blockDuration: 2
+  blockDuration: 3
   blockCooldown: 2
-  blockAnimName: Block
+  preBlockAnimName: PreBlock
   defaultStunDuration: 2
   stunAnimName: Stunned
   isStunned: 0

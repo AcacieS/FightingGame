@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 519053077
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
@@ -311,7 +311,7 @@ MonoBehaviour:
   wanderingThinkTime: 2
   chaseMoveScale: 1
   biteDamage: 8
-  biteRange: 2.2
+  biteRange: 3
   biteWindup: 0.35
   biteRecovery: 0.25
   biteCooldown: 0.9
@@ -351,6 +351,8 @@ MonoBehaviour:
   pounceInterrupts: 1
   pounceHitbox: {fileID: 695968579385026289}
   pounceActiveTime: 0.2
+  verticalVelocityParameter: VelocityY
+  isGroundedParameter: IsGround
   accumulateHealthThreshold: 0.3
   accumulateChargeTime: 3
   accumulateReleaseWindup: 0.2
@@ -383,7 +385,6 @@ MonoBehaviour:
   drawGizmos: 1
   currentMove: 0
   grounded: 0
-  isDead: 0
 --- !u!114 &8319515839610944663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +392,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4889810009924403310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627931f6df602274980de00e28160b8d, type: 3}
   m_Name: 
@@ -452,8 +453,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 519053077
-  m_SortingLayer: 4
+  m_SortingLayerID: 1508938299
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7913284869333941183, guid: ea9b4342e78a2e34890e0e673b363b72, type: 3}
@@ -500,7 +501,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -7.0665493, y: -2.859723}
+  m_Offset: {x: -7.937029, y: -4.134752}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -510,7 +511,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 13.051838, y: 10.766003}
+  m_Size: {x: 13.659149, y: 8.215945}
   m_EdgeRadius: 0
 --- !u!114 &1852757112305648574
 MonoBehaviour:
@@ -557,6 +558,29 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &446353403426843036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889810009924403310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5897283039eab2e48e5572f7b484b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathSequence
+  deathStateName: Death
+  deathTrigger: Death
+  raiseTrigger: 0
+  durationMode: 0
+  fixedDuration: 2
+  extraHold: 0.5
+  fallbackDuration: 2
+  stateEntryTimeout: 0.5
+  freezeMovement: 1
+  deathAudio: {fileID: 0}
+  logSequence: 0
 --- !u!1 &5401432157155523129
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +648,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.7094951, y: 0.07151508}
+  m_Offset: {x: -1.9924576, y: -2.8621054}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -634,7 +658,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.659704, y: 5.1087904}
+  m_Size: {x: 15.857527, y: 10.97603}
   m_EdgeRadius: 0
 --- !u!114 &4077517055470952893
 MonoBehaviour:
@@ -720,7 +744,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.6880946, y: 0.03816223}
+  m_Offset: {x: -2.1702883, y: -2.8422885}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -730,7 +754,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.3134823, y: 4.9573717}
+  m_Size: {x: 17.368706, y: 10.718274}
   m_EdgeRadius: 0
 --- !u!114 &3653375828566312747
 MonoBehaviour:
@@ -759,6 +783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4082587107850195897}
   - component: {fileID: 695968579385026289}
+  - component: {fileID: 1495622500613346216}
   m_Layer: 0
   m_Name: PounceColliderBox
   m_TagString: Untagged
@@ -798,26 +823,49 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   drawGizmos: 1
---- !u!114 &446353403426843036
-MonoBehaviour:
+--- !u!61 &1495622500613346216
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4889810009924403310}
+  m_GameObject: {fileID: 7294286432466440259}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5897283039eab2e48e5572f7b484b4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeathSequence
-  deathStateName: Death
-  deathTrigger: Death
-  raiseTrigger: 0
-  durationMode: 0
-  fixedDuration: 2
-  extraHold: 0.5
-  fallbackDuration: 2
-  stateEntryTimeout: 0.5
-  freezeMovement: 1
-  deathAudio: {fileID: 0}
-  logSequence: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -6.89168, y: -3.2362947}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 24.09644, y: 16.040632}
+  m_EdgeRadius: 0

@@ -11,7 +11,7 @@ public class Player : Character
     [Header("Block")]
     [SerializeField] private float blockDuration = 0.5f;
     [SerializeField] private float blockCooldown = 1f;
-    [SerializeField] private string blockAnimName = "Block";
+    [SerializeField] private string preBlockAnimName = "PreBlock";
 
     [Header("Stun")]
     [SerializeField] private float defaultStunDuration = 2f;
@@ -219,16 +219,13 @@ public class Player : Character
         }
 
         Debug.Log($"{name}: Start Block");
-        PlayAnim(blockAnimName);
+        PlayAnim(preBlockAnimName);
         blockCoroutine = StartCoroutine(BlockRoutine());
     }
 
     private IEnumerator BlockRoutine()
     {
         isBlocking = true;
-
-        PlayAnim("Block");
-
         yield return new WaitForSeconds(blockDuration);
 
         StopBlock();
