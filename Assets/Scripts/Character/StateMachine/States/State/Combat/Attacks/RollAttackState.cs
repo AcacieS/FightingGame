@@ -46,7 +46,6 @@ public class RollAttackState : NearAttackState
     private Vector3 startPosition;
     private float direction;
     private bool hasAttack;
-    [ReadOnly, SerializeField] private Quaternion initialRotation = Quaternion.identity;
 
     private Collider2D characterCollider;
     
@@ -211,8 +210,8 @@ public class RollAttackState : NearAttackState
 
         AI.Character.StopMoving();
 
-        AI.Character.transform.rotation = initialRotation;
-
+        Context.Self.transform.rotation =
+            Quaternion.identity;
         base.Exit();
     }
 }

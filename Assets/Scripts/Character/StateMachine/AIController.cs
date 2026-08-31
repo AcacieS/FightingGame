@@ -69,6 +69,7 @@ public class AIController : MonoBehaviour
     
     private void Update()
     {
+        CheckDeath();
         //context.Update();
         currentState?.Play();
         reactionState?.Play();
@@ -86,6 +87,14 @@ public class AIController : MonoBehaviour
         }
 
         return false;
+    }
+    private void CheckDeath()
+    {
+        if (Context.Target.Hp <= 0)
+        {
+            StopReactionState();
+            StopState();
+        }
     }
     private void HandleHurt(int hp, bool isInterruptible)
     {

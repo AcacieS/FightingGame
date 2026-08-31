@@ -74,7 +74,6 @@ MonoBehaviour:
   wallCheckDistance: 0.05
   movementDirection: 0
   currentRotationSpeed: 0
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &8254826053932824534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,14 +883,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2195606832982475193}
   - component: {fileID: 2214545429384937754}
-  - component: {fileID: 7329279504234584934}
   m_Layer: 0
   m_Name: TiredState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2195606832982475193
 Transform:
   m_ObjectHideFlags: 0
@@ -926,25 +924,6 @@ MonoBehaviour:
   minDuration: 3
   maxDuration: 3
   timer: 0
---- !u!114 &7329279504234584934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789196334357559063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0025029dd91f474486fe043dbcc4f48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UtilityAction
-  requirements: []
-  considerations:
-  - {fileID: 0}
-  state: {fileID: 0}
-  _finalScore: 0
-  _activateTestScore: 0
-  _testScore: 0
 --- !u!1 &1819406442052011895
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class MovementState : ActionState
 
         _startPosition = AI.Character.transform.position;
         _direction = Context.DirectionSign;
-
+        
         characterCollider = AI.Character.GetComponent<Collider2D>();
 
         if (characterCollider == null)
@@ -53,6 +53,10 @@ public class MovementState : ActionState
 
     public override void Play()
     {
+        if (Mathf.Approximately(_direction, 0f))
+        {
+            _direction = Context.DirectionSign;
+        }
         _movementDirection = moveAwayFromTarget
             ? -_direction
             : _direction;
@@ -87,7 +91,7 @@ public class MovementState : ActionState
 
         if (distanceMoved >= _movementDistance)
         {
-            RequestRootDecision();
+            RequestDecision();
         }
     }
 

@@ -44,6 +44,8 @@ public abstract class ActionState : State
             }
             
         }
+        Context.Self.transform.rotation =
+            Quaternion.identity;
     }
     
 

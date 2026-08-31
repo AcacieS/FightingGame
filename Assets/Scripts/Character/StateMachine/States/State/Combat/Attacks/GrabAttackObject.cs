@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class GrabAttackObject : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    
 
     private Character owner;
     private Character target;
@@ -109,6 +111,7 @@ public class GrabAttackObject : MonoBehaviour
         Debug.Log(
             $"{name}: Grab direction = {direction}"
         );
+        spriteRenderer.flipX = direction.x > 0;
     }
     private Vector2 previousPosition;
     private void FixedUpdate()
