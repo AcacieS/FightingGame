@@ -57,7 +57,7 @@ MonoBehaviour:
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 4787532557060414024}
-  attackRange: 2.5
+  attackRange: 2.14
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -209,7 +209,7 @@ MonoBehaviour:
   actions:
   - {fileID: 5142942473209291724}
   currentChild: {fileID: 0}
---- !u!1 &82622767687730503
+--- !u!1 &274833352028774561
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,22 +217,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5915356260263374732}
-  - component: {fileID: 2967473719436502271}
+  - component: {fileID: 7848044154031201176}
+  - component: {fileID: 5654021419571343361}
   m_Layer: 0
-  m_Name: PreAttack State
+  m_Name: EndAttack State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5915356260263374732
+--- !u!4 &7848044154031201176
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82622767687730503}
+  m_GameObject: {fileID: 274833352028774561}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -241,22 +241,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3199004143761683856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2967473719436502271
+--- !u!114 &5654021419571343361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82622767687730503}
+  m_GameObject: {fileID: 274833352028774561}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17480b8616d42ff41abcd693bfa3140e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PreAttackState
   stateWeight: 0
-  animName: PreNearAttack
+  animName: NearAttackEnd
   overrideDuration: 0
-  desiredDuration: 1
+  desiredDuration: 0.2
 --- !u!1 &706517381900874169
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ Transform:
   m_GameObject: {fileID: 735235653789676998}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.07, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -748,7 +748,7 @@ MonoBehaviour:
   _doesInterrupt: 0
   attackResult: 0
   attackPoint: {fileID: 7562689284456734458}
-  attackRange: 5
+  attackRange: 4
   charactersLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -923,8 +923,8 @@ MonoBehaviour:
   animName: Tired
   overrideDuration: 0
   desiredDuration: 1
-  minDuration: 5
-  maxDuration: 5
+  minDuration: 3
+  maxDuration: 3
   timer: 0
 --- !u!114 &7329279504234584934
 MonoBehaviour:
@@ -1023,7 +1023,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 550567050207658441}
+  m_Father: {fileID: 3199004143761683856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8250896399755128976
 MonoBehaviour:
@@ -1170,7 +1170,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.09, y: -11.99, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6291960767165015311}
@@ -1724,6 +1724,7 @@ MonoBehaviour:
   overrideDuration: 0
   desiredDuration: 1
   jumpForce: 5
+  apexLimit: 1
 --- !u!1 &3973462988292646085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,6 +1773,55 @@ MonoBehaviour:
   animName: PreJump
   overrideDuration: 0
   desiredDuration: 1
+--- !u!1 &4024103687340882996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5718174479868457857}
+  - component: {fileID: 6343598621636890943}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5718174479868457857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024103687340882996}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3274752833654505411}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6343598621636890943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024103687340882996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1239254281482fe46ada36068055db29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  stateWeight: 0
+  animName: JumpApex
+  overrideDuration: 0
+  desiredDuration: 1
+  apexLimit: 1
 --- !u!1 &4122533716166435316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,8 +2036,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8560758
-      value: 0.49579486
+      time: 0.96032387
+      value: 0.50250876
       inSlope: -1.8251954
       outSlope: -1.8251954
       tangentMode: 0
@@ -1995,8 +2045,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 0.99588186
-      value: 0.31080103
+      time: 0.99725515
+      value: 0.29834986
       inSlope: -1
       outSlope: -1
       tangentMode: 0
@@ -2235,8 +2285,8 @@ MonoBehaviour:
   animName: Tired
   overrideDuration: 0
   desiredDuration: 1
-  minDuration: 5
-  maxDuration: 5
+  minDuration: 2
+  maxDuration: 2
   timer: 0
 --- !u!114 &7211033049282074207
 MonoBehaviour:
@@ -2652,7 +2702,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7541096932330940110}
   - {fileID: 2732512437894757323}
   - {fileID: 8001661126336763466}
   m_Father: {fileID: 3199004143761683856}
@@ -2673,7 +2722,7 @@ MonoBehaviour:
   states: []
   currentChild: {fileID: 0}
   currentIndex: -1
-  maxLoops: 4
+  maxLoops: 3
   currentLoop: 0
   failed: 0
 --- !u!1 &6257422425604724432
@@ -2790,8 +2839,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5915356260263374732}
+  - {fileID: 7541096932330940110}
   - {fileID: 550567050207658441}
+  - {fileID: 7848044154031201176}
   - {fileID: 2771803206824555115}
   - {fileID: 2195606832982475193}
   m_Father: {fileID: 6212307711274433067}
@@ -2810,7 +2860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SequenceState
   stateWeight: 0
   states:
-  - {fileID: 2967473719436502271}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 2214545429384937754}
@@ -3230,6 +3280,7 @@ Transform:
   m_Children:
   - {fileID: 6547028483376188479}
   - {fileID: 5563499162483533066}
+  - {fileID: 5718174479868457857}
   - {fileID: 5494662844882995931}
   m_Father: {fileID: 1467224322281213288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -4,6 +4,7 @@ public class JumpState : ActionState
 {
     [Header("Jump")]
     [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float apexLimit = 1f;
 
     private Rigidbody2D rb;
     private bool hasJumped;
@@ -37,7 +38,7 @@ public class JumpState : ActionState
             return;
 
         // The character has reached the peak and is now falling.
-        if (rb.linearVelocity.y <= 0f)
+        if (rb.linearVelocity.y <= apexLimit)
         {
             RequestDecision();
         }

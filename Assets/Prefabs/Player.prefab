@@ -382,7 +382,7 @@ MonoBehaviour:
   characterCollider: {fileID: 0}
   jumpForce: 10
   jumpAnimName: PreJump
-  blockDuration: 3
+  blockDuration: 2
   blockCooldown: 2
   preBlockAnimName: PreBlock
   defaultStunDuration: 2
