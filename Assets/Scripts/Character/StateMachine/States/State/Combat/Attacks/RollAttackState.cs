@@ -207,7 +207,7 @@ public class RollAttackState : NearAttackState
     public override void Exit()
     {
         Debug.Log("AI → Exit Roll Attack");
-
+        AudioEventChannel.Instance.Stop(grandmaRoll);
         AI.Character.StopMoving();
 
         Context.Self.transform.rotation =

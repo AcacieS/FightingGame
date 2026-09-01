@@ -190,13 +190,32 @@ public class Character: MonoBehaviour
             targetSpeed,
             acceleration * Time.fixedDeltaTime
         );
+        
+        Debug.Log("newSpeed"+newSpeed);
 
         rb.linearVelocity = new Vector2(
             newSpeed,
             rb.linearVelocity.y
         );
+        // float targetSpeed = direction * speed;
+
+        // float velocityX = rb.linearVelocity.x;
+
+        // velocityX += direction * acceleration * Time.fixedDeltaTime;
+
+        // velocityX = Mathf.Clamp(
+        //     velocityX,
+        //     -speed,
+        //     speed
+        // );
+
+        // rb.linearVelocity = new Vector2(
+        //     velocityX,
+        //     rb.linearVelocity.y
+        // );
 
         //Debug.Log($"AFTER velocity = {rb.linearVelocity}");
+        
     }
     public void StopMoving()
     {

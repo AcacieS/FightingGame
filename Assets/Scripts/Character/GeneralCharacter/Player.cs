@@ -35,6 +35,8 @@ public class Player : Character
     [SerializeField] private string isGroundedParameter = "IsGrounded";
     [SerializeField] private string verticalVelocityParameter = "VerticalVelocity";
     [SerializeField] private string horizontalSpeedParameter = "HorizontalSpeed";
+    [Header("SFX")]
+    [SerializeField] private Audio umbrellaBlockSFX;
 
     [ReadOnly, SerializeField]
     private bool isBlocking;
@@ -140,6 +142,7 @@ public class Player : Character
     private IEnumerator ThrowRoutine()
     {
         bottleReleased = false;
+        
         PlayAnim(bottleInfo.AnimName);
 
         float start = Time.time;
@@ -314,17 +317,16 @@ public class Player : Character
         if (isBlocking)
         {
             Debug.Log($"{name}: Blocked attack!");
+            AudioEventChannel.Instance.Play(umbrellaBlockSFX);
             return false;
         }
 
         base.Hurt(damage, isInterruptible, stunDuration); //moved here so anims play
-
         PlayRandomHurt();
-
         if (stunDuration != 0f)
         {
             Stun(stunDuration);
-        }        
+        } 
 
         return true;
     }
@@ -396,7 +398,6 @@ public class Player : Character
     {
         if (stunCouroutine != null)
             StopCoroutine(stunCouroutine);
-        
         stunCouroutine = StartCoroutine(StunRoutine(duration));
     }
 

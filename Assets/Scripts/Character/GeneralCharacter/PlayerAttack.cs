@@ -9,11 +9,15 @@ using UnityEngine.InputSystem;
 // needed yet; swap to animation-driven hit frames once the sprites arrive.
 public class PlayerAttack : MonoBehaviour
 {
+
     [System.Serializable]
     public class AttackData
     {
         public string animName;
         public int damage = 10;
+        public Audio attackHitSFX;
+        public float cooldown = 0.35f;
+        public float lastAttackTime = -999f;
         /*
         [Tooltip("Hitbox center relative to the player, x flips with facing")]
         public Vector2 offset = new Vector2(0.9f, 0f);
@@ -25,7 +29,6 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private Character character;
     [SerializeField] private LayerMask hitMask = ~0;
-    [SerializeField] private float cooldown = 0.35f;
 
     [Header("Attacks (pick by held direction)")]
     [SerializeField] private AttackData sweep = new AttackData
@@ -36,7 +39,6 @@ public class PlayerAttack : MonoBehaviour
     { animName = "DownStrike"};//, damage = 12, offset = new Vector2(0.5f, -0.8f), size = new Vector2(1f, 1f) };
 
     private Vector2 moveInput;
-    private float lastAttackTime = -999f;
     [SerializeField]private float maxSwingDuration = 2f;
     private Coroutine swingRoutine;
     public bool IsAttacking => swingRoutine != null;
@@ -68,11 +70,9 @@ public class PlayerAttack : MonoBehaviour
         Player player = character as Player;
         if(player != null && (player.IsStunned || player.IsControlsLocked || player.IsBlocking || player.IsThrowing))
             return;
-        
-        if (!value.isPressed || swingRoutine != null ||Time.time < lastAttackTime + cooldown)
-            return;
 
-        lastAttackTime = Time.time;
+        if (!value.isPressed || swingRoutine != null)
+            return;
 
         AttackData attack = sweep;
         if (moveInput.y > 0.5f)
@@ -80,7 +80,8 @@ public class PlayerAttack : MonoBehaviour
         else if (moveInput.y < -0.5f)
             attack = downStrike;
 
-        //DoAttack(attack);
+        if(Time.time < attack.lastAttackTime + attack.cooldown) return;
+        attack.lastAttackTime = Time.time;
         swingRoutine = StartCoroutine(SwingRoutine(attack));
     }
 
@@ -92,7 +93,7 @@ public class PlayerAttack : MonoBehaviour
             attack.hitbox.enabled = true;
 
         character.PlayAnim(attack.animName);
-
+        AudioEventChannel.Instance.Play(attack.attackHitSFX);
         Player player = character as Player;
         bool hasHit = false;
         float start = Time.time;

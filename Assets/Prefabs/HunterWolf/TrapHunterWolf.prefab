@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1508938299
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2066955260129907943, guid: 0bbdf6a92d083584e89a1f3f8b73707b, type: 3}
@@ -277,6 +277,7 @@ MonoBehaviour:
     m_Bits: 128
   sr: {fileID: 7572623709507732596}
   spriteGround: {fileID: 8867726902795195679, guid: fc82268b6f496fa4ba5008e615b6b5d9, type: 3}
+  activateTrapSFX: {fileID: 11400000, guid: b545359ae805ee945b132401bc658123, type: 2}
 --- !u!50 &2681010649237156086
 Rigidbody2D:
   serializedVersion: 5

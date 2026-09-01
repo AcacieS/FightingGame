@@ -332,8 +332,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1084931657
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6682738439518977790, guid: eb98d2210cade974fb95a28009130747, type: 3}
@@ -396,6 +396,7 @@ MonoBehaviour:
   _selfController: {fileID: 1326996269}
   selfState: {fileID: 0}
   attackResult: 0
+  lastDirectionSign: -1
 --- !u!4 &528626507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4067434074276851671, guid: 50fda5decd216b24d819da136ee34e57, type: 3}
@@ -489,8 +490,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1084931657
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6682738439518977790, guid: eb98d2210cade974fb95a28009130747, type: 3}
@@ -736,34 +737,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1067183556}
-    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: OwnSceneManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295639599394433332, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2803012359293011082, guid: f598557bfff4ff6468696a91ead19513, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4046746299803320991, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-      propertyPath: m_Name
-      value: Profile Image Player
       objectReference: {fileID: 0}
     - target: {fileID: 5149420404900469314, guid: f598557bfff4ff6468696a91ead19513, type: 3}
       propertyPath: character
       value: 
       objectReference: {fileID: 1542685156}
-    - target: {fileID: 8008155159079106810, guid: f598557bfff4ff6468696a91ead19513, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1865359520236808983, guid: bd1b7e5293a2fce4591a41d5c4862665, type: 3}
     - target: {fileID: 9161248383275540444, guid: f598557bfff4ff6468696a91ead19513, type: 3}
       propertyPath: character
       value: 
@@ -1121,7 +1102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6660301385218996750, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 65.25
+      value: 56.4
       objectReference: {fileID: 0}
     - target: {fileID: 6660301385218996750, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1155,6 +1136,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7804798345033300385, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: launchTrapSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: 53895eacb27e46142bc1a6d0e1d949df, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1394,18 +1379,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2206925923544164841, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2206925923544164841, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2206925923544164841, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
+    - target: {fileID: 846466374908611304, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
+      propertyPath: downStrike.attackHitSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: cd5f56acd39aa1c49b639b5cbea747d6, type: 2}
     - target: {fileID: 2206925923544164841, guid: 20c397897a04d9748928727b76e6eeac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16
@@ -1719,7 +1696,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -4.4}
+  m_Offset: {x: 0, y: -5.121316}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1729,7 +1706,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 150, y: 10}
+  m_Size: {x: 150, y: 8.557367}
   m_EdgeRadius: 0
 --- !u!1 &1998990338
 GameObject:

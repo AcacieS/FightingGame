@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Context : MonoBehaviour
@@ -26,7 +27,8 @@ public class Context : MonoBehaviour
     public float Direction { get; private set; }
     public float DirectionSign => Mathf.Sign(Direction);
     public float AngleToTarget { get; private set; }
-
+    [ReadOnly, SerializeField] private float lastDirectionSign = -1;
+    public float LastDirectionSign => lastDirectionSign;
     public bool TargetIsAbove45 => AngleToTarget > 45f && AngleToTarget < 135f;
     public bool TargetIsBelow45 => AngleToTarget < -45f && AngleToTarget > -135f;
     public bool TargetIsInFront45
@@ -90,7 +92,10 @@ public class Context : MonoBehaviour
         DistanceX = Mathf.Abs(toTarget.x);
 
         Direction = toTarget.x;
-
+        if (!Mathf.Approximately(DirectionSign, 0f))
+        {
+            lastDirectionSign = DirectionSign;
+        }
         AngleToTarget = Mathf.Atan2(
             toTarget.y,
             Mathf.Abs(toTarget.x)

@@ -13,6 +13,7 @@ public class TrapHunterWolf : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Sprite spriteGround;
+    [SerializeField] private Audio activateTrapSFX;
 
     private Rigidbody2D rb;
     private TrapHunterPool pool;
@@ -97,6 +98,7 @@ public class TrapHunterWolf : MonoBehaviour
 
             if (character != null)
             {
+                AudioEventChannel.Instance.Play(activateTrapSFX);
                 owner.Hit(character, 10, false);
             }
 

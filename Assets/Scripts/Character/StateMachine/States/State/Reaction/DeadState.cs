@@ -4,7 +4,7 @@ public class DeadState : ActionState
 {
     public override void Enter()
     {
-
+        base.Enter();
         Debug.Log("AI → Dead");
         Context.Self.Move(0);
         // AI.Character.Die();

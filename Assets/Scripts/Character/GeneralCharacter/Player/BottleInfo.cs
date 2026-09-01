@@ -16,6 +16,8 @@ public class BottleInfo
     [SerializeField] private int bottleDamage = 10;
     [SerializeField] private LayerMask charactersLayer;
     [SerializeField] private LayerMask groundWallLayer;
+    [SerializeField] private Audio bottleBreakSFX;
+    [SerializeField] private Audio bottleHitSFX;
     [ReadOnly, SerializeField] private int nbBottle;
 
     public GameObject Prefab => bottlePrefab;
@@ -86,7 +88,9 @@ public class BottleInfo
             bottleDamage,
             velocity,
             charactersLayer,
-            groundWallLayer
+            groundWallLayer,
+            bottleHitSFX,
+            bottleBreakSFX
         );
     }
 }

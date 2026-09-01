@@ -8,11 +8,13 @@ public class LauchTrapHunterState : HunterState
     [SerializeField] private int TrapAmountToShoot;
     [SerializeField] private int TrapSpeed = 15;
     [SerializeField] private int TrapSpeedEach = 5;
+    [SerializeField] private Audio launchTrapSFX;
     public override void Enter()
     {
         base.Enter();
         StartCoroutine(ShootCoroutine());
         HunterWolf.Animator.SetBool("LauchTrap", true);
+        AudioEventChannel.Instance.Play(launchTrapSFX);
         HunterWolf.CanInitiateOtherState = false;
     }
 

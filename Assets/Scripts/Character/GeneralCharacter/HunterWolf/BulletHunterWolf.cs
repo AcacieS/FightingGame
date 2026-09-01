@@ -5,6 +5,7 @@ public class BulletHunterWolf : MonoBehaviour
     [SerializeField] private float speed = 15f;
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private Audio shotHitSFX;
 
     private Rigidbody2D rb;
     private BulletHunterPool pool;
@@ -65,7 +66,7 @@ public class BulletHunterWolf : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 Character character = hit.collider.GetComponent<Character>();
-
+                AudioEventChannel.Instance.Play(shotHitSFX);
                 if (character != null)
                 {
                     owner.Hit(character, 10, false);

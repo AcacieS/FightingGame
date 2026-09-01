@@ -216,7 +216,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.69, y: 0.04, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3236310646105841990}
@@ -351,7 +351,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3690938835707519134}
@@ -382,8 +382,8 @@ MonoBehaviour:
   characterCollider: {fileID: 0}
   jumpForce: 10
   jumpAnimName: PreJump
-  blockDuration: 2
-  blockCooldown: 2
+  blockDuration: 1
+  blockCooldown: 1.5
   preBlockAnimName: PreBlock
   defaultStunDuration: 2
   stunAnimName: Stunned
@@ -393,8 +393,8 @@ MonoBehaviour:
     bottleAnim: BottleAttack
     bottlePrefab: {fileID: 6264657806095282118, guid: 41e7159c9aad85645bc4db9514ad6a88, type: 3}
     spawnBottlePoint: {fileID: 8543647383849467929}
-    bottleSpeed: 10
-    throwAngle: 55
+    bottleSpeed: 12
+    throwAngle: 45
     bottleDamage: 30
     charactersLayer:
       serializedVersion: 2
@@ -402,14 +402,18 @@ MonoBehaviour:
     groundWallLayer:
       serializedVersion: 2
       m_Bits: 520
+    bottleBreakSFX: {fileID: 11400000, guid: bd2c43bb279b64b44b6499c8ae6d0392, type: 2}
+    bottleHitSFX: {fileID: 11400000, guid: 5b72ca6f4a10b684894935eb6fb885e5, type: 2}
     nbBottle: 0
   hurtAudios:
-  - {fileID: 11400000, guid: 066bc05afb8be644c99c115d6446975f, type: 2}
+  - {fileID: 11400000, guid: 466bf6fd11559a44fb42c3af66f3f426, type: 2}
+  - {fileID: 11400000, guid: c81c336be618caf4c925a083aa84f451, type: 2}
   - {fileID: 11400000, guid: c81c336be618caf4c925a083aa84f451, type: 2}
   isMovingParameter: IsMoving
   isGroundedParameter: IsGrounded
   verticalVelocityParameter: VerticalVelocity
   horizontalSpeedParameter: HorizontalSpeed
+  umbrellaBlockSFX: {fileID: 11400000, guid: b30df8bf3ee3eba4e8909c90eb94c97b, type: 2}
   isBlocking: 0
   blockOnCooldown: 0
   playerAttack: {fileID: 0}
@@ -625,18 +629,26 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  cooldown: 0.35
   sweep:
     animName: FrontAttack
     damage: 10
+    attackHitSFX: {fileID: 11400000, guid: 1e25cc3950e622a48861f5162ae36567, type: 2}
+    cooldown: 0.35
+    lastAttackTime: -999
     hitbox: {fileID: 4167549211194211855}
   uppercut:
     animName: AboveAttack
     damage: 20
+    attackHitSFX: {fileID: 11400000, guid: 39e6a64efdbfc24489200b07f3207fa4, type: 2}
+    cooldown: 0.8
+    lastAttackTime: -999
     hitbox: {fileID: 5600924128219676252}
   downStrike:
     animName: BelowAttack
-    damage: 20
+    damage: 15
+    attackHitSFX: {fileID: 11400000, guid: 1e25cc3950e622a48861f5162ae36567, type: 2}
+    cooldown: 0.7
+    lastAttackTime: -999
     hitbox: {fileID: 8544330455495429035}
   maxSwingDuration: 2
 --- !u!70 &6494158251503499481

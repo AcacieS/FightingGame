@@ -1,93 +1,163 @@
 using UnityEngine;
 
-public class BallAttackState : AttackState
+public class BallAttackState : NearAttackState
 {
+    // =========================================================
+    // Bounce
+    // =========================================================
+
     [Header("Bounce")]
     [SerializeField] private float bounceSpeed = 8f;
     [SerializeField] private int nbBounce = 1;
+
     private int currentNbBounce;
+
+    // =========================================================
+    // Direction
+    // =========================================================
 
     [Header("Direction")]
     [Tooltip("How strongly the initial direction is biased toward the target.")]
-    [SerializeField, Range(0f, 1f)] private float targetDirectionBias = 0.75f;
+    [SerializeField, Range(0f, 1f)]
+    private float targetDirectionBias = 0.75f;
 
     [Tooltip("Maximum random angle added to the direction toward the target.")]
-    [SerializeField] private float randomAngle = 45f;
+    [SerializeField]
+    private float randomAngle = 45f;
+
+    // =========================================================
+    // Rotation
+    // =========================================================
 
     [Header("Rotation")]
     [Tooltip("How many degrees the character rotates per unit of movement.")]
-    [SerializeField] private float rotationPerUnit = 180f;
+    [SerializeField]
+    private float rotationPerUnit = 180f;
 
     [Tooltip("Rotate based on the actual movement speed.")]
-    [SerializeField] private bool rotateBasedOnSpeed = true;
+    [SerializeField]
+    private bool rotateBasedOnSpeed = true;
+
+    [SerializeField] private Audio rollSFX;
+
+    // =========================================================
+    // Detection
+    // =========================================================
 
     [Header("Detection")]
     [SerializeField] private Collider2D characterCollider;
     [SerializeField] private LayerMask environmentLayer;
-    [SerializeField] private LayerMask charactersLayer;
     [SerializeField] private float detectionDistance = 0.1f;
-    [SerializeField] private CooldownRequirement cooldownRequirement;
+
+    // =========================================================
+    // Debug
+    // =========================================================
 
     [Header("Debug")]
     [ReadOnly, SerializeField] private Vector2 direction;
     [ReadOnly, SerializeField] private float currentRotationSpeed;
 
+    // =========================================================
+    // Runtime
+    // =========================================================
+
     private Rigidbody2D rb;
     private float originalGravityScale;
+    private bool hasHitCharacter;
 
-    // Store this so we can restore it when the state exits.
+    // =========================================================
+    // ENTER
+    // =========================================================
 
     public override void Enter()
     {
         base.Enter();
 
+        Debug.Log("AI → Ball Attack");
+
+        hasHitCharacter = false;
+        currentNbBounce = 0;
+
+        AudioEventChannel.Instance.Play(rollSFX);
+
         rb = Context.Self.GetComponent<Rigidbody2D>();
 
         if (rb == null)
         {
-            Debug.LogError($"{name}: Rigidbody2D not found.");
+            Debug.LogError(
+                $"{name}: Rigidbody2D not found."
+            );
             return;
         }
-
-        currentNbBounce = 0;
 
         // Save gravity.
         originalGravityScale = rb.gravityScale;
 
-        // Disable gravity during attack.
+        // Ball should travel freely.
         rb.gravityScale = 0f;
 
+        // Get collider.
         if (characterCollider == null)
         {
             characterCollider =
                 Context.Self.GetComponent<Collider2D>();
         }
 
-        // Get a direction toward the target,
-        // with some randomness.
+        if (characterCollider == null)
+        {
+            Debug.LogError(
+                $"{name}: Collider2D not found."
+            );
+            return;
+        }
+
+        // Calculate initial direction.
         direction = GetTargetBiasedDirection();
 
+        // Start moving immediately.
         SetVelocity();
     }
+
+    // =========================================================
+    // PLAY
+    // =========================================================
 
     public override void Play()
     {
         if (rb == null)
             return;
 
+        if (hasHitCharacter)
+            return;
+
+        // -----------------------------------------------------
+        // Make sure velocity stays constant.
+        // -----------------------------------------------------
+
+        SetVelocity();
+
+        // -----------------------------------------------------
+        // Detect collision.
+        // -----------------------------------------------------
+
         if (DetectCollision())
             return;
 
-        // Keep moving.
-        SetVelocity();
+        // -----------------------------------------------------
+        // Rotate.
+        // -----------------------------------------------------
 
-        // Rotate the character while moving.
         RotateBall();
     }
 
+    // =========================================================
+    // MOVEMENT
+    // =========================================================
+
     private void SetVelocity()
     {
-        rb.linearVelocity = direction * bounceSpeed;
+        rb.linearVelocity =
+            direction.normalized * bounceSpeed;
     }
 
     // =========================================================
@@ -106,37 +176,26 @@ public class BallAttackState : AttackState
         if (toTarget.sqrMagnitude <= 0.001f)
             return GetRandomDirection();
 
-        Vector2 targetDirection = toTarget.normalized;
+        Vector2 targetDirection =
+            toTarget.normalized;
 
-        // Random direction.
-        Vector2 randomDirection = GetRandomDirection();
+        Vector2 randomDirection =
+            GetRandomDirection();
 
-        // Bias between random and target.
-        Vector2 finalDirection = Vector2.Lerp(
-            randomDirection,
-            targetDirection,
-            targetDirectionBias
-        );
+        Vector2 finalDirection =
+            Vector2.Lerp(
+                randomDirection,
+                targetDirection,
+                targetDirectionBias
+            );
 
         return finalDirection.normalized;
     }
 
-    private Vector2 RotateVector(Vector2 vector, float angle)
-    {
-        float radians = angle * Mathf.Deg2Rad;
-
-        float cos = Mathf.Cos(radians);
-        float sin = Mathf.Sin(radians);
-
-        return new Vector2(
-            vector.x * cos - vector.y * sin,
-            vector.x * sin + vector.y * cos
-        );
-    }
-
     private Vector2 GetRandomDirection()
     {
-        float angle = Random.Range(0f, 360f);
+        float angle =
+            Random.Range(0f, 360f);
 
         return new Vector2(
             Mathf.Cos(angle * Mathf.Deg2Rad),
@@ -150,7 +209,8 @@ public class BallAttackState : AttackState
 
     private void RotateBall()
     {
-        float speed = rb.linearVelocity.magnitude;
+        float speed =
+            rb.linearVelocity.magnitude;
 
         if (rotateBasedOnSpeed)
         {
@@ -163,9 +223,6 @@ public class BallAttackState : AttackState
                 bounceSpeed * rotationPerUnit;
         }
 
-        // Rotate around its own Z axis.
-        //
-        // The sign determines clockwise/counter-clockwise.
         float rotationDirection =
             Mathf.Sign(rb.linearVelocity.x);
 
@@ -187,99 +244,181 @@ public class BallAttackState : AttackState
     // =========================================================
 
     private bool DetectCollision()
-{
-    if (characterCollider == null)
-        return false;
-
-    Bounds bounds = characterCollider.bounds;
-
-    // Check characters first
-    RaycastHit2D characterHit = Physics2D.BoxCast(
-        bounds.center,
-        bounds.size,
-        0f,
-        direction,
-        detectionDistance,
-        charactersLayer
-    );
-
-    if (characterHit.collider)
     {
-        Character character =
-            characterHit.collider.GetComponentInParent<Character>();
+        if (characterCollider == null)
+            return false;
 
-        if (character != null && character != Context.Self)
-        {
-            Debug.Log(
-                $"{name}: Ball hit {character.name}"
+        // -----------------------------------------------------
+        // Direction of the actual ball movement.
+        // -----------------------------------------------------
+
+        Vector2 castDirection =
+            rb.linearVelocity.normalized;
+
+        if (castDirection.sqrMagnitude <= 0.001f)
+            return false;
+
+        Bounds bounds =
+            characterCollider.bounds;
+
+        // -----------------------------------------------------
+        // 1. Check CHARACTER first.
+        // -----------------------------------------------------
+
+        RaycastHit2D characterHit =
+            Physics2D.BoxCast(
+                bounds.center,
+                bounds.size,
+                0f,
+                castDirection,
+                detectionDistance,
+                charactersLayer
             );
 
-            character.Hurt(damage);
+        if (characterHit.collider != null)
+        {
+            Character character =
+                characterHit.collider
+                    .GetComponentInParent<Character>();
 
-            RequestDecision();
-            return true;
+            if (character != null &&
+                character != Context.Self)
+            {
+                Debug.Log(
+                    $"{name}: Ball hit {character.name}"
+                );
+
+                // Same attack logic as NearAttackState.
+                bool isHurt =
+                    character.Hurt(
+                        damage,
+                        _doesInterrupt,
+                        _stunDuration
+                    );
+
+                AttackResult =
+                    isHurt
+                        ? AttackResult.Success
+                        : AttackResult.Blocked;
+
+                hasHitCharacter = true;
+
+                // STOP the ball immediately.
+                rb.linearVelocity = Vector2.zero;
+
+                AudioEventChannel.Instance.Stop(
+                    rollSFX
+                );
+
+                // Leave this state.
+                RequestDecision();
+
+                return true;
+            }
         }
-    }
 
-    // Then check environment
-    RaycastHit2D environmentHit = Physics2D.BoxCast(
-        bounds.center,
-        bounds.size,
-        0f,
-        direction,
-        detectionDistance,
-        environmentLayer
-    );
+        // -----------------------------------------------------
+        // 2. Check ENVIRONMENT.
+        // -----------------------------------------------------
 
-    if (!environmentHit.collider)
+        RaycastHit2D environmentHit =
+            Physics2D.BoxCast(
+                bounds.center,
+                bounds.size,
+                0f,
+                castDirection,
+                detectionDistance,
+                environmentLayer
+            );
+
+        if (environmentHit.collider != null)
+        {
+            Debug.Log(
+                $"{name}: Ball hit environment"
+            );
+
+            currentNbBounce++;
+
+            // No more bounces.
+            if (currentNbBounce >= nbBounce)
+            {
+                rb.linearVelocity =
+                    Vector2.zero;
+
+                AudioEventChannel.Instance.Stop(
+                    rollSFX
+                );
+
+                RequestDecision();
+
+                return true;
+            }
+
+            // Bounce.
+            Bounce(
+                environmentHit.normal
+            );
+
+            return false;
+        }
+
         return false;
-
-    Debug.Log(
-        $"{name}: Bounce hit {environmentHit.collider.name}"
-    );
-
-    currentNbBounce++;
-
-    Debug.Log(
-        $"{name}: Bounce {currentNbBounce}/{nbBounce}"
-    );
-
-    if (currentNbBounce >= nbBounce)
-    {
-        RequestDecision();
-        return true;
     }
 
-    Bounce(environmentHit.normal);
-
-    return false;
-}
+    // =========================================================
+    // BOUNCE
+    // =========================================================
 
     private void Bounce(Vector2 normal)
     {
-        // Natural reflection.
+        // Reflect current movement.
         Vector2 reflectedDirection =
-            Vector2.Reflect(direction, normal).normalized;
+            Vector2.Reflect(
+                direction,
+                normal
+            ).normalized;
 
-        // Direction toward target.
+        // Try to bias the bounce toward target.
         Vector2 targetDirection =
-            (Context.Target.transform.position -
-            Context.Self.transform.position).normalized;
+            reflectedDirection;
 
-        // Blend the reflected direction with the target direction.
-        Vector2 newDirection = Vector2.Lerp(
-            reflectedDirection,
-            targetDirection,
-            targetDirectionBias
+        if (Context.Target != null)
+        {
+            Vector2 toTarget =
+                Context.Target.transform.position -
+                Context.Self.transform.position;
+
+            if (toTarget.sqrMagnitude > 0.001f)
+            {
+                targetDirection =
+                    toTarget.normalized;
+            }
+        }
+
+        Vector2 newDirection =
+            Vector2.Lerp(
+                reflectedDirection,
+                targetDirection,
+                targetDirectionBias
+            );
+
+        direction =
+            newDirection.normalized;
+
+        SetVelocity();
+
+        AudioEventChannel.Instance.Stop(
+            rollSFX
         );
 
-        direction = newDirection.normalized;
+        AudioEventChannel.Instance.Play(
+            rollSFX
+        );
 
         Debug.Log(
             $"{name}: Bounce → " +
             $"Reflected: {reflectedDirection} | " +
-            $"Target: {targetDirection} | " +
-            $"Final: {direction}"
+            $"New Direction: {direction}"
         );
     }
 
@@ -289,28 +428,52 @@ public class BallAttackState : AttackState
 
     public override void Exit()
     {
-        cooldownRequirement.Initialize();
+        Debug.Log(
+            "AI → Exit Ball Attack"
+        );
+
+        AudioEventChannel.Instance.Stop(
+            rollSFX
+        );
 
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.gravityScale = originalGravityScale;
+            rb.linearVelocity =
+                Vector2.zero;
+
+            rb.gravityScale =
+                originalGravityScale;
         }
-        
-        // Return character to the rotation it had before the attack.
+
         Context.Self.transform.rotation =
             Quaternion.identity;
-        Debug.Log("should return normal rotation");
+
+        base.Exit();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (characterCollider == null)
-            return;
+    // =========================================================
+    // GIZMOS
+    // =========================================================
 
-        Gizmos.DrawRay(
-            characterCollider.bounds.center,
-            direction * detectionDistance
-        );
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     if (characterCollider == null)
+    //         return;
+
+    //     Vector2 gizmoDirection = direction;
+
+    //     if (rb != null &&
+    //         Application.isPlaying &&
+    //         rb.linearVelocity.sqrMagnitude > 0.001f)
+    //     {
+    //         gizmoDirection =
+    //             rb.linearVelocity.normalized;
+    //     }
+
+    //     Gizmos.DrawRay(
+    //         characterCollider.bounds.center,
+    //         gizmoDirection *
+    //         detectionDistance
+    //     );
+    // }
 }

@@ -1,21 +1,22 @@
 using UnityEngine;
 
-public class SlamAttackState : MeleeAttackState
+public class SlamAttackState : AttackState
 {
     [SerializeField] private CooldownRequirement coolDownRequirement;
     public override void Enter()
     {
         base.Enter();
         coolDownRequirement.Initialize();
-    }
-    protected override void OnAttackHit()
-    {
-        base.OnAttackHit();
-        if (Context.Target is Player player)
+        if (Context.Target.IsOnGround)
         {
-            player.Stun();
+            AttackPlayer();
         }
-        //TODO: CHECK SUCCESSFULLY
-        AttackResult = AttackResult.Success;
+    }
+    public override void Play()
+    {
+        if (Context.Self.IsAnimFinished(animName))
+        {
+            RequestDecision();
+        }
     }
 }

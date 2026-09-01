@@ -4,12 +4,14 @@ public class RechargeHunterState : HunterState
 {
     [SerializeField] private State IdleState;
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private Audio rechargeSFX;
     public override void Enter()
     {
         base.Enter();
         HunterWolf.ChangeSpeed(moveSpeed);
         HunterWolf.Animator.SetBool("Recharge", true);
         HunterWolf.CanInitiateOtherState = false;
+        AudioEventChannel.Instance.Play(rechargeSFX);
     }
     public override void Play()
     {

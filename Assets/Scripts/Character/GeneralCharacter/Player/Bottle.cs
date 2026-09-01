@@ -9,6 +9,8 @@ public class Bottle : MonoBehaviour
     private LayerMask groundLayer;
 
     private Rigidbody2D rb;
+    private Audio bottleHitSFX;
+    private Audio bottleBreakSFX;
 
     [SerializeField] private float maxLifetime = 5f;
 
@@ -22,13 +24,17 @@ public class Bottle : MonoBehaviour
         int damage,
         Vector2 velocity,
         LayerMask charactersLayer,
-        LayerMask groundLayer)
+        LayerMask groundLayer,
+        Audio bottleHitSFX,
+        Audio bottleBreakSFX
+            )
     {
         this.owner = owner;
         this.damage = damage;
         this.charactersLayer = charactersLayer;
         this.groundLayer = groundLayer;
-
+        this.bottleHitSFX = bottleHitSFX;
+        this.bottleBreakSFX= bottleBreakSFX;
         rb = GetComponent<Rigidbody2D>();
 
         if (rb == null)
@@ -53,7 +59,7 @@ public class Bottle : MonoBehaviour
         if (IsLayerInMask(other.gameObject.layer, groundLayer))
         {
             Debug.Log($"{name}: Bottle hit ground.");
-
+            AudioEventChannel.Instance.Play(bottleHitSFX);
             Destroy(gameObject);
             return;
         }
@@ -78,7 +84,8 @@ public class Bottle : MonoBehaviour
         Debug.Log(
             $"{name}: Bottle hit {character.name}"
         );
-
+        
+        AudioEventChannel.Instance.Play(bottleBreakSFX);
         character.Hurt(damage);
 
         Destroy(gameObject);

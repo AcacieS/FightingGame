@@ -25,4 +25,18 @@ public abstract class AttackState : ActionState
     {
         base.Exit();
     }
+    protected void AttackPlayer()
+    {
+        if (Context.Target is Player player)
+        {
+            if(player.Hurt(damage, _doesInterrupt, _stunDuration))
+            {
+                AttackResult = AttackResult.Success;
+            }
+            else
+            {
+                AttackResult = AttackResult.Blocked;
+            }
+        }
+    }
 }

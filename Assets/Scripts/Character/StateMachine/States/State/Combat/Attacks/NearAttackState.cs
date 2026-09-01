@@ -5,7 +5,7 @@ public class NearAttackState : AttackState
     [Header("Near Attack State")]
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange;
-    [SerializeField] LayerMask charactersLayer;
+    [SerializeField] protected LayerMask charactersLayer;
     public override void Enter()
     {
         base.Enter();
