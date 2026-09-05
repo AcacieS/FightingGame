@@ -150,16 +150,21 @@ public class HunterWolf : Enemy
         moveSpeed = newMoveSpeed;
         directionFoward = newDirectionFoward;
     }
-
-    public void StartPlay()
+    
+    public override void StartCharacterMatch()
     {
         controlsLocked = false;
         timerWaitBetweenState.Restart();
         timerWaitBetweenTrap.Restart();
     }
-
-    public void ReadyPlay()
+    public void PlayAgainReadyAnim()
     {
+        anim.SetTrigger("Start");
+    }
+
+    public override void PlayReadyAnim()
+    {
+        controlsLocked = true;
         timerWaitBetweenState.Restart();
         timerWaitBetweenTrap.Restart();
     }

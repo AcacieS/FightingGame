@@ -640,7 +640,7 @@ MonoBehaviour:
     animName: AboveAttack
     damage: 20
     attackHitSFX: {fileID: 11400000, guid: 39e6a64efdbfc24489200b07f3207fa4, type: 2}
-    cooldown: 0.8
+    cooldown: 0.9
     lastAttackTime: -999
     hitbox: {fileID: 5600924128219676252}
   downStrike:

@@ -27,4 +27,8 @@ public class MenuManager : MonoBehaviour
     {
         uiTutoElement.SetActive(!uiTutoElement.activeSelf);
     }
+    public void SceneLoad(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

@@ -23,6 +23,7 @@ public class AIController : MonoBehaviour
     public Character Character => character;
     public Character Target => target;
     public Context Context => context;
+    private bool targetDead = false;
 
     private void Awake()
     {
@@ -88,12 +89,15 @@ public class AIController : MonoBehaviour
 
         return false;
     }
+    
     private void CheckDeath()
     {
-        if (Context.Target.Hp <= 0)
+        if (!targetDead && Context.Target.Hp <= 0)
         {
             StopReactionState();
             StopState();
+            ChangeState(readyState);
+            targetDead = true;
         }
     }
     private void HandleHurt(int hp, bool isInterruptible)

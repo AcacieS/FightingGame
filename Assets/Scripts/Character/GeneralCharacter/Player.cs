@@ -323,6 +323,8 @@ public class Player : Character
 
         base.Hurt(damage, isInterruptible, stunDuration); //moved here so anims play
         PlayRandomHurt();
+        if(IsDead) return true;
+        
         if (stunDuration != 0f)
         {
             Stun(stunDuration);
@@ -362,7 +364,19 @@ public class Player : Character
             return;
         
         base.Die();
+        StopControl();
+        
+        if(Context.Instance.Self is Enemy enemy){
+            enemy.PlayReadyAnim();
+            if(Context.Instance.Self is HunterWolf hunterWolf)
+            {
+                hunterWolf.PlayAgainReadyAnim();
+            }
+        }
 
+    }
+    public void StopControl()
+    {
         controlsLocked = true;
         StopMoving();
         StopAllCoroutines();

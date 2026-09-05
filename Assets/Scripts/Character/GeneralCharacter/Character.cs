@@ -76,6 +76,7 @@ public class Character: MonoBehaviour
         isDead = true;
         Debug.Log("Die");
         anim.SetTrigger("Death");
+        
     }
     public virtual void Awake()
     {

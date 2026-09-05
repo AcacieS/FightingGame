@@ -1096,6 +1096,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: HunterWolf
       objectReference: {fileID: 0}
+    - target: {fileID: 4163894957566226950, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1326996270}
+    - target: {fileID: 4163894957566226950, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayReadyAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163894957566226950, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartCharacterMatch
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163894957566226950, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HunterWolf, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6660301385218996750, guid: 78846c5ceb9e16249a5e02539a5b220e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18

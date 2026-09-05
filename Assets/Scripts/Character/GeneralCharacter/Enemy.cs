@@ -20,6 +20,18 @@ public class Enemy : Character
         base.Start();
         
     }
+    public override void Die()
+    {
+        if(IsDead) 
+            return;
+        
+        base.Die();
+        
+        if(Context.Instance.Target is Player player){
+            player.StopControl();
+            player.PlayAnim("Ready");
+        }
+    }
     public override bool Hurt(int damage, bool isInterruptible = false, float stunDuration = 0f)
     {
         if (_aiController != null && _aiController.TryBlock())
